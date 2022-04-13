@@ -1,6 +1,6 @@
-const API_SERVER_URL = "http://localhost:3000";
+const API_SERVER_URL = `${window.location.origin}:3000`;
 var socket = io();
-socket = io.connect("http://localhost:3000");
+socket = io.connect(`${window.location.origin}:3000`);
 // Declaring variables
 let videoContainer = document.getElementById("videoContainer");
 let micButton = document.getElementById("mic-btn");

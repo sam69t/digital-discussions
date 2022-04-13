@@ -2,7 +2,7 @@ var id = new Date().getTime();
 
 window.addEventListener("load", function () {
   var socket = io();
-  socket = io.connect("http://localhost:3000");
+  socket = io.connect(`${window.location.origin}:3000`);
   socket.emit("id", id);
 
   let xCam;

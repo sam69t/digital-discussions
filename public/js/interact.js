@@ -1,6 +1,6 @@
 const position = { x: 0, y: 0 };
 var socket = io();
-socket = io.connect("http://localhost:3000");
+socket = io.connect(`${window.location.origin}:3000`);
 
 interact(".resize-drag")
   .resizable({
