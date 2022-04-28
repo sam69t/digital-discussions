@@ -1,6 +1,6 @@
-const API_SERVER_URL = `${window.location.origin}:3000`;
-var socket = io();
-socket = io.connect(`${window.location.origin}:3000`);
+const API_SERVER_URL = `${window.location.origin}`;
+// var socket = io();
+// socket = io.connect(`${window.location.origin}`);
 // Declaring variables
 let videoContainer = document.getElementById("videoContainer");
 let micButton = document.getElementById("mic-btn");
@@ -74,10 +74,17 @@ function startMeeting(token, meetingId, name) {
     micEnabled: true, // optional, default: true
     webcamEnabled: true, // optional, default: true
     maxResolution: "hd", // optional, default: "hd"
+    whiteboardEnabled: true,
+    permissions: {
+      // ...
+      drawOnWhiteboard: true,
+      toggleWhiteboard: true,
+    },
   });
 
   // Meeting Join
   meeting.join();
+  // meeting.setWebcamQuality("high");
 
   //create Local Participant
   createLocalParticipant();
@@ -106,6 +113,18 @@ function startMeeting(token, meetingId, name) {
     participant.on("stream-enabled", (stream) => {
       setTrack(stream, videoElement, audioElement, participant.id);
     });
+
+    const bool = true;
+    meeting.sendChatMessage(JSON.stringify({ type: "flex", bool }));
+
+    participant.setQuality("high");
+    console.log(
+      participant.length,
+      meeting.localParticipant.id,
+      participant.id
+    );
+    // console.log("row");
+
     videoContainer.appendChild(videoElement);
     videoContainer.appendChild(audioElement);
     addParticipantToList(participant);
@@ -122,34 +141,6 @@ function startMeeting(token, meetingId, name) {
     document.getElementById(`p-${participant.id}`).remove();
   });
   //chat message event
-  meeting.on("chat-message", (chatEvent) => {
-    const { senderId, text, timestamp, senderName } = chatEvent;
-    const parsedText = JSON.parse(text);
-    if (
-      parsedText?.type == "raiseHand" &&
-      senderId != meeting.localParticipant.id //remove this for both parties
-    ) {
-      console.log(chatEvent.senderName + " RAISED HAND");
-    }
-    if (parsedText?.type == "chat") {
-      const chatBox = document.getElementById("chats");
-      const chatTemplate = `
-      <div style="margin-bottom: 10px; ${
-        meeting.localParticipant.id == senderId && "text-align : center"
-      }">
-        <span style="font-size:12px; text-align:center;">${senderName}</span>
-        <div style="margin-top:5px">
-          <span style="background:${
-            meeting.localParticipant.id == senderId ? "white" : "black"
-          }; color:${
-        meeting.localParticipant.id == senderId ? "black" : "white"
-      };padding:5px;border-radius:8px">${parsedText.message}<span>
-        </div>
-      </div>
-      `;
-      chatBox.insertAdjacentHTML("beforeend", chatTemplate);
-    }
-  });
 
   //video state changed
   meeting.on("video-state-changed", (videoEvent) => {
@@ -274,29 +265,39 @@ async function joinMeeting(newMeeting) {
     meetingId = await fetch(API_SERVER_URL + "/create-meeting", options).then(
       async (result) => {
         const { meetingId } = await result.json();
+        console.log(options);
+
         console.log("NEW MEETING meetingId", meetingId);
         return meetingId;
       }
     );
   }
+  // meetingId = "test"
   console.log("MEETING_ID::", meetingId);
   //set meetingId
   document.querySelector("#meetingid").innerHTML = meetingId;
   startMeeting(token, meetingId, name);
+  console.log(token, meetingId, name);
 }
 
 // creating video element
 function createVideoElement(pId) {
   let videoElement = document.createElement("video");
-  videoElement.classList.add("video-frame");
-  videoElement.classList.add("resize-drag");
+  let allVideos = document.querySelectorAll("video");
 
-  videoElement.setAttribute("id", `v-${pId}`);
+  videoElement.classList.add("video-frame");
+  if (allVideos.length === 2) {
+    videoElement.classList.add("resize-drag");
+  }
+
+  console.log(allVideos);
+
+  videoElement.setAttribute("id", pId);
   console.log("Webcacreated");
 
-  socket.emit("webcam_id", {
-    id: ("id", `v-${pId}`),
-  });
+  // socket.emit("webcam_id", {
+  //   id: ("id", `v-${pId}`),
+  // });
   return videoElement;
 }
 
@@ -359,12 +360,17 @@ function addDomEvents() {
 
   // cam button event listener
   camButton.addEventListener("click", () => {
-    if (camButton.innerText == "Disable Cam") {
-      meeting.disableWebcam();
+    if (camButton.innerText == "Hide Cam") {
+      // meeting.disableWebcam();
+      $(".video-frame").addClass("blur");
       camButton.innerText = "Enable Cam";
+      console.log("hide");
     } else {
-      meeting.enableWebcam();
-      camButton.innerText = "Disable Cam";
+      // meeting.enableWebcam();
+      $(".video-frame").removeClass("blur");
+
+      camButton.innerText = "Hide Cam";
+      console.log("show");
     }
   });
 
@@ -385,10 +391,234 @@ function addDomEvents() {
   //   meeting.sendChatMessage(JSON.stringify({ type: "raiseHand" }));
   // });
 
+  meeting.on("chat-message", (chatEvent) => {
+    const { senderId, text, timestamp, senderName } = chatEvent;
+    const parsedText = JSON.parse(text);
+    // console.log(parsedText, senderId, senderName);
+    if (
+      parsedText?.type == "raiseHand" &&
+      senderId != meeting.localParticipant.id //remove this for both parties
+    ) {
+      console.log(chatEvent.senderName + " RAISED HAND");
+    }
+    if (parsedText?.type == "chat") {
+      //! CHAT MESSAGE
+      const chatBox = document.getElementById("chats");
+      const chatTemplate = `
+      <div style="margin-bottom: 10px; ${
+        meeting.localParticipant.id == senderId && "text-align : center"
+      }">
+        <span style="font-size:12px; text-align:center;">${senderName}</span>
+        <div style="margin-top:5px">
+          <span style="background:${
+            meeting.localParticipant.id == senderId ? "white" : "black"
+          }; color:${
+        meeting.localParticipant.id == senderId ? "black" : "white"
+      };padding:5px;border-radius:8px; font-size:120px">${
+        parsedText.message
+      }<span>
+        </div>
+      </div>
+      `;
+      chatBox.insertAdjacentHTML("beforeend", chatTemplate);
+    }
+    if (
+      //! MOUSE ACTIVITY
+      parsedText?.type == "mouse-move" &&
+      senderId != meeting.localParticipant.id
+    ) {
+      // console.log("mouse-move", parsedText.mouseActivity.x, senderId);
+      // console.log(pId);
+
+      if ($('.pointer[id="' + meeting.localParticipant.id + '"]').length <= 0) {
+        $("body").append(
+          '<div class="pointer" id="' + meeting.localParticipant.id + '"></div>'
+        );
+      }
+
+      var $pointer = $('.pointer[id= "' + meeting.localParticipant.id + '"]');
+      $pointer.css("left", parsedText.mouseActivity.x);
+      $pointer.css("top", parsedText.mouseActivity.y);
+    }
+    if (
+      //! WEBCAM SIZE
+      parsedText?.type == "resize-webcam" &&
+      senderId != meeting.localParticipant.id
+    ) {
+      console.log(parsedText.resizeWebcam.w, parsedText.resizeWebcam.h);
+
+      if (senderId != meeting.localParticipant.id) {
+        var $webcam = $(".video-frame:last");
+
+        $webcam.css("width", parsedText.resizeWebcam.w);
+        $webcam.css("height", parsedText.resizeWebcam.h);
+      }
+    }
+    if (
+      //! WEBCAM MOVEMENT
+      parsedText?.type == "moving-webcam" &&
+      senderId != meeting.localParticipant.id
+    ) {
+      console.log(parsedText.movingWebcam.x, parsedText.movingWebcam.x);
+      // var $webcam = $('.video-frame[id= "' + pId + '"]');
+      if (senderId != meeting.localParticipant.id) {
+        $("#videoContainer").css("flex-direction", "row-reverse");
+        console.log("rows");
+        var $webcam = $(".video-frame:last");
+        $webcam.css("left", parsedText.movingWebcam.x);
+        $webcam.css("top", parsedText.movingWebcam.y);
+      }
+
+      // console.log($webcam);
+      // $webcam.css("background-color", "blue");
+    }
+    if (
+      //! WEBCAM MOVEMENT
+      parsedText?.type == "flex"
+    ) {
+      // console.log("lol");
+
+      console.log(parsedText.bool);
+
+      // var $webcam = $('.video-frame[id= "' + pId + '"]');
+      if (meeting.localParticipant.id) {
+        console.log("lol");
+        console.log(parsedText.bool);
+
+        // var $webcam = $(".video-frame:last");
+        // $webcam.css("left", -parsedText.movingWebcam.x);
+        // $webcam.css("top", -parsedText.movingWebcam.y);
+      }
+
+      // console.log($webcam);
+      // $webcam.css("background-color", "blue");
+    }
+  });
+
   // //send chat message button
+
+  //! CHAT MESSAGE SENDER
+
   sendMessageBtn.addEventListener("click", async () => {
     const message = document.getElementById("inputMessage").value;
     meeting.sendChatMessage(JSON.stringify({ type: "chat", message }));
+    console.log(message);
+  });
+
+  //! MOUSE ACTIVITY SENDER
+
+  $(document).on("mousemove", function (event) {
+    const mouseActivity = {
+      x: event.pageX,
+      y: event.pageY,
+    };
+    meeting.sendChatMessage(
+      JSON.stringify({ type: "mouse-move", mouseActivity })
+    );
+  });
+
+  //! VIDEO DRAG & SIZE SENDER
+
+  const position = { x: 0, y: 0 };
+  console.log(`${window.location.origin}`);
+
+  interact(".resize-drag")
+    .resizable({
+      // resize from all edges and corners
+      edges: { left: true, right: true, bottom: true, top: true },
+
+      listeners: {
+        move(event) {
+          var target = event.target;
+          var x = parseFloat(target.getAttribute("data-x")) || 0;
+          var y = parseFloat(target.getAttribute("data-y")) || 0;
+
+          // update the element's style
+          target.style.width = event.rect.width + "px";
+          target.style.height = event.rect.height + "px";
+
+          // translate when resizing from top or left edges
+          x += event.deltaRect.left;
+          y += event.deltaRect.top;
+
+          target.style.transform = "translate(" + x + "px," + y + "px)";
+
+          target.setAttribute("data-x", x);
+          target.setAttribute("data-y", y);
+          target.textContent =
+            Math.round(event.rect.width) +
+            "\u00D7" +
+            Math.round(event.rect.height);
+
+          // console.log(event.rect.width, event.rect.height);
+
+          // socket.emit("webcam_size", {
+          //   width: event.rect.width,
+          //   height: event.rect.height,
+          // });
+          const resizeWebcam = {
+            w: event.rect.width,
+            h: event.rect.height,
+          };
+
+          meeting.sendChatMessage(
+            JSON.stringify({ type: "resize-webcam", resizeWebcam })
+          );
+        },
+      },
+      modifiers: [
+        // keep the edges inside the parent
+        interact.modifiers.restrictEdges({
+          outer: "wrapper",
+        }),
+
+        // minimum size
+        interact.modifiers.restrictSize({
+          min: { width: 100, height: 50 },
+        }),
+      ],
+
+      inertia: true,
+    })
+    .draggable({
+      listeners: {
+        start(event) {
+          // console.log(event.type, event.target);
+        },
+        move(event) {
+          const movingWebcam = {
+            x: (position.x += event.dx),
+            y: (position.y += event.dy),
+          };
+
+          meeting.sendChatMessage(
+            JSON.stringify({ type: "moving-webcam", movingWebcam })
+          );
+
+          // socket.emit("webcam_move", {
+          //   x: (position.x += event.dx),
+          //   y: (position.y += event.dy),
+          // });
+
+          // console.log((position.x += event.dx), event.dy);
+          position.x += event.dx;
+          position.y += event.dy;
+
+          event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
+        },
+      },
+    });
+
+  //! START RECORDING
+
+  startRecordingBtn.addEventListener("click", async () => {
+    meeting.startRecording();
+  });
+
+  //! STOP RECORDING
+
+  stopRecordingBtn.addEventListener("click", async () => {
+    meeting.stopRecording();
   });
 
   //leave Meeting Button
@@ -428,12 +658,5 @@ function addDomEvents() {
   // seekVideoBtn.addEventListener("click", async () => {
   //   meeting.seekVideo({ currentTime: 40 });
   // });
-  // //startRecording
-  // startRecordingBtn.addEventListener("click", async () => {
-  //   meeting.startRecording();
-  // });
-  // //Stop Recording
-  // stopRecordingBtn.addEventListener("click", async () => {
-  //   meeting.stopRecording();
-  // });
+  //startRecording
 }

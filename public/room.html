@@ -1,0 +1,30 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./js/router.js" defer></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./libs/papaparse.min.js"></script>
+  </head>
+  <body>
+    <div class="previewContainer">same content</div>
+
+    <div class="overlayContainer">
+      <div class="playerMode hidden">
+        <h2>Player</h2>
+        <input type="range" id="timeline" name="volume" min="0" max="11" />
+      </div>
+      <div class="toolMode hidden">
+        <!-- mute -->
+        <!-- record -->
+        <!-- stop -->
+        <h2>Tools</h2>
+        <button>mute</button>
+        <button>record</button>
+        <button>stop</button>
+      </div>
+    </div>
+  </body>
+</html>

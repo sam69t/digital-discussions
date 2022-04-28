@@ -11,13 +11,14 @@
   align-items: center;
 }
 body {
-  cursor: url("/img/cursor.png"), auto;
+  cursor: url("/img/png.png"), auto;
+  margin: 0;
 }
 
 .pointer {
   z-index: 9999;
   position: absolute;
-  background-image: url("/img/cursor.png");
+  background-image: url("/img/png.png");
   background-repeat: no-repeat;
   background-position: left top;
   width: 1%;
@@ -101,8 +102,10 @@ input {
   margin-bottom: 10vh;
 }
 #joinCam {
-  filter: blur(5px);
-  position: absolute;
+  filter: blur(10px);
+  /* backdrop-filter: blur(20px); */
+  /* -webkit-backdrop-filter: blur(20px); */
+  /* position: absolute; */
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -114,6 +117,9 @@ audio {
   display: none;
 }
 
+.blur {
+  filter: blur(15px);
+}
 .join-right-wrapper > div {
   margin-top: 1rem;
 }
@@ -205,15 +211,16 @@ body {
 /* Chat-wrapper*/
 .chat-wrapper {
   /* background-color: red; */
-  height: 50%;
-  top: 50%;
-  width: 300px;
-  padding: 10px;
+  z-index: -1;
+  height: 100vh;
+  top: 0%;
+  width: 100%;
+  padding-top: 15px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   background-color: whitesmoke;
   position: absolute;
-  top: calc(50% - 300px);
-  left: calc(50% - 150px);
+  /* top: calc(50% - 300px);
+  left: calc(50% - 150px); */
 }
 #chats {
   display: flex;
@@ -238,8 +245,35 @@ footer > button {
   /* padding: 0px; */
 }
 .mute {
+  /* margin-right: 2rem; */
+}
+#startRecording-btn {
   margin-right: 2rem;
 }
 .cam {
   margin-left: 2rem;
+}
+.cam-container {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.previewContainer {
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+}
+
+.overlayContainer {
+  width: 100%;
+  /* height: 100%; */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.386);
 }

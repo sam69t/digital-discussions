@@ -112,7 +112,7 @@ io.sockets.on("connection", function (socket) {
       session_id: socket.id,
       coords: data,
     });
-    // console.log(data);
+    console.log(data, socket.id);
   });
 
   //! WEBCAM SIZE
@@ -122,7 +122,7 @@ io.sockets.on("connection", function (socket) {
       session_id: socket.id,
       coords: data,
     });
-    console.log(data);
+    // console.log(data);
   });
 
   //! CURSOR TRACKER

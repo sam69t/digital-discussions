@@ -10,110 +10,114 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div id="joinPage" class="main-bg" style="display: flex">
-      <div style="margin: auto; display: flex">
-        <div
-          class="join-left"
-          style="
-            /* border: 1px solid black; */
-            width: 400px;
-            height: 300px;
-            margin-right: 40px;
-            position: relative;
-          "
-        >
-          <video class="drag resize-drag" id="joinCam"></video>
+    <main class="wrapper">
+      <div id="joinPage" class="main-bg" style="display: flex">
+        <div style="margin: auto; display: flex">
           <div
+            class="join-left"
             style="
-              display: none;
-              justify-content: space-evenly;
-              position: absolute;
-              bottom: 20px;
-              width: 100%;
+              /* border: 1px solid black; */
+              width: 400px;
+              height: 300px;
+              margin-right: 40px;
+              position: relative;
             "
           >
-            <div><button>Mic</button></div>
-            <div><button>Webcam</button></div>
+            <!-- <div class="cam-container"> -->
+            <video class="drag resize-drag" id="joinCam"></video>
+            <!-- <div
+                style="
+                  display: none;
+                  justify-content: space-evenly;
+                  position: absolute;
+                  bottom: 20px;
+                  width: 100%;
+                "
+              ></div> -->
+            <!-- <div><button>Mic</button></div>
+              <div><button>Webcam</button></div> -->
           </div>
-        </div>
-        <div class="join-right" style="width: 350px">
-          <h1 style="text-align: center">REJOINDRE UNE ROOM</h1>
-          <div>
+          <!-- </div> -->
+          <div class="join-right" style="width: 350px">
+            <h1 style="text-align: center">REJOINDRE UNE ROOM</h1>
             <div>
-              <label>NAME</label>
-              <input
-                style="
-                  display: block;
-                  width: 100%;
-                  padding: 5px;
-                  border: 1px solid black;
-                  margin-bottom: 1vh;
-                "
-                type="text"
-                name="name"
-                id="joinMeetingName"
-                required
-              />
-            </div>
-            <div>
-              <label>ROOM ID</label>
-              <input
-                style="
-                  display: block;
-                  width: 100%;
-                  padding: 5px;
-                  border: 1px solid black;
-                "
-                type="text"
-                name="name"
-                id="joinMeetingId"
-              />
-            </div>
-            <div>
-              <button
-                style="margin-top: 2rem; display: block; width: 104%"
-                class="btn secondary text-white"
-                id="meetingJoinButton"
-                onclick="joinMeeting(true)"
-              >
-                CREATE MEETING
-              </button>
-            </div>
-            <div>
-              <button
-                style="margin-top: 2rem; display: block; width: 104%"
-                class="btn secondary text-white"
-                id="meetingJoinButton"
-                onclick="joinMeeting()"
-              >
-                JOIN MEETING
-              </button>
+              <div>
+                <label>NAME</label>
+                <input
+                  style="
+                    display: block;
+                    width: 100%;
+                    padding: 5px;
+                    border: 1px solid black;
+                    margin-bottom: 1vh;
+                  "
+                  type="text"
+                  name="name"
+                  id="joinMeetingName"
+                  required
+                />
+              </div>
+              <div>
+                <label>ROOM ID</label>
+                <input
+                  style="
+                    display: block;
+                    width: 100%;
+                    padding: 5px;
+                    border: 1px solid black;
+                  "
+                  type="text"
+                  name="name"
+                  id="joinMeetingId"
+                />
+              </div>
+              <div>
+                <button
+                  style="margin-top: 2rem; display: block; width: 104%"
+                  class="btn secondary text-white"
+                  id="meetingJoinButton"
+                  onclick="joinMeeting(true)"
+                >
+                  CREATE MEETING
+                </button>
+              </div>
+              <div>
+                <button
+                  style="margin-top: 2rem; display: block; width: 104%"
+                  class="btn secondary text-white"
+                  id="meetingJoinButton"
+                  onclick="joinMeeting()"
+                >
+                  JOIN MEETING
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Common Functionalityes -->
-    <div class="sur-footer">
-      <button id="sendMessage-btn">Send Message</button>
-    </div>
-    <footer style="position: absolute; bottom: 20px">
-      <!-- <button class="btn primary text-white" id="startRecording-btn">
-        Start Recording
-      </button>
-      <button class="btn primary text-white" id="stopRecording-btn">
-        Stop Recording
-      </button> -->
-      <button class="mute btn primary text-white" id="mic-btn">Mute Mic</button>
-      <!-- <button id="sendMessage-btn">Send Message</button> -->
-      <input type="text" required id="inputMessage" style="" />
-      <button class="cam btn primary text-white" id="cam-btn">
-        Disable Cam
-      </button>
-      <!-- <button class="btn primary text-white" id="ss-btn">
+      <!-- Common Functionalityes -->
+      <div class="sur-footer">
+        <button id="sendMessage-btn">Send Message</button>
+      </div>
+      <footer style="position: absolute; bottom: 20px">
+        <button class="btn primary text-white" id="startRecording-btn">
+          Start Recording
+        </button>
+        <button class="btn primary text-white" id="stopRecording-btn">
+          Stop Recording
+        </button>
+        <button class="mute btn primary text-white" id="mic-btn">
+          Mute Mic
+        </button>
+        <!-- <button id="sendMessage-btn">Send Message</button> -->
+        <input type="text" required id="inputMessage" style="" />
+        <button class="cam btn primary text-white" id="cam-btn">
+          Hide Cam
+        </button>
+        <!-- <button class="btn primary text-white" id="ss-btn">
         Share Entire Screen
       </button> -->
-      <!-- <button
+        <!-- <button
         style="display: none"
         class="btn primary text-white"
         id="raiseHand-btn"
@@ -126,10 +130,10 @@
       <button class="btn primary text-white" id="endMeeting-btn">
         End Meeting
       </button> -->
-    </footer>
-    <!-- Video Functionalities -->
-    <div style="position: absolute; left: 20%; bottom: 65px">
-      <!-- <button class="btn primary text-white" id="startVideo-btn">
+      </footer>
+      <!-- Video Functionalities -->
+      <div style="position: absolute; left: 20%; bottom: 65px">
+        <!-- <button class="btn primary text-white" id="startVideo-btn">
         start Video
       </button>
       <button class="btn primary text-white" id="stopVideo-btn">
@@ -144,46 +148,47 @@
       <button class="btn primary text-white" id="seekVideo-btn">
         seek video
       </button> -->
-    </div>
+      </div>
 
-    <div class="resize-drag" id="videoContainer"></div>
-    <!-- 
+      <div class="" id="videoContainer"></div>
+      <!-- 
     <div
       class="screenshare-wrapper"
       style="position: absolute; top: 10px; left: 50px; width: 88%; height: 80%"
     >
       <video id="screenShare"></video>
     </div> -->
-    <div>
-      <video id="videoPlayback"></video>
-    </div>
-    <div class="chat-wrapper">
-      <div id="chats"></div>
-      <!-- chat message -->
-      <!-- <input
+      <div>
+        <video id="videoPlayback"></video>
+      </div>
+      <div class="chat-wrapper">
+        <div id="chats"></div>
+        <!-- chat message -->
+        <!-- <input
         type="text"
         required
         id="inputMessage"
         style="display: block; width: 90%"
       /> -->
-      <div style="display: flex">
-        <!-- <input
+        <div style="display: flex">
+          <!-- <input
           type="text"
           required
           id="inputMessage"
           style="display: block; width: 90%"
         /> -->
-        <!-- <button id="sendMessage-btn">Send Message</button> -->
+          <!-- <button id="sendMessage-btn">Send Message</button> -->
+        </div>
       </div>
-    </div>
 
-    <div class="meetingId-wrapper">
-      <div class="meetingId-container">
-        meetingId:
-        <!-- MEETING-ID=> -->
-        <div style="display: inline" id="meetingid"></div>
+      <div class="meetingId-wrapper">
+        <div class="meetingId-container">
+          meetingId:
+          <!-- MEETING-ID=> -->
+          <div style="display: inline" id="meetingid"></div>
+        </div>
       </div>
-    </div>
+    </main>
 
     <!-- <div
       class="participants-wrapper"
