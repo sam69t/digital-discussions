@@ -4,8 +4,8 @@ const previewContainer = document.querySelector(".previewContainer");
 
 const params = new URLSearchParams(window.location.search);
 const mode = params.get("mode");
-const meeting = params.get("meetingID");
-console.log(meeting);
+// const meeting = params.get("meetingID");
+// console.log(meeting);
 
 if (mode === "player") {
   Papa.parse(
@@ -42,11 +42,16 @@ if (mode === "player") {
 
 function initPlayer({ messages, startStamp }) {
   const container = document.querySelector(".playerMode");
+  const Videocontainer = document.querySelector(".videoContain");
+
   container.classList.remove("hidden");
 
   const videoSrc = "./assets/videos/626a51ca29fb565fd094ed6d.mp4";
   const videoPlayer = document.createElement("video");
-  previewContainer.appendChild(videoPlayer);
+  videoPlayer.classList.add("redif-vid");
+
+  //   previewContainer.appendChild(videoPlayer);
+  Videocontainer.appendChild(videoPlayer);
   videoPlayer.src = videoSrc;
   videoPlayer.controls = true;
 

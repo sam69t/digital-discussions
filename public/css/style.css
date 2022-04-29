@@ -277,3 +277,32 @@ footer > button {
   z-index: 1000;
   background-color: rgba(255, 255, 255, 0.386);
 }
+
+.redif-vid {
+  width: 25%;
+}
+
+/* NAV */
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 99999;
+}
+nav {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/* TOOOL */
+
+main {
+  height: 100vh;
+}
