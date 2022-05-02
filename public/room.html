@@ -29,8 +29,10 @@
     </div>
     <div class="overlayContainer">
         <div class="playerMode hidden">
-            <h2>Player</h2>
-            <input type="range" id="timeline" name="volume" min="0" max="11" />
+            <div class="slider-container">
+                <button class="btn play">Play</button>
+                <input class="slider" type="range" id="timeline" name="video" min="0" max="100" value="0" />
+            </div>
         </div>
         <div class="toolMode hidden">
             <!-- mute -->
@@ -134,6 +136,7 @@
     <script type="text/javascript" src="https://unpkg.com/socket.io-client@4.4.1/dist/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     <script src="https://sdk.videosdk.live/js-sdk/0.0.20/videosdk.js"></script>
+    <script src="js/chat.js" async defer></script>
     <script src="js/script-sdk.js" async defer></script>
     <script src="js/dragDrop.js" async defer></script>
 </body>

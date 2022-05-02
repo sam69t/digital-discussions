@@ -2,6 +2,38 @@ const API_SERVER_URL = `${window.location.origin}`;
 // var socket = io();
 // socket = io.connect(`${window.location.origin}`);
 // Declaring variables
+
+const msg = { type: "canvas:moveto", x: 0, y: 10 };
+
+const [category, action] = msg.type.split(":");
+
+switch (category) {
+  case "chat":
+    CHAT.executeAction(action, msg);
+    break;
+  case "canvas":
+    // CANVAS.executeAction(action, msg)
+
+    break;
+}
+
+/*
+"canvas:moveto"
+"canvas:fill"
+"canvas:lineto"
+"window:resize"
+
+"chat:send"
+"chat:ontap"
+
+"flex"
+
+
+
+
+
+*/
+
 let playGround = document.querySelector(".playGround");
 let micButton = document.getElementById("mic-btn");
 let camButton = document.getElementById("cam-btn");
@@ -393,7 +425,12 @@ function addDomEvents() {
   //   meeting.sendChatMessage(JSON.stringify({ type: "raiseHand" }));
   // });
 
-  meeting.on("chat-message", (chatEvent) => {
+  // let recording = new Player({ csv, video1, video2 });
+  // recording.onMessage(onMessage.bind(this));
+
+  meeting.on("chat-message", onMessage.bind(this));
+
+  function onMessage(chatEvent) {
     const { senderId, text, timestamp, senderName } = chatEvent;
     const parsedText = JSON.parse(text);
     let chatData = [];
@@ -403,29 +440,6 @@ function addDomEvents() {
       senderId != meeting.localParticipant.id //remove this for both parties
     ) {
       console.log(chatEvent.senderName + " RAISED HAND");
-    }
-    if (parsedText?.type == "chatMessageCreated") {
-      //! CHAT MESSAGE
-      chatData.push(parsedText.message);
-      console.log(chatData);
-      // const chatBox = document.getElementById("chats");
-      // const chatTemplate = `
-      // <div style="margin-bottom: 10px; ${
-      //   meeting.localParticipant.id == senderId && "text-align : center"
-      // }">
-      //   <span style="font-size:12px; text-align:center;">${senderName}</span>
-      //   <div style="margin-top:5px">
-      //     <span style="background:${
-      //       meeting.localParticipant.id == senderId ? "white" : "black"
-      //     }; color:${
-      //   meeting.localParticipant.id == senderId ? "black" : "white"
-      // };padding:5px;border-radius:8px; font-size:120px">${
-      //   parsedText.message
-      // }<span>
-      //   </div>
-      // </div>
-      // `;
-      // chatBox.insertAdjacentHTML("beforeend", chatTemplate);
     }
     if (
       //! MOUSE ACTIVITY
@@ -459,31 +473,59 @@ function addDomEvents() {
         $webcam.css("height", parsedText.resizeWebcam.h);
       }
     }
+    if (parsedText?.type == "chatMessageCreated") {
+      //! CHAT MESSAGE
+      // chatData.push(parsedText.message);
+      // console.log(chatData);
+
+      // const lastElement = CHAT.getOrAddMsgElem();
+      CHAT.addTextToLastMsg(parsedText.message);
+      CHAT.lockLastMsg();
+
+      // const chatBox = document.getElementById("chats");
+      // const chatTemplate = `
+      // <div style="margin-bottom: 10px; ${
+      //   meeting.localParticipant.id == senderId && "text-align : center"
+      // }">
+      //   <span style="font-size:12px; text-align:center;">${senderName}</span>
+      //   <div style="margin-top:5px">
+      //     <span style="background:${
+      //       meeting.localParticipant.id == senderId ? "white" : "black"
+      //     }; color:${
+      //   meeting.localParticipant.id == senderId ? "black" : "white"
+      // };padding:5px;border-radius:8px; font-size:120px">${
+      //   parsedText.message
+      // }<span>
+      //   </div>
+      // </div>
+      // `;
+      // chatBox.insertAdjacentHTML("beforeend", chatTemplate);
+    }
     if (
       //! ON TAP CHAT
       parsedText?.type == "ontap-chat"
     ) {
-      console.log(parsedText.message);
-      chatData = parsedText.message;
-      console.log(chatData);
-      const chatBox = document.getElementById("chats");
-      const chatTemplate = `
-      <div style="margin-bottom: 10px; ${
-        meeting.localParticipant.id == senderId && "text-align : center"
-      }">
-        <span style="font-size:12px; text-align:center;">${senderName}</span>
-        <div style="margin-top:5px">
-          <span style="background:${
-            meeting.localParticipant.id == senderId ? "white" : "black"
-          }; color:${
-        meeting.localParticipant.id == senderId ? "black" : "white"
-      };padding:5px;border-radius:8px; font-size:120px">${
-        parsedText.message
-      }<span>
-        </div>
-      </div>
-      `;
-      chatBox.insertAdjacentHTML("beforeend", chatTemplate);
+      // console.log(parsedText.message);
+      // chatData = parsedText.message;
+      // console.log(chatData);
+      // const chatTemplate = `
+      CHAT.addTextToLastMsg(parsedText.message);
+      // <div style="margin-bottom: 10px; ${
+      //   meeting.localParticipant.id == senderId && "text-align : center"
+      // }">
+      //   <span style="font-size:12px; text-align:center;">${senderName}</span>
+      //   <div style="margin-top:5px">
+      //     <span style="background:${
+      //       meeting.localParticipant.id == senderId ? "white" : "black"
+      //     }; color:${
+      //   meeting.localParticipant.id == senderId ? "black" : "white"
+      // };padding:5px;border-radius:8px; font-size:120px">${
+      //   parsedText.message
+      // }<span>
+      //   </div>
+      // </div>
+      // `;
+      // chatBox.insertAdjacentHTML("beforeend", chatTemplate);
     }
     if (
       //! WEBCAM MOVEMENT
@@ -537,7 +579,7 @@ function addDomEvents() {
         playGround.appendChild(divImage);
       }
     }
-  });
+  }
 
   // //send chat message button
 
@@ -554,7 +596,7 @@ function addDomEvents() {
   //! CHAT MESSAGE SAVER
 
   sendMessageBtn.addEventListener("click", async () => {
-    const message = document.getElementById("inputMessage").value;
+    const message = inputUser.value;
     meeting.sendChatMessage(
       JSON.stringify({ type: "chatMessageCreated", message })
     );
@@ -667,15 +709,24 @@ function addDomEvents() {
     });
 
   //! START RECORDING
+  let recInterview;
 
   startRecordingBtn.addEventListener("click", async () => {
     meeting.startRecording();
+    recInterview = true;
+    meeting.sendChatMessage(
+      JSON.stringify({ type: "start-interview", recInterview })
+    );
   });
 
   //! STOP RECORDING
 
   stopRecordingBtn.addEventListener("click", async () => {
     meeting.stopRecording();
+    recInterview = false;
+    meeting.sendChatMessage(
+      JSON.stringify({ type: "start-interview", recInterview })
+    );
   });
 
   //leave Meeting Button

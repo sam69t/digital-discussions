@@ -1,5 +1,5 @@
-class PlayerTool {
-  constructor(id, x, y, w, h) {
+class Player {
+  constructor({ videoLeft, videoRight, csvSrc }) {
     // this.id =
     // this.x =
     // this.y =
@@ -7,3 +7,9 @@ class PlayerTool {
     // this.h =
   }
 }
+
+new PlayerTool({
+  videoLeft: "./video/fklgjghlkgkldf.mp4",
+  videoRight: "./video/fklgjghlkgkldf.mp4",
+  csv: "lkfgmnhgdsfnhmg.csv",
+});
