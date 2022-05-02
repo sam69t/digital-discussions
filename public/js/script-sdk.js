@@ -2,7 +2,7 @@ const API_SERVER_URL = `${window.location.origin}`;
 // var socket = io();
 // socket = io.connect(`${window.location.origin}`);
 // Declaring variables
-let videoContainer = document.getElementById("videoContainer");
+let playGround = document.querySelector(".playGround");
 let micButton = document.getElementById("mic-btn");
 let camButton = document.getElementById("cam-btn");
 let ssButton = document.getElementById("ss-btn");
@@ -32,6 +32,8 @@ let meeting;
 let localParticipant;
 let localParticipantAudio;
 
+// let chatData = [];
+
 ///////// join page
 
 let joinPageWebcam = document.getElementById("joinCam");
@@ -60,7 +62,7 @@ function addParticipantToList({ id, displayName }) {
 function createLocalParticipant() {
   localParticipant = createVideoElement(meeting.localParticipant.id);
   localParticipantAudio = createAudioElement(meeting.localParticipant.id);
-  videoContainer.appendChild(localParticipant);
+  playGround.appendChild(localParticipant);
 }
 
 function startMeeting(token, meetingId, name) {
@@ -125,8 +127,8 @@ function startMeeting(token, meetingId, name) {
     );
     // console.log("row");
 
-    videoContainer.appendChild(videoElement);
-    videoContainer.appendChild(audioElement);
+    playGround.appendChild(videoElement);
+    playGround.appendChild(audioElement);
     addParticipantToList(participant);
   });
 
@@ -394,6 +396,7 @@ function addDomEvents() {
   meeting.on("chat-message", (chatEvent) => {
     const { senderId, text, timestamp, senderName } = chatEvent;
     const parsedText = JSON.parse(text);
+    let chatData = [];
     // console.log(parsedText, senderId, senderName);
     if (
       parsedText?.type == "raiseHand" &&
@@ -401,33 +404,35 @@ function addDomEvents() {
     ) {
       console.log(chatEvent.senderName + " RAISED HAND");
     }
-    if (parsedText?.type == "chat") {
+    if (parsedText?.type == "chatMessageCreated") {
       //! CHAT MESSAGE
-      const chatBox = document.getElementById("chats");
-      const chatTemplate = `
-      <div style="margin-bottom: 10px; ${
-        meeting.localParticipant.id == senderId && "text-align : center"
-      }">
-        <span style="font-size:12px; text-align:center;">${senderName}</span>
-        <div style="margin-top:5px">
-          <span style="background:${
-            meeting.localParticipant.id == senderId ? "white" : "black"
-          }; color:${
-        meeting.localParticipant.id == senderId ? "black" : "white"
-      };padding:5px;border-radius:8px; font-size:120px">${
-        parsedText.message
-      }<span>
-        </div>
-      </div>
-      `;
-      chatBox.insertAdjacentHTML("beforeend", chatTemplate);
+      chatData.push(parsedText.message);
+      console.log(chatData);
+      // const chatBox = document.getElementById("chats");
+      // const chatTemplate = `
+      // <div style="margin-bottom: 10px; ${
+      //   meeting.localParticipant.id == senderId && "text-align : center"
+      // }">
+      //   <span style="font-size:12px; text-align:center;">${senderName}</span>
+      //   <div style="margin-top:5px">
+      //     <span style="background:${
+      //       meeting.localParticipant.id == senderId ? "white" : "black"
+      //     }; color:${
+      //   meeting.localParticipant.id == senderId ? "black" : "white"
+      // };padding:5px;border-radius:8px; font-size:120px">${
+      //   parsedText.message
+      // }<span>
+      //   </div>
+      // </div>
+      // `;
+      // chatBox.insertAdjacentHTML("beforeend", chatTemplate);
     }
     if (
       //! MOUSE ACTIVITY
       parsedText?.type == "mouse-move" &&
       senderId != meeting.localParticipant.id
     ) {
-      // console.log("mouse-move", parsedText.mouseActivity.x, senderId);
+      console.log("mouse-move", parsedText.mouseActivity.x, senderId);
       // console.log(pId);
 
       if ($('.pointer[id="' + meeting.localParticipant.id + '"]').length <= 0) {
@@ -453,6 +458,32 @@ function addDomEvents() {
         $webcam.css("width", parsedText.resizeWebcam.w);
         $webcam.css("height", parsedText.resizeWebcam.h);
       }
+    }
+    if (
+      //! ON TAP CHAT
+      parsedText?.type == "ontap-chat"
+    ) {
+      console.log(parsedText.message);
+      chatData = parsedText.message;
+      console.log(chatData);
+      const chatBox = document.getElementById("chats");
+      const chatTemplate = `
+      <div style="margin-bottom: 10px; ${
+        meeting.localParticipant.id == senderId && "text-align : center"
+      }">
+        <span style="font-size:12px; text-align:center;">${senderName}</span>
+        <div style="margin-top:5px">
+          <span style="background:${
+            meeting.localParticipant.id == senderId ? "white" : "black"
+          }; color:${
+        meeting.localParticipant.id == senderId ? "black" : "white"
+      };padding:5px;border-radius:8px; font-size:120px">${
+        parsedText.message
+      }<span>
+        </div>
+      </div>
+      `;
+      chatBox.insertAdjacentHTML("beforeend", chatTemplate);
     }
     if (
       //! WEBCAM MOVEMENT
@@ -493,16 +524,42 @@ function addDomEvents() {
       // console.log($webcam);
       // $webcam.css("background-color", "blue");
     }
+    if (
+      //! IMG DISPLAY
+      parsedText?.type == "image-url"
+    ) {
+      if (meeting.localParticipant.id != senderId) {
+        console.log(parsedText.urlImage);
+        let divImage = document.createElement("div");
+        divImage.style.backgroundImage = `url(${parsedText.urlImage})`;
+        divImage.classList.add("imageBlock");
+        // divImage.classList.add("resize-drag");
+        playGround.appendChild(divImage);
+      }
+    }
   });
 
   // //send chat message button
 
-  //! CHAT MESSAGE SENDER
+  //! ON TAP MESSAGE SENDER
+
+  let inputUser = document.querySelector("#inputMessage");
+
+  inputUser.addEventListener("input", function () {
+    const message = inputUser.value;
+    meeting.sendChatMessage(JSON.stringify({ type: "ontap-chat", message }));
+    // console.log(message);
+  });
+
+  //! CHAT MESSAGE SAVER
 
   sendMessageBtn.addEventListener("click", async () => {
     const message = document.getElementById("inputMessage").value;
-    meeting.sendChatMessage(JSON.stringify({ type: "chat", message }));
+    meeting.sendChatMessage(
+      JSON.stringify({ type: "chatMessageCreated", message })
+    );
     console.log(message);
+    document.getElementById("inputMessage").value = "";
   });
 
   //! MOUSE ACTIVITY SENDER
@@ -538,17 +595,17 @@ function addDomEvents() {
           target.style.height = event.rect.height + "px";
 
           // translate when resizing from top or left edges
-          x += event.deltaRect.left;
-          y += event.deltaRect.top;
+          // x += event.deltaRect.left;
+          // y += event.deltaRect.top;
 
-          target.style.transform = "translate(" + x + "px," + y + "px)";
+          // target.style.transform = "translate(" + x + "px," + y + "px)";
 
           target.setAttribute("data-x", x);
           target.setAttribute("data-y", y);
-          target.textContent =
-            Math.round(event.rect.width) +
-            "\u00D7" +
-            Math.round(event.rect.height);
+          // target.textContent =
+          //   Math.round(event.rect.width) +
+          //   "\u00D7" +
+          //   Math.round(event.rect.height);
 
           // console.log(event.rect.width, event.rect.height);
 
