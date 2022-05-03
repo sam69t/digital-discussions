@@ -133,7 +133,7 @@ label {
 .btn {
   padding: 7px;
   border: none;
-  box-shadow: 0px -2px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px -2px 10px 0px rgba(0, 0, 0, 0.3);
   font-size: 15px !important;
   border-radius: 4px;
   background-color: white !important;
@@ -265,7 +265,7 @@ footer > button {
 .previewContainer {
   width: 100%;
   height: 100%;
-  background-color: gray;
+  background-color: rgba(223, 223, 223, 0.1);
 }
 
 .overlayContainer {
@@ -319,37 +319,48 @@ main {
 }
 /* REDIFF */
 
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 25px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: 0.2s;
-  transition: opacity 0.2s;
-  margin-left: 1em;
-}
+/* SLIDER STYLING */
 
-.slider:hover {
-  opacity: 1;
-}
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: black;
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  background: black;
-  cursor: pointer;
-}
 .slider-container {
-  width: 100%;
-  display: flex;
+  position: absolute;
+  width: 98%;
+  z-index: 100;
+  bottom: 15;
+  right: 0;
+  margin-right: 1em;
+}
+.play {
+  margin-left: 1em;
+  height: 4vh;
+}
+#custom-seekbar {
+  cursor: pointer;
+  height: 4vh;
+  border-radius: 14px;
+  background-color: white;
+  /* outline: thin solid white; */
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 95%;
+  box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2);
+}
+#custom-seekbar span {
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4vh;
+  width: 0px;
+}
+
+#custom-seekbar span.hover:after {
+  content: "L";
+  display: block;
+  position: absolute;
+  /* background-color: red;
+  color: red; */
+  top: 0;
+  right: 0;
 }

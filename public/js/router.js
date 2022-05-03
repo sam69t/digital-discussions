@@ -41,28 +41,17 @@ if (mode === "player") {
 }
 
 function initPlayer({ messages, startStamp }) {
-  const container = document.querySelector(".playerMode");
-  const Videocontainer = document.querySelector(".videoContain");
-
-  container.classList.remove("hidden");
-
-  const videoSrc = "./assets/videos/626a51ca29fb565fd094ed6d.mp4";
-  const videoPlayer = document.createElement("video");
-  videoPlayer.classList.add("redif-vid");
-
-  //   previewContainer.appendChild(videoPlayer);
-  Videocontainer.appendChild(videoPlayer);
-  videoPlayer.src = videoSrc;
-  videoPlayer.controls = true;
-
-  var lastTime = 0;
-  var messageIndex = 0;
+  VIDEOCONTROL.videoInit();
+  VIDEOCONTROL.videoPlayerControls();
 
   function draw() {
+    const videoPlayer = document.querySelector(".redif-vid");
+    var lastTime = 0;
+    var messageIndex = 0;
     var time = videoPlayer.currentTime;
     // console.log(videoPlayer.currentTime);
     if (time !== lastTime) {
-      console.log("time: " + time);
+      // console.log("time: " + time);
       //todo: do your rendering here
 
       lastTime = time;

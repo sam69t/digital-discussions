@@ -23,15 +23,17 @@
         </nav>
     </header>
     <div class="previewContainer">
-        same content
-
-        <div class="videoContain"></div>
+        <div class="videoWrapper-one"></div>
+        <div class="videoWrapper-two"></div>
     </div>
     <div class="overlayContainer">
         <div class="playerMode hidden">
             <div class="slider-container">
                 <button class="btn play">Play</button>
-                <input class="slider" type="range" id="timeline" name="video" min="0" max="100" value="0" />
+
+                <div id="custom-seekbar">
+                    <span></span>
+                </div>
             </div>
         </div>
         <div class="toolMode hidden">
@@ -137,6 +139,7 @@
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     <script src="https://sdk.videosdk.live/js-sdk/0.0.20/videosdk.js"></script>
     <script src="js/chat.js" async defer></script>
+    <script src="js/VideoPlayer.js" async defer></script>
     <script src="js/script-sdk.js" async defer></script>
     <script src="js/dragDrop.js" async defer></script>
 </body>
