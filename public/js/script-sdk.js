@@ -31,8 +31,15 @@ switch (category) {
 
 
 
-
 */
+
+let localUser = false;
+let participantUser = false;
+
+let userNotReadyYet = false;
+
+let startButton = document.querySelector(".startButton");
+let startOtherButton = document.querySelector(".startOtherButton");
 
 let playGround = document.querySelector(".playGround");
 let micButton = document.getElementById("mic-btn");
@@ -116,11 +123,11 @@ function startMeeting(token, meetingId, name) {
     },
   });
 
-  // Meeting Join
+  //? Meeting Join
   meeting.join();
   // meeting.setWebcamQuality("high");
 
-  //create Local Participant
+  //? create Local Participant
   createLocalParticipant();
 
   //add yourself in participant list
@@ -129,7 +136,7 @@ function startMeeting(token, meetingId, name) {
     displayName: "You",
   });
 
-  // Setting local participant stream
+  //?  Setting local participant stream
   meeting.localParticipant.on("stream-enabled", (stream) => {
     setTrack(
       stream,
@@ -139,7 +146,7 @@ function startMeeting(token, meetingId, name) {
     );
   });
 
-  // Other participants
+  //?  Other participants
   meeting.on("participant-joined", (participant) => {
     let videoElement = createVideoElement(participant.id);
     let audioElement = createAudioElement(participant.id);
@@ -148,8 +155,8 @@ function startMeeting(token, meetingId, name) {
       setTrack(stream, videoElement, audioElement, participant.id);
     });
 
-    const bool = true;
-    meeting.sendChatMessage(JSON.stringify({ type: "flex", bool }));
+    // const bool = true;
+    // meeting.sendChatMessage(JSON.stringify({ type: "flex", bool }));
 
     participant.setQuality("high");
     console.log(
@@ -209,37 +216,23 @@ function startMeeting(token, meetingId, name) {
   //recording events
   meeting.on("recording-started", () => {
     console.log("RECORDING STARTED EVENT");
+    let recInterview = true;
+    meeting.sendChatMessage(
+      JSON.stringify({ type: "start-interview", recInterview })
+    );
+    // SEND TRIGGER MSG
   });
   meeting.on("recording-stopped", () => {
     console.log("RECORDING STOPPED EVENT");
-  });
-
-  meeting.on("presenter-changed", (presenterId) => {
-    if (presenterId) {
-      ssButton.innerText = "Stop Sharing";
-    } else {
-      console.log(presenterId);
-      screenShare.removeAttribute("src");
-      screenShare.pause();
-      screenShare.load();
-
-      ssButton.innerText = "Share Entire Screen";
-    }
+    let recInterview = true;
+    meeting.sendChatMessage(
+      JSON.stringify({ type: "stop-interview", recInterview })
+    );
   });
 
   meeting.on("meeting-left", () => {
     window.location.reload();
   });
-
-  // //Entry Response
-  // meeting.on("entry-requested", (requestEvent) => {
-  //   console.log(requestEvent, "EVENT::entryRequested");
-  // });
-
-  // meeting.on("entry-responded", (respondEvent) => {
-  //   console.log(respondEvent, "EVENT::entryResponded");
-  // });
-  //add DOM Events
   addDomEvents();
 }
 
@@ -312,6 +305,8 @@ async function joinMeeting(newMeeting) {
   document.querySelector("#meetingid").innerHTML = meetingId;
   startMeeting(token, meetingId, name);
   console.log(token, meetingId, name);
+  let startButton = document.querySelector(".startButtonWrapper");
+  startButton.style.display = "flex";
 }
 
 // creating video element
@@ -359,12 +354,12 @@ function setTrack(stream, videoElem, audioElement, id) {
   }
   if (stream.kind == "audio") {
     if (id == meeting.localParticipant.id) return;
-    const mediaStream = new MediaStream();
-    mediaStream.addTrack(stream.track);
-    audioElement.srcObject = mediaStream;
-    audioElement
-      .play()
-      .catch((error) => console.error("audioElem.play() failed", error));
+    // const mediaStream = new MediaStream();
+    // mediaStream.addTrack(stream.track);
+    // audioElement.srcObject = mediaStream;
+    // audioElement
+    //   .play()
+    //   .catch((error) => console.error("audioElem.play() failed", error));
   }
   if (stream.kind == "share") {
     console.log("SHARE EVENT ");
@@ -407,24 +402,6 @@ function addDomEvents() {
       console.log("show");
     }
   });
-
-  // screen share button event listener
-  // ssButton.addEventListener("click", async () => {
-  //   if (ssButton.innerText == "Share Entire Screen") {
-  //     // let source = await showSources();
-  //     meeting.enableScreenShare();
-  //     // ssButton.innerText = "Stop Sharing";
-  //   } else {
-  //     meeting.disableScreenShare();
-  //     // ssButton.innerText = "Share Entire Screen";
-  //   }
-  // });
-
-  //raiseHand button
-  // raiseHand.addEventListener("click", async () => {
-  //   meeting.sendChatMessage(JSON.stringify({ type: "raiseHand" }));
-  // });
-
   // let recording = new Player({ csv, video1, video2 });
   // recording.onMessage(onMessage.bind(this));
 
@@ -436,17 +413,63 @@ function addDomEvents() {
     let chatData = [];
     // console.log(parsedText, senderId, senderName);
     if (
-      parsedText?.type == "raiseHand" &&
+      parsedText?.type == "all-user-ready"
+      //remove this for both parties
+    ) {
+      console.log("TOUS");
+      let fond = document.querySelector(".chat-wrapper");
+      fond.style.setProperty("background-color", "green", "important");
+      startButton.style.setProperty("display", "none", "important");
+      startOtherButton.style.setProperty("display", "none", "important");
+    }
+
+    if (
+      parsedText?.type == "user1-ready" //remove this for both parties
+    ) {
+      if (meeting.localParticipant.id) {
+        startButton.style.setProperty("background-color", "green", "important");
+        startButton.textContent = "En attente d'en face";
+      }
+      if (senderId != meeting.localParticipant.id) {
+        startButton.style.setProperty("display", "none", "important");
+        startOtherButton.style.setProperty("display", "block", "important");
+
+        // );
+
+        startButton.textContent = "En attente de votre réponse";
+      }
+    }
+    if (
+      parsedText?.type == "user2-ready" &&
       senderId != meeting.localParticipant.id //remove this for both parties
     ) {
-      console.log(chatEvent.senderName + " RAISED HAND");
+      const allUsersReady = true;
+      meeting.sendChatMessage(
+        JSON.stringify({ type: "all-user-ready", allUsersReady })
+      );
     }
+
+    // if (
+    //   parsedText?.type == "user1-ready" &&
+    //   senderId &&
+    //   meeting.localParticipant.id //remove this for both parties
+    // ) {
+    //   if (parsedText.localUser === true) {
+    //     startInterviewButton.style.setProperty(
+    //       "background-color",
+    //       "green",
+    //       "important"
+    //     );
+    //     startInterviewButton.textContent = "Lessgo";
+    //     console.log(parsedText.localUser);
+    //   }
+    // }
     if (
       //! MOUSE ACTIVITY
       parsedText?.type == "mouse-move" &&
       senderId != meeting.localParticipant.id
     ) {
-      console.log("mouse-move", parsedText.mouseActivity.x, senderId);
+      // console.log("mouse-move", parsedText.mouseActivity.x, senderId);
       // console.log(pId);
 
       if ($('.pointer[id="' + meeting.localParticipant.id + '"]').length <= 0) {
@@ -464,7 +487,7 @@ function addDomEvents() {
       parsedText?.type == "resize-webcam" &&
       senderId != meeting.localParticipant.id
     ) {
-      console.log(parsedText.resizeWebcam.w, parsedText.resizeWebcam.h);
+      // console.log(parsedText.resizeWebcam.w, parsedText.resizeWebcam.h);
 
       if (senderId != meeting.localParticipant.id) {
         var $webcam = $(".video-frame:last");
@@ -475,65 +498,21 @@ function addDomEvents() {
     }
     if (parsedText?.type == "chatMessageCreated") {
       //! CHAT MESSAGE
-      // chatData.push(parsedText.message);
-      // console.log(chatData);
-
-      // const lastElement = CHAT.getOrAddMsgElem();
       CHAT.addTextToLastMsg(parsedText.message);
       CHAT.lockLastMsg();
-
-      // const chatBox = document.getElementById("chats");
-      // const chatTemplate = `
-      // <div style="margin-bottom: 10px; ${
-      //   meeting.localParticipant.id == senderId && "text-align : center"
-      // }">
-      //   <span style="font-size:12px; text-align:center;">${senderName}</span>
-      //   <div style="margin-top:5px">
-      //     <span style="background:${
-      //       meeting.localParticipant.id == senderId ? "white" : "black"
-      //     }; color:${
-      //   meeting.localParticipant.id == senderId ? "black" : "white"
-      // };padding:5px;border-radius:8px; font-size:120px">${
-      //   parsedText.message
-      // }<span>
-      //   </div>
-      // </div>
-      // `;
-      // chatBox.insertAdjacentHTML("beforeend", chatTemplate);
     }
     if (
       //! ON TAP CHAT
       parsedText?.type == "ontap-chat"
     ) {
-      // console.log(parsedText.message);
-      // chatData = parsedText.message;
-      // console.log(chatData);
-      // const chatTemplate = `
       CHAT.addTextToLastMsg(parsedText.message);
-      // <div style="margin-bottom: 10px; ${
-      //   meeting.localParticipant.id == senderId && "text-align : center"
-      // }">
-      //   <span style="font-size:12px; text-align:center;">${senderName}</span>
-      //   <div style="margin-top:5px">
-      //     <span style="background:${
-      //       meeting.localParticipant.id == senderId ? "white" : "black"
-      //     }; color:${
-      //   meeting.localParticipant.id == senderId ? "black" : "white"
-      // };padding:5px;border-radius:8px; font-size:120px">${
-      //   parsedText.message
-      // }<span>
-      //   </div>
-      // </div>
-      // `;
-      // chatBox.insertAdjacentHTML("beforeend", chatTemplate);
     }
     if (
       //! WEBCAM MOVEMENT
       parsedText?.type == "moving-webcam" &&
       senderId != meeting.localParticipant.id
     ) {
-      console.log(parsedText.movingWebcam.x, parsedText.movingWebcam.x);
-      // var $webcam = $('.video-frame[id= "' + pId + '"]');
+      // console.log(parsedText.movingWebcam.x, parsedText.movingWebcam.x);
       if (senderId != meeting.localParticipant.id) {
         $("#videoContainer").css("flex-direction", "row-reverse");
         console.log("rows");
@@ -541,30 +520,16 @@ function addDomEvents() {
         $webcam.css("left", parsedText.movingWebcam.x);
         $webcam.css("top", parsedText.movingWebcam.y);
       }
-
-      // console.log($webcam);
-      // $webcam.css("background-color", "blue");
     }
     if (
       //! WEBCAM MOVEMENT
       parsedText?.type == "flex"
     ) {
-      // console.log("lol");
-
-      console.log(parsedText.bool);
-
-      // var $webcam = $('.video-frame[id= "' + pId + '"]');
+      // console.log(parsedText.bool);
       if (meeting.localParticipant.id) {
         console.log("lol");
-        console.log(parsedText.bool);
-
-        // var $webcam = $(".video-frame:last");
-        // $webcam.css("left", -parsedText.movingWebcam.x);
-        // $webcam.css("top", -parsedText.movingWebcam.y);
+        // console.log(parsedText.bool);
       }
-
-      // console.log($webcam);
-      // $webcam.css("background-color", "blue");
     }
     if (
       //! IMG DISPLAY
@@ -580,8 +545,6 @@ function addDomEvents() {
       }
     }
   }
-
-  // //send chat message button
 
   //! ON TAP MESSAGE SENDER
 
@@ -636,25 +599,9 @@ function addDomEvents() {
           target.style.width = event.rect.width + "px";
           target.style.height = event.rect.height + "px";
 
-          // translate when resizing from top or left edges
-          // x += event.deltaRect.left;
-          // y += event.deltaRect.top;
-
-          // target.style.transform = "translate(" + x + "px," + y + "px)";
-
           target.setAttribute("data-x", x);
           target.setAttribute("data-y", y);
-          // target.textContent =
-          //   Math.round(event.rect.width) +
-          //   "\u00D7" +
-          //   Math.round(event.rect.height);
 
-          // console.log(event.rect.width, event.rect.height);
-
-          // socket.emit("webcam_size", {
-          //   width: event.rect.width,
-          //   height: event.rect.height,
-          // });
           const resizeWebcam = {
             w: event.rect.width,
             h: event.rect.height,
@@ -693,13 +640,6 @@ function addDomEvents() {
           meeting.sendChatMessage(
             JSON.stringify({ type: "moving-webcam", movingWebcam })
           );
-
-          // socket.emit("webcam_move", {
-          //   x: (position.x += event.dx),
-          //   y: (position.y += event.dy),
-          // });
-
-          // console.log((position.x += event.dx), event.dy);
           position.x += event.dx;
           position.y += event.dy;
 
@@ -708,26 +648,28 @@ function addDomEvents() {
       },
     });
 
-  //! START RECORDING
-  let recInterview;
+  // //! START RECORDING
 
-  startRecordingBtn.addEventListener("click", async () => {
-    meeting.startRecording();
-    recInterview = true;
-    meeting.sendChatMessage(
-      JSON.stringify({ type: "start-interview", recInterview })
-    );
+  startButton.addEventListener("click", async () => {
+    console.log("sendUser1");
+    let localUser = true;
+    // let localUser = { user1: true, user2: false };
+
+    meeting.sendChatMessage(JSON.stringify({ type: "user1-ready", localUser }));
+  });
+  startOtherButton.addEventListener("click", async () => {
+    console.log("sendUser1");
+    let otherUser = true;
+    // let localUser = { user1: true, user2: false };
+
+    meeting.sendChatMessage(JSON.stringify({ type: "user2-ready", otherUser }));
   });
 
-  //! STOP RECORDING
+  // //! STOP RECORDING
 
-  stopRecordingBtn.addEventListener("click", async () => {
-    meeting.stopRecording();
-    recInterview = false;
-    meeting.sendChatMessage(
-      JSON.stringify({ type: "start-interview", recInterview })
-    );
-  });
+  // stopRecordingBtn.addEventListener("click", async () => {
+  //   meeting.stopRecording();
+  // });
 
   //leave Meeting Button
   // leaveMeetingBtn.addEventListener("click", async () => {

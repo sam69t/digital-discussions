@@ -1,18 +1,29 @@
 const VIDEOCONTROL = {
   videoInit() {
     const container = document.querySelector(".playerMode");
-    const Videocontainer = document.querySelector(".videoWrapper-one");
+    const videoContaineOne = document.querySelector(".videoWrapper-one");
+    const videoContaineTwo = document.querySelector(".videoWrapper-two");
 
     container.classList.remove("hidden");
 
-    const videoSrc = "./assets/videos/626a51ca29fb565fd094ed6d.mp4";
-    const videoPlayer = document.createElement("video");
-    videoPlayer.classList.add("redif-vid");
+    const videoSrcOne = "./assets/videos/626a51ca29fb565fd094ed6d.mp4";
+    const videoSrcTwo = "./assets/videos/626a51ca29fb565fd094ed6d.mp4";
+
+    const videoPlayerOne = document.createElement("video");
+    const videoPlayerTwo = document.createElement("video");
+
+    videoPlayerOne.classList.add("redif-vid");
+    videoPlayerTwo.classList.add("redif-vid");
 
     //   previewContainer.appendChild(videoPlayer);
-    Videocontainer.appendChild(videoPlayer);
-    videoPlayer.src = videoSrc;
-    videoPlayer.controls = true;
+    videoContaineOne.appendChild(videoPlayerOne);
+    videoContaineTwo.appendChild(videoPlayerTwo);
+
+    videoPlayerOne.src = videoSrcOne;
+    videoPlayerOne.controls = false;
+
+    videoPlayerTwo.src = videoSrcTwo;
+    videoPlayerTwo.controls = false;
   },
   videoPlayerControls() {
     var vid = document.querySelector(".redif-vid");
