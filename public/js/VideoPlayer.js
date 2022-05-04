@@ -6,8 +6,8 @@ const VIDEOCONTROL = {
 
     container.classList.remove("hidden");
 
-    const videoSrcOne = "./assets/videos/626a51ca29fb565fd094ed6d.mp4";
-    const videoSrcTwo = "./assets/videos/626a51ca29fb565fd094ed6d.mp4";
+    const videoSrcOne = "./assets/videos/62722ad69572afb6903bf83b.mp4";
+    const videoSrcTwo = "./assets/videos/62722ad69572afb6903bf83b.mp4";
 
     const videoPlayerOne = document.createElement("video");
     const videoPlayerTwo = document.createElement("video");

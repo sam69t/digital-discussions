@@ -9,7 +9,7 @@ const mode = params.get("mode");
 
 if (mode === "player") {
   Papa.parse(
-    "./assets/chats/2e43-ei07-yriy-626a62fd48819a0408c7d5e2-625280f2a457cf8bc28d7648.csv",
+    "./assets/chats/m58r-utz1-8y5o-62722abde4a43b0446ec914c-625280f2a457cf8bc28d7648.csv",
     {
       download: true,
       delimiter: "	",

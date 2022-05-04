@@ -91,8 +91,11 @@ input {
 .meetingId-wrapper {
   position: absolute;
   display: flex;
-  top: 0;
+  top: 80%;
+  bottom: 0;
+  z-index: 9999999999;
   width: 100%;
+  font-size: 80px;
   justify-content: center;
   align-items: flex-start;
 }
@@ -303,6 +306,9 @@ a {
 
 main {
   height: 100vh;
+}
+.tool-control {
+  display: block;
 }
 
 .startButtonWrapper {

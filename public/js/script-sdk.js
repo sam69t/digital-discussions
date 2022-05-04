@@ -40,6 +40,8 @@ let userNotReadyYet = false;
 
 let startButton = document.querySelector(".startButton");
 let startOtherButton = document.querySelector(".startOtherButton");
+let startButtonWrapper = document.querySelector(".startButtonWrapper");
+let toolController = document.querySelector(".tool-control");
 
 let playGround = document.querySelector(".playGround");
 let micButton = document.getElementById("mic-btn");
@@ -416,11 +418,12 @@ function addDomEvents() {
       parsedText?.type == "all-user-ready"
       //remove this for both parties
     ) {
-      console.log("TOUS");
       let fond = document.querySelector(".chat-wrapper");
       fond.style.setProperty("background-color", "green", "important");
-      startButton.style.setProperty("display", "none", "important");
-      startOtherButton.style.setProperty("display", "none", "important");
+      startButtonWrapper.style.setProperty("display", "none", "important");
+      toolControllerstyle.setProperty("display", "block", "important");
+
+      meeting.startRecording();
     }
 
     if (
@@ -574,9 +577,9 @@ function addDomEvents() {
       x: event.pageX,
       y: event.pageY,
     };
-    meeting.sendChatMessage(
-      JSON.stringify({ type: "mouse-move", mouseActivity })
-    );
+    // meeting.sendChatMessage(
+    //   JSON.stringify({ type: "mouse-move", mouseActivity })
+    // );
   });
 
   //! VIDEO DRAG & SIZE SENDER
@@ -660,16 +663,20 @@ function addDomEvents() {
   startOtherButton.addEventListener("click", async () => {
     console.log("sendUser1");
     let otherUser = true;
+    // meeting.startRecording();
+
     // let localUser = { user1: true, user2: false };
 
     meeting.sendChatMessage(JSON.stringify({ type: "user2-ready", otherUser }));
   });
 
   // //! STOP RECORDING
-
-  // stopRecordingBtn.addEventListener("click", async () => {
-  //   meeting.stopRecording();
-  // });
+  startRecordingBtn.addEventListener("click", async () => {
+    meeting.startRecording();
+  });
+  stopRecordingBtn.addEventListener("click", async () => {
+    meeting.stopRecording();
+  });
 
   //leave Meeting Button
   // leaveMeetingBtn.addEventListener("click", async () => {
