@@ -407,7 +407,13 @@ function addDomEvents() {
   // let recording = new Player({ csv, video1, video2 });
   // recording.onMessage(onMessage.bind(this));
 
-  meeting.on("chat-message", onMessage.bind(this));
+  meeting.on("chat-message", (event) => {
+    // split
+    onMessage(event);
+
+    updateTool(event);
+    updatePrewiew(event);
+  });
 
   function onMessage(chatEvent) {
     const { senderId, text, timestamp, senderName } = chatEvent;

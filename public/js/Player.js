@@ -1,6 +1,9 @@
 class Player {
   constructor({ parent, csvSrc, leftVideoSrc, rightVideoSrc }) {
     this.emitter = new EventEmitter();
+    this.startStamp = 0; //! in seconds
+    this.oldTime = 0;
+    this.messageIndex = 0;
 
     this.leftVideo = this.createVideo({
       parent: parent.querySelector(".videoWrapper-one"),
@@ -18,17 +21,18 @@ class Player {
       delimiter: "	",
       header: true,
       complete: (results) => {
-        results.data.forEach((element) => {
+        this.messages = results.data;
+        this.messages.forEach((element) => {
           if (!element.message) return;
           element.message = JSON.parse(element.message);
         });
 
-        const firstTimestamp = new Date("2022-04-28T09:48:48.469Z");
+        const startRecordingMessage = this.messages.find((element) => {
+          return element?.message?.type === "start-interview";
+        });
 
-        console.log(firstTimestamp.getTime());
-
-        this.messages = results.data;
-        this.startStamp = 0;
+        const firstTimestamp = new Date(startRecordingMessage.timestamp);
+        this.startStamp = firstTimestamp.getTime();
 
         this.emit("loaded", this.messages);
       },
@@ -61,6 +65,39 @@ class Player {
     return video;
   }
 
+  updateMessages(currentTime) {
+    const time = currentTime * 1000 + this.startStamp;
+    const deltaTime = time - this.oldTime;
+
+    this.triggerMessages(time, deltaTime);
+
+    this.oldTime = time;
+  }
+
+  triggerMessages(time, deltaTime) {
+    const pendingMessage = this.messages[this.messageIndex];
+
+    if (pendingMessage === undefined) return;
+
+    const messageTime = new Date(pendingMessage.timestamp).getTime();
+
+    // seek to future
+
+    if (deltaTime >= 0 && messageTime <= time) {
+      this.emit("chat-message", pendingMessage);
+      this.messageIndex++;
+      this.triggerMessages(time, deltaTime);
+    }
+
+    // seek to past
+
+    if (deltaTime < 0 && messageTime >= time) {
+      this.emit("revert-chat-message", pendingMessage);
+      this.messageIndex--;
+      this.triggerMessages(time, deltaTime);
+    }
+  }
+
   setupSlider({ sliderContainer }) {
     const buttonElem = sliderContainer.querySelector(".play");
     buttonElem.textContent = ">";
@@ -70,11 +107,24 @@ class Player {
     const vid2 = this.rightVideo;
     const spanElem = sliderElem.querySelector("span");
 
+    const moveSlider = (clientX) => {
+      const { left, width, right } = sliderElem.getBoundingClientRect();
+      //   console.log(right);
+      const amount = mapClamped(clientX, left, right, 0, 1);
+      const time = vid.duration * amount;
+      vid.currentTime = time;
+      vid2.currentTime = time;
+
+      updateSlider(amount);
+      this.updateMessages(vid.currentTime);
+    };
+
     vid.ontimeupdate = () => {
       if (drag) return;
 
       var amount = vid.currentTime / vid.duration;
 
+      this.updateMessages(vid.currentTime);
       //   this.rightVideo.currentTime = vid.currentTime;
       //   $("#custom-seekbar span").css("width", percentage + "%");
       updateSlider(amount);
@@ -99,17 +149,6 @@ class Player {
       drag = false;
       dragWhilePlaying = false;
     });
-
-    function moveSlider(clientX) {
-      const { left, width, right } = sliderElem.getBoundingClientRect();
-      //   console.log(right);
-      const amount = map(clientX, left, right, 0, 1);
-      const time = vid.duration * amount;
-      vid.currentTime = time;
-      vid2.currentTime = time;
-
-      updateSlider(amount);
-    }
 
     function updateSlider(normalizedAmount) {
       spanElem.style.width = `${normalizedAmount * 100}%`;

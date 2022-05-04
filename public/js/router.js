@@ -27,7 +27,13 @@ if (mode === "player") {
     sliderContainer: document.querySelector(".slider-container"),
   });
 
-  // player.on("chat-message", (message) => {});
+  player.on("chat-message", (data) => {
+    console.log(data.message.type);
+  });
+
+  player.on("revert-chat-message", (data) => {
+    console.log("revert", data.message.type);
+  });
 } else if (mode === "tool") {
   const container = document.querySelector(".toolMode");
   container.classList.remove("hidden");
