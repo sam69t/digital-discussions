@@ -1,32 +1,53 @@
 const VIDEOCONTROL = {
-  videoInit() {
+  showContainer() {
     const container = document.querySelector(".playerMode");
-    const videoContaineOne = document.querySelector(".videoWrapper-one");
-    const videoContaineTwo = document.querySelector(".videoWrapper-two");
-
     container.classList.remove("hidden");
-
-    const videoSrcOne = "./assets/videos/62722ad69572afb6903bf83b.mp4";
-    const videoSrcTwo = "./assets/videos/62722ad69572afb6903bf83b.mp4";
-
-    const videoPlayerOne = document.createElement("video");
-    const videoPlayerTwo = document.createElement("video");
-
-    videoPlayerOne.classList.add("redif-vid");
-    videoPlayerTwo.classList.add("redif-vid");
-
-    //   previewContainer.appendChild(videoPlayer);
-    videoContaineOne.appendChild(videoPlayerOne);
-    videoContaineTwo.appendChild(videoPlayerTwo);
-
-    videoPlayerOne.src = videoSrcOne;
-    videoPlayerOne.controls = false;
-
-    videoPlayerTwo.src = videoSrcTwo;
-    videoPlayerTwo.controls = false;
   },
-  videoPlayerControls() {
-    var vid = document.querySelector(".redif-vid");
+
+  //   videoInit() {
+
+  //     const videoContaineOne = document.querySelector(".videoWrapper-one");
+  //     const videoContaineTwo = document.querySelector(".videoWrapper-two");
+
+  //     const videoSrcOne = "./assets/videos/62722ad69572afb6903bf83b.mp4";
+  //     const videoSrcTwo = "./assets/videos/62722ad69572afb6903bf83b.mp4";
+
+  //     const videoPlayerOne = document.createElement("video");
+  //     const videoPlayerTwo = document.createElement("video");
+
+  //     videoPlayerOne.classList.add("redif-vid");
+  //     videoPlayerTwo.classList.add("redif-vid");
+
+  //     //   previewContainer.appendChild(videoPlayer);
+  //     videoContaineOne.appendChild(videoPlayerOne);
+  //     videoContaineTwo.appendChild(videoPlayerTwo);
+
+  //     videoPlayerOne.src = videoSrcOne;
+  //     videoPlayerOne.controls = false;
+
+  //     videoPlayerTwo.src = videoSrcTwo;
+  //     videoPlayerTwo.controls = false;
+  //   },
+  //   setupVideo({
+  //       parent: document.querySelector(".videoWrapper-one"),
+  //       src: "./assets/videos/62722ad69572afb6903bf83b.mp4"
+  //   }),
+  //   setupVideo({
+  //       parent: document.querySelector(".videoWrapper-two"),
+  //       src: "./assets/videos/62722ad69572afb6903bf83b.mp4"
+  //   }),
+
+  setupVideo({ parent, src }) {
+    const video = document.createElement("video");
+    video.classList.add("redif-vid");
+    parent.appendChild(video);
+    video.src = src;
+    video.controls = false;
+
+    return video;
+  },
+
+  connectVideoToSlider(vid) {
     vid.ontimeupdate = function () {
       var percentage = (vid.currentTime / vid.duration) * 100;
       $("#custom-seekbar span").css("width", percentage + "%");
