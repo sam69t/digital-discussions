@@ -28,7 +28,7 @@ class Player {
         });
 
         const startRecordingMessage = this.messages.find((element) => {
-          return element?.message?.type === "start-interview";
+          return element?.message?.type === "moving-webcam";
         });
 
         const firstTimestamp = new Date(startRecordingMessage.timestamp);
@@ -57,7 +57,7 @@ class Player {
 
   createVideo({ parent, src }) {
     const video = document.createElement("video");
-    video.classList.add("redif-vid");
+    video.classList.add("video-frame");
     parent.appendChild(video);
     video.src = src;
     video.controls = false;
@@ -80,12 +80,14 @@ class Player {
     if (pendingMessage === undefined) return;
 
     const messageTime = new Date(pendingMessage.timestamp).getTime();
+    console.log(this.messageIndex);
 
     // seek to future
 
     if (deltaTime >= 0 && messageTime <= time) {
       this.emit("chat-message", pendingMessage);
       this.messageIndex++;
+      console.log(this.messageIndex);
       this.triggerMessages(time, deltaTime);
     }
 
@@ -100,7 +102,7 @@ class Player {
 
   setupSlider({ sliderContainer }) {
     const buttonElem = sliderContainer.querySelector(".play");
-    buttonElem.textContent = ">";
+    buttonElem.textContent = "Play";
     const sliderElem = sliderContainer.querySelector(".custom-seekbar");
 
     const vid = this.leftVideo;
@@ -120,6 +122,7 @@ class Player {
     };
 
     vid.ontimeupdate = () => {
+      // console.log(vid.currentTime);
       if (drag) return;
 
       var amount = vid.currentTime / vid.duration;
@@ -156,15 +159,15 @@ class Player {
 
     function pauseVideo() {
       vid.pause();
-      vid2.pause();
+      // vid2.pause();
       videoPlaying = false;
-      buttonElem.textContent = ">";
+      buttonElem.textContent = "Play";
     }
     function playVideo() {
       vid.play();
-      vid2.play();
+      // vid2.play();
       videoPlaying = true;
-      buttonElem.textContent = "II";
+      buttonElem.textContent = "Stop";
     }
 
     sliderElem.onmousedown = (event) => {

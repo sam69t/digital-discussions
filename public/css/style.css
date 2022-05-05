@@ -90,7 +90,7 @@ input {
 
 .meetingId-wrapper {
   position: absolute;
-  display: flex;
+  display: none;
   top: 80%;
   bottom: 0;
   z-index: 9999999999;
@@ -122,7 +122,7 @@ audio {
 }
 
 .blur {
-  filter: blur(15px);
+  filter: blur(10px);
 }
 .join-right-wrapper > div {
   margin-top: 1rem;
@@ -219,9 +219,9 @@ body {
   height: 100vh;
   top: 0%;
   width: 100%;
-  padding-top: 15px;
+  padding-top: 30px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  background-color: whitesmoke;
+  background-color: transparent;
   position: absolute;
   /* top: calc(50% - 300px);
   left: calc(50% - 150px); */
@@ -308,16 +308,42 @@ main {
   height: 100vh;
 }
 .tool-control {
-  display: block;
+  display: none;
+}
+.videos-wrapper {
+  position: absolute;
+  z-index: 100000;
+  width: 100%;
+  height: 100vh;
+}
+.videos-container {
+  /* z-index: 3000; */
+  width: 100%;
+  display: flex;
+  position: absolute;
+  top: calc(50% - 20%);
+  justify-content: space-between;
+  flex-direction: row;
 }
 
+.chats__message {
+  font-size: 50px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.videos-wrapper > video {
+  width: 100%;
+  transform: scale(1.2);
+}
 .startButtonWrapper {
   position: absolute;
   /* display: flex; */
   justify-content: center;
   align-items: center;
   width: 100%;
-  z-index: 1000000;
+  z-index: 999999999999;
   height: 100vh;
   display: none;
 }
@@ -358,6 +384,7 @@ main {
 .play {
   margin-left: 1em;
   height: 4vh;
+  font-size: 11px !important;
 }
 .custom-seekbar {
   cursor: pointer;
@@ -394,20 +421,22 @@ main {
 /* CAM */
 
 .videoWrapper-one {
+  transform-origin: 0%;
   position: absolute;
-  width: 25%;
-  top: 30%;
-  left: 15;
+  width: 20%;
+  margin-left: 2vh;
   overflow: hidden;
   border-radius: 20px;
 }
 .videoWrapper-two {
+  transform-origin: 0%;
+
   position: absolute;
-  width: 25%;
-  right: 15;
-  top: 30%;
+  width: 20%;
+  margin-right: 2vh;
   overflow: hidden;
   border-radius: 20px;
+  right: 0;
 }
 .videoWrapper-one > video {
   width: 100%;

@@ -18,9 +18,13 @@
     <script src="https://sdk.videosdk.live/js-sdk/0.0.20/videosdk.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/chat.js" defer></script>
+    <script src="js/video.js" defer></script>
     <script src="js/VideoPlayer.js" defer></script>
     <script src="js/Player.js" defer></script>
-    <script src="js/script-sdk.js" defer></script>
+    <script src="js/sdkInit.js" defer></script>
+    <script src="js/sdkSendMsg.js" defer></script>
+    <script src="js/sdkDomAction.js" defer></script>
+    <script src="js/moveAndResize.js" defer></script>
     <script src="js/dragDrop.js" defer></script>
 
     <script src="./js/router.js" defer></script>
@@ -39,8 +43,13 @@
         </nav>
     </header>
     <div class="previewContainer">
-        <div class="videoWrapper-one"></div>
-        <div class="videoWrapper-two"></div>
+        <div class="videos-container">
+            <div class="videoWrapper-one"></div>
+            <div class="videoWrapper-two"></div>
+        </div>
+        <div class="chat-wrapper">
+            <div id="chats"></div>
+        </div>
     </div>
     <div class="overlayContainer">
         <div class="playerMode hidden">
@@ -69,10 +78,10 @@
                             <video class="drag resize-drag" id="joinCam"></video>
                         </div>
                         <div class="join-right" style="width: 350px">
-                            <h1 style="text-align: center">REJOINDRE UNE ROOM</h1>
+                            <h1 style="text-align: left">Rejoindre une room</h1>
                             <div>
                                 <div>
-                                    <label>NAME</label>
+                                    <label>Name</label>
                                     <input style="
                         display: block;
                         width: 100%;
@@ -82,7 +91,7 @@
                       " type="text" name="name" id="joinMeetingName" required />
                                 </div>
                                 <div>
-                                    <label>ROOM ID</label>
+                                    <label>Room ID</label>
                                     <input style="
                         display: block;
                         width: 100%;
@@ -94,13 +103,13 @@
                                     <button style="margin-top: 2rem; display: block; width: 104%"
                                         class="btn secondary text-white" id="meetingJoinButton"
                                         onclick="joinMeeting(true)">
-                                        CREATE MEETING
+                                        Create Meeting
                                     </button>
                                 </div>
                                 <div>
                                     <button style="margin-top: 2rem; display: block; width: 104%"
                                         class="btn secondary text-white" id="meetingJoinButton" onclick="joinMeeting()">
-                                        JOIN MEETING
+                                        Join Meeting
                                     </button>
                                 </div>
                             </div>
@@ -118,11 +127,12 @@
                         <button class="btn primary text-white" id="stopRecording-btn">
                             Stop Recording
                         </button>
+
                         <button class="mute btn primary text-white" id="mic-btn">
                             Mute Mic
                         </button>
                         <input type="text" required id="inputMessage" style="" />
-                        <button class="cam btn primary text-white" id="cam-btn">
+                        <button class="cam-btn cam btn primary text-white">
                             Hide Cam
                         </button>
                     </footer>
@@ -136,8 +146,6 @@
                     </div>
                     <div class="chat-wrapper">
                         <div id="chats"></div>
-
-                        <div style="display: flex"></div>
                     </div>
                 </div>
 
