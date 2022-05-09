@@ -5,10 +5,14 @@ let participantUser = false;
 
 let userNotReadyYet = false;
 
+let chatContainer = document.querySelector("#chats");
+
 let startButton = document.querySelector(".startButton");
 let startOtherButton = document.querySelector(".startOtherButton");
 let startButtonWrapper = document.querySelector(".startButtonWrapper");
-let toolController = document.querySelector(".tool-control");
+let toolControllerP = document.querySelector(".tool-control-P");
+let toolControllerH = document.querySelector(".tool-control-H");
+
 let fond = document.querySelector(".chat-wrapper");
 
 let videoContainerOne = document.querySelector(".videoWrapper-one");
@@ -119,11 +123,20 @@ function startMeeting(token, meetingId, name) {
     });
 
     participant.setQuality("high");
-    console.log(
-      participant.length,
-      meeting.localParticipant.id,
-      participant.id
-    );
+
+    // if (participant.id) {
+    //   participant.pin("CAM");
+    // }
+
+    if (mode === "toolH") {
+      console.log(participant.id);
+      participant.pin("CAM");
+    }
+
+    if (mode === "toolP") {
+      console.log(participant.id);
+      participant.unpin("CAM");
+    }
 
     let mirrorCam = true;
     meeting.sendChatMessage(
@@ -135,6 +148,14 @@ function startMeeting(token, meetingId, name) {
     videoContainerTwo.appendChild(videoElement);
     videoContainerTwo.appendChild(audioElement);
     addParticipantToList(participant);
+  });
+
+  meeting.on("pin-state-changed", ({ participantId, state, pinnedBy }) => {
+    console.log({
+      participantId, // id of participant who were pinned
+      state, // { cam: true, share: true }
+      pinnedBy, // id of participant who pinned that participant
+    });
   });
 
   // participants left
@@ -245,6 +266,15 @@ async function joinMeeting(newMeeting) {
   document.querySelector("#meetingid").innerHTML = meetingId;
   startMeeting(token, meetingId, name);
   console.log(token, meetingId, name);
+
+  if (mode === "toolH") {
+    console.log(meeting.localParticipant.id);
+  }
+  if (mode === "toolP") {
+    console.log(meeting.localParticipant.id);
+  }
+  // let url = new URLSearchParams("http://localhost:3000/room.html?mode=tool");
+  // const mode = params.get("mode");
 }
 
 // creating video element
@@ -254,9 +284,12 @@ function createVideoElement(pId) {
   // let parentVideo = videoElement.parentNode;
 
   videoElement.classList.add("video-frame");
-  if (allVideos.length === 2) {
-    videoContainerOne.classList.add("resize-drag");
-  }
+  videoContainerOne.classList.add("resize-drag");
+  videoContainerTwo.classList.add("resize-drag");
+
+  // if (allVideos.length === 2) {
+  //   videoContainerOne.classList.add("resize-drag");
+  // }
 
   console.log(allVideos);
 
@@ -336,6 +369,21 @@ function addDomEvents() {
   VIDEO.moveVideo();
   VIDEO.resizeVideo();
 
+  startButton.addEventListener("click", async () => {
+    console.log("sendUser1");
+    let localUser = true;
+    // let localUser = { user1: true, user2: false };
+
+    meeting.sendChatMessage(JSON.stringify({ type: "user1-ready", localUser }));
+  });
+  startOtherButton.addEventListener("click", async () => {
+    console.log("sendUser1");
+    const allUsersReady = true;
+    meeting.sendChatMessage(
+      JSON.stringify({ type: "all-user-ready", allUsersReady })
+    );
+  });
+
   sendMessageBtn.addEventListener("click", async () => {
     const message = inputUser.value;
     meeting.sendChatMessage(
@@ -348,5 +396,41 @@ function addDomEvents() {
     const message = inputUser.value;
     meeting.sendChatMessage(JSON.stringify({ type: "ontap-chat", message }));
     console.log(message);
+  });
+
+  startRecordingBtn.addEventListener("click", async () => {
+    meeting.startRecording();
+  });
+  stopRecordingBtn.addEventListener("click", async () => {
+    meeting.stopRecording();
+  });
+
+  //! HIDE OR SHOW CAM
+  camButton.addEventListener("click", () => {
+    if (camButton.innerText == "Hide Cam") {
+      console.log("WOW");
+      // meeting.disableWebcam();
+      console.log(meeting.localParticipant.id, participant);
+      $(".video-frame").addClass("blur");
+      camButton.innerText = "Enable Cam";
+      console.log("hide");
+    } else {
+      // meeting.enableWebcam();
+      $(".video-frame").removeClass("blur");
+
+      camButton.innerText = "Hide Cam";
+      console.log("show");
+    }
+  });
+
+  //! MUTE OR UNMUTE MIC
+  micButton.addEventListener("click", () => {
+    if (micButton.innerText == "Unmute Mic") {
+      meeting.unmuteMic();
+      micButton.innerText = "Mute Mic";
+    } else {
+      meeting.muteMic();
+      micButton.innerText = "Unmute Mic";
+    }
   });
 }

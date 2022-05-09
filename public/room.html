@@ -10,13 +10,18 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/EventEmitter/5.2.8/EventEmitter.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/imagekit-javascript/dist/imagekit.min.js"></script>
     <!-- <script
       type="text/javascript"
       src="https://unpkg.com/socket.io-client@4.4.1/dist/socket.io.min.js"
     ></script> -->
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     <script src="https://sdk.videosdk.live/js-sdk/0.0.20/videosdk.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script src="js/utils.js"></script>
+    <script src="js/imageKit.js" defer></script>
+
     <script src="js/chat.js" defer></script>
     <script src="js/video.js" defer></script>
     <script src="js/VideoPlayer.js" defer></script>
@@ -39,9 +44,14 @@
             <a href="http://localhost:3000/room.html?mode=player">Interviews</a>
         </nav>
         <nav>
-            <a href="http://localhost:3000/room.html?mode=tool">Tool</a>
+            <a href="http://localhost:3000/room.html?mode=toolH">Tool</a>
         </nav>
     </header>
+    <!-- <div class="card">
+        <img src="" id="img-preview" />
+        <input type="file" id="file-upload" />
+    </div> -->
+
     <div class="previewContainer">
         <div class="videos-container">
             <div class="videoWrapper-one"></div>
@@ -66,8 +76,22 @@
             <!-- record -->
             <!-- stop -->
             <main class="wrapper">
+                <div class="entry-button">
+                    <div>
+                        <button style="margin-top: 2rem; display: block; width: 100%" class="btn secondary text-white"
+                            id="meetingJoinButton" onclick="joinMeeting(true)">
+                            Crée une room
+                        </button>
+                    </div>
+                    <div>
+                        <button style="margin-top: 2rem; display: block; width: 100%" class="btn secondary text-white"
+                            id="meetingJoinButton" onclick="joinMeeting()">
+                            Rejoindre la room
+                        </button>
+                    </div>
+                </div>
                 <div id="joinPage" class="main-bg" style="display: flex">
-                    <div style="margin: auto; display: flex">
+                    <div class="wrapper-join">
                         <div class="join-left" style="
                   /* border: 1px solid black; */
                   width: 400px;
@@ -75,78 +99,74 @@
                   margin-right: 40px;
                   position: relative;
                 ">
-                            <video class="drag resize-drag" id="joinCam"></video>
-                        </div>
-                        <div class="join-right" style="width: 350px">
-                            <h1 style="text-align: left">Rejoindre une room</h1>
+                            <h1 style="text-align: center">Rejoindre une room</h1>
+                            <div class="joinvid-wrap">
+                                <video class="drag resize-drag" id="joinCam"></video>
+                            </div>
                             <div>
-                                <div>
-                                    <label>Name</label>
+                                <div style="text-align: center">
                                     <input style="
+                        text-align: center;
                         display: block;
                         width: 100%;
                         padding: 5px;
                         border: 1px solid black;
-                        margin-bottom: 1vh;
-                      " type="text" name="name" id="joinMeetingName" required />
+                        margin-bottom: 4vh;
+                      " type="text" name="name" id="joinMeetingName" placeholder="Name" required />
                                 </div>
-                                <div>
-                                    <label>Room ID</label>
+                                <div style="text-align: center">
                                     <input style="
+                        text-align: center;
                         display: block;
                         width: 100%;
                         padding: 5px;
                         border: 1px solid black;
-                      " type="text" name="name" id="joinMeetingId" />
-                                </div>
-                                <div>
-                                    <button style="margin-top: 2rem; display: block; width: 104%"
-                                        class="btn secondary text-white" id="meetingJoinButton"
-                                        onclick="joinMeeting(true)">
-                                        Create Meeting
-                                    </button>
-                                </div>
-                                <div>
-                                    <button style="margin-top: 2rem; display: block; width: 104%"
-                                        class="btn secondary text-white" id="meetingJoinButton" onclick="joinMeeting()">
-                                        Join Meeting
-                                    </button>
+                      " type="text" name="name" placeholder="Room ID" id="joinMeetingId" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="tool-control">
-                    <div class="sur-footer">
-                        <button class="btn" id="sendMessage-btn">Send Message</button>
-                    </div>
+                <div class="cam-mic-controls">
+                    <button class="mute btn primary text-white" id="mic-btn">
+                        Mute Mic
+                    </button>
+                    <input type="text" required id="inputMessage" style="" />
+                    <button class="cam-btn cam btn primary text-white">Hide Cam</button>
+                </div>
+                <div class="tool-control-H">
                     <footer style="position: absolute; bottom: 20px">
-                        <button class="btn primary text-white" id="startRecording-btn">
-                            Start Recording
-                        </button>
                         <button class="btn primary text-white" id="stopRecording-btn">
                             Stop Recording
                         </button>
-
-                        <button class="mute btn primary text-white" id="mic-btn">
-                            Mute Mic
+                        <span class="timer-recording">0:00</span>
+                        <button class="btn primary text-white" id="startRecording-btn">
+                            Start Recording
                         </button>
-                        <input type="text" required id="inputMessage" style="" />
-                        <button class="cam-btn cam btn primary text-white">
-                            Hide Cam
-                        </button>
+                    </footer>
+                </div>
+                <div class="tool-control-P">
+                    <div class="sur-footer">
+                        <button class="btn" id="sendMessage-btn">Envoyer message</button>
+                        <button class="btn" id="sendMessage-btn">Envoyer lien</button>
+                    </div>
+                    <footer style="position: absolute; bottom: 20px">
+                        <button class="btn" id="sendVid-btn">Envoyer une vidéo</button>
+                        <input type="text" required id="inputMessage" onfocusin="showButton()"
+                            onfocusout="hideButton()" />
+                        <button class="btn" id="sendImg-btn">Envoyer une image</button>
                     </footer>
                 </div>
                 <div style="position: absolute; left: 20%; bottom: 65px"></div>
 
                 <div class="playGround">
                     <div class="startButtonWrapper">
-                        <button class="startButton btn">Commencer l'interview</button>
+                        <button class="startButton btn">Commencer</button>
                         <button class="startOtherButton btn">En attendant ta rep</button>
                     </div>
-                    <div class="chat-wrapper">
+                    <!-- <div class="chat-wrapper">
                         <div id="chats"></div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div>

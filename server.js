@@ -8,19 +8,25 @@ const morgan = require("morgan");
 const { default: fetch } = require("node-fetch");
 const jwt = require("jsonwebtoken");
 
-// const PORT = 3000;
+const PORT = 3000;
 const app = express();
 
-let server = app.listen(3000, "0.0.0.0");
-let socket = require("socket.io");
-let io = socket(server);
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+// let server = app.listen(3000, "0.0.0.0");
+// let socket = require("socket.io");
+// let io = socket(server);
 // let client = io.sockets.clients();
 
-// app.listen(PORT, () => {
-//   console.log(`API server listening at http://localhost:${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`API server listening at http://localhost:${PORT}`);
+});
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
@@ -28,11 +34,21 @@ app.use(morgan("dev"));
 app.use(express.static("public"));
 
 //
-app.get("/", (req, res) => {
+app.get("/", (req, res, next) => {
   res.send("Hello World!");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type,Accept, x-client-key, x-client-token, x-client-secret, Authorization"
+  );
+  next();
 });
 
-//
+// app.listen(3000, () => {
+//   console.log("alive");
+// });
+// //
 app.get("/get-token", (req, res) => {
   const API_KEY = process.env.VIDEOSDK_API_KEY;
   const SECRET_KEY = process.env.VIDEOSDK_SECRET_KEY;
@@ -80,58 +96,4 @@ app.post("/validate-meeting/:meetingId", (req, res) => {
     .then((response) => response.json())
     .then((result) => res.json(result)) // result will contain meetingId
     .catch((error) => console.error("error", error));
-});
-
-//! SETUP SOCKET //!
-let dataText = [];
-var nclient = 0;
-io.sockets.on("connection", function (socket) {
-  // console.log(socket);
-  var id;
-  socket.on("id", function (data) {
-    socket.emit("inputResultFromUser", dataText);
-    //    console.log(data);
-    id = nclient;
-    dataText[id] = [];
-    nclient++;
-  });
-
-  //! WEBCAM ID ASSIGNEMENT
-
-  socket.on("webcam_id", function (data) {
-    socket.broadcast.emit("all_webcam_id", {
-      session_id: socket.id,
-      webcamId: data,
-    });
-    console.log(data);
-  });
-
-  //! WEBCAM MOVEMENT
-  socket.on("webcam_move", function (data) {
-    socket.broadcast.emit("all_webcam_moves", {
-      session_id: socket.id,
-      coords: data,
-    });
-    console.log(data, socket.id);
-  });
-
-  //! WEBCAM SIZE
-
-  socket.on("webcam_size", function (data) {
-    socket.broadcast.emit("all_webcam_sizes", {
-      session_id: socket.id,
-      coords: data,
-    });
-    // console.log(data);
-  });
-
-  //! CURSOR TRACKER
-
-  socket.on("mouse_activity", function (data) {
-    socket.broadcast.emit("all_mouse_activity", {
-      session_id: socket.id,
-      coords: data,
-    });
-    // console.log(data);
-  });
 });

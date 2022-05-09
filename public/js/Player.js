@@ -42,6 +42,8 @@ class Player {
   //! event emitter
 
   emit(type, ...message) {
+    console.log(type, message);
+
     return this.emitter.emitEvent(type, message);
   }
 
@@ -80,7 +82,7 @@ class Player {
     if (pendingMessage === undefined) return;
 
     const messageTime = new Date(pendingMessage.timestamp).getTime();
-    console.log(this.messageIndex);
+    // console.log(this.messageIndex);
 
     // seek to future
 
@@ -119,6 +121,13 @@ class Player {
 
       updateSlider(amount);
       this.updateMessages(vid.currentTime);
+      console.log(vid.currentTime);
+
+      console.log(vid.currentTime);
+      if (vid.currentTime > 10 && vid.currentTime < 10.2) {
+        console.log("trigger");
+        chatContainer.classList.toggle("addColorBackGround");
+      }
     };
 
     vid.ontimeupdate = () => {
@@ -128,11 +137,12 @@ class Player {
       var amount = vid.currentTime / vid.duration;
 
       this.updateMessages(vid.currentTime);
+      // console.log(vid.currentTime);
       //   this.rightVideo.currentTime = vid.currentTime;
       //   $("#custom-seekbar span").css("width", percentage + "%");
       updateSlider(amount);
 
-      //   console.log(vid.currentTime);
+      console.log(vid.currentTime);
     };
 
     let videoPlaying = false;

@@ -51,7 +51,7 @@ if (mode === "player") {
   });
 
   player.on("revert-chat-message", (data) => {
-    console.log(data.message.type + "revert");
+    // console.log(data.message.type + "revert");
     if (data.message.type == "moving-webcam") {
       // console.log(data.message.movingWebcam);
       var $webcam = $(".videoWrapper-one");
@@ -71,7 +71,12 @@ if (mode === "player") {
       CHAT.addTextToLastMsg(data.message.message);
     }
   });
-} else if (mode === "tool") {
+} else if (mode === "toolH") {
+  const container = document.querySelector(".toolMode");
+  container.classList.remove("hidden");
+
+  init();
+} else if (mode === "toolP") {
   const container = document.querySelector(".toolMode");
   container.classList.remove("hidden");
 
@@ -81,3 +86,18 @@ if (mode === "player") {
 function init() {
   console.log("lol");
 }
+const surfooter = document.querySelector(".sur-footer");
+function showButton() {
+  surfooter.style.opacity = "1";
+}
+function hideButton() {
+  surfooter.style.opacity = "0";
+}
+
+// console.log(elem === document.activeElement);
+// if (elem === document.activeElement) {
+//   console.log("Element has focus!");
+//   elem.style.backgroundColor = "pink";
+// } else {
+//   console.log(`Element is not focused.`);
+// }

@@ -1,5 +1,3 @@
-const chatContainer = document.querySelector("#chats");
-
 const CHAT = {
   addTextToLastMsg(text) {
     const lastElement = this.getOrAddMsgElem();

@@ -10,11 +10,18 @@ function onMessage(chatEvent) {
     //remove this for both parties
   ) {
     const videosContainer = document.querySelector(".videos-container");
-    videosContainer.style.setProperty("z-index", "3000", "important");
+    videosContainer.style.setProperty("z-index", "999000", "important");
     fond.style.setProperty("background-color", "transparent", "important");
     startButtonWrapper.style.setProperty("display", "none", "important");
-    toolController.style.setProperty("display", "block", "important");
     $(".videoWrapper-two").css("position", "absolute");
+
+    if (mode === "toolP") {
+      console.log("start Participant Rec");
+      toolControllerP.style.setProperty("display", "block", "important");
+    }
+    if (mode === "toolH") {
+      toolControllerH.style.setProperty("display", "block", "important");
+    }
   }
 
   if (
@@ -23,7 +30,6 @@ function onMessage(chatEvent) {
     parsedText?.type == "user1-ready" //remove this for both parties
   ) {
     if (meeting.localParticipant.id) {
-      startButton.style.setProperty("background-color", "green", "important");
       startButton.textContent = `En attente du participant`;
     }
     if (senderId != meeting.localParticipant.id) {
