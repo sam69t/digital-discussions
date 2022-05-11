@@ -56,7 +56,20 @@
         <img src="" id="img-preview" />
         <input type="file" id="file-upload" />
     </div> -->
-
+    <div class="card">
+      <!-- <img src="" id="img-preview" />
+      <input type="file" id="file-upload" />
+      <button onclick="upload(event)">Submit</button> -->
+      <div>
+        <label for="imgfiles" class="btn">Select Image</label>
+        <input id="imgfiles" style="visibility: hidden" type="file" />
+        <label for="vidfiles" class="btn">Select Video</label>
+        <input id="vidfiles" style="visibility: hidden" type="file" />
+      </div>
+    </div>
+    <div id="orig_image">
+      <p><img style="position:absolute; z-index:9999999999"></img></p>
+    </div>
     <div class="previewContainer">
       <div class="videos-container">
         <div class="videoWrapper-one"></div>

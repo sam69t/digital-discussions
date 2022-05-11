@@ -1,7 +1,5 @@
-// function moveAndResize() {
-//   const position = { x: 0, y: 0 };
-
-//   interact(".resize-drag").resizable({
+// interact(".resize-drag")
+//   .resizable({
 //     // resize from all edges and corners
 //     edges: { left: true, right: true, bottom: true, top: true },
 
@@ -41,26 +39,25 @@
 //     ],
 
 //     inertia: true,
+//   })
+//   .draggable({
+//     listeners: {
+//       start(event) {
+//         // console.log(event.type, event.target);
+//       },
+//       move(event) {
+//         const movingWebcam = {
+//           x: (position.x += event.dx),
+//           y: (position.y += event.dy),
+//         };
+
+//         meeting.sendChatMessage(
+//           JSON.stringify({ type: "moving-webcam", movingWebcam })
+//         );
+//         position.x += event.dx;
+//         position.y += event.dy;
+
+//         event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
+//       },
+//     },
 //   });
-//   // .draggable({
-//   //   listeners: {
-//   //     start(event) {
-//   //       // console.log(event.type, event.target);
-//   //     },
-//   //     move(event) {
-//   //       const movingWebcam = {
-//   //         x: (position.x += event.dx),
-//   //         y: (position.y += event.dy),
-//   //       };
-
-//   //       meeting.sendChatMessage(
-//   //         JSON.stringify({ type: "moving-webcam", movingWebcam })
-//   //       );
-//   //       position.x += event.dx;
-//   //       position.y += event.dy;
-
-//   //       event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
-//   //     },
-//   //   },
-//   // });
-// }

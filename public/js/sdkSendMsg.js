@@ -107,17 +107,32 @@ function onMessage(chatEvent) {
 
   if (
     //! IMG DISPLAY
-    parsedText?.type == "image-url"
+    parsedText?.type == "img-url"
   ) {
-    console.log(parsedText.urlImage);
+    console.log(parsedText.srcImgUrl);
 
     if (meeting.localParticipant.id != senderId) {
-      console.log(parsedText.urlImage);
-      let divImage = document.createElement("div");
-      divImage.style.backgroundImage = `url(${parsedText.urlImage})`;
-      divImage.classList.add("imageBlock");
-      // divImage.classList.add("resize-drag");
-      playGround.appendChild(divImage);
+      console.log(parsedText.srcImgUrl);
+      let imageWrapper = document.createElement("div");
+
+      let image = document.createElement("img");
+      image.src = parsedText.srcImgUrl;
+      image.classList.add("imageBlock");
+      imageWrapper.classList.add("imageBlockwrapper");
+
+      // image.classList.add("resize-drag");
+      imageWrapper.appendChild(image);
+      playGround.appendChild(imageWrapper);
+    }
+  }
+  if (
+    //! VIDEO DISPLAY
+    parsedText?.type == "vid-url"
+  ) {
+    console.log(parsedText.srcImgUrl);
+
+    if (meeting.localParticipant.id != senderId) {
+      console.log(parsedText.srcImgUrl);
     }
   }
 }
