@@ -18,9 +18,11 @@ function onMessage(chatEvent) {
     if (mode === "toolP") {
       console.log("start Participant Rec");
       toolControllerP.style.setProperty("display", "block", "important");
+      camMicControls.style.setProperty("display", "flex", "important");
     }
     if (mode === "toolH") {
       toolControllerH.style.setProperty("display", "block", "important");
+      camMicControls.style.setProperty("display", "flex", "important");
     }
   }
 

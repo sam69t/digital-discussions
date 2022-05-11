@@ -1,30 +1,54 @@
-// var CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dejdsouuf";
-// var CLOUDINARY_UPLOAD_PRESET = "hrkmwjql";
-// var imgPreview = document.getElementById("img-preview");
-// var fileUpload = document.getElementById("file-upload");
+var imagekit = new ImageKit({
+  publicKey: "public_F+y/bdBG9098fxlawOAt4+sv63Q=",
+  urlEndpoint: "https://ik.imagekit.io/diploma/",
+  authenticationEndpoint: "http://localhost:3000/auth",
+});
 
-// fileUpload.addEventListener("change", function (event) {
-//   console.log(event);
-//   var file = event.target.files[0];
-//   var formData = new FormData();
-//   formData.append("file", file);
-//   formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-//   axios({
-//     url: CLOUDINARY_URL,
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/x-www-form-urlencoded",
-//       "Access-Control-Allow-Origin": "*",
-//       "Access-Control-Allow-Headers": "Origin",
-//       "Access-Control-Allow-Credentials": true,
-//     },
-//     data: formData,
-//   })
-//     .then(function (res) {
-//       console.log(res);
-//       imgPreview.src = res.data.secure_url;
-//     })
-//     .catch(function (err) {
-//       console.error(err);
-//     });
-// });
+console.log(imagekit);
+
+window.imagekit = imagekit;
+var file = document.getElementById("file-upload");
+
+file.addEventListener("change", (event) => {
+  // var statusEl = document.getElementById("status");
+  // statusEl.innerHTML = "Uploading...";
+  console.log(imagekit);
+  imagekit.upload(
+    {
+      file: file.files[0],
+      fileName: file.files[0].name || "test_image.jpg",
+      tags: ["test_tag_1"],
+      // folder: "/TEST_NO_1",
+      //- extensions: [
+      //-         {
+      //-             name: "aws-auto-tagging",
+      //-             minConfidence: 80,
+      //-             maxTags: 10
+      //-         }
+      //-     ],
+    },
+    function (err, result) {
+      if (err) {
+        // statusEl.innerHTML = "Error uploading image. " + err.message;
+        console.log(err);
+      } else {
+        // statusEl.innerHTML = "File Uploaded";
+        var sampleTransformations = [{ HEIGHT: 300, WIDTH: 400 }];
+        srcUrl = result.url;
+        transformedURL = imagekit.url({
+          src: srcUrl,
+          transformation: sampleTransformations,
+        });
+
+        var orig_img = document.querySelector("#orig_image > p > img");
+        // var trans_img = document.querySelector("#trans_image > p > img");
+
+        orig_img.setAttribute("src", srcUrl);
+        // trans_img.setAttribute("src", transformedURL);
+
+        // var el = document.getElementById("images");
+        // el.setAttribute("style", "block");
+      }
+    }
+  );
+});

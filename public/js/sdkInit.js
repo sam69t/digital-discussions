@@ -12,6 +12,8 @@ let startOtherButton = document.querySelector(".startOtherButton");
 let startButtonWrapper = document.querySelector(".startButtonWrapper");
 let toolControllerP = document.querySelector(".tool-control-P");
 let toolControllerH = document.querySelector(".tool-control-H");
+let camMicControls = document.querySelector(".cam-mic-controls");
+let entryButton = document.querySelector(".entry-button");
 
 let fond = document.querySelector(".chat-wrapper");
 
@@ -193,6 +195,7 @@ function startMeeting(token, meetingId, name) {
   addDomEvents();
 
   startButtonWrapper.style.setProperty("display", "flex", "important");
+  entryButton.style.setProperty("display", "none", "important");
 }
 
 //get access token
@@ -284,12 +287,12 @@ function createVideoElement(pId) {
   // let parentVideo = videoElement.parentNode;
 
   videoElement.classList.add("video-frame");
-  videoContainerOne.classList.add("resize-drag");
-  videoContainerTwo.classList.add("resize-drag");
+  // videoContainerOne.classList.add("resize-drag");
+  // videoContainerTwo.classList.add("resize-drag");
 
-  // if (allVideos.length === 2) {
-  //   videoContainerOne.classList.add("resize-drag");
-  // }
+  if (allVideos.length === 2) {
+    videoContainerOne.classList.add("resize-drag");
+  }
 
   console.log(allVideos);
 

@@ -39,14 +39,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin-top: 7em;
+  margin-top: 5em;
 }
 .entry-button {
   position: absolute;
   width: 100%;
+  top: 40%;
   display: flex;
   justify-content: space-between;
   z-index: 9999999;
+}
+.entry-button > div:nth-child(1) {
+  margin-left: 14vh;
+}
+.entry-button > div:nth-child(2) {
+  margin-right: 14vh;
 }
 .pointer {
   z-index: 9999;
@@ -195,8 +202,13 @@ label {
 }
 .card {
   position: absolute;
-  bottom: 0;
   z-index: 9999999999;
+  top: 50%;
+  left: 0;
+  width: 200px;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .btn {
@@ -295,7 +307,8 @@ body {
 }
 .chats__message {
   letter-spacing: -3.5px;
-  line-height: 180px;
+  line-height: 70px;
+
   /* -webkit-text-stroke: 1px black; */
   font-size: 90px;
   background: none;
@@ -335,17 +348,23 @@ footer > button {
   /* padding: 0px; */
 }
 .mute {
-  /* margin-right: 2rem; */
-}
-/* #startRecording-btn {
-  margin-right: 2rem;
-} */
-.cam {
   margin-left: 2rem;
+}
+
+.cam {
+  margin-right: 2rem;
 }
 .cam-container {
   overflow: hidden;
   border-radius: 10px;
+}
+.cam-mic-controls {
+  display: none;
+  position: absolute;
+  z-index: 99999999999999999;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 5vh;
 }
 
 .hidden {
@@ -424,7 +443,7 @@ main {
 
 .videos-wrapper > video {
   width: 100%;
-  /* transform: scale(1.2); */
+  transform: scale(1.2);
 }
 .startButtonWrapper {
   position: absolute;
@@ -520,7 +539,7 @@ main {
 }
 
 .video-frame:hover {
-  filter: blur(15px);
+  /* filter: blur(15px); */
 }
 .videoWrapper-two {
   transform-origin: 0%;
@@ -534,10 +553,10 @@ main {
 }
 .videoWrapper-one > video {
   width: 100%;
-  /* transform: scale(1.2); */
+  transform: scale(1.2);
 }
 
 .videoWrapper-two > video {
   width: 100%;
-  /* transform: scale(1.2); */
+  transform: scale(1.2);
 }

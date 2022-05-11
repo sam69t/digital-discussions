@@ -1,6 +1,5 @@
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,9 +7,15 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script src="./libs/papaparse.min.js"></script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/EventEmitter/5.2.8/EventEmitter.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/imagekit-javascript/dist/imagekit.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/imagekit-javascript/dist/imagekit.min.js"
+    ></script>
     <!-- <script
       type="text/javascript"
       src="https://unpkg.com/socket.io-client@4.4.1/dist/socket.io.min.js"
@@ -33,19 +38,19 @@
     <script src="js/dragDrop.js" defer></script>
 
     <script src="./js/router.js" defer></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <nav>
-            <a href="http://localhost:3000/room.html">Home</a>
-        </nav>
-        <nav>
-            <a href="http://localhost:3000/room.html?mode=player">Interviews</a>
-        </nav>
-        <nav>
-            <a href="http://localhost:3000/room.html?mode=toolH">Tool</a>
-        </nav>
+      <nav>
+        <a href="http://localhost:3000/index.html">Home</a>
+      </nav>
+      <nav>
+        <a href="http://localhost:3000/room.html?mode=player">Interviews</a>
+      </nav>
+      <nav>
+        <a href="http://localhost:3000/room.html?mode=toolH">Tool</a>
+      </nav>
     </header>
     <!-- <div class="card">
         <img src="" id="img-preview" />
@@ -53,136 +58,167 @@
     </div> -->
 
     <div class="previewContainer">
-        <div class="videos-container">
-            <div class="videoWrapper-one"></div>
-            <div class="videoWrapper-two"></div>
-        </div>
-        <div class="chat-wrapper">
-            <div id="chats"></div>
-        </div>
+      <div class="videos-container">
+        <div class="videoWrapper-one"></div>
+        <div class="videoWrapper-two"></div>
+      </div>
+      <div class="chat-wrapper">
+        <div id="chats"></div>
+      </div>
     </div>
     <div class="overlayContainer">
-        <div class="playerMode hidden">
-            <div class="slider-container">
-                <button class="btn play"></button>
+      <div class="playerMode hidden">
+        <div class="slider-container">
+          <button class="btn play"></button>
 
-                <div class="custom-seekbar">
-                    <span></span>
-                </div>
-            </div>
+          <div class="custom-seekbar">
+            <span></span>
+          </div>
         </div>
-        <div class="toolMode hidden">
-            <!-- mute -->
-            <!-- record -->
-            <!-- stop -->
-            <main class="wrapper">
-                <div class="entry-button">
-                    <div>
-                        <button style="margin-top: 2rem; display: block; width: 100%" class="btn secondary text-white"
-                            id="meetingJoinButton" onclick="joinMeeting(true)">
-                            Crée une room
-                        </button>
-                    </div>
-                    <div>
-                        <button style="margin-top: 2rem; display: block; width: 100%" class="btn secondary text-white"
-                            id="meetingJoinButton" onclick="joinMeeting()">
-                            Rejoindre la room
-                        </button>
-                    </div>
-                </div>
-                <div id="joinPage" class="main-bg" style="display: flex">
-                    <div class="wrapper-join">
-                        <div class="join-left" style="
+      </div>
+      <div class="toolMode hidden">
+        <!-- mute -->
+        <!-- record -->
+        <!-- stop -->
+        <main class="wrapper">
+          <div class="entry-button">
+            <div>
+              <button
+                style="margin-top: 2rem; display: block; width: 100%"
+                class="btn secondary text-white"
+                id="meetingJoinButton"
+                onclick="joinMeeting(true)"
+              >
+                Crée une room
+              </button>
+            </div>
+            <div>
+              <button
+                style="margin-top: 2rem; display: block; width: 100%"
+                class="btn secondary text-white"
+                id="meetingJoinButton"
+                onclick="joinMeeting()"
+              >
+                Rejoindre la room
+              </button>
+            </div>
+          </div>
+          <div id="joinPage" class="main-bg" style="display: flex">
+            <div class="wrapper-join">
+              <div
+                class="join-left"
+                style="
                   /* border: 1px solid black; */
                   width: 400px;
                   height: 300px;
                   margin-right: 40px;
                   position: relative;
-                ">
-                            <h1 style="text-align: center">Rejoindre une room</h1>
-                            <div class="joinvid-wrap">
-                                <video class="drag resize-drag" id="joinCam"></video>
-                            </div>
-                            <div>
-                                <div style="text-align: center">
-                                    <input style="
+                "
+              >
+                <h1 style="text-align: center; margin-bottom: 10vh">
+                  Rejoindre une room
+                </h1>
+                <div class="joinvid-wrap">
+                  <video class="drag resize-drag" id="joinCam"></video>
+                </div>
+                <div>
+                  <div style="text-align: center">
+                    <input
+                      style="
                         text-align: center;
                         display: block;
                         width: 100%;
                         padding: 5px;
                         border: 1px solid black;
-                        margin-bottom: 4vh;
-                      " type="text" name="name" id="joinMeetingName" placeholder="Name" required />
-                                </div>
-                                <div style="text-align: center">
-                                    <input style="
-                        text-align: center;
-                        display: block;
-                        width: 100%;
-                        padding: 5px;
-                        border: 1px solid black;
-                      " type="text" name="name" placeholder="Room ID" id="joinMeetingId" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cam-mic-controls">
-                    <button class="mute btn primary text-white" id="mic-btn">
-                        Mute Mic
-                    </button>
-                    <input type="text" required id="inputMessage" style="" />
-                    <button class="cam-btn cam btn primary text-white">Hide Cam</button>
-                </div>
-                <div class="tool-control-H">
-                    <footer style="position: absolute; bottom: 20px">
-                        <button class="btn primary text-white" id="stopRecording-btn">
-                            Stop Recording
-                        </button>
-                        <span class="timer-recording">0:00</span>
-                        <button class="btn primary text-white" id="startRecording-btn">
-                            Start Recording
-                        </button>
-                    </footer>
-                </div>
-                <div class="tool-control-P">
-                    <div class="sur-footer">
-                        <button class="btn" id="sendMessage-btn">Envoyer message</button>
-                        <button class="btn" id="sendMessage-btn">Envoyer lien</button>
-                    </div>
-                    <footer style="position: absolute; bottom: 20px">
-                        <button class="btn" id="sendVid-btn">Envoyer une vidéo</button>
-                        <input type="text" required id="inputMessage" onfocusin="showButton()"
-                            onfocusout="hideButton()" />
-                        <button class="btn" id="sendImg-btn">Envoyer une image</button>
-                    </footer>
-                </div>
-                <div style="position: absolute; left: 20%; bottom: 65px"></div>
+                        margin-top: 10vh;
 
-                <div class="playGround">
-                    <div class="startButtonWrapper">
-                        <button class="startButton btn">Commencer</button>
-                        <button class="startOtherButton btn">En attendant ta rep</button>
-                    </div>
-                    <!-- <div class="chat-wrapper">
+                        margin-bottom: 4vh;
+                      "
+                      type="text"
+                      name="name"
+                      id="joinMeetingName"
+                      placeholder="Name"
+                      required
+                    />
+                  </div>
+                  <div style="text-align: center">
+                    <input
+                      style="
+                        text-align: center;
+                        display: block;
+                        width: 100%;
+                        padding: 5px;
+                        border: 1px solid black;
+                      "
+                      type="text"
+                      name="name"
+                      placeholder="Room ID"
+                      id="joinMeetingId"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cam-mic-controls">
+            <button class="mute btn primary text-white" id="mic-btn">
+              Mute Mic
+            </button>
+            <button class="cam-btn cam btn primary text-white">Hide Cam</button>
+          </div>
+          <div class="tool-control-H">
+            <footer style="position: absolute; bottom: 20px">
+              <button class="btn primary text-white" id="stopRecording-btn">
+                Stop Recording
+              </button>
+              <span class="timer-recording">0:00</span>
+              <button class="btn primary text-white" id="startRecording-btn">
+                Start Recording
+              </button>
+            </footer>
+          </div>
+          <div class="tool-control-P">
+            <div class="sur-footer">
+              <button class="btn" id="sendMessage-btn">Envoyer message</button>
+              <button class="btn" id="sendMessage-btn">Envoyer lien</button>
+            </div>
+            <footer style="position: absolute; bottom: 20px">
+              <button class="btn" id="sendVid-btn">Envoyer une vidéo</button>
+              <input
+                type="text"
+                required
+                id="inputMessage"
+                onfocusin="showButton()"
+                onfocusout="hideButton()"
+              />
+              <button class="btn" id="sendImg-btn">Envoyer une image</button>
+            </footer>
+          </div>
+          <div style="position: absolute; left: 20%; bottom: 65px"></div>
+
+          <div class="playGround">
+            <div class="startButtonWrapper">
+              <button class="startButton btn">Commencer</button>
+              <button class="startOtherButton btn">En attendant ta rep</button>
+            </div>
+            <!-- <div class="chat-wrapper">
                         <div id="chats"></div>
                     </div> -->
-                </div>
+          </div>
 
-                <div>
-                    <video id="videoPlayback"></video>
-                </div>
+          <div>
+            <video id="videoPlayback"></video>
+          </div>
 
-                <div class="meetingId-wrapper">
-                    <div class="meetingId-container">
-                        meetingId:
-                        <!-- MEETING-ID=> -->
-                        <div style="display: inline" id="meetingid"></div>
-                    </div>
-                </div>
-            </main>
-        </div>
+          <div class="meetingId-wrapper">
+            <div class="meetingId-container">
+              meetingId:
+              <!-- MEETING-ID=> -->
+              <div style="display: inline" id="meetingid"></div>
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
