@@ -22,6 +22,7 @@
     <script src="js/utils.js"></script>
     <script src="js/imageKit.js" defer></script>
     <script src="js/timer.js" defer></script>
+    <script src="js/colorPicker.js" defer></script>
     <script src="js/chat.js" defer></script>
     <script src="js/video.js" defer></script>
     <script src="js/VideoPlayer.js" defer></script>
@@ -60,9 +61,11 @@
       </div>
     </div> -->
     <div class="cam-mic-controls">
-        <button class="mute btn primary text-white" id="mic-btn">
-            Mute Mic
-        </button>
+        <button class="mute btn primary text-white" id="mic-btn"> Couper micro</button>
+        <div>
+            <input type="color" id="colorPicker" name="head" value="#ffffff" />
+            <label for="head">Couleur du fond</label>
+        </div>
         <button class="cam-btn cam btn primary text-white">Flouter sa caméra</button>
     </div>
     <div id="orig_image">

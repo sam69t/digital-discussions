@@ -140,6 +140,7 @@ input {
   border-radius: 3px;
   box-shadow: 0px -2px 10px 0px rgba(0, 0, 0, 0.1);
 }
+
 #joinMeetingName {
   border: 0px solid !important;
   margin-top: 8px;
@@ -410,6 +411,7 @@ footer > button {
   width: 100%;
   height: 100%;
   background-color: rgba(223, 223, 223, 0.1);
+  transition: 500ms ease;
 }
 
 .overlayContainer {
@@ -607,4 +609,9 @@ main {
 .videoWrapper-two > video {
   width: 100%;
   transform: scale(1.2);
+}
+input[type="color"] {
+  border: none !important;
+  border-color: green !important;
+  outline: none;
 }

@@ -26,6 +26,8 @@
 
     <script src="js/utils.js"></script>
     <script src="js/imageKit.js" defer></script>
+    <script src="js/timer.js" defer></script>
+    <script src="js/colorPicker.js" defer></script>
     <script src="js/chat.js" defer></script>
     <script src="js/video.js" defer></script>
     <script src="js/VideoPlayer.js" defer></script>
@@ -51,25 +53,7 @@
         <a href="http://localhost:3000/room.html?mode=toolH">Tool</a>
       </nav>
     </header>
-    <div class="card">
-      <!-- <img src="" id="img-preview" />
-      <input type="file" id="file-upload" />
-      <button onclick="upload(event)">Submit</button> -->
-      <!-- <div>
-        <label for="imgfiles" class="btn">Select Image</label>
-        <input id="imgfiles" style="display: none" type="file" />
-        <label for="vidfiles" class="btn">Select Video</label>
-        <input id="vidfiles" style="display: none" type="file" />
-      </div> -->
-    </div>
-    <div id="orig_image">
-      <p><img style="position:absolute; z-index:9999999999"></img></p>
-    </div>
-
-    <div class="drop-out"></div>
-    <div class="drop-zone resize-drag">
-      <span class="drop-zone__prompt">Drop file here or click to upload</span>
-    </div>
+    <div class="card"></div>
 
     <div class="previewContainer">
       <div class="videos-container">
@@ -186,6 +170,27 @@
               <button class="cam-btn cam btn primary text-white">
                 Hide Cam
               </button>
+              <label for="vidfiles" class="btn">Select Video</label>
+              <input
+                id="vidfiles"
+                style="display: none"
+                type="file"
+                accept="video/*"
+              />
+              <input
+                type="text"
+                required
+                id="inputMessage"
+                onfocusin="showButton()"
+                onfocusout="hideButton()"
+              />
+              <label for="imgfiles" class="btn">Select Image</label>
+              <input
+                id="imgfiles"
+                style="display: none"
+                type="file"
+                accept="image/*"
+              />
             </footer>
           </div>
           <div style="position: absolute; left: 20%; bottom: 65px"></div>
@@ -196,9 +201,6 @@
               <button class="startOtherButton btn">En attendant ta rep</button>
             </div>
           </div>
-
-
-         
         </main>
       </div>
     </div>

@@ -158,4 +158,12 @@ function onMessage(chatEvent) {
       console.log("toggle");
     }
   }
+  if (
+    //! COULEUR DU FOND
+    parsedText?.type == "couleur-fond"
+  ) {
+    if (meeting.localParticipant.id != senderId) {
+      previewContainer.style.backgroundColor = parsedText.dataColor;
+    }
+  }
 }
