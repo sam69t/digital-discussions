@@ -13,8 +13,8 @@ let startButtonWrapper = document.querySelector(".startButtonWrapper");
 let toolControllerP = document.querySelector(".tool-control-P");
 let toolControllerH = document.querySelector(".tool-control-H");
 let camMicControls = document.querySelector(".cam-mic-controls");
-let entryButton = document.querySelector(".entry-button");
 
+// let previewContainer = document.querySelector(".previewContainer");
 let fond = document.querySelector(".chat-wrapper");
 
 let videoContainerOne = document.querySelector(".videoWrapper-one");
@@ -175,10 +175,15 @@ function startMeeting(token, meetingId, name) {
   //recording events
   meeting.on("recording-started", () => {
     console.log("RECORDING STARTED EVENT");
-    let recInterview = true;
-    meeting.sendChatMessage(
-      JSON.stringify({ type: "start-interview", recInterview })
-    );
+    setTimeout(() => {
+      console.log("startInterview");
+      let recInterview = true;
+      meeting.sendChatMessage(
+        JSON.stringify({ type: "start-interview", recInterview })
+      );
+      TIMER.StartTimer();
+    }, 5000);
+
     // SEND TRIGGER MSG
   });
   meeting.on("recording-stopped", () => {
@@ -195,7 +200,6 @@ function startMeeting(token, meetingId, name) {
   addDomEvents();
 
   startButtonWrapper.style.setProperty("display", "flex", "important");
-  entryButton.style.setProperty("display", "none", "important");
 }
 
 //get access token
@@ -211,7 +215,8 @@ async function joinMeeting(newMeeting) {
     return alert("Please Provide a meetingId");
   }
 
-  document.getElementById("joinPage").style.display = "none";
+  // document.getElementById("joinPage").style.display = "none";
+  document.querySelector(".wrapper").style.display = "none";
 
   //create New Token
   let token = await window
@@ -266,7 +271,7 @@ async function joinMeeting(newMeeting) {
 
   navigator.clipboard.writeText(meetingId);
   //set meetingId
-  document.querySelector("#meetingid").innerHTML = meetingId;
+  // document.querySelector("#meetingid").innerHTML = meetingId;
   startMeeting(token, meetingId, name);
   console.log(token, meetingId, name);
 
@@ -410,18 +415,22 @@ function addDomEvents() {
 
   //! HIDE OR SHOW CAM
   camButton.addEventListener("click", () => {
-    if (camButton.innerText == "Hide Cam") {
+    const toggleBLur = true;
+
+    if (camButton.innerText == "Flouter sa caméra") {
       console.log("WOW");
       // meeting.disableWebcam();
       console.log(meeting.localParticipant.id, participant);
-      $(".video-frame").addClass("blur");
-      camButton.innerText = "Enable Cam";
+      $(".video-frame:first").addClass("blur");
+      camButton.innerText = "Enlever le flou";
+      meeting.sendChatMessage(JSON.stringify({ type: "blur-cam", toggleBLur }));
       console.log("hide");
     } else {
       // meeting.enableWebcam();
       $(".video-frame").removeClass("blur");
+      meeting.sendChatMessage(JSON.stringify({ type: "blur-cam", toggleBLur }));
 
-      camButton.innerText = "Hide Cam";
+      camButton.innerText = "Flouter sa caméra";
       console.log("show");
     }
   });

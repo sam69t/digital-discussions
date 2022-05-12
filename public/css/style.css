@@ -96,6 +96,11 @@ body {
   margin-right: 2em;
 }
 
+.timer {
+  display: flex;
+  align-items: center;
+}
+
 .tool-control-P > .sur-footer {
   opacity: 0;
 }
@@ -220,6 +225,7 @@ label {
 }
 
 .video-test {
+  z-index: 9999;
   position: absolute;
   width: 68%;
   top: 50%;
@@ -437,9 +443,13 @@ a {
 }
 
 /* TOOOL */
-
 main {
-  height: 100vh;
+  /* height: 100vh; */
+}
+
+.tools {
+  /* position: absolute;
+  width: 100%; */
 }
 .tool-control-H {
   display: none;
@@ -488,24 +498,33 @@ main {
   position: absolute;
   z-index: 1;
   display: none;
-  font-size: 50px !important;
+  font-size: 90px !important;
   padding: 25px;
   border-radius: 10px;
 }
 .startButton {
-  font-size: 100px !important;
+  font-size: 90px !important;
   letter-spacing: -5px;
   padding: 25px;
   border-radius: 10px;
 }
 .imageBlock {
   width: 50%;
-  height: 50vh;
   background-position: center;
   background-size: cover;
   box-sizing: content-box;
   background-repeat: no-repeat;
   background-size: contain;
+}
+.imageBlockWrappr {
+  position: absolute;
+  z-index: 9999999999;
+}
+
+.video-testWrapper {
+  width: 100%;
+  position: absolute;
+  z-index: 999000 !important;
 }
 /* REDIFF */
 

@@ -12,7 +12,7 @@ function onMessage(chatEvent) {
     const videosContainer = document.querySelector(".videos-container");
     videosContainer.style.setProperty("z-index", "999000", "important");
     fond.style.setProperty("background-color", "transparent", "important");
-    startButtonWrapper.style.setProperty("display", "none", "important");
+    playGround.style.setProperty("display", "none", "important");
     $(".videoWrapper-two").css("position", "absolute");
 
     if (mode === "toolP") {
@@ -119,6 +119,7 @@ function onMessage(chatEvent) {
       image.src = parsedText.srcImgUrl;
       image.classList.add("imageBlock");
       imageWrapper.classList.add("imageBlockwrapper");
+      imageWrapper.classList.add("resize-ref");
 
       // image.classList.add("resize-drag");
       imageWrapper.appendChild(image);
@@ -129,10 +130,32 @@ function onMessage(chatEvent) {
     //! VIDEO DISPLAY
     parsedText?.type == "vid-url"
   ) {
-    console.log(parsedText.srcImgUrl);
-
     if (meeting.localParticipant.id != senderId) {
-      console.log(parsedText.srcImgUrl);
+      console.log(parsedText.srcVidUrl);
+
+      let videoWrapper = document.createElement("vid");
+      videoWrapper.classList.add("video-testWrapper");
+
+      const video = document.createElement("video");
+      video.src = parsedText.srcVidUrl;
+      video.classList.add("video-test");
+      video.classList.add("resize-ref");
+
+      previewContainer.appendChild(video);
+      // previewContainer.appendChild(videoWrapper);
+      video.autoplay = true;
+      video.muted = true;
+      video.loop = true;
+      console.log("video-created");
+    }
+  }
+  if (
+    //! BLUR CAM
+    parsedText?.type == "blur-cam"
+  ) {
+    if (meeting.localParticipant.id != senderId) {
+      $(".video-frame:last").toggleClass("blur");
+      console.log("toggle");
     }
   }
 }

@@ -74,11 +74,17 @@ if (mode === "player") {
 } else if (mode === "toolH") {
   const container = document.querySelector(".toolMode");
   container.classList.remove("hidden");
+  const JoinMeeting = document.querySelector("#meetingJoinButton");
+  JoinMeeting.style.display = "none";
+  const idMeet = document.querySelector(".id-meet");
+  idMeet.style.display = "none";
 
   init();
 } else if (mode === "toolP") {
   const container = document.querySelector(".toolMode");
   container.classList.remove("hidden");
+  const createMeeting = document.querySelector("#meetingCreateButton");
+  createMeeting.style.display = "none";
 
   init();
 }

@@ -26,13 +26,12 @@ inputImg.addEventListener("change", (event) => {
           src: srcUrl,
           transformation: sampleTransformations,
         });
+        let srcImgUrl = srcUrl;
+        meeting.sendChatMessage(JSON.stringify({ type: "img-url", srcImgUrl }));
 
         var img = document.querySelector("#orig_image > p > img");
         img.setAttribute("src", srcUrl);
-        img.classList.add("resize-drag");
-
-        let srcImgUrl = srcUrl;
-        meeting.sendChatMessage(JSON.stringify({ type: "img-url", srcImgUrl }));
+        img.classList.add("resize-ref");
       }
     }
   );
@@ -57,18 +56,28 @@ inputVid.addEventListener("change", (event) => {
           transformation: sampleTransformations,
         });
 
-        const video = document.createElement("video");
-        video.src = srcUrl;
-        video.classList.add("video-test");
-        video.classList.add("resize-drag");
+        let srcVidUrl = srcUrl;
+        meeting.sendChatMessage(JSON.stringify({ type: "vid-url", srcVidUrl }));
 
-        document.body.appendChild(video);
+        const video = document.createElement("video");
+        let videoWrapper = document.createElement("vid");
+        videoWrapper.classList.add("video-testWrapper");
+        // videoWrapper.classList.add("resize-ref");
+
+        video.src = srcUrl;
         video.autoplay = true;
+        video.muted = true;
+        video.loop = true;
+        video.classList.add("video-test");
+        video.classList.add("resize-ref");
+
+        previewContainer.appendChild(video);
+        // previewContainer.appendChild(videoWrapper);
       }
     }
   );
 });
-interact(".resize-drag")
+interact(".resize-ref")
   .resizable({
     // resize from all edges and corners
     edges: { left: true, right: true, bottom: true, top: true },
