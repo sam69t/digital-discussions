@@ -1,7 +1,11 @@
 const videosContainer = document.querySelector(".videos-container");
 let firstVid = videosContainer.firstElementChild;
 let SecondVid = videosContainer.lastElementChild;
-const position = { x: 0, y: 0 };
+const position = { x: 1000, y: 0 };
+
+if (mode === "toolH") {
+  position.x = 0;
+}
 
 const VIDEO = {
   moveVideo(src, x, y) {
@@ -16,8 +20,8 @@ const VIDEO = {
           meeting.sendChatMessage(
             JSON.stringify({ type: "moving-webcam", movingWebcam })
           );
-          position.x += event.dx;
-          position.y += event.dy;
+          // position.x += event.dx;
+          // position.y += event.dy;
 
           event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
         },

@@ -78,15 +78,25 @@ if (mode === "player") {
   JoinMeeting.style.display = "none";
   const idMeet = document.querySelector(".id-meet");
   idMeet.style.display = "none";
-
-  init();
 } else if (mode === "toolP") {
   const container = document.querySelector(".toolMode");
   container.classList.remove("hidden");
   const createMeeting = document.querySelector("#meetingCreateButton");
   createMeeting.style.display = "none";
-
-  init();
+} else if (mode === "public") {
+  console.log("public");
+  const container = document.querySelector(".toolMode");
+  container.classList.remove("hidden");
+  // const JoinMeeting = document.querySelector("#joinPage");
+  // JoinMeeting.style.display = "none";
+  const createMeeting = document.querySelector("#meetingCreateButton");
+  createMeeting.style.display = "none";
+  const joinVid = document.querySelector(".joinvid-wrap");
+  joinVid.style.display = "none";
+  const firstInput = document.querySelector(".first-input");
+  const joinTitle = document.querySelector(".join-title");
+  joinTitle.textContent = "Rejoindre un live";
+  joinTitle.style.marginTop = "5em";
 }
 
 function init() {

@@ -17,7 +17,7 @@ const CHAT = {
     if (!lastElement) {
       lastElement = document.createElement("div");
       lastElement.classList.add("chats__message");
-      lastElement.classList.add("resize-drag");
+      lastElement.classList.add("resize-ref");
 
       // lastElement.classList.add(
       //   `${meeting.localParticipant.id ? "chats__message" : ""}`

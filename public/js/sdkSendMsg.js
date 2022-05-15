@@ -22,6 +22,7 @@ function onMessage(chatEvent) {
     }
     if (mode === "toolH") {
       toolControllerH.style.setProperty("display", "block", "important");
+      toolControllerP.style.setProperty("display", "block", "important");
       camMicControls.style.setProperty("display", "flex", "important");
     }
   }
@@ -37,10 +38,8 @@ function onMessage(chatEvent) {
     if (senderId != meeting.localParticipant.id) {
       startButton.style.setProperty("display", "none", "important");
       startOtherButton.style.setProperty("display", "block", "important");
-
+      console.log("WOW");
       // );
-      $(".videos-container").css("flex-direction", "row-reverse");
-      $(".videoWrapper-two").css("transform", "translateX(-390%)");
       // $(".videoWrapper-two").css("transform", "translateX(-1250px)");
 
       startOtherButton.textContent = `${senderName} t'attend`;
@@ -98,10 +97,11 @@ function onMessage(chatEvent) {
       // );
 
       $webcam.css(
-        `${meeting.localParticipant.id == senderId ? "left" : "right"}`,
-        -parsedText.movingWebcam.x
+        `${meeting.localParticipant.id == senderId ? "right" : "left"}`,
+        parsedText.movingWebcam.x
       );
       $webcam.css("top", parsedText.movingWebcam.y);
+      console.log(parsedText.movingWerbc);
     }
   }
 
@@ -113,17 +113,18 @@ function onMessage(chatEvent) {
 
     if (meeting.localParticipant.id != senderId) {
       console.log(parsedText.srcImgUrl);
-      let imageWrapper = document.createElement("div");
-
+      // let imageWrapper = document.createElement("div");
       let image = document.createElement("img");
       image.src = parsedText.srcImgUrl;
       image.classList.add("imageBlock");
-      imageWrapper.classList.add("imageBlockwrapper");
-      imageWrapper.classList.add("resize-ref");
+      image.classList.add("resize-ref");
+
+      // imageWrapper.classList.add("imageBlockwrapper");
+      // imageWrapper.classList.add("resize-ref");
 
       // image.classList.add("resize-drag");
-      imageWrapper.appendChild(image);
-      playGround.appendChild(imageWrapper);
+      // imageWrapper.appendChild(image);
+      previewContainer.appendChild(image);
     }
   }
   if (

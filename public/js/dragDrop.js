@@ -29,9 +29,19 @@ inputImg.addEventListener("change", (event) => {
         let srcImgUrl = srcUrl;
         meeting.sendChatMessage(JSON.stringify({ type: "img-url", srcImgUrl }));
 
-        var img = document.querySelector("#orig_image > p > img");
-        img.setAttribute("src", srcUrl);
-        img.classList.add("resize-ref");
+        // var img = document.querySelector("#orig_image > p > img");
+        // img.setAttribute("src", srcUrl);
+        // img.classList.add("resize-ref");
+        let imageWrapper = document.createElement("div");
+        let image = document.createElement("img");
+        image.src = srcUrl;
+        image.classList.add("imageBlock");
+        imageWrapper.classList.add("imageBlockwrapper");
+        image.classList.add("resize-ref");
+
+        // image.classList.add("resize-drag");
+        // imageWrapper.appendChild(image);
+        previewContainer.appendChild(image);
       }
     }
   );
@@ -77,70 +87,97 @@ inputVid.addEventListener("change", (event) => {
     }
   );
 });
-interact(".resize-ref")
-  .resizable({
-    // resize from all edges and corners
-    edges: { left: true, right: true, bottom: true, top: true },
+interact(".resize-ref").resizable({
+  // resize from all edges and corners
+  edges: { left: true, right: true, bottom: true, top: true },
 
-    listeners: {
-      move(event) {
-        var target = event.target;
-        var x = parseFloat(target.getAttribute("data-x")) || 0;
-        var y = parseFloat(target.getAttribute("data-y")) || 0;
+  listeners: {
+    move(event) {
+      var target = event.target;
+      var x = parseFloat(target.getAttribute("data-x")) || 0;
+      var y = parseFloat(target.getAttribute("data-y")) || 0;
 
-        // update the element's style
-        target.style.width = event.rect.width + "px";
-        target.style.height = event.rect.height + "px";
+      // update the element's style
+      target.style.width = event.rect.width + "px";
+      target.style.height = event.rect.height + "px";
 
-        target.setAttribute("data-x", x);
-        target.setAttribute("data-y", y);
+      target.setAttribute("data-x", x);
+      target.setAttribute("data-y", y);
 
-        const resizeWebcam = {
-          w: event.rect.width,
-          h: event.rect.height,
-        };
+      const resizeWebcam = {
+        w: event.rect.width,
+        h: event.rect.height,
+      };
 
-        // meeting.sendChatMessage(
-        //   JSON.stringify({ type: "resize-webcam", resizeWebcam })
-        // );
-      },
+      // meeting.sendChatMessage(
+      //   JSON.stringify({ type: "resize-webcam", resizeWebcam })
+      // );
     },
-    modifiers: [
-      // keep the edges inside the parent
-      interact.modifiers.restrictEdges({
-        outer: "wrapper",
-      }),
+  },
+  modifiers: [
+    // keep the edges inside the parent
+    interact.modifiers.restrictEdges({
+      outer: "wrapper",
+    }),
 
-      // minimum size
-      interact.modifiers.restrictSize({
-        min: { width: 100, height: 50 },
-      }),
-    ],
+    // minimum size
+    interact.modifiers.restrictSize({
+      min: { width: 100, height: 50 },
+    }),
+  ],
 
-    inertia: true,
-  })
-  .draggable({
-    listeners: {
-      start(event) {
-        // console.log(event.type, event.target);
-      },
-      move(event) {
-        const movingWebcam = {
-          x: (position.x += event.dx),
-          y: (position.y += event.dy),
-        };
+  inertia: true,
+});
+interact(".resize-ref").draggable({
+  // enable inertial throwing
+  inertia: true,
+  // keep the element within the area of it's parent
+  modifiers: [
+    interact.modifiers.restrictRect({
+      restriction: "parent",
+      endOnly: true,
+    }),
+  ],
+  // enable autoScroll
+  autoScroll: true,
 
-        // meeting.sendChatMessage(
-        //   JSON.stringify({ type: "moving-webcam", movingWebcam })
-        // );
-        position.x += event.dx;
-        position.y += event.dy;
+  listeners: {
+    // call this function on every dragmove event
+    move: dragMoveListener,
 
-        event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
-      },
+    // call this function on every dragend event
+    end(event) {
+      var textEl = event.target.querySelector("p");
+
+      textEl &&
+        (textEl.textContent =
+          "moved a distance of " +
+          Math.sqrt(
+            (Math.pow(event.pageX - event.x0, 2) +
+              Math.pow(event.pageY - event.y0, 2)) |
+              0
+          ).toFixed(2) +
+          "px");
     },
-  });
+  },
+});
 
+function dragMoveListener(event) {
+  var target = event.target;
+  // keep the dragged position in the data-x/data-y attributes
+  var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+  var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+
+  // translate the element
+  target.style.transform = "translate(" + x + "px, " + y + "px)";
+
+  // update the posiion attributes
+  target.setAttribute("data-x", x);
+  target.setAttribute("data-y", y);
+}
+
+// this function is used later in the resizing and gesture demos
+window.dragMoveListener = dragMoveListener;
 // let choice_drop = true;
 
 // let image_drop_area = document.querySelector(".drop-out");

@@ -98,7 +98,9 @@ function startMeeting(token, meetingId, name) {
 
   //? create Local Participant
   createLocalParticipant();
-
+  if (mode === "toolP") {
+    startButton.style.setProperty("visibility", "hidden", "important");
+  }
   //add yourself in participant list
   addParticipantToList({
     id: meeting.localParticipant.id,
@@ -133,11 +135,22 @@ function startMeeting(token, meetingId, name) {
     if (mode === "toolH") {
       console.log(participant.id);
       participant.pin("CAM");
+      // $(".videoWrapper-two").css("right", "0");
+      // $(".videoWrapper-two").css("transform", "translateX(390%)");
+      $(".videoWrapper-two").css("left", "1000px");
     }
 
     if (mode === "toolP") {
       console.log(participant.id);
       participant.unpin("CAM");
+      // $(".videos-container").css("flex-direction", "row-reverse");
+      // $(".videoWrapper-two").css("transform", "translateX(-390%)");
+      // $(".videoWrapper-two").css("right", "0");
+      $(".videoWrapper-two").css("transform", "translateX(0%)");
+      $(".videoWrapper-one").css("transform", "translateX(1000px)");
+
+      // $(".videoWrapper-one").css("transform", "translateX(390%)");
+      // $(".videoWrapper-one").css("right", "0");
     }
 
     let mirrorCam = true;
