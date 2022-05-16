@@ -6,6 +6,7 @@ const uuid = require("uuid");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const { default: fetch } = require("node-fetch");
+const { log } = require("console");
 
 // const pugTemplatePath = path.join(__dirname, "../views/index.pug");
 // const HtmlTemplatePath = path.join(__dirname, "../views/index.html");
@@ -101,7 +102,9 @@ const startServer = (port = 3000, PUBLIC_KEY, PRIVATE_KEY, URL_ENDPOINT) => {
         const options = {
           method: "POST",
           headers: { Authorization: token, "Content-Type": "application/json" },
-          body: JSON.stringify({ region }),
+          // body: JSON.stringify({
+          //   // region: "eu001",
+          // }),
         };
 
         fetch(url, options)
@@ -114,6 +117,8 @@ const startServer = (port = 3000, PUBLIC_KEY, PRIVATE_KEY, URL_ENDPOINT) => {
       app.post("/validate-meeting/:meetingId", (req, res) => {
         const token = req.body.token;
         const meetingId = req.params.meetingId;
+
+        console.log(meetingId);
 
         const url = `${process.env.VIDEOSDK_API_ENDPOINT}/api/meetings/${meetingId}`;
 

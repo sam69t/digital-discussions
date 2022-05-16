@@ -3,16 +3,24 @@ const API_SERVER_URL = `${window.location.origin}`;
 let localUser = false;
 let participantUser = false;
 
+let participantNumber = 1;
 let userNotReadyYet = false;
 
+const offSetParticipant = 1250;
+
 let chatContainer = document.querySelector("#chats");
+
+let nav = document.querySelector(".nav");
 
 let startButton = document.querySelector(".startButton");
 let startOtherButton = document.querySelector(".startOtherButton");
 let startButtonWrapper = document.querySelector(".startButtonWrapper");
 let toolControllerP = document.querySelector(".tool-control-P");
 let toolControllerH = document.querySelector(".tool-control-H");
+let publicTool = document.querySelector(".tool-public");
+
 let camMicControls = document.querySelector(".cam-mic-controls");
+let colorControls = document.querySelector(".color-controls");
 
 // let previewContainer = document.querySelector(".previewContainer");
 let fond = document.querySelector(".chat-wrapper");
@@ -20,6 +28,7 @@ let fond = document.querySelector(".chat-wrapper");
 let videoContainerOne = document.querySelector(".videoWrapper-one");
 let videoContainerTwo = document.querySelector(".videoWrapper-two");
 let inputUser = document.querySelector("#inputMessage");
+let inputPublic = document.querySelector("#inputPublic");
 
 let playGround = document.querySelector(".playGround");
 let micButton = document.getElementById("mic-btn");
@@ -28,6 +37,8 @@ let ssButton = document.getElementById("ss-btn");
 let screenShare = document.getElementById("screenShare");
 let raiseHand = document.getElementById("raiseHand-btn");
 let sendMessageBtn = document.getElementById("sendMessage-btn");
+let publicSendMessageBtn = document.getElementById("publicSendMessage-btn");
+
 let participants = document.getElementById("participants");
 let leaveMeetingBtn = document.getElementById("leaveMeeting-btn");
 let endMeetingBtn = document.getElementById("endMeeting-btn");
@@ -74,10 +85,18 @@ function addParticipantToList({ id, displayName }) {
 }
 
 function createLocalParticipant() {
-  localParticipant = createVideoElement(meeting.localParticipant.id);
-  localParticipantAudio = createAudioElement(meeting.localParticipant.id);
-  videoContainerOne.appendChild(localParticipant);
-  meeting.localParticipant.quality = "high";
+  if (mode === "toolH" || mode === "toolP") {
+    localParticipant = createVideoElement(meeting.localParticipant.id);
+    localParticipantAudio = createAudioElement(meeting.localParticipant.id);
+    videoContainerOne.appendChild(localParticipant);
+    meeting.localParticipant.quality = "high";
+  }
+  if (mode === "public") {
+    localParticipant = createVideoElement(meeting.localParticipant.id);
+    localParticipantAudio = createAudioElement(meeting.localParticipant.id);
+    videoContainerOne.appendChild(localParticipant);
+    meeting.localParticipant.quality = "high";
+  }
 }
 
 function startMeeting(token, meetingId, name) {
@@ -101,6 +120,13 @@ function startMeeting(token, meetingId, name) {
   if (mode === "toolP") {
     startButton.style.setProperty("visibility", "hidden", "important");
   }
+  if (mode === "public") {
+    startButton.style.setProperty("visibility", "hidden", "important");
+    nav.style.display = "none";
+    publicTool.style.setProperty("display", "block", "important");
+    playGround.style.setProperty("display", "none", "important");
+    colorControls.style.setProperty("display", "flex", "important");
+  }
   //add yourself in participant list
   addParticipantToList({
     id: meeting.localParticipant.id,
@@ -119,50 +145,74 @@ function startMeeting(token, meetingId, name) {
 
   //?  Other participants
   meeting.on("participant-joined", (participant) => {
-    let videoElement = createVideoElement(participant.id);
-    let audioElement = createAudioElement(participant.id);
+    participantNumber++;
+    console.log(participantNumber);
+    if (participantNumber >= 0 && participantNumber <= 2) {
+      let videoElement = createVideoElement(participant.id);
+      let audioElement = createAudioElement(participant.id);
 
-    participant.on("stream-enabled", (stream) => {
-      setTrack(stream, videoElement, audioElement, participant.id);
-    });
+      participant.on("stream-enabled", (stream) => {
+        setTrack(stream, videoElement, audioElement, participant.id);
+      });
 
-    participant.setQuality("high");
+      participant.setQuality("high");
 
-    // if (participant.id) {
-    //   participant.pin("CAM");
-    // }
+      // if (participant.id) {
+      //   participant.pin("CAM");
+      // }
 
-    if (mode === "toolH") {
-      console.log(participant.id);
-      participant.pin("CAM");
-      // $(".videoWrapper-two").css("right", "0");
-      // $(".videoWrapper-two").css("transform", "translateX(390%)");
-      $(".videoWrapper-two").css("left", "1000px");
+      if (mode === "toolH") {
+        console.log(participant.id);
+        participant.pin("CAM");
+        // $(".videoWrapper-two").css("right", "0");
+        // $(".videoWrapper-two").css("transform", "translateX(390%)");
+        $(".videoWrapper-two").css("left", `${offSetParticipant}`);
+      }
+
+      if (mode === "toolP") {
+        console.log(participant.id);
+        participant.unpin("CAM");
+        // $(".videos-container").css("flex-direction", "row-reverse");
+        // $(".videoWrapper-two").css("transform", "translateX(-390%)");
+        // $(".videoWrapper-two").css("right", "0");
+        $(".videoWrapper-two").css("transform", "translateX(0%)");
+        $(".videoWrapper-one").css(
+          "transform",
+          `translateX(${offSetParticipant}px)`
+        );
+        // $(".videoWrapper-one").css("transform",`translateX(1250px)`
+        // );
+
+        // $(".videoWrapper-one").css("transform", "translateX(390%)");
+        // $(".videoWrapper-one").css("right", "0");
+      }
+      if (mode === "public") {
+        console.log(participant.id);
+        participant.unpin("CAM");
+
+        $(".videoWrapper-two").css("transform", "translateX(0%)");
+        $(".videoWrapper-one").css(
+          "transform",
+          `translateX(${offSetParticipant}px)`
+        ); // videoContainerOne.classList.add("resize-drag");
+        $(".videoWrapper-one").removeClass("resize-drag");
+      }
+
+      console.log("PARTICIPANT-JOINED");
+
+      videoContainerTwo.appendChild(videoElement);
+      videoContainerTwo.appendChild(audioElement);
+      addParticipantToList(participant);
+
+      if (mode === "public") {
+        // console.log(participant.id);
+        // participant.unpin("CAM");
+        // var ele = document.getElementsByClassName("video-frame");
+        // // find last element
+        // var lastEle = ele[ele.length - 1];
+        // videoContainerTwo.removeChild(lastEle);
+      }
     }
-
-    if (mode === "toolP") {
-      console.log(participant.id);
-      participant.unpin("CAM");
-      // $(".videos-container").css("flex-direction", "row-reverse");
-      // $(".videoWrapper-two").css("transform", "translateX(-390%)");
-      // $(".videoWrapper-two").css("right", "0");
-      $(".videoWrapper-two").css("transform", "translateX(0%)");
-      $(".videoWrapper-one").css("transform", "translateX(1000px)");
-
-      // $(".videoWrapper-one").css("transform", "translateX(390%)");
-      // $(".videoWrapper-one").css("right", "0");
-    }
-
-    let mirrorCam = true;
-    meeting.sendChatMessage(
-      JSON.stringify({ type: "mirror-webcam", mirrorCam })
-    ); // console.log("row");
-
-    console.log("PARTICIPANT-JOINED");
-
-    videoContainerTwo.appendChild(videoElement);
-    videoContainerTwo.appendChild(audioElement);
-    addParticipantToList(participant);
   });
 
   meeting.on("pin-state-changed", ({ participantId, state, pinnedBy }) => {
@@ -222,7 +272,7 @@ function startMeeting(token, meetingId, name) {
 async function joinMeeting(newMeeting) {
   // let defaultMeeting = "qwrc-b9ho-7x3j";
 
-  let name = document.getElementById("joinMeetingName").value || "JSSDK";
+  let name = document.getElementById("joinMeetingName").value || "Sam";
   let meetingId = document.getElementById("joinMeetingId").value;
   if (!meetingId && !newMeeting) {
     return alert("Please Provide a meetingId");
@@ -269,30 +319,31 @@ async function joinMeeting(newMeeting) {
   //create New Meeting
   //get new meeting if new meeting requested;
   if (newMeeting) {
-    meetingId = await fetch(API_SERVER_URL + "/create-meeting", options).then(
-      async (result) => {
-        const { meetingId } = await result.json();
-        console.log(options);
-
-        console.log("NEW MEETING meetingId", meetingId);
-        return meetingId;
-      }
-    );
+    // meetingId = await fetch(API_SERVER_URL + "/create-meeting", options).then(
+    //   async (result) => {
+    //     const { meetingId } = await result.json();
+    //     console.log(meetingId);
+    //     // console.log("NEW MEETING meetingId", meetingId);
+    //     return meetingId;
+    //   }
+    // );
+    meetingId = "6j1x-8g2h-9ioc";
   }
   // meetingId = "test"
-  console.log("MEETING_ID::", meetingId);
+  // console.log("MEETING_ID::", meetingId);
 
   navigator.clipboard.writeText(meetingId);
   //set meetingId
   // document.querySelector("#meetingid").innerHTML = meetingId;
   startMeeting(token, meetingId, name);
   console.log(token, meetingId, name);
+  // console.log(token, meetingId, name);
 
   if (mode === "toolH") {
-    console.log(meeting.localParticipant.id);
+    // console.log(meeting.localParticipant.id);
   }
   if (mode === "toolP") {
-    console.log(meeting.localParticipant.id);
+    // console.log(meeting.localParticipant.id);
   }
   // let url = new URLSearchParams("http://localhost:3000/room.html?mode=tool");
   // const mode = params.get("mode");
@@ -300,26 +351,50 @@ async function joinMeeting(newMeeting) {
 
 // creating video element
 function createVideoElement(pId) {
-  let videoElement = document.createElement("video");
-  let allVideos = document.querySelectorAll("video");
-  // let parentVideo = videoElement.parentNode;
+  if (mode === "toolH" || mode === "toolP") {
+    let videoElement = document.createElement("video");
+    let allVideos = document.querySelectorAll("video");
+    // let parentVideo = videoElement.parentNode;
 
-  videoElement.classList.add("video-frame");
-  // videoContainerOne.classList.add("resize-drag");
-  // videoContainerTwo.classList.add("resize-drag");
+    videoElement.classList.add("video-frame");
+    // videoContainerOne.classList.add("resize-drag");
+    // videoContainerTwo.classList.add("resize-drag");
 
-  if (allVideos.length === 2) {
-    videoContainerOne.classList.add("resize-drag");
+    if (allVideos.length === 2) {
+      videoContainerOne.classList.add("resize-drag");
+    }
+
+    // console.log(allVideos);
+
+    videoElement.setAttribute("id", pId);
+
+    // socket.emit("webcam_id", {
+    //   id: ("id", `v-${pId}`),
+    // });
+    return videoElement;
   }
+  if (mode === "public") {
+    let videoElement = document.createElement("video");
+    let allVideos = document.querySelectorAll("video");
+    // let parentVideo = videoElement.parentNode;
 
-  console.log(allVideos);
+    videoElement.classList.add("video-frame");
+    // videoContainerOne.classList.add("resize-drag");
+    // videoContainerTwo.classList.add("resize-drag");
 
-  videoElement.setAttribute("id", pId);
+    if (allVideos.length === 2) {
+      videoContainerOne.classList.add("resize-drag");
+    }
 
-  // socket.emit("webcam_id", {
-  //   id: ("id", `v-${pId}`),
-  // });
-  return videoElement;
+    console.log(allVideos);
+
+    videoElement.setAttribute("id", pId);
+
+    // socket.emit("webcam_id", {
+    //   id: ("id", `v-${pId}`),
+    // });
+    return videoElement;
+  }
 }
 
 // creating audio element
@@ -411,12 +486,20 @@ function addDomEvents() {
       JSON.stringify({ type: "chatMessageCreated", message })
     );
     console.log(message);
-    document.getElementById("inputMessage").value = "";
+    inputUser.value = "";
   });
   inputUser.addEventListener("input", function () {
     const message = inputUser.value;
     meeting.sendChatMessage(JSON.stringify({ type: "ontap-chat", message }));
     console.log(message);
+  });
+  publicSendMessageBtn.addEventListener("click", async () => {
+    const message = inputPublic.value;
+    meeting.sendChatMessage(
+      JSON.stringify({ type: "public-send-chat", message })
+    );
+    console.log(message);
+    inputPublic.value = "";
   });
 
   startRecordingBtn.addEventListener("click", async () => {

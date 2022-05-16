@@ -1,7 +1,7 @@
 const videosContainer = document.querySelector(".videos-container");
 let firstVid = videosContainer.firstElementChild;
 let SecondVid = videosContainer.lastElementChild;
-const position = { x: 1000, y: 0 };
+const position = { x: offSetParticipant, y: 0 };
 
 if (mode === "toolH") {
   position.x = 0;
@@ -17,9 +17,26 @@ const VIDEO = {
             y: (position.y += event.dy),
           };
 
-          meeting.sendChatMessage(
-            JSON.stringify({ type: "moving-webcam", movingWebcam })
-          );
+          // meeting.sendChatMessage(
+          //   JSON.stringify({ type: "moving-webcam", movingWebcam })
+          // );
+          if (mode === "toolH") {
+            meeting.sendChatMessage(
+              JSON.stringify({
+                type: "moving-webcam-host",
+                movingWebcam,
+              })
+            );
+          }
+
+          if (mode === "toolP") {
+            meeting.sendChatMessage(
+              JSON.stringify({
+                type: "moving-webcam-participant",
+                movingWebcam,
+              })
+            );
+          }
           // position.x += event.dx;
           // position.y += event.dy;
 
@@ -53,10 +70,19 @@ const VIDEO = {
             w: event.rect.width,
             h: event.rect.height,
           };
-
-          meeting.sendChatMessage(
-            JSON.stringify({ type: "resize-webcam", resizeWebcam })
-          );
+          if (mode === "toolH") {
+            meeting.sendChatMessage(
+              JSON.stringify({ type: "resize-webcam-host", resizeWebcam })
+            );
+          }
+          if (mode === "toolP") {
+            meeting.sendChatMessage(
+              JSON.stringify({
+                type: "resize-webcam-participant",
+                resizeWebcam,
+              })
+            );
+          }
         },
       },
       modifiers: [

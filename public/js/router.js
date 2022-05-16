@@ -99,15 +99,16 @@ if (mode === "player") {
   joinTitle.style.marginTop = "5em";
 }
 
-function init() {
-  console.log("lol");
-}
 const surfooter = document.querySelector(".sur-footer");
+const surfooterPublic = document.querySelector("#public-sur-footer");
+
 function showButton() {
   surfooter.style.opacity = "1";
+  surfooterPublic.style.opacity = "1";
 }
 function hideButton() {
   surfooter.style.opacity = "0";
+  surfooterPublic.style.opacity = "0";
 }
 
 // console.log(elem === document.activeElement);

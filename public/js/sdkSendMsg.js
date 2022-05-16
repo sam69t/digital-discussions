@@ -22,7 +22,7 @@ function onMessage(chatEvent) {
     }
     if (mode === "toolH") {
       toolControllerH.style.setProperty("display", "block", "important");
-      toolControllerP.style.setProperty("display", "block", "important");
+      // toolControllerP.style.setProperty("display", "block", "important");
       camMicControls.style.setProperty("display", "flex", "important");
     }
   }
@@ -55,20 +55,43 @@ function onMessage(chatEvent) {
       console.log("change");
     }
   }
-  if (
-    //! WEBCAM SIZE
-    parsedText?.type == "resize-webcam" &&
-    senderId != meeting.localParticipant.id
-  ) {
-    // console.log(parsedText.resizeWebcam.w, parsedText.resizeWebcam.h);
+  //! PUBLIC CHAT MESSAGE
 
+  if (parsedText?.type == "public-send-chat") {
+    if (parsedText.message.length <= 35) {
+      let horizBanner = document.createElement("div");
+      let horizBannerText = document.createElement("span");
+      let textAuthor = document.createElement("span");
+
+      horizBanner.classList.add("moving-banner-h");
+      textAuthor.classList.add("credit-banner");
+
+      horizBannerText.textContent = `${parsedText.message}`;
+      textAuthor.textContent = `${senderName}`;
+      horizBanner.appendChild(horizBannerText);
+      horizBanner.appendChild(textAuthor);
+      previewContainer.appendChild(horizBanner);
+    }
+    if (parsedText.message.length > 35) {
+      let verticalBanner = document.createElement("div");
+      let verticalBannerText = document.createElement("span");
+      let textAuthor = document.createElement("span");
+
+      verticalBanner.classList.add("moving-banner-v");
+      textAuthor.classList.add("credit-banner");
+
+      verticalBannerText.textContent = `${parsedText.message}`;
+      textAuthor.textContent = `${senderName}`;
+      verticalBanner.appendChild(verticalBannerText);
+      verticalBanner.appendChild(textAuthor);
+      previewContainer.appendChild(verticalBanner);
+    }
+    // console.log(`${senderName + " a dit " + parsedText.message}`);
+    console.log(parsedText.message.length);
     if (senderId != meeting.localParticipant.id) {
-      var $webcam = $(".videoWrapper-two");
-
-      $webcam.css("width", parsedText.resizeWebcam.w);
-      $webcam.css("height", parsedText.resizeWebcam.h);
     }
   }
+
   if (parsedText?.type == "chatMessageCreated") {
     //! CHAT MESSAGE
     CHAT.addTextToLastMsg(parsedText.message);
@@ -80,31 +103,135 @@ function onMessage(chatEvent) {
   ) {
     CHAT.addTextToLastMsg(parsedText.message);
   }
+  // if (
+  //   //! WEBCAM MOVEMENT
+  //   parsedText?.type == "moving-webcam" &&
+  //   senderId != meeting.localParticipant.id
+  // ) {
+  //   // console.log(parsedText.movingWebcam.x, parsedText.movingWebcam.x);
+  //   if (senderId != meeting.localParticipant.id) {
+  //     console.log("rows");
+
+  //     var $webcam = $(".videoWrapper-two");
+  //     // VIDEO.moveVideo(
+  //     //   $webcam,
+  //     //   -parsedText.movingWebcam.x,
+  //     //   parsedText.movingWebcam.y
+  //     // );
+
+  //     $webcam.css(
+  //       `${meeting.localParticipant.id == senderId ? "right" : "left"}`,
+  //       parsedText.movingWebcam.x
+  //     );
+  //     $webcam.css("top", parsedText.movingWebcam.y);
+  //     console.log(parsedText.movingWerbc);
+  //   }
+  // }
   if (
-    //! WEBCAM MOVEMENT
-    parsedText?.type == "moving-webcam" &&
+    //! WEBCAM RESIZE - PARTICIPANT
+    parsedText?.type == "resize-webcam-participant" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    // console.log(parsedText.resizeWebcam.w, parsedText.resizeWebcam.h);
+
+    if (senderId != meeting.localParticipant.id) {
+      console.log("Participant is resizing webcam");
+
+      if (mode === "toolH") {
+        var $webcam = $(".videoWrapper-two");
+
+        $webcam.css("width", parsedText.resizeWebcam.w);
+        $webcam.css("height", parsedText.resizeWebcam.h);
+      }
+      if (mode === "public") {
+        var $webcam = $(".videoWrapper-one");
+
+        $webcam.css("width", parsedText.resizeWebcam.w);
+        $webcam.css("height", parsedText.resizeWebcam.h);
+      }
+    }
+  }
+  if (
+    //! WEBCAM RESIZE - HOST
+    parsedText?.type == "resize-webcam-host" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    // console.log(parsedText.resizeWebcam.w, parsedText.resizeWebcam.h);
+
+    if (senderId != meeting.localParticipant.id) {
+      console.log("Host is resizing webcam");
+
+      if (mode === "toolP") {
+        var $webcam = $(".videoWrapper-two");
+
+        $webcam.css("width", parsedText.resizeWebcam.w);
+        $webcam.css("height", parsedText.resizeWebcam.h);
+      }
+      if (mode === "public") {
+        var $webcam = $(".videoWrapper-two");
+
+        $webcam.css("width", parsedText.resizeWebcam.w);
+        $webcam.css("height", parsedText.resizeWebcam.h);
+      }
+    }
+  }
+
+  if (
+    //! WEBCAM MOVEMENT - PARTICIPANT
+    parsedText?.type == "moving-webcam-participant" &&
     senderId != meeting.localParticipant.id
   ) {
     // console.log(parsedText.movingWebcam.x, parsedText.movingWebcam.x);
     if (senderId != meeting.localParticipant.id) {
-      console.log("rows");
-
-      var $webcam = $(".videoWrapper-two");
-      // VIDEO.moveVideo(
-      //   $webcam,
-      //   -parsedText.movingWebcam.x,
-      //   parsedText.movingWebcam.y
-      // );
-
-      $webcam.css(
-        `${meeting.localParticipant.id == senderId ? "right" : "left"}`,
-        parsedText.movingWebcam.x
-      );
-      $webcam.css("top", parsedText.movingWebcam.y);
-      console.log(parsedText.movingWerbc);
+      console.log("Participant is moving webcam");
+      if (mode === "toolH") {
+        var $webcam = $(".videoWrapper-two");
+        $webcam.css(
+          `${meeting.localParticipant.id == senderId ? "right" : "left"}`,
+          parsedText.movingWebcam.x
+        );
+        $webcam.css("top", parsedText.movingWebcam.y);
+        console.log(parsedText.movingWerbc);
+      }
+      if (mode === "public") {
+        var $webcam = $(".videoWrapper-one");
+        $webcam.css(
+          `${meeting.localParticipant.id == senderId ? "right" : "left"}`,
+          parsedText.movingWebcam.x
+        );
+        $webcam.css("top", parsedText.movingWebcam.y);
+        console.log(parsedText.movingWerbc);
+      }
     }
   }
-
+  if (
+    //! WEBCAM MOVEMENT - HOST
+    parsedText?.type == "moving-webcam-host" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    // console.log(parsedText.movingWebcam.x, parsedText.movingWebcam.x);
+    if (senderId != meeting.localParticipant.id) {
+      console.log("Host is moving webcam");
+      if (mode === "toolP") {
+        var $webcam = $(".videoWrapper-two");
+        $webcam.css(
+          `${meeting.localParticipant.id == senderId ? "right" : "left"}`,
+          parsedText.movingWebcam.x
+        );
+        $webcam.css("top", parsedText.movingWebcam.y);
+        console.log(parsedText.movingWerbc);
+      }
+      if (mode === "public") {
+        var $webcam = $(".videoWrapper-two");
+        $webcam.css(
+          `${meeting.localParticipant.id == senderId ? "right" : "left"}`,
+          parsedText.movingWebcam.x
+        );
+        $webcam.css("top", parsedText.movingWebcam.y);
+        console.log(parsedText.movingWerbc);
+      }
+    }
+  }
   if (
     //! IMG DISPLAY
     parsedText?.type == "img-url"
