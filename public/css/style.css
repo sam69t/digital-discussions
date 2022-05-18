@@ -393,8 +393,8 @@ button:focus {
 .publicJoinRoom {
   position: absolute;
   /* top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
+    left: 50%;
+    transform: translate(-50%, -50%); */
 }
 .video-frame {
   position: relative;
@@ -438,13 +438,13 @@ body {
   background-color: transparent;
   position: absolute;
   /* top: calc(50% - 300px);
-  left: calc(50% - 150px); */
+    left: calc(50% - 150px); */
 }
 /* .chats__message:hover {
-  transition: 300ms ease-in-out;
-  font-size: 250px;
-  cursor: pointer;
-} */
+    transition: 300ms ease-in-out;
+    font-size: 250px;
+    cursor: pointer;
+  } */
 .chats__message {
   letter-spacing: -0.5px;
   line-height: 70px;
@@ -563,7 +563,7 @@ main {
 
 .tools {
   /* position: absolute;
-  width: 100%; */
+    width: 100%; */
 }
 .tool-control-H {
   display: none;
@@ -691,7 +691,7 @@ main {
   display: block;
   position: absolute;
   /* background-color: red;
-  color: red; */
+    color: red; */
   top: 0;
   right: 0;
 }

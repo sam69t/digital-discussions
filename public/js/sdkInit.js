@@ -6,7 +6,7 @@ let participantUser = false;
 let participantNumber = 1;
 let userNotReadyYet = false;
 
-const offSetParticipant = 1250;
+const offSetParticipant = 1050;
 
 let chatContainer = document.querySelector("#chats");
 
@@ -92,10 +92,10 @@ function createLocalParticipant() {
     meeting.localParticipant.quality = "high";
   }
   if (mode === "public") {
-    localParticipant = createVideoElement(meeting.localParticipant.id);
-    localParticipantAudio = createAudioElement(meeting.localParticipant.id);
-    videoContainerOne.appendChild(localParticipant);
-    meeting.localParticipant.quality = "high";
+    // localParticipant = createVideoElement(meeting.localParticipant.id);
+    // localParticipantAudio = createAudioElement(meeting.localParticipant.id);
+    // previewContainer.appendChild(localParticipant);
+    // meeting.localParticipant.quality = "high";
   }
 }
 
@@ -190,11 +190,12 @@ function startMeeting(token, meetingId, name) {
         console.log(participant.id);
         participant.unpin("CAM");
 
-        $(".videoWrapper-two").css("transform", "translateX(0%)");
-        $(".videoWrapper-one").css(
-          "transform",
-          `translateX(${offSetParticipant}px)`
-        ); // videoContainerOne.classList.add("resize-drag");
+        // $(".videoWrapper-two").css("transform", "translateX(0%)");
+        $(".videoWrapper-one").css("right", "0");
+        // $(".videoWrapper-one").css(
+        //   "transform",
+        //   `translateX(${offSetParticipant}px)`
+        // ); // videoContainerOne.classList.add("resize-drag");
         $(".videoWrapper-one").removeClass("resize-drag");
       }
 
@@ -203,14 +204,23 @@ function startMeeting(token, meetingId, name) {
       videoContainerTwo.appendChild(videoElement);
       videoContainerTwo.appendChild(audioElement);
       addParticipantToList(participant);
-
+    } else if (participantNumber <= 3) {
       if (mode === "public") {
-        // console.log(participant.id);
-        // participant.unpin("CAM");
-        // var ele = document.getElementsByClassName("video-frame");
-        // // find last element
-        // var lastEle = ele[ele.length - 1];
-        // videoContainerTwo.removeChild(lastEle);
+        console.log("je suis le dernier arrivant");
+        let PublicVideoElement = createVideoElement(participant.id);
+        let PublicAudioElement = createAudioElement(participant.id);
+        participant.on("stream-enabled", (stream) => {
+          setTrack(
+            stream,
+            PublicVideoElement,
+            PublicAudioElement,
+            participant.id
+          );
+        });
+        participant.setQuality("high");
+        videoContainerOne.appendChild(PublicVideoElement);
+        videoContainerOne.appendChild(PublicAudioElement);
+        addParticipantToList(participant);
       }
     }
   });
