@@ -4,6 +4,7 @@ const previewContainer = document.querySelector(".previewContainer");
 
 const params = new URLSearchParams(window.location.search);
 const mode = params.get("mode");
+const animator = new Animator();
 // const meeting = params.get("meetingID");
 // console.log(meeting);
 
@@ -19,8 +20,12 @@ if (mode === "player") {
     rightVideoSrc: "",
   });
 
+  animator.on("frame", () => {
+    player.update();
+  });
+
   player.on("loaded", (messages) => {
-    init();
+    // init();
   });
 
   player.setupSlider({
@@ -110,6 +115,8 @@ function hideButton() {
   surfooter.style.opacity = "0";
   surfooterPublic.style.opacity = "0";
 }
+
+animator.start();
 
 // console.log(elem === document.activeElement);
 // if (elem === document.activeElement) {

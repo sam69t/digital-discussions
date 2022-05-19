@@ -707,6 +707,10 @@ main {
   border-radius: 20px;
 }
 
+[smoothen] {
+  transition: all 0.33s;
+}
+
 .video-frame:hover {
   /* filter: blur(15px); */
 }

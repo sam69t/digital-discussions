@@ -4,6 +4,7 @@ class Player {
     this.startStamp = 0; //! in seconds
     this.oldTime = 0;
     this.messageIndex = 0;
+    this.messages = [];
 
     this.leftVideo = this.createVideo({
       parent: parent.querySelector(".videoWrapper-one"),
@@ -42,7 +43,7 @@ class Player {
   //! event emitter
 
   emit(type, ...message) {
-    console.log(type, message);
+    // console.log(type, message);
 
     return this.emitter.emitEvent(type, message);
   }
@@ -89,7 +90,8 @@ class Player {
     if (deltaTime >= 0 && messageTime <= time) {
       this.emit("chat-message", pendingMessage);
       this.messageIndex++;
-      console.log(this.messageIndex);
+      // console.log(time, deltaTime);
+      // console.trace(time, deltaTime);
       this.triggerMessages(time, deltaTime);
     }
 
@@ -102,7 +104,13 @@ class Player {
     }
   }
 
+  update() {}
+
   setupSlider({ sliderContainer }) {
+    let videoPlaying = false;
+    let dragWhilePlaying = false;
+    let drag = false;
+
     const buttonElem = sliderContainer.querySelector(".play");
     buttonElem.textContent = "Play";
     const sliderElem = sliderContainer.querySelector(".custom-seekbar");
@@ -123,31 +131,34 @@ class Player {
       this.updateMessages(vid.currentTime);
       console.log(vid.currentTime);
 
-      console.log(vid.currentTime);
+      // console.log(vid.currentTime);
       if (vid.currentTime > 10 && vid.currentTime < 10.2) {
         console.log("trigger");
         chatContainer.classList.toggle("addColorBackGround");
       }
     };
 
-    vid.ontimeupdate = () => {
-      // console.log(vid.currentTime);
+    this.update = () => {
       if (drag) return;
-
       var amount = vid.currentTime / vid.duration;
-
       this.updateMessages(vid.currentTime);
-      // console.log(vid.currentTime);
-      //   this.rightVideo.currentTime = vid.currentTime;
-      //   $("#custom-seekbar span").css("width", percentage + "%");
+      // // console.log(vid.currentTime);
+      // //   this.rightVideo.currentTime = vid.currentTime;
+      // //   $("#custom-seekbar span").css("width", percentage + "%");
       updateSlider(amount);
-
-      console.log(vid.currentTime);
     };
 
-    let videoPlaying = false;
-    let dragWhilePlaying = false;
-    let drag = false;
+    vid.ontimeupdate = () => {
+      // if (drag) return;
+      // var amount = vid.currentTime / vid.duration;
+      // this.updateMessages(vid.currentTime);
+      // // console.log(vid.currentTime);
+      // //   this.rightVideo.currentTime = vid.currentTime;
+      // //   $("#custom-seekbar span").css("width", percentage + "%");
+      // updateSlider(amount);
+      // console.log(vid.currentTime);
+    };
+
     // var sliderCanMove = false;
 
     buttonElem.onclick = () => {
@@ -186,5 +197,7 @@ class Player {
       moveSlider(event.clientX);
       drag = true;
     };
+
+    // animate();
   }
 }
