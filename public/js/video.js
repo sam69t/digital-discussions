@@ -10,6 +10,12 @@ if (mode === "toolH") {
 const VIDEO = {
   moveVideo(src, x, y) {
     interact(".resize-drag").draggable({
+      modifiers: [
+        interact.modifiers.restrictRect({
+          restriction: "parent",
+          endOnly: true,
+        }),
+      ],
       listeners: {
         move(event) {
           const movingWebcam = {

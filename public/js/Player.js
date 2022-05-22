@@ -29,7 +29,7 @@ class Player {
         });
 
         const startRecordingMessage = this.messages.find((element) => {
-          return element?.message?.type === "moving-webcam";
+          return element?.message?.type === "start-interview";
         });
 
         const firstTimestamp = new Date(startRecordingMessage.timestamp);
@@ -111,8 +111,10 @@ class Player {
     let dragWhilePlaying = false;
     let drag = false;
 
-    const buttonElem = sliderContainer.querySelector(".play");
-    buttonElem.textContent = "Play";
+    const buttonElem = document.querySelector(".preview-start");
+    const pauseElem = document.querySelector(".pause");
+
+    // buttonElem.textContent = "Play";
     const sliderElem = sliderContainer.querySelector(".custom-seekbar");
 
     const vid = this.leftVideo;
@@ -131,11 +133,18 @@ class Player {
       this.updateMessages(vid.currentTime);
       console.log(vid.currentTime);
 
+      // var timer = vid.currentTime;
+      // var minutes = Math.floor(timer / 60);
+      // var seconds = timer - minutes * 60;
+      // console.log(minutes, seconds);
+      // document.querySelector(".minutes").textContent = minutes;
+      // document.querySelector(".seconds").textContent = seconds;
+
       // console.log(vid.currentTime);
-      if (vid.currentTime > 10 && vid.currentTime < 10.2) {
-        console.log("trigger");
-        chatContainer.classList.toggle("addColorBackGround");
-      }
+      // if (vid.currentTime > 10 && vid.currentTime < 10.2) {
+      //   console.log("trigger");
+      //   chatContainer.classList.toggle("addColorBackGround");
+      // }
     };
 
     this.update = () => {
@@ -156,13 +165,35 @@ class Player {
       // //   this.rightVideo.currentTime = vid.currentTime;
       // //   $("#custom-seekbar span").css("width", percentage + "%");
       // updateSlider(amount);
-      // console.log(vid.currentTime);
+      var timer = vid.currentTime;
+      var minutes = Math.floor(timer / 60);
+      var seconds = Math.floor(timer - minutes * 60);
+
+      // var seconds = Math.floor(timer);
+      // console.log(seconds);
+
+      document.querySelector(".minutes").textContent = minutes;
+
+      if (seconds < 10) {
+        document.querySelector(".seconds").textContent = "0" + seconds;
+      } else if (seconds >= 10)
+        document.querySelector(".seconds").textContent = seconds;
+      if (seconds === 60) {
+        document.querySelector(".seconds").textContent = "00";
+      }
     };
 
     // var sliderCanMove = false;
+    pauseElem.onclick = () => {
+      videoPlaying ? pauseVideo() : playVideo();
+    };
 
     buttonElem.onclick = () => {
-      videoPlaying ? pauseVideo() : playVideo();
+      buttonElem.style.opacity = "0";
+      setTimeout(() => {
+        buttonElem.style.display = "none";
+        videoPlaying ? pauseVideo() : playVideo();
+      }, 500);
     };
 
     window.addEventListener("mousemove", (event) => {
@@ -182,13 +213,13 @@ class Player {
       vid.pause();
       // vid2.pause();
       videoPlaying = false;
-      buttonElem.textContent = "Play";
+      pauseElem.textContent = "Play";
     }
     function playVideo() {
       vid.play();
       // vid2.play();
       videoPlaying = true;
-      buttonElem.textContent = "Stop";
+      pauseElem.textContent = "Pause";
     }
 
     sliderElem.onmousedown = (event) => {
@@ -196,6 +227,7 @@ class Player {
       pauseVideo();
       moveSlider(event.clientX);
       drag = true;
+      pauseElem.textContent = "Pause";
     };
 
     // animate();

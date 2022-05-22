@@ -1,6 +1,9 @@
 let inputImg = document.querySelector("#imgfiles");
 let inputVid = document.querySelector("#vidfiles");
 
+let imgSelect = "resize-ref";
+let vidSelect = "resize-vid";
+
 var imagekit = new ImageKit({
   publicKey: "public_F+y/bdBG9098fxlawOAt4+sv63Q=",
   urlEndpoint: "https://ik.imagekit.io/diploma/",
@@ -27,6 +30,8 @@ inputImg.addEventListener("change", (event) => {
           transformation: sampleTransformations,
         });
         let srcImgUrl = srcUrl;
+
+        imgNumber++;
         meeting.sendChatMessage(JSON.stringify({ type: "img-url", srcImgUrl }));
 
         // var img = document.querySelector("#orig_image > p > img");
@@ -37,7 +42,7 @@ inputImg.addEventListener("change", (event) => {
         image.src = srcUrl;
         image.classList.add("imageBlock");
         imageWrapper.classList.add("imageBlockwrapper");
-        image.classList.add("resize-ref");
+        image.classList.add(`${imgSelect + imgNumber}`);
 
         // image.classList.add("resize-drag");
         // imageWrapper.appendChild(image);
@@ -67,19 +72,23 @@ inputVid.addEventListener("change", (event) => {
         });
 
         let srcVidUrl = srcUrl;
+        vidNumber++;
+
         meeting.sendChatMessage(JSON.stringify({ type: "vid-url", srcVidUrl }));
 
         const video = document.createElement("video");
         let videoWrapper = document.createElement("vid");
         videoWrapper.classList.add("video-testWrapper");
+        videoWrapper.classList.add(`${vidSelect + vidNumber}`);
+
         // videoWrapper.classList.add("resize-ref");
 
         video.src = srcUrl;
         video.autoplay = true;
         video.muted = true;
         video.loop = true;
-        video.classList.add("video-test");
-        video.classList.add("resize-ref");
+        video.classList.add("vid-s");
+        video.classList.add(`${vidSelect + vidNumber}`);
 
         previewContainer.appendChild(video);
         // previewContainer.appendChild(videoWrapper);
@@ -87,97 +96,7 @@ inputVid.addEventListener("change", (event) => {
     }
   );
 });
-interact(".resize-ref").resizable({
-  // resize from all edges and corners
-  edges: { left: true, right: true, bottom: true, top: true },
 
-  listeners: {
-    move(event) {
-      var target = event.target;
-      var x = parseFloat(target.getAttribute("data-x")) || 0;
-      var y = parseFloat(target.getAttribute("data-y")) || 0;
-
-      // update the element's style
-      target.style.width = event.rect.width + "px";
-      target.style.height = event.rect.height + "px";
-
-      target.setAttribute("data-x", x);
-      target.setAttribute("data-y", y);
-
-      const resizeWebcam = {
-        w: event.rect.width,
-        h: event.rect.height,
-      };
-
-      // meeting.sendChatMessage(
-      //   JSON.stringify({ type: "resize-webcam", resizeWebcam })
-      // );
-    },
-  },
-  modifiers: [
-    // keep the edges inside the parent
-    interact.modifiers.restrictEdges({
-      outer: "wrapper",
-    }),
-
-    // minimum size
-    interact.modifiers.restrictSize({
-      min: { width: 100, height: 50 },
-    }),
-  ],
-
-  inertia: true,
-});
-interact(".resize-ref").draggable({
-  // enable inertial throwing
-  inertia: true,
-  // keep the element within the area of it's parent
-  modifiers: [
-    interact.modifiers.restrictRect({
-      restriction: "parent",
-      endOnly: true,
-    }),
-  ],
-  // enable autoScroll
-  autoScroll: true,
-
-  listeners: {
-    // call this function on every dragmove event
-    move: dragMoveListener,
-
-    // call this function on every dragend event
-    end(event) {
-      var textEl = event.target.querySelector("p");
-
-      textEl &&
-        (textEl.textContent =
-          "moved a distance of " +
-          Math.sqrt(
-            (Math.pow(event.pageX - event.x0, 2) +
-              Math.pow(event.pageY - event.y0, 2)) |
-              0
-          ).toFixed(2) +
-          "px");
-    },
-  },
-});
-
-function dragMoveListener(event) {
-  var target = event.target;
-  // keep the dragged position in the data-x/data-y attributes
-  var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
-  var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
-
-  // translate the element
-  target.style.transform = "translate(" + x + "px, " + y + "px)";
-
-  // update the posiion attributes
-  target.setAttribute("data-x", x);
-  target.setAttribute("data-y", y);
-}
-
-// this function is used later in the resizing and gesture demos
-window.dragMoveListener = dragMoveListener;
 // let choice_drop = true;
 
 // let image_drop_area = document.querySelector(".drop-out");

@@ -32,8 +32,12 @@
     <script src="js/sdkDomAction.js" defer></script>
     <script src="js/moveAndResize.js" defer></script>
     <script src="js/dragDrop.js" defer></script>
+    <script src="js/imageMovement.js" defer></script>
+    <script src="js/videoMovement.js" defer></script>
     <script src="./js/router.js" defer></script>
     <script src="js/video.js" defer></script>
+    <script src="js/replayBehavior.js" defer></script>
+
 
 </head>
 
@@ -78,7 +82,14 @@
     <div id="orig_image">
         <p><img style="position:absolute; z-index:9999999999"></img></p>
     </div>
+    <header class="player-actions">
+        <div class="zoom-in" onclick="zoomIn()">Zoom in </div>
+        <div class="zoom-out " onclick="zoomBack()">Normal view </div>
+        <div class="zoom-out" onclick="zoomOut()">Zoom out </div>
+
+    </header>
     <div class="previewContainer">
+  
         <div class="videos-container">
             <div class="videoWrapper-one" smoothen></div>
             <div class="videoWrapper-two" smoothen></div>
@@ -97,13 +108,20 @@
     <div class="overlayContainer">
 
         <div class="playerMode hidden">
+            <div class="preview-start">
+                Play
+            </div>
             <div class="slider-container">
-                <button class="btn play"></button>
 
                 <div class="custom-seekbar">
                     <span></span>
                 </div>
-            </div>
+                <div class="video-timer">
+                    <span class="minutes">0</span> <span>:</span><span class="seconds">00</span>
+                </div>
+                <div class="pause">
+                    <span class="button-pause">Pause</span> 
+                </div>
         </div>
 
         <div class="toolMode hidden">
