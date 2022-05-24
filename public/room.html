@@ -79,17 +79,17 @@
             <label for="head">Couleur du fond</label>
         </div>
     </div>
-    <div id="orig_image">
+    <!-- <div id="orig_image">
         <p><img style="position:absolute; z-index:9999999999"></img></p>
-    </div>
+    </div> -->
     <header class="player-actions">
-        <div class="zoom-in" onclick="zoomIn()">Zoom in </div>
-        <div class="zoom-out " onclick="zoomBack()">Normal view </div>
-        <div class="zoom-out" onclick="zoomOut()">Zoom out </div>
-
+        <div class="zoom-out" onclick="zoomOut()">Overview </div>
     </header>
+    <div class="sum-assets">
+
+    </div>
     <div class="previewContainer">
-  
+
         <div class="videos-container">
             <div class="videoWrapper-one" smoothen></div>
             <div class="videoWrapper-two" smoothen></div>
@@ -120,11 +120,11 @@
                     <span class="minutes">0</span> <span>:</span><span class="seconds">00</span>
                 </div>
                 <div class="pause">
-                    <span class="button-pause">Pause</span> 
+                    <span class="button-pause">Pause</span>
                 </div>
+            </div>
         </div>
-
-        <div class="toolMode hidden">
+        <div class="toolMode">
             <main class="wrapper">
                 <div id="joinPage" class="main-bg" style="display: flex">
                     <div class="wrapper-join">
@@ -207,7 +207,7 @@
                     </footer>
                 </div>
                 <div class="tool-public">
-                    <div id="public-sur-footer"class="sur-footer">
+                    <div id="public-sur-footer" class="sur-footer">
                         <button class="btn" id="publicSendMessage-btn">Envoyer message</button>
                         <button class="btn" id="sendMessage-btn">Envoyer lien</button>
                     </div>
@@ -224,7 +224,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </body>
 
 </html>

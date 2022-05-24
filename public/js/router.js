@@ -1,6 +1,8 @@
 // http://127.0.0.1:5500/public/room.html?mode=player
 
 const previewContainer = document.querySelector(".previewContainer");
+let SumAssets = document.querySelector(".sum-assets");
+let widthTimeStamp = amount * 100;
 
 const params = new URLSearchParams(window.location.search);
 const mode = params.get("mode");
@@ -10,11 +12,11 @@ let imgCounter = 0;
 let vidCounter = 0;
 
 // const meeting = params.get("meetingID");
-// console.log(meeting);
-
-if (mode === "player") {
+function playerSetup() {
   const container = document.querySelector(".playerMode");
   container.classList.remove("hidden");
+  const toolMode = document.querySelector(".toolMode");
+  toolMode.classList.add("hidden");
 
   const player = new Player({
     parent: previewContainer,
@@ -59,8 +61,14 @@ if (mode === "player") {
       CHAT.addTextToLastMsg(data.message.message);
     }
     if (data.message.type == "img-url") {
+      let widthTimeStamp = amount * 100;
       imgCounter++;
-      // console.log(data.message.message);
+
+      let imageThumbNail = document.createElement("img");
+      imageThumbNail.src = data.message.srcImgUrl;
+      imageThumbNail.style.marginLeft = widthTimeStamp + "%";
+      imageThumbNail.classList.add(`${"assets" + imgCounter}`);
+      SumAssets.appendChild(imageThumbNail);
       let imageWrap = document.createElement("div");
       let cross = document.createElement("div");
       let crossBar = document.createElement("div");
@@ -82,6 +90,14 @@ if (mode === "player") {
       imageBehavior();
     }
     if (data.message.type == "vid-url") {
+      let widthTimeStamp = amount * 100;
+
+      let vidThumbNail = document.createElement("video");
+      vidThumbNail.src = data.message.srcVidUrl;
+      vidThumbNail.style.marginLeft = widthTimeStamp + "%";
+      vidThumbNail.classList.add(`${"assets" + vidCounter}`);
+      SumAssets.appendChild(vidThumbNail);
+
       vidCounter++;
       const video = document.createElement("video");
       video.src = data.message.srcVidUrl;
@@ -95,6 +111,7 @@ if (mode === "player") {
 
     if (data.message.type == "moving-img-participant") {
       var $webcam = $(".imageBlock1");
+
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -185,10 +202,14 @@ if (mode === "player") {
     }
     if (data.message.type == "img-url") {
       previewContainer.removeChild(previewContainer.lastChild);
+      SumAssets.removeChild(SumAssets.lastChild);
       imgCounter = 0;
 
       if (data.message.type == "moving-img-participant") {
         var $webcam = $(".imageBlock1");
+
+        // $webcam.css(`${"left"}`, data.message.movingWebcam.x);
+        // $webcam.css("top", data.message.movingWebcam.y);
         $webcam.css(
           "-webkit-transform",
           "translate(" +
@@ -211,6 +232,14 @@ if (mode === "player") {
       }
     }
   });
+}
+// console.log(meeting);
+
+if (mode === "player") {
+  playerSetup();
+}
+if (mode === "player-2") {
+  // playerSetup();
 } else if (mode === "toolH") {
   const container = document.querySelector(".toolMode");
   container.classList.remove("hidden");
@@ -257,7 +286,7 @@ function zoomIn() {
   previewContainer.style.transform = "scale(2)";
 }
 function zoomOut() {
-  previewContainer.style.transform = "scale(.4)";
+  previewContainer.classList.toggle("scale");
 }
 function zoomBack() {
   previewContainer.style.transform = "scale(1)";

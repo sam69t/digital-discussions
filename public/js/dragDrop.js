@@ -1,6 +1,8 @@
 let inputImg = document.querySelector("#imgfiles");
 let inputVid = document.querySelector("#vidfiles");
 
+let folderPath = "HUGO_JAUFFET";
+
 let imgSelect = "resize-ref";
 let vidSelect = "resize-vid";
 
@@ -14,7 +16,8 @@ inputImg.addEventListener("change", (event) => {
   imagekit.upload(
     {
       file: inputImg.files[0],
-      fileName: inputImg.files[0].name || "test_image.jpg",
+      fileName: "test_image.jpg",
+      folder: `${"/" + folderPath + "/"}`,
       tags: ["reference"],
     },
     function (err, result) {
@@ -56,6 +59,7 @@ inputVid.addEventListener("change", (event) => {
     {
       file: inputVid.files[0],
       fileName: inputVid.files[0].name || "test_image.jpg",
+      folder: `${"/" + folderPath + "/"}`,
       tags: ["reference"],
     },
     function (err, result) {

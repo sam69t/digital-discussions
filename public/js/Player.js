@@ -1,3 +1,4 @@
+let amount;
 class Player {
   constructor({ parent, csvSrc, leftVideoSrc, rightVideoSrc }) {
     this.emitter = new EventEmitter();
@@ -149,12 +150,14 @@ class Player {
 
     this.update = () => {
       if (drag) return;
-      var amount = vid.currentTime / vid.duration;
+      amount = vid.currentTime / vid.duration;
       this.updateMessages(vid.currentTime);
       // // console.log(vid.currentTime);
       // //   this.rightVideo.currentTime = vid.currentTime;
       // //   $("#custom-seekbar span").css("width", percentage + "%");
       updateSlider(amount);
+
+      // console.log(amount * 100);
     };
 
     vid.ontimeupdate = () => {
@@ -207,6 +210,7 @@ class Player {
 
     function updateSlider(normalizedAmount) {
       spanElem.style.width = `${normalizedAmount * 100}%`;
+      // console.log(normalizedAmount * 100);
     }
 
     function pauseVideo() {

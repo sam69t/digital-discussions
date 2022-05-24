@@ -35,6 +35,16 @@ const startServer = (port = 3000, PUBLIC_KEY, PRIVATE_KEY, URL_ENDPOINT) => {
         urlEndpoint: URL_ENDPOINT,
       });
 
+      // imagekit.listFiles(
+      //   {
+      //     tags: [""],
+      //   },
+      //   function (error, result) {
+      //     if (error) console.log(error);
+      //     console.log(result);
+      //   }
+      // );
+
       router.get("/auth", (req, res) => {
         try {
           const token = req.query.token || uuid.v4();
