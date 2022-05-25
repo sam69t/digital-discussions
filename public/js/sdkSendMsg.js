@@ -1,6 +1,6 @@
 let imgNumber = 0;
 let imgNumberHost = 0;
-
+console.log();
 let vidNumber = 0;
 let vidNumberHost = 0;
 
