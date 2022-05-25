@@ -1,4 +1,5 @@
 const API_SERVER_URL = `${window.location.origin}`;
+const MEETING_ID = "6j1x-8g2h-9ioc";
 
 let localUser = false;
 let participantUser = false;
@@ -337,7 +338,7 @@ async function joinMeeting(newMeeting) {
     //     return meetingId;
     //   }
     // );
-    meetingId = "6j1x-8g2h-9ioc";
+    meetingId = MEETING_ID;
   }
   // meetingId = "test"
   // console.log("MEETING_ID::", meetingId);

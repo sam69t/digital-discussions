@@ -18,27 +18,46 @@ class Player {
     });
 
     //! load csv
-    Papa.parse(csvSrc, {
-      download: true,
-      delimiter: "	",
-      header: true,
-      complete: (results) => {
-        this.messages = results.data;
-        this.messages.forEach((element) => {
-          if (!element.message) return;
-          element.message = JSON.parse(element.message);
-        });
 
-        const startRecordingMessage = this.messages.find((element) => {
-          return element?.message?.type === "start-interview";
-        });
+    const csvString = localStorage.getItem(csvSrc);
+    const getOriginal = false;
+    if (getOriginal || !csvString) {
+      console.log("loaded csv file", csvSrc);
+      Papa.parse(csvSrc, {
+        download: true,
+        delimiter: "	",
+        header: true,
+        complete: (results) => {
+          this.saveInLocal(csvSrc, results.data);
+          this.start(results.data);
+        },
+      });
+    } else {
+      console.log("retrieved from local", csvSrc);
+      this.start(JSON.parse(csvString));
+    }
+  }
 
-        const firstTimestamp = new Date(startRecordingMessage.timestamp);
-        this.startStamp = firstTimestamp.getTime();
+  saveInLocal(name, messages) {
+    //! convert to csv if too big
+    localStorage.setItem(name, JSON.stringify(messages));
+  }
 
-        this.emit("loaded", this.messages);
-      },
+  start(messages) {
+    this.messages = messages;
+    this.messages.forEach((element) => {
+      if (!element.message) return;
+      element.message = JSON.parse(element.message);
     });
+
+    const startRecordingMessage = this.messages.find((element) => {
+      return element?.message?.type === "start-interview";
+    });
+
+    const firstTimestamp = new Date(startRecordingMessage.timestamp);
+    this.startStamp = firstTimestamp.getTime();
+
+    this.emit("loaded", this.messages);
   }
 
   //! event emitter

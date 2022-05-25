@@ -159,3 +159,11 @@ const startServer = (port = 3000, PUBLIC_KEY, PRIVATE_KEY, URL_ENDPOINT) => {
 module.exports = {
   startServer,
 };
+
+// window.addEventListener("load", async () => {
+//   console.log(MEETING_ID);
+//   const url = `https://api.videosdk.live/v2/recordings?roomId=${MEETING_ID}`;
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   console.log(data);
+// });

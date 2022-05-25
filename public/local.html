@@ -1,0 +1,47 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="insertBtn">Insert</button>
+    <button id="saveBtn">save</button>
+    <script>
+      const filename = "12344efgz6890.csv";
+
+      const importedCSV = JSON.parse(localStorage.getItem(filename) || "[]");
+
+      console.log(importedCSV);
+
+      if (importedCSV.length === 0) {
+        for (let i = 0; i < 10; i++) {
+          const lastEntry = importedCSV[importedCSV.length - 1];
+          const timestamp = lastEntry ? lastEntry.timestamp + 100 : 100;
+
+          importedCSV.push({ timestamp, msg: "tklyj" });
+          console.log(importedCSV);
+        }
+      }
+
+      document.querySelector("#insertBtn").onclick = () => {
+        insertMsg({ timestamp: Math.random() * 500, msg: "inserted stuff" });
+        console.log(importedCSV);
+      };
+
+      document.querySelector("#saveBtn").onclick = () => {
+        localStorage.setItem(filename, JSON.stringify(importedCSV));
+        console.log("saved");
+      };
+
+      function insertMsg(data) {
+        const index = importedCSV.findIndex((prevEntry, index) => {
+          return data.timestamp < prevEntry.timestamp;
+        });
+
+        importedCSV.splice(index, 0, data);
+      }
+    </script>
+  </body>
+</html>
