@@ -37,7 +37,7 @@
     <script src="./js/router.js" defer></script>
     <script src="js/video.js" defer></script>
     <script src="js/replayBehavior.js" defer></script>
-    <script src="js/overWritePlayer.js.js" defer></script>
+    <script src="js/overWritePlayer.js" defer></script>
 
 
 
@@ -63,6 +63,8 @@
     </header>
 
 
+    <!-- <span class="instructions style-presentation">Références</span> -->
+
     <!-- <div class="moving-banner-v">
         <span>Je pense que la manière de vous penser!Je pense que la manière de vous penser!de vous penser
         </span>
@@ -70,6 +72,12 @@
         </span>
     </div> -->
 
+    <div class="chapters-controls">
+        <button class="btn presentation" id=""> Présentation</button>
+        <button class="btn projet" id=""> Projets</button>
+        <button class="btn reference" id=""> Références</button>
+
+    </div>
     <div class="cam-mic-controls">
         <button class="mute btn primary text-white" id="mic-btn"> Couper micro</button>
 
@@ -91,9 +99,9 @@
 
     </div>
     <div class="previewContainer">
+        <div style="left: calc(50% - 10vh); bottom:10vh" class="videoWrapper-one" smoothen></div>
 
         <div class="videos-container">
-            <div class="videoWrapper-one" smoothen></div>
             <div class="videoWrapper-two" smoothen></div>
         </div>
         <div class="chat-wrapper">

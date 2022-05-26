@@ -43,13 +43,15 @@ inputImg.addEventListener("change", (event) => {
         let imageWrapper = document.createElement("div");
         let image = document.createElement("img");
         image.src = srcUrl;
-        image.classList.add("imageBlock");
+        imageWrapper.classList.add("imageBlock");
+
         imageWrapper.classList.add("imageBlockwrapper");
-        image.classList.add(`${imgSelect + imgNumber}`);
+        imageWrapper.classList.add(`${imgSelect + imgNumber}`);
+        imageWrapper.classList.add("assets");
 
         // image.classList.add("resize-drag");
-        // imageWrapper.appendChild(image);
-        previewContainer.appendChild(image);
+        imageWrapper.appendChild(image);
+        previewContainer.appendChild(imageWrapper);
       }
     }
   );
@@ -84,6 +86,7 @@ inputVid.addEventListener("change", (event) => {
         let videoWrapper = document.createElement("vid");
         videoWrapper.classList.add("video-testWrapper");
         videoWrapper.classList.add(`${vidSelect + vidNumber}`);
+        video.classList.add("assets");
 
         // videoWrapper.classList.add("resize-ref");
 

@@ -20,8 +20,11 @@ let toolControllerP = document.querySelector(".tool-control-P");
 let toolControllerH = document.querySelector(".tool-control-H");
 let publicTool = document.querySelector(".tool-public");
 
+let chapterCrontrols = document.querySelector(".chapters-controls");
 let camMicControls = document.querySelector(".cam-mic-controls");
 let colorControls = document.querySelector(".color-controls");
+let overViewButton = document.querySelector(".player-actions");
+let sumAssets = document.querySelector(".sum-assets");
 
 // let previewContainer = document.querySelector(".previewContainer");
 let fond = document.querySelector(".chat-wrapper");
@@ -86,13 +89,17 @@ function addParticipantToList({ id, displayName }) {
 }
 
 function createLocalParticipant() {
-  if (mode === "toolH" || mode === "toolP") {
+  if (mode === "toolH") {
     localParticipant = createVideoElement(meeting.localParticipant.id);
     localParticipantAudio = createAudioElement(meeting.localParticipant.id);
     videoContainerOne.appendChild(localParticipant);
     meeting.localParticipant.quality = "high";
   }
-  if (mode === "public") {
+  if (mode === "toolP") {
+    localParticipant = createVideoElement(meeting.localParticipant.id);
+    localParticipantAudio = createAudioElement(meeting.localParticipant.id);
+    videoContainerTwo.appendChild(localParticipant);
+
     // localParticipant = createVideoElement(meeting.localParticipant.id);
     // localParticipantAudio = createAudioElement(meeting.localParticipant.id);
     // previewContainer.appendChild(localParticipant);
@@ -168,19 +175,29 @@ function startMeeting(token, meetingId, name) {
         // $(".videoWrapper-two").css("right", "0");
         // $(".videoWrapper-two").css("transform", "translateX(390%)");
         $(".videoWrapper-two").css("left", `${offSetParticipant}`);
+        $(".videoWrapper-two").css("left", "calc(50% - 20vh");
+
+        videoContainerTwo.appendChild(videoElement);
+        videoContainerTwo.appendChild(audioElement);
       }
 
       if (mode === "toolP") {
         console.log(participant.id);
         participant.unpin("CAM");
+        videoContainerTwo.style.left = "calc(50% - 20vh)";
+
         // $(".videos-container").css("flex-direction", "row-reverse");
         // $(".videoWrapper-two").css("transform", "translateX(-390%)");
         // $(".videoWrapper-two").css("right", "0");
         $(".videoWrapper-two").css("transform", "translateX(0%)");
-        $(".videoWrapper-one").css(
-          "transform",
-          `translateX(${offSetParticipant}px)`
-        );
+        // $(".videoWrapper-one").css(
+        //   "transform",
+        //   `translateX(${offSetParticipant}px)`
+        // );
+        $(".videoWrapper-one").css("left", "calc(50% - 20vh");
+        videoContainerOne.appendChild(videoElement);
+        videoContainerOne.appendChild(audioElement);
+
         // $(".videoWrapper-one").css("transform",`translateX(1250px)`
         // );
 
@@ -202,8 +219,6 @@ function startMeeting(token, meetingId, name) {
 
       console.log("PARTICIPANT-JOINED");
 
-      videoContainerTwo.appendChild(videoElement);
-      videoContainerTwo.appendChild(audioElement);
       addParticipantToList(participant);
     } else if (participantNumber <= 3) {
       if (mode === "public") {
@@ -370,9 +385,10 @@ function createVideoElement(pId) {
     videoElement.classList.add("video-frame");
     // videoContainerOne.classList.add("resize-drag");
     // videoContainerTwo.classList.add("resize-drag");
-
-    if (allVideos.length === 2) {
-      videoContainerOne.classList.add("resize-drag");
+    if (mode === "toolH") {
+      if (allVideos.length === 2) {
+        videoContainerOne.classList.add("resize-drag");
+      }
     }
 
     // console.log(allVideos);
@@ -464,7 +480,6 @@ function addDomEvents() {
   meeting.on("chat-message", (event) => {
     // split
     onMessage(event);
-    domAction(event);
 
     // updateTool(event);
 

@@ -33,12 +33,24 @@ class Player {
         },
       });
     } else {
+      // papa.parse from string
       console.log("retrieved from local", csvSrc);
+      let jsonMessages = JSON.parse(csvString);
+      console.log(csvString);
       this.start(JSON.parse(csvString));
+      csvString;
     }
   }
 
   saveInLocal(name, messages) {
+    // papa.unparse
+    Papa.unparse(messages, {
+      delimiter: "	",
+      header: true,
+      complete: (results) => {
+        console.log(csvSrc, results.data);
+      },
+    });
     //! convert to csv if too big
     localStorage.setItem(name, JSON.stringify(messages));
   }

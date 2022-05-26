@@ -1,12 +1,15 @@
 const videosContainer = document.querySelector(".videos-container");
 let firstVid = videosContainer.firstElementChild;
 let SecondVid = videosContainer.lastElementChild;
-const position = { x: offSetParticipant, y: 0 };
+const position = { x: 0, y: 0 };
 
 if (mode === "toolH") {
   position.x = 0;
 }
 
+if (mode === "toolP") {
+  position.x = 0;
+}
 const VIDEO = {
   moveVideo(src, x, y) {
     interact(".resize-drag").draggable({
