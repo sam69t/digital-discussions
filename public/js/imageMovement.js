@@ -186,3 +186,5 @@ function dragMoveListener2(event) {
 // this function is used later in the resizing and gesture demos
 window.dragMoveListener = dragMoveListener;
 window.dragMoveListener2 = dragMoveListener2;
+
+console.log("beforeMore");
