@@ -1,16 +1,22 @@
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/vc-toggle-switch.css" />
     <script src="./libs/papaparse.min.js"></script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/EventEmitter/5.2.8/EventEmitter.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/imagekit-javascript/dist/imagekit.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/imagekit-javascript/dist/imagekit.min.js"
+    ></script>
     <!-- <script
       type="text/javascript"
       src="https://unpkg.com/socket.io-client@4.4.1/dist/socket.io.min.js"
@@ -19,10 +25,10 @@
     <script src="https://sdk.videosdk.live/js-sdk/0.0.20/videosdk.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-
     <script src="js/fetch.js"></script>
 
     <script src="js/Animator.js"></script>
+    <script src="js/replayBehavior.js" defer></script>
     <script src="js/utils.js"></script>
     <script src="js/timer.js" defer></script>
     <script src="js/colorPicker.js" defer></script>
@@ -36,32 +42,27 @@
     <script src="js/videoMovement.js" defer></script>
     <script src="./js/router.js" defer></script>
     <script src="js/video.js" defer></script>
-    <script src="js/replayBehavior.js" defer></script>
     <script src="js/overWritePlayer.js" defer></script>
+  </head>
 
-
-
-</head>
-
-<body>
+  <body>
     <header class="nav">
-        <nav>
-            <a href="http://localhost:3000/index.html">Home</a>
-        </nav>
-        <nav>
-            <a href="http://localhost:3000/room.html?mode=player">Replay</a>
-        </nav>
-        <nav>
-            <a href="http://localhost:3000/room.html?mode=toolH">Tool-Host</a>
-        </nav>
-        <nav>
-            <a href="http://localhost:3000/room.html?mode=toolP">Tool-Invited</a>
-        </nav>
-        <nav>
-            <a href="http://localhost:3000/room.html?mode=public">Public</a>
-        </nav>
+      <nav>
+        <a href="http://localhost:3000/index.html">Home</a>
+      </nav>
+      <nav>
+        <a href="http://localhost:3000/room.html?mode=player">Replay</a>
+      </nav>
+      <nav>
+        <a href="http://localhost:3000/room.html?mode=toolH">Tool-Host</a>
+      </nav>
+      <nav>
+        <a href="http://localhost:3000/room.html?mode=toolP">Tool-Invited</a>
+      </nav>
+      <nav>
+        <a href="http://localhost:3000/room.html?mode=public">Public</a>
+      </nav>
     </header>
-
 
     <!-- <span class="instructions style-presentation">Références</span> -->
 
@@ -73,87 +74,105 @@
     </div> -->
 
     <div class="chapters-controls">
-        <button class="btn presentation" id=""> Présentation</button>
-        <button class="btn projet" id=""> Projets</button>
-        <button class="btn reference" id=""> Références</button>
-
+      <button class="btn presentation" id="">Présentation</button>
+      <button class="btn projet" id="">Projets</button>
+      <button class="btn reference" id="">Références</button>
     </div>
     <div class="cam-mic-controls">
-        <button class="mute btn primary text-white" id="mic-btn"> Couper micro</button>
+      <button class="mute btn primary text-white" id="mic-btn">
+        Couper micro
+      </button>
 
-        <button class="cam-btn cam btn primary text-white">Flouter sa caméra</button>
+      <button class="cam-btn cam btn primary text-white">
+        Flouter sa caméra
+      </button>
     </div>
     <div class="color-controls">
-        <div>
-            <input type="color" id="colorPicker" name="head" value="#ffffff" />
-            <label for="head">Couleur du fond</label>
-        </div>
+      <div>
+        <input type="color" id="colorPicker" name="head" value="#ffffff" />
+        <label for="head">Couleur du fond</label>
+      </div>
     </div>
     <!-- <div id="orig_image">
         <p><img style="position:absolute; z-index:9999999999"></img></p>
     </div> -->
     <header class="player-actions">
-        <div class="zoom-out" onclick="zoomOut()">Overview </div>
+      <div class="grid" onclick="">Grid</div>
+      <div class="live" onclick="">Live</div>
+      <!-- <div class="toggle-container">
+  
+      </div> -->
     </header>
-    <div class="sum-assets">
+    <div class="sum-assets"></div>
+    <div
+      style="left: calc(50% - 10vh); bottom: 10vh"
+      class="videoWrapper-one"
+      smoothen
+    ></div>
 
+    <div class="videos-container">
+      <div class="videoWrapper-two" smoothen></div>
+    </div>
+    <div class="previewContainerGrid">
+      <div class="col-left">
+        <div class="container-left"></div>
+      </div>
+      <div class="col-right">
+        <div class="container-right"></div>
+      </div>
     </div>
     <div class="previewContainer">
-        <div style="left: calc(50% - 10vh); bottom:10vh" class="videoWrapper-one" smoothen></div>
-
-        <div class="videos-container">
-            <div class="videoWrapper-two" smoothen></div>
+      <div class="chat-wrapper">
+        <div id="chats"></div>
+      </div>
+      <div class="playGround">
+        <div class="startButtonWrapper">
+          <button class="startButton btn">Commencer</button>
+          <button class="startOtherButton btn">En attendant ta rep</button>
         </div>
-        <div class="chat-wrapper">
-            <div id="chats"></div>
-        </div>
-        <div class="playGround">
-            <div class="startButtonWrapper">
-                <button class="startButton btn">Commencer</button>
-                <button class="startOtherButton btn">En attendant ta rep</button>
-            </div>
-        </div>
+      </div>
     </div>
 
     <div class="overlayContainer">
-
-        <div class="playerMode hidden">
-            <div class="preview-start">
-                Play
-            </div>
-            <div class="slider-container">
-
-                <div class="custom-seekbar">
-                    <span></span>
-                </div>
-                <div class="video-timer">
-                    <span class="minutes">0</span> <span>:</span><span class="seconds">00</span>
-                </div>
-                <div class="pause">
-                    <span class="button-pause">Pause</span>
-                </div>
-            </div>
+      <div class="playerMode hidden">
+        <div class="preview-start">Play</div>
+        <div class="slider-container">
+          <div class="custom-seekbar">
+            <span></span>
+          </div>
+          <div class="video-timer">
+            <span class="minutes">0</span> <span>:</span
+            ><span class="seconds">00</span>
+          </div>
+          <div class="pause">
+            <span class="button-pause">Pause</span>
+          </div>
         </div>
-        <div class="toolMode">
-            <main class="wrapper">
-                <div id="joinPage" class="main-bg" style="display: flex">
-                    <div class="wrapper-join">
-                        <div class="join-left" style="
-                              /* border: 1px solid black; */
-                              width: 400px;
-                              height: 300px;
-                              margin-right: 40px;
-                              position: relative;
-                            ">
-                            <h1 class="join-title" style="text-align: center; ">
-                                Rejoindre une room
-                            </h1>
-                            <div class="joinvid-wrap">
-                                <video class="drag resize-drag" id="joinCam"></video>
-                            </div>
-                            <div>
-                                <div class="first-input" style="text-align: center">
-                                    <input style="
+      </div>
+      <div class="toolMode">
+        <main class="wrapper">
+          <div id="joinPage" class="main-bg" style="display: flex">
+            <div class="wrapper-join">
+              <div
+                class="join-left"
+                style="
+                  /* border: 1px solid black; */
+                  width: 400px;
+                  height: 300px;
+                  margin-right: 40px;
+                  position: relative;
+                "
+              >
+                <h1 class="join-title" style="text-align: center">
+                  Rejoindre une room
+                </h1>
+                <div class="joinvid-wrap">
+                  <video class="drag resize-drag" id="joinCam"></video>
+                </div>
+                <div>
+                  <div class="first-input" style="text-align: center">
+                    <input
+                      style="
                         text-align: center;
                         display: block;
                         width: 100%;
@@ -162,78 +181,133 @@
                         margin-top: 10vh;
 
                         margin-bottom: 4vh;
-                      " type="text" name="name" id="joinMeetingName" placeholder="Name" required />
-                                </div>
-                                <div class="" style="text-align: center">
-                                    <input class="id-meet" style="
+                      "
+                      type="text"
+                      name="name"
+                      id="joinMeetingName"
+                      placeholder="Name"
+                      required
+                    />
+                  </div>
+                  <div class="" style="text-align: center">
+                    <input
+                      class="id-meet"
+                      style="
                         text-align: center;
                         display: block;
                         width: 100%;
                         padding: 5px;
                         border: 1px solid black;
-                      " type="text" name="name" placeholder="Room ID" id="joinMeetingId" />
-                                </div>
-                                <button style="margin-top: 2rem; display: block; width: 100%"
-                                    class="btn secondary text-white" id="meetingCreateButton"
-                                    onclick="joinMeeting(true)">
-                                    Crée une room
-                                </button>
-                                <button style="margin-top: 2rem; display: block; width: 100%"
-                                    class="btn secondary text-white" id="meetingJoinButton" onclick="joinMeeting()">
-                                    Rejoindre la room
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                      "
+                      type="text"
+                      name="name"
+                      placeholder="Room ID"
+                      id="joinMeetingId"
+                    />
+                  </div>
+                  <button
+                    style="margin-top: 2rem; display: block; width: 100%"
+                    class="btn secondary text-white"
+                    id="meetingCreateButton"
+                    onclick="joinMeeting(true)"
+                  >
+                    Crée une room
+                  </button>
+                  <button
+                    style="margin-top: 2rem; display: block; width: 100%"
+                    class="btn secondary text-white"
+                    id="meetingJoinButton"
+                    onclick="joinMeeting()"
+                  >
+                    Rejoindre la room
+                  </button>
                 </div>
-            </main>
-
-            <div class="tools">
-                <div class="tool-control-H">
-                    <footer style="position: absolute; bottom: 20px">
-                        <button class="btn primary text-white" id="stopRecording-btn">
-                            Stop Recording
-                        </button>
-                        <div class="timer">
-                            <label id="minutes">00</label>:<label id="seconds">00</label>
-                        </div>
-                        <button class="btn primary text-white" id="startRecording-btn">
-                            Start Recording
-                        </button>
-                    </footer>
-                </div>
-                <div class="tool-control-P">
-                    <div class="sur-footer">
-                        <button class="btn" id="sendMessage-btn">Envoyer message</button>
-                        <button class="btn" id="sendMessage-btn">Envoyer lien</button>
-                    </div>
-                    <footer style="position: absolute; bottom: 20px">
-                        <label for="vidfiles" class="btn">Select Video</label>
-                        <input id="vidfiles" style="display: none" type="file" accept="video/*" />
-                        <input type="text" required id="inputMessage" onfocusin="showButton()"
-                            onfocusout="hideButton()" />
-                        <label for="imgfiles" class="btn">Select Image</label>
-                        <input id="imgfiles" style="display: none" type="file" accept="image/*" />
-                    </footer>
-                </div>
-                <div class="tool-public">
-                    <div id="public-sur-footer" class="sur-footer">
-                        <button class="btn" id="publicSendMessage-btn">Envoyer message</button>
-                        <button class="btn" id="sendMessage-btn">Envoyer lien</button>
-                    </div>
-                    <footer style="position: absolute; bottom: 20px">
-                        <label for="vidfiles" class="btn">Select Video</label>
-                        <input id="vidfiles" style="display: none" type="file" accept="video/*" />
-                        <input type="text" required id="inputPublic" onfocusin="showButton()"
-                            onfocusout="hideButton()" />
-                        <label for="imgfiles" class="btn">Select Image</label>
-                        <input id="imgfiles" style="display: none" type="file" accept="image/*" />
-                    </footer>
-                </div>
-                <div style=" position: absolute; left: 20%; bottom: 65px">
-                </div>
+              </div>
             </div>
-        </div>
-</body>
+          </div>
+        </main>
 
+        <div class="tools">
+          <div class="tool-control-H">
+            <footer style="position: absolute; bottom: 20px">
+              <button class="btn primary text-white" id="stopRecording-btn">
+                Stop Recording
+              </button>
+              <div class="timer">
+                <label id="minutes">00</label>:<label id="seconds">00</label>
+              </div>
+              <button class="btn primary text-white" id="startRecording-btn">
+                Start Recording
+              </button>
+            </footer>
+          </div>
+          <div class="tool-control-P">
+            <div class="sur-footer">
+              <button class="btn" id="sendMessage-btn">Envoyer message</button>
+              <button class="btn" id="sendMessage-btn">Envoyer lien</button>
+            </div>
+            <footer style="position: absolute; bottom: 20px">
+              <label for="vidfiles" class="btn">Select Video</label>
+              <input
+                id="vidfiles"
+                style="display: none"
+                type="file"
+                accept="video/*"
+              />
+              <input
+                type="text"
+                required
+                id="inputMessage"
+                onfocusin="showButton()"
+                onfocusout="hideButton()"
+              />
+              <label for="imgfiles" class="btn">Select Image</label>
+              <input
+                id="imgfiles"
+                style="display: none"
+                type="file"
+                accept="image/*"
+              />
+            </footer>
+          </div>
+          <div class="tool-public">
+            <div id="public-sur-footer" class="sur-footer">
+              <button class="btn" id="publicSendMessage-btn">
+                Envoyer message
+              </button>
+              <button class="btn" id="sendMessage-btn">Envoyer lien</button>
+            </div>
+            <footer style="position: absolute; bottom: 20px">
+              <label for="vidfiles" class="btn">Select Video</label>
+              <input
+                id="vidfiles"
+                style="display: none"
+                type="file"
+                accept="video/*"
+              />
+              <input
+                type="text"
+                required
+                id="inputPublic"
+                onfocusin="showButton()"
+                onfocusout="hideButton()"
+              />
+              <label for="imgfiles" class="btn">Select Image</label>
+              <input
+                id="imgfiles"
+                style="display: none"
+                type="file"
+                accept="image/*"
+              />
+            </footer>
+          </div>
+          <div style="position: absolute; left: 20%; bottom: 65px"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="player-actions-bottom">
+      <div class="zoom-out" onclick="zoomOut()">Overview</div>
+    </footer>
+  </body>
 </html>

@@ -8,7 +8,7 @@ class Player {
     this.messages = [];
 
     this.leftVideo = this.createVideo({
-      parent: parent.querySelector(".videoWrapper-one"),
+      parent: parent.querySelector(".videoWrapper-two"),
       src: leftVideoSrc,
     });
 
@@ -63,7 +63,7 @@ class Player {
     });
 
     const startRecordingMessage = this.messages.find((element) => {
-      return element?.message?.type === "start-interview";
+      return element?.message?.type === "launch-presentation";
     });
 
     const firstTimestamp = new Date(startRecordingMessage.timestamp);
@@ -266,5 +266,18 @@ class Player {
     };
 
     // animate();
+    $(".grid").on("click", function (e) {
+      $(".previewContainer").css("opacity", "0");
+      $(".previewContainerGrid").css("opacity", "1");
+      videoContainer.classList.toggle("movinggg");
+
+      console.log("grid");
+    });
+    $(".live").on("click", function (e) {
+      videoContainer.classList.toggle("movinggg");
+      $(".previewContainer").css("opacity", "1");
+      $(".previewContainerGrid").css("opacity", "0");
+      console.log("grid");
+    });
   }
 }
