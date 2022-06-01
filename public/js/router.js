@@ -767,18 +767,21 @@ function hideButton() {
 
 animator.start();
 
-function zoomIn() {
-  previewContainer.style.transform = "scale(2)";
-}
 function zoomOut() {
   previewContainer.classList.toggle("scale");
   previewContainerGrid.classList.toggle("scale");
   videoContainer.classList.toggle("scale");
+  gridLiveContainer.classList.toggle("scale");
+  gridLiveContainer.classList.toggle("top-live-button");
+  publicButton.classList.toggle("enabled-flex");
+  publicAssetsWrapper.classList.toggle("enabled-flex");
+
+  setTimeout(() => {
+    publicButton.classList.toggle("enabled-opa");
+    publicAssetsWrapper.classList.toggle("enabled-opa");
+  }, 100);
 
   console.log("Grid");
-}
-function zoomBack() {
-  previewContainer.style.transform = "scale(1)";
 }
 
 // console.log(elem === document.activeElement);
@@ -789,14 +792,14 @@ function zoomBack() {
 //   console.log(`Element is not focused.`);
 // }
 
-onInactive(5500, function () {
+onInactive(2000, function () {
   console.log("incative");
 
-  // SumAssets.style.opacity = 0;
-  // playerContainer.style.opacity = 0;
-  // gridLiveContainer.style.opacity = 0;
-  // overViewButtonBottom.style.opacity = 0;
-  // nav.style.opacity = 0;
+  SumAssets.style.opacity = 0;
+  playerContainer.style.opacity = 0;
+  gridLiveContainer.style.opacity = 0;
+  overViewButtonBottom.style.opacity = 0;
+  nav.style.opacity = 0;
 });
 
 function onInactive(ms, cb) {
@@ -823,10 +826,10 @@ function onInactive(ms, cb) {
       };
 }
 
-$(".toggle").on("click", function (e) {
+$(".toggle-layout").on("click", function (e) {
   // $(this).toggleClass("switch");
   if (switchMode === true) {
-    $(this).css("left", "55%");
+    $(this).css("left", "48%");
     $(".gridMode").css("opacity", "1");
     $(".liveMode").css("opacity", "0");
     $(this).toggleClass("shadowLeft");
@@ -845,6 +848,28 @@ $(".toggle").on("click", function (e) {
     videoContainer.classList.toggle("movinggg");
     $(".previewContainer").css("opacity", "1");
     $(".previewContainerGrid").css("opacity", "0");
+    switchMode = true;
+  }
+});
+$(".toggle-view").on("click", function (e) {
+  // $(this).toggleClass("switch");
+  if (switchMode === true) {
+    $(this).css("left", "48%");
+    $(".microView").css("opacity", "0");
+    $(".macroView").css("opacity", "1");
+    $(this).toggleClass("shadowLeft");
+
+    videoContainer.classList.toggle("movinggg");
+
+    switchMode = false;
+  } else if (switchMode === false) {
+    $(this).css("left", "0%");
+    $(".microView").css("opacity", "1");
+    $(".macroView").css("opacity", "0");
+    $(this).toggleClass("shadowLeft");
+
+    videoContainer.classList.toggle("movinggg");
+
     switchMode = true;
   }
 });

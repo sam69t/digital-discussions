@@ -38,6 +38,7 @@
     <script src="js/sdkInit.js" defer></script>
     <script src="js/sdkSendMsg.js" defer></script>
     <script src="js/dragDrop.js" defer></script>
+    <script src="js/inputPublicImg.js" defer></script>
     <script src="js/imageMovement.js" defer></script>
     <script src="js/videoMovement.js" defer></script>
     <script src="./js/router.js" defer></script>
@@ -73,6 +74,21 @@
         </span>
     </div> -->
 
+    <div class="public-add">
+      <!-- <button class="btn">+</button> -->
+      <label for="publicImg" class="btn">+</label>
+      <input
+        id="publicImg"
+        style="display: none"
+        type="file"
+        accept="image/*"
+      />
+    </div>
+
+    <div class="public-assets">
+      <!-- <button class="btn">+</button> -->
+    </div>
+
     <div class="chapters-controls">
       <button class="btn presentation" id="">Présentation</button>
       <button class="btn projet" id="">Projets</button>
@@ -98,7 +114,7 @@
     </div> -->
     <header class="player-actions">
       <div class="switch-container">
-        <div class="toggle"></div>
+        <div class="toggle-layout"></div>
         <div class="toggle-info">
           <span class="gridMode">Grid</span>
           <span class="liveMode">Live</span>
@@ -312,7 +328,13 @@
     </div>
 
     <footer class="player-actions-bottom">
-      <div class="zoom-out" onclick="zoomOut()">Overview</div>
+      <div class="switch-container" onclick="zoomOut()">
+        <div class="toggle-view"></div>
+        <div class="toggle-info">
+          <span class="macroView">-</span>
+          <span class="microView">+</span>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

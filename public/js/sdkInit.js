@@ -26,6 +26,9 @@ let colorControls = document.querySelector(".color-controls");
 let gridLiveContainer = document.querySelector(".player-actions");
 let overViewButtonBottom = document.querySelector(".player-actions-bottom");
 
+let publicButton = document.querySelector(".public-add");
+let publicAssetsWrapper = document.querySelector(".public-assets");
+
 let sumAssets = document.querySelector(".sum-assets");
 
 // let previewContainer = document.querySelector(".previewContainer");
