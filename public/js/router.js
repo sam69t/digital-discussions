@@ -3,13 +3,14 @@
 const previewContainer = document.querySelector(".previewContainer");
 const previewContainerGrid = document.querySelector(".previewContainerGrid");
 const videoContainer = document.querySelector(".videos-container");
-
+const playerContainer = document.querySelector(".playerMode");
 let gridColRight = document.querySelector(".container-right");
 let gridColLeft = document.querySelector(".container-left");
 let body = document.querySelector("body");
 let SumAssets = document.querySelector(".sum-assets");
 let cross = document.querySelector(".cross");
 let widthTimeStamp = amount * 100;
+let switchMode = true;
 
 const params = new URLSearchParams(window.location.search);
 const mode = params.get("mode");
@@ -787,3 +788,63 @@ function zoomBack() {
 // } else {
 //   console.log(`Element is not focused.`);
 // }
+
+onInactive(5500, function () {
+  console.log("incative");
+
+  // SumAssets.style.opacity = 0;
+  // playerContainer.style.opacity = 0;
+  // gridLiveContainer.style.opacity = 0;
+  // overViewButtonBottom.style.opacity = 0;
+  // nav.style.opacity = 0;
+});
+
+function onInactive(ms, cb) {
+  var wait = setTimeout(cb, ms);
+
+  document.onmousemove =
+    document.mousedown =
+    document.mouseup =
+    document.onkeydown =
+    document.onkeyup =
+    document.focus =
+      function () {
+        console.log("incative");
+        overViewButtonBottom.style.opacity = 1;
+        gridLiveContainer.style.opacity = 1;
+        SumAssets.style.opacity = 1;
+        playerContainer.style.opacity = 1;
+        nav.style.opacity = 1;
+
+        // isPaused = false;
+
+        clearTimeout(wait);
+        wait = setTimeout(cb, ms);
+      };
+}
+
+$(".toggle").on("click", function (e) {
+  // $(this).toggleClass("switch");
+  if (switchMode === true) {
+    $(this).css("left", "55%");
+    $(".gridMode").css("opacity", "1");
+    $(".liveMode").css("opacity", "0");
+    $(this).toggleClass("shadowLeft");
+
+    $(".previewContainer").css("opacity", "0");
+    $(".previewContainerGrid").css("opacity", "1");
+    videoContainer.classList.toggle("movinggg");
+
+    switchMode = false;
+  } else if (switchMode === false) {
+    $(this).css("left", "0%");
+    $(".gridMode").css("opacity", "0");
+    $(".liveMode").css("opacity", "1");
+    $(this).toggleClass("shadowLeft");
+
+    videoContainer.classList.toggle("movinggg");
+    $(".previewContainer").css("opacity", "1");
+    $(".previewContainerGrid").css("opacity", "0");
+    switchMode = true;
+  }
+});

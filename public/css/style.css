@@ -39,6 +39,11 @@
 
 :root {
   --allColors: rgb(black);
+
+  --inactive: 666ms ease;
+}
+.nav {
+  transition: var(--inactive);
 }
 
 .moving-banner-h {
@@ -934,7 +939,11 @@ input[type="color"] {
   background-color: black;
 }
 
+.playerMode {
+  transition: var(--inactive);
+}
 .player-actions {
+  transition: var(--inactive);
   font-family: Unica;
   font-size: 12px;
   margin-top: 5vh;
@@ -952,6 +961,7 @@ input[type="color"] {
   margin-right: 2vh;
 }
 .player-actions-bottom {
+  transition: var(--inactive);
   font-family: Unica;
   font-size: 12px;
   position: absolute !important;
@@ -960,10 +970,12 @@ input[type="color"] {
   position: absolute;
   bottom: 3.5vh;
   height: 3.5vh;
+  margin-bottom: 3vh;
   /* height: 30px; */
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .player-actions-bottom > div {
@@ -976,6 +988,7 @@ input[type="color"] {
 }
 
 .sum-assets {
+  transition: var(--inactive);
   font-family: Unica;
   font-size: 12px;
   height: 3.5vh;
@@ -993,8 +1006,21 @@ input[type="color"] {
   height: 2.5vh;
   position: absolute;
 }
+
+.zoom-out {
+  background-color: lightgray;
+
+  color: white;
+  padding-left: 1.5vh;
+  padding-right: 1.5vh;
+  height: 3vh;
+  padding-top: 0.8vh;
+  border-radius: 20px;
+
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1), 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
 .zoom-out:hover {
-  opacity: 0.3;
+  opacity: 0.7;
 }
 
 .presentation:hover {
@@ -1182,4 +1208,54 @@ input[type="color"] {
 .movinggg {
   top: 46% !important;
   transform: scale(0.7);
+}
+.switch-container {
+  background-color: lightgray;
+  width: 5%;
+  height: 4vh;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1), 1px 1px 3px rgba(0, 0, 0, 0.1);
+
+  position: relative;
+}
+
+.toggle {
+  position: absolute;
+  z-index: 999999;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 5px 0px 6px rgba(0, 0, 0, 0.15);
+  width: 23px;
+  height: 23px;
+  transition: 333ms ease;
+  left: 0%;
+  background-color: white;
+  border-radius: 30px;
+  margin-left: 4.5px;
+  margin-right: 3px;
+}
+
+.toggle-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  position: absolute;
+  color: white;
+}
+.gridMode {
+  transition: var(--inactive);
+  margin-left: 7px;
+  opacity: 0;
+}
+.switch {
+  left: 50%;
+}
+.liveMode {
+  transition: var(--inactive);
+  margin-right: 7px;
+  opacity: 1;
+}
+.shadowLeft {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), -5px 0px 6px rgba(0, 0, 0, 0.15) !important
+  ;
 }

@@ -23,7 +23,9 @@ let publicTool = document.querySelector(".tool-public");
 let chapterCrontrols = document.querySelector(".chapters-controls");
 let camMicControls = document.querySelector(".cam-mic-controls");
 let colorControls = document.querySelector(".color-controls");
-let overViewButton = document.querySelector(".player-actions");
+let gridLiveContainer = document.querySelector(".player-actions");
+let overViewButtonBottom = document.querySelector(".player-actions-bottom");
+
 let sumAssets = document.querySelector(".sum-assets");
 
 // let previewContainer = document.querySelector(".previewContainer");
