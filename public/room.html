@@ -73,15 +73,31 @@
         <span class="credit-banner">Sam
         </span>
     </div> -->
+    <!-- <div class="moving-banner-h">Ceci est un test</div>
+    <div class="moving-banner-v">
+      <img
+        src="https://ik.imagekit.io/diploma/PUBlIC/test_image_jDIyWdrEX.jpg"
+      />
+    </div> -->
 
     <div class="public-add">
       <!-- <button class="btn">+</button> -->
+
+      <button id="exportBtn" class="btn export">Export</button>
+
       <label for="publicImg" class="btn">+</label>
       <input
         id="publicImg"
         style="display: none"
         type="file"
         accept="image/*"
+      />
+      <label for="publicVid" class="btn">=+</label>
+      <input
+        id="publicVid"
+        style="display: none"
+        type="file"
+        accept="video/*"
       />
     </div>
 
@@ -331,8 +347,8 @@
       <div class="switch-container" onclick="zoomOut()">
         <div class="toggle-view"></div>
         <div class="toggle-info">
-          <span class="macroView">-</span>
-          <span class="microView">+</span>
+          <span class="macroView">Public</span>
+          <span class="microView">Lectures </span>
         </div>
       </div>
     </footer>

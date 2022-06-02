@@ -18,6 +18,7 @@ const animator = new Animator();
 
 let imgCounter = 0;
 let vidCounter = 0;
+let player;
 
 // const meeting = params.get("meetingID");
 function playerSetup() {
@@ -26,10 +27,9 @@ function playerSetup() {
   const toolMode = document.querySelector(".toolMode");
   toolMode.classList.add("hidden");
 
-  const player = new Player({
+  player = new Player({
     parent: body,
-    csvSrc:
-      "./assets/chats/6j1x-8g2h-9ioc-6290cf054c186c0474bf939e-625280f2a457cf8bc28d7648.csv",
+    csvSrc: "./assets/chats/modif_2.csv",
     leftVideoSrc: "./assets/videos/6290cf12f5cc40fcdf9d02c9.mp4",
     rightVideoSrc: "",
   });
@@ -51,6 +51,89 @@ function playerSetup() {
     // console.log(data.message.type.message);
     $(".videoWrapper-two").css("left", "calc(50% - 20vh");
     $(".videoWrapper-two").css("height", "20vh");
+
+    if (data.message.type == "launch-presentation") {
+      chatContainer.style.backgroundColor = data.message.dataColor;
+      document.body.style.backgroundColor = data.message.dataColor;
+    }
+
+    if (data.message.type == "launch-projet") {
+      chatContainer.style.backgroundColor = data.message.dataColor;
+      document.body.style.backgroundColor = data.message.dataColor;
+      let instruction = document.createElement("span");
+      instruction.textContent = "Projet";
+      instruction.classList.add("instructions");
+      instruction.classList.add("style-projet");
+      videoContainerTwo.classList.add("resize-drag");
+      previewContainer.appendChild(instruction);
+      setTimeout(() => {
+        instruction.style.opacity = 1;
+        toolControllerP.style.setProperty("display", "block", "important");
+      }, 300);
+
+      console.log("spawn instruction");
+      setTimeout(() => {
+        instruction.style.opacity = 0;
+      }, 20000);
+      setTimeout(() => {
+        previewContainer.removeChild(instruction);
+      }, 2500);
+    }
+
+    if (data.message.type == "upload-public-img") {
+      let publicImg = document.createElement("div");
+      let image = document.createElement("img");
+      image.src = data.message.srcUrl;
+      publicImg.classList.add("public-img");
+      publicImg.classList.add("imageBlockwrapper");
+      publicImg.classList.add("assets");
+      publicImg.appendChild(image);
+      publicAssetsWrapper.appendChild(publicImg);
+
+      let imgSlide = document.createElement("div");
+      let imgofSlide = document.createElement("img");
+      imgSlide.classList.add("moving-banner-v");
+      imgSlide.classList.add("moving-img");
+
+      imgofSlide.src = data.message.srcUrl;
+      imgSlide.appendChild(imgofSlide);
+      document.body.appendChild(imgSlide);
+      imgSlide.addEventListener(
+        "animationend",
+        function () {
+          document.body.removeChild(imgSlide);
+        },
+        false
+      );
+    }
+    if (data.message.type == "upload-public-vid") {
+      let publicVid = document.createElement("div");
+      let vid = document.createElement("video");
+      vid.src = data.message.srcUrl;
+      publicVid.classList.add("public-vid");
+      publicVid.classList.add("vid");
+      publicVid.appendChild(vid);
+      publicAssetsWrapper.appendChild(publicVid);
+
+      let vidSlide = document.createElement("div");
+      let vidofSlide = document.createElement("video");
+      vidSlide.classList.add("moving-banner-h");
+      vidSlide.classList.add("moving-vid");
+
+      vidofSlide.src = data.message.srcUrl;
+      vidSlide.appendChild(vidofSlide);
+      document.body.appendChild(vidSlide);
+      vidofSlide.autoplay = true;
+      vidofSlide.muted = true;
+      vidofSlide.loop = true;
+      vidSlide.addEventListener(
+        "animationend",
+        function () {
+          document.body.removeChild(vidSlide);
+        },
+        false
+      );
+    }
 
     if (data.message.type == "moving-webcam-participant") {
       // console.log(data.message.movingWebcam);
@@ -443,6 +526,33 @@ function playerSetup() {
 
   //! REVERT
   player.on("revert-chat-message", (data) => {
+    if (data.message.type == "launch-presentation") {
+      fond.style.backgroundColor = data.message.dataColor;
+    }
+
+    if (data.message.type == "launch-projet") {
+      fond.style.backgroundColor = data.message.dataColor;
+    }
+    if (data.message.type == "upload-public-vid") {
+      let vidSlide = document.createElement("div");
+      let vidofSlide = document.createElement("video");
+      vidSlide.classList.add("moving-banner-h-invert");
+      vidSlide.classList.add("moving-vid");
+
+      vidofSlide.src = data.message.srcUrl;
+      vidSlide.appendChild(vidofSlide);
+      document.body.appendChild(vidSlide);
+      vidofSlide.autoplay = true;
+      vidofSlide.muted = true;
+      vidofSlide.loop = true;
+      vidSlide.addEventListener(
+        "animationend",
+        function () {
+          document.body.removeChild(vidSlide);
+        },
+        false
+      );
+    }
     // console.log(data.message.type + "revert");
     if (data.message.type == "moving-webcam-participant") {
       // console.log(data.message.movingWebcam);
@@ -463,10 +573,10 @@ function playerSetup() {
       CHAT.addTextToLastMsg(data.message.message);
     }
     if (data.message.type == "img-url") {
-      previewContainer.removeChild(previewContainer.lastChild);
-      SumAssets.removeChild(SumAssets.lastChild);
-      gridColRight.removeChild(gridColRight.lastChild);
-      gridColLeft.removeChild(gridColLeft.lastChild);
+      // previewContainer.removeChild(previewContainer.lastChild);
+      // SumAssets.removeChild(SumAssets.lastChild);
+      // gridColRight.removeChild(gridColRight.lastChild);
+      // gridColLeft.removeChild(gridColLeft.lastChild);
       // if (gridColRight.childNodes.length === 0) {
       // } else {
       //   gridColRight.removeChild(gridColRight.lastChild);
@@ -721,6 +831,8 @@ function playerSetup() {
 // console.log(meeting);
 
 if (mode === "player") {
+  // let other = document.querySelector(".playerMode");
+  // other.style.display = "none";
   playerSetup();
 }
 if (mode === "player-2") {
@@ -792,7 +904,7 @@ function zoomOut() {
 //   console.log(`Element is not focused.`);
 // }
 
-onInactive(2000, function () {
+onInactive(3000, function () {
   console.log("incative");
 
   SumAssets.style.opacity = 0;

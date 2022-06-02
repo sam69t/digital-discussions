@@ -38,6 +38,7 @@ function onHover() {
     }
   );
 }
+
 function assetsCliked() {
   $(".imageStyle").on("click", function (e) {
     zCounter++;

@@ -20,18 +20,25 @@ function onMessage(chatEvent) {
     fond.style.setProperty("background-color", "transparent", "important");
     playGround.style.setProperty("display", "none", "important");
     $(".videoWrapper-two").css("position", "absolute");
+    // gridLiveContainer.style.setProperty("display", "none", "important");
+    // overViewButtonBottom.style.setProperty("display", "none", "important");
+    console.log("start");
 
     if (mode === "toolP") {
       console.log("start Participant Rec");
       camMicControls.style.setProperty("display", "flex", "important");
-      overViewButton.style.setProperty("display", "none", "important");
+      overViewButtonBottom.style.setProperty("display", "none", "important");
       sumAssets.style.setProperty("display", "none", "important");
+      gridLiveContainer.style.setProperty("display", "none", "important");
     }
     if (mode === "toolH") {
       toolControllerH.style.setProperty("display", "block", "important");
-      overViewButton.style.setProperty("display", "none", "important");
+      overViewButtonBottom.style.setProperty("display", "none", "important");
       sumAssets.style.setProperty("display", "none", "important");
       chapterCrontrols.style.setProperty("display", "flex", "important");
+      gridLiveContainer.style.setProperty("display", "none", "important");
+
+      console.log("start");
     }
   }
 

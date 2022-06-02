@@ -1,4 +1,6 @@
 let amount;
+const getOriginal = true;
+
 class Player {
   constructor({ parent, csvSrc, leftVideoSrc, rightVideoSrc }) {
     this.emitter = new EventEmitter();
@@ -6,6 +8,7 @@ class Player {
     this.oldTime = 0;
     this.messageIndex = 0;
     this.messages = [];
+    this.csvSrc = csvSrc;
 
     this.leftVideo = this.createVideo({
       parent: parent.querySelector(".videoWrapper-two"),
@@ -17,10 +20,17 @@ class Player {
       src: rightVideoSrc,
     });
 
+    this.exportBtn = document.querySelector("#exportBtn");
+
+    this.exportBtn.onclick = () => {
+      const csvString = this.saveInLocal(csvSrc, this.messages);
+      this.downloadCSV(csvSrc, csvString);
+    };
+
     //! load csv
 
     const csvString = localStorage.getItem(csvSrc);
-    const getOriginal = false;
+
     if (getOriginal || !csvString) {
       console.log("loaded csv file", csvSrc);
       Papa.parse(csvSrc, {
@@ -28,31 +38,81 @@ class Player {
         delimiter: "	",
         header: true,
         complete: (results) => {
-          this.saveInLocal(csvSrc, results.data);
           this.start(results.data);
+          this.saveInLocal(csvSrc, this.messages);
         },
       });
     } else {
       // papa.parse from string
-      console.log("retrieved from local", csvSrc);
-      let jsonMessages = JSON.parse(csvString);
-      console.log(csvString);
-      this.start(JSON.parse(csvString));
-      csvString;
+      const results = Papa.parse(csvString, {
+        delimiter: "	",
+        header: true,
+      });
+      this.start(results.data);
     }
   }
 
+  downloadCSV(name, csv) {
+    var csvData = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    var csvURL = null;
+    if (navigator.msSaveBlob) {
+      csvURL = navigator.msSaveBlob(csvData, `${name}.csv`);
+    } else {
+      csvURL = window.URL.createObjectURL(csvData);
+    }
+
+    var tempLink = document.createElement("a");
+    tempLink.href = csvURL;
+    tempLink.setAttribute("download", "download.csv");
+    tempLink.click();
+  }
+
+  insertMessage({ peerName }, data) {
+    const time = this.toRecordTime(this.leftVideo.currentTime);
+    const pendingMessage =
+      this.messages[Math.min(this.messageIndex, this.messages.length - 1)];
+
+    if (!pendingMessage) {
+      console.error("cant insert message: no messages found");
+      return;
+    }
+
+    const entry = deepClone(pendingMessage);
+    entry.timestamp = new Date(time).toISOString();
+    entry.peerName = peerName;
+    entry.message = data;
+
+    // const index = this.messages.findIndex((prevEntry, index) => {
+    //   return time < new Date(prevEntry.timestamp).getTime();
+    // });
+    this.messages.splice(this.messageIndex, 0, entry);
+
+    this.saveInLocal(this.csvSrc, this.messages);
+  }
+
   saveInLocal(name, messages) {
+    console.log("SAVED");
+
+    //! stringify entries
+    messages = messages.map((element) => {
+      const cloned = deepClone(element);
+
+      if (element.message) cloned.message = JSON.stringify(element.message);
+
+      return cloned;
+    });
+
     // papa.unparse
-    Papa.unparse(messages, {
+    const csv = Papa.unparse(messages, {
       delimiter: "	",
       header: true,
-      complete: (results) => {
-        console.log(csvSrc, results.data);
-      },
+      quotes: true,
     });
+
     //! convert to csv if too big
-    localStorage.setItem(name, JSON.stringify(messages));
+    localStorage.setItem(name, csv);
+
+    return csv;
   }
 
   start(messages) {
@@ -67,6 +127,7 @@ class Player {
     });
 
     const firstTimestamp = new Date(startRecordingMessage.timestamp);
+
     this.startStamp = firstTimestamp.getTime();
 
     this.emit("loaded", this.messages);
@@ -101,12 +162,16 @@ class Player {
   }
 
   updateMessages(currentTime) {
-    const time = currentTime * 1000 + this.startStamp;
+    const time = this.toRecordTime(currentTime);
     const deltaTime = time - this.oldTime;
 
     this.triggerMessages(time, deltaTime);
 
     this.oldTime = time;
+  }
+
+  toRecordTime(currentTime) {
+    return currentTime * 1000 + this.startStamp;
   }
 
   triggerMessages(time, deltaTime) {
@@ -255,6 +320,7 @@ class Player {
       // vid2.play();
       videoPlaying = true;
       pauseElem.textContent = "Pause";
+      hoverPublicImage();
     }
 
     sliderElem.onmousedown = (event) => {
@@ -264,6 +330,24 @@ class Player {
       drag = true;
       pauseElem.textContent = "Pause";
     };
+
+    function hoverPublicImage() {
+      $(".moving-banner-h").mouseenter(function () {
+        console.log("HOVER");
+        vid.muted = true;
+        $(this).find("video").prop("muted", false);
+      });
+      $(".moving-banner-h").mouseleave(function () {
+        console.log("HOVER");
+        vid.muted = false;
+        $(this).find("video").prop("muted", true);
+      });
+    }
+
+    // $(".moving-banner-v").on("hover", function (e) {
+    //   console.log("hover");
+    // });
+    // $(".moving-banner-v").on("mouseout", function (e) {});
 
     // animate();
     $(".grid").on("click", function (e) {
@@ -280,4 +364,9 @@ class Player {
       console.log("grid");
     });
   }
+}
+
+function deepClone(obj) {
+  // console.warn('deepClone() is deprecated, use structuredClone() instead')
+  return JSON.parse(JSON.stringify(obj));
 }
