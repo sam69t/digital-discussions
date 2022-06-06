@@ -1366,6 +1366,461 @@ function dragMoveListener15(event) {
   target.setAttribute("data-x", x);
   target.setAttribute("data-y", y);
 }
+
+interact(`${"." + imgSelect + 16}`).resizable({
+  // resize from all edges and corners
+  edges: { left: true, right: true, bottom: true, top: true },
+
+  listeners: {
+    move(event) {
+      var target = event.target;
+      var x = parseFloat(target.getAttribute("data-x")) || 0;
+      var y = parseFloat(target.getAttribute("data-y")) || 0;
+
+      // update the element's style
+      target.style.width = event.rect.width + "px";
+      target.style.height = event.rect.height + "px";
+
+      target.setAttribute("data-x", x);
+      target.setAttribute("data-y", y);
+
+      const resizeWebcam = {
+        w: event.rect.width,
+        h: event.rect.height,
+      };
+      if (mode === "toolP") {
+        meeting.sendChatMessage(
+          JSON.stringify({ type: "resize-img-participant-16", resizeWebcam })
+        );
+      }
+    },
+  },
+  modifiers: [
+    // keep the edges inside the parent
+    interact.modifiers.restrictEdges({
+      outer: "wrapper",
+    }),
+
+    // minimum size
+    interact.modifiers.restrictSize({
+      min: { width: 100, height: 50 },
+    }),
+  ],
+
+  inertia: true,
+});
+interact(`${"." + imgSelect + 16}`).draggable({
+  // enable inertial throwing
+  inertia: true,
+  // keep the element within the area of it's parent
+  modifiers: [
+    interact.modifiers.restrictRect({
+      restriction: "parent",
+      endOnly: true,
+    }),
+  ],
+  // enable autoScroll
+
+  listeners: {
+    // call this function on every dragmove event
+    move: dragMoveListener21,
+
+    // call this function on every dragend event
+  },
+});
+function dragMoveListener21(event) {
+  var target = event.target;
+  // keep the dragged position in the data-x/data-y attributes
+  var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+  var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+
+  const movingWebcam = {
+    x: x,
+    y: y,
+  };
+
+  console.log(movingWebcam);
+  if (mode === "toolP") {
+    meeting.sendChatMessage(
+      JSON.stringify({
+        type: "moving-img-participant-16",
+        movingWebcam,
+      })
+    );
+  }
+
+  // translate the element
+
+  target.style.transform = "translate(" + x + "px, " + y + "px)";
+
+  // update the posiion attributes
+  target.setAttribute("data-x", x);
+  target.setAttribute("data-y", y);
+}
+
+interact(`${"." + imgSelect + 17}`).resizable({
+  // resize from all edges and corners
+  edges: { left: true, right: true, bottom: true, top: true },
+
+  listeners: {
+    move(event) {
+      var target = event.target;
+      var x = parseFloat(target.getAttribute("data-x")) || 0;
+      var y = parseFloat(target.getAttribute("data-y")) || 0;
+
+      // update the element's style
+      target.style.width = event.rect.width + "px";
+      target.style.height = event.rect.height + "px";
+
+      target.setAttribute("data-x", x);
+      target.setAttribute("data-y", y);
+
+      const resizeWebcam = {
+        w: event.rect.width,
+        h: event.rect.height,
+      };
+      if (mode === "toolP") {
+        meeting.sendChatMessage(
+          JSON.stringify({ type: "resize-img-participant-17", resizeWebcam })
+        );
+      }
+    },
+  },
+  modifiers: [
+    // keep the edges inside the parent
+    interact.modifiers.restrictEdges({
+      outer: "wrapper",
+    }),
+
+    // minimum size
+    interact.modifiers.restrictSize({
+      min: { width: 100, height: 50 },
+    }),
+  ],
+
+  inertia: true,
+});
+interact(`${"." + imgSelect + 17}`).draggable({
+  // enable inertial throwing
+  inertia: true,
+  // keep the element within the area of it's parent
+  modifiers: [
+    interact.modifiers.restrictRect({
+      restriction: "parent",
+      endOnly: true,
+    }),
+  ],
+  // enable autoScroll
+
+  listeners: {
+    // call this function on every dragmove event
+    move: dragMoveListener22,
+
+    // call this function on every dragend event
+  },
+});
+function dragMoveListener22(event) {
+  var target = event.target;
+  // keep the dragged position in the data-x/data-y attributes
+  var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+  var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+
+  const movingWebcam = {
+    x: x,
+    y: y,
+  };
+
+  console.log(movingWebcam);
+  if (mode === "toolP") {
+    meeting.sendChatMessage(
+      JSON.stringify({
+        type: "moving-img-participant-17",
+        movingWebcam,
+      })
+    );
+  }
+
+  // translate the element
+
+  target.style.transform = "translate(" + x + "px, " + y + "px)";
+
+  // update the posiion attributes
+  target.setAttribute("data-x", x);
+  target.setAttribute("data-y", y);
+}
+
+interact(`${"." + imgSelect + 18}`).resizable({
+  // resize from all edges and corners
+  edges: { left: true, right: true, bottom: true, top: true },
+
+  listeners: {
+    move(event) {
+      var target = event.target;
+      var x = parseFloat(target.getAttribute("data-x")) || 0;
+      var y = parseFloat(target.getAttribute("data-y")) || 0;
+
+      // update the element's style
+      target.style.width = event.rect.width + "px";
+      target.style.height = event.rect.height + "px";
+
+      target.setAttribute("data-x", x);
+      target.setAttribute("data-y", y);
+
+      const resizeWebcam = {
+        w: event.rect.width,
+        h: event.rect.height,
+      };
+      if (mode === "toolP") {
+        meeting.sendChatMessage(
+          JSON.stringify({ type: "resize-img-participant-18", resizeWebcam })
+        );
+      }
+    },
+  },
+  modifiers: [
+    // keep the edges inside the parent
+    interact.modifiers.restrictEdges({
+      outer: "wrapper",
+    }),
+
+    // minimum size
+    interact.modifiers.restrictSize({
+      min: { width: 100, height: 50 },
+    }),
+  ],
+
+  inertia: true,
+});
+interact(`${"." + imgSelect + 18}`).draggable({
+  // enable inertial throwing
+  inertia: true,
+  // keep the element within the area of it's parent
+  modifiers: [
+    interact.modifiers.restrictRect({
+      restriction: "parent",
+      endOnly: true,
+    }),
+  ],
+  // enable autoScroll
+
+  listeners: {
+    // call this function on every dragmove event
+    move: dragMoveListener23,
+
+    // call this function on every dragend event
+  },
+});
+function dragMoveListener23(event) {
+  var target = event.target;
+  // keep the dragged position in the data-x/data-y attributes
+  var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+  var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+
+  const movingWebcam = {
+    x: x,
+    y: y,
+  };
+
+  console.log(movingWebcam);
+  if (mode === "toolP") {
+    meeting.sendChatMessage(
+      JSON.stringify({
+        type: "moving-img-participant-18",
+        movingWebcam,
+      })
+    );
+  }
+
+  // translate the element
+
+  target.style.transform = "translate(" + x + "px, " + y + "px)";
+
+  // update the posiion attributes
+  target.setAttribute("data-x", x);
+  target.setAttribute("data-y", y);
+}
+
+interact(`${"." + imgSelect + 19}`).resizable({
+  // resize from all edges and corners
+  edges: { left: true, right: true, bottom: true, top: true },
+
+  listeners: {
+    move(event) {
+      var target = event.target;
+      var x = parseFloat(target.getAttribute("data-x")) || 0;
+      var y = parseFloat(target.getAttribute("data-y")) || 0;
+
+      // update the element's style
+      target.style.width = event.rect.width + "px";
+      target.style.height = event.rect.height + "px";
+
+      target.setAttribute("data-x", x);
+      target.setAttribute("data-y", y);
+
+      const resizeWebcam = {
+        w: event.rect.width,
+        h: event.rect.height,
+      };
+      if (mode === "toolP") {
+        meeting.sendChatMessage(
+          JSON.stringify({ type: "resize-img-participant-19", resizeWebcam })
+        );
+      }
+    },
+  },
+  modifiers: [
+    // keep the edges inside the parent
+    interact.modifiers.restrictEdges({
+      outer: "wrapper",
+    }),
+
+    // minimum size
+    interact.modifiers.restrictSize({
+      min: { width: 100, height: 50 },
+    }),
+  ],
+
+  inertia: true,
+});
+interact(`${"." + imgSelect + 19}`).draggable({
+  // enable inertial throwing
+  inertia: true,
+  // keep the element within the area of it's parent
+  modifiers: [
+    interact.modifiers.restrictRect({
+      restriction: "parent",
+      endOnly: true,
+    }),
+  ],
+  // enable autoScroll
+
+  listeners: {
+    // call this function on every dragmove event
+    move: dragMoveListener24,
+
+    // call this function on every dragend event
+  },
+});
+function dragMoveListener24(event) {
+  var target = event.target;
+  // keep the dragged position in the data-x/data-y attributes
+  var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+  var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+
+  const movingWebcam = {
+    x: x,
+    y: y,
+  };
+
+  console.log(movingWebcam);
+  if (mode === "toolP") {
+    meeting.sendChatMessage(
+      JSON.stringify({
+        type: "moving-img-participant-19",
+        movingWebcam,
+      })
+    );
+  }
+
+  // translate the element
+
+  target.style.transform = "translate(" + x + "px, " + y + "px)";
+
+  // update the posiion attributes
+  target.setAttribute("data-x", x);
+  target.setAttribute("data-y", y);
+}
+
+interact(`${"." + imgSelect + 20}`).resizable({
+  // resize from all edges and corners
+  edges: { left: true, right: true, bottom: true, top: true },
+
+  listeners: {
+    move(event) {
+      var target = event.target;
+      var x = parseFloat(target.getAttribute("data-x")) || 0;
+      var y = parseFloat(target.getAttribute("data-y")) || 0;
+
+      // update the element's style
+      target.style.width = event.rect.width + "px";
+      target.style.height = event.rect.height + "px";
+
+      target.setAttribute("data-x", x);
+      target.setAttribute("data-y", y);
+
+      const resizeWebcam = {
+        w: event.rect.width,
+        h: event.rect.height,
+      };
+      if (mode === "toolP") {
+        meeting.sendChatMessage(
+          JSON.stringify({ type: "resize-img-participant-20", resizeWebcam })
+        );
+      }
+    },
+  },
+  modifiers: [
+    // keep the edges inside the parent
+    interact.modifiers.restrictEdges({
+      outer: "wrapper",
+    }),
+
+    // minimum size
+    interact.modifiers.restrictSize({
+      min: { width: 100, height: 50 },
+    }),
+  ],
+
+  inertia: true,
+});
+interact(`${"." + imgSelect + 20}`).draggable({
+  // enable inertial throwing
+  inertia: true,
+  // keep the element within the area of it's parent
+  modifiers: [
+    interact.modifiers.restrictRect({
+      restriction: "parent",
+      endOnly: true,
+    }),
+  ],
+  // enable autoScroll
+
+  listeners: {
+    // call this function on every dragmove event
+    move: dragMoveListener25,
+
+    // call this function on every dragend event
+  },
+});
+function dragMoveListener25(event) {
+  var target = event.target;
+  // keep the dragged position in the data-x/data-y attributes
+  var x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+  var y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+
+  const movingWebcam = {
+    x: x,
+    y: y,
+  };
+
+  console.log(movingWebcam);
+  if (mode === "toolP") {
+    meeting.sendChatMessage(
+      JSON.stringify({
+        type: "moving-img-participant-20",
+        movingWebcam,
+      })
+    );
+  }
+
+  // translate the element
+
+  target.style.transform = "translate(" + x + "px, " + y + "px)";
+
+  // update the posiion attributes
+  target.setAttribute("data-x", x);
+  target.setAttribute("data-y", y);
+}
 // this function is used later in the resizing and gesture demos
 
 // this function is used later in the resizing and gesture demos

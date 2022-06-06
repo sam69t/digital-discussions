@@ -21,6 +21,12 @@ let toolControllerH = document.querySelector(".tool-control-H");
 let publicTool = document.querySelector(".tool-public");
 
 let chapterCrontrols = document.querySelector(".chapters-controls");
+let endButton = document.querySelector(".end-button");
+
+let chapterCrontrolsParticipant = document.querySelector(
+  ".chapters-controls-participant"
+);
+
 let camMicControls = document.querySelector(".cam-mic-controls");
 let colorControls = document.querySelector(".color-controls");
 let gridLiveContainer = document.querySelector(".player-actions");
@@ -115,6 +121,11 @@ function createLocalParticipant() {
 function startMeeting(token, meetingId, name) {
   // Meeting config
   window.ZujoSDK.config(token);
+
+  gridLiveContainer.style.display = "none";
+  overViewButtonBottom.style.display = "none";
+  sumAssets.style.display = "none";
+  nav.style.display = "none";
 
   // Meeting Init
   meeting = window.ZujoSDK.initMeeting({
@@ -457,12 +468,12 @@ function setTrack(stream, videoElem, audioElement, id) {
   if (stream.kind == "audio") {
     if (id == meeting.localParticipant.id) return;
 
-    // const mediaStream = new MediaStream();
-    // mediaStream.addTrack(stream.track);
-    // audioElement.srcObject = mediaStream;
-    // audioElement
-    //   .play()
-    //   .catch((error) => console.error("audioElem.play() failed", error));
+    const mediaStream = new MediaStream();
+    mediaStream.addTrack(stream.track);
+    audioElement.srcObject = mediaStream;
+    audioElement
+      .play()
+      .catch((error) => console.error("audioElem.play() failed", error));
   }
   if (stream.kind == "share") {
     console.log("SHARE EVENT ");

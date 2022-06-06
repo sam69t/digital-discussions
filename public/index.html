@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <link rel="stylesheet" href="./css/flick.css" />
+
     <script src="./libs/papaparse.min.js"></script>
 
     <script
@@ -23,7 +26,7 @@
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     <script src="https://sdk.videosdk.live/js-sdk/0.0.20/videosdk.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+    <script src="js/flick.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/imageKit.js" defer></script>
     <script src="js/timer.js" defer></script>
@@ -41,7 +44,7 @@
     <script src="./js/router.js" defer></script>
   </head>
 
-  <body>
+  <body style="">
     <header>
       <nav>
         <a href="http://localhost:3000/index.html">Home</a>
@@ -59,156 +62,130 @@
         <a href="http://localhost:3000/room.html?mode=public">Public</a>
       </nav>
     </header>
-    <div class="card"></div>
-
-    <div class="previewContainer">
-      <div class="videos-container">
-        <div class="videoWrapper-one"></div>
-        <div class="videoWrapper-two"></div>
+    <main class="home-wrap">
+      <div class="credits">Credits</div>
+      <div class="home-info">
+        <ul>
+          <li>
+            Comment un.e artiste /designer pourrait partager et enrichir sa
+            pratique dans un contexte où la visioconférence devient l’un des
+            supports privilégié de diffusion de contenu.
+          </li>
+          <li>
+            Sous la forme de mini-conférence web, Public Lectures consistera à
+            présenter succinctement le travail de personnes actives dans le
+            domaine de la culture à travers un contenu audiovisuel. Encourageant
+            l’interaction, par le biais de commentaires et d’échange de contenu,
+            Public Lectures cherche à effacer les frontières habituelles entre
+            présentateur et spectateur. Une horizontalité née ainsi au sein de
+            la plateforme, invitant chacun.e à apporter sa contribution afin de
+            faire émerger des formes novatrices de dialogues, tentant de relever
+            les défis de ce nouveau contexte de communication.
+          </li>
+        </ul>
       </div>
-      <div class="chat-wrapper">
-        <div id="chats"></div>
-      </div>
-    </div>
-    <div class="overlayContainer">
-      <div class="playerMode hidden">
-        <div class="slider-container">
-          <button class="btn play"></button>
+      <div class="home-credits">
+        <div>
+          <ul>
+            <li>Remerciement</li>
+            <li>
+              <a href="https://www.notdefined.net/" target="blank"
+                >Alain Bellet</a
+              >
+            </li>
+            <li>
+              <a href="https://www.fabric.ch/" target="blank"
+                >Christophe Guignard</a
+              >
+            </li>
+            <li>
+              <a href="https://jean-rene-jean.dev/" target="blank"
+                >Jean Reynaud</a
+              >
+            </li>
+            <li>Clara Roumégoux</li>
+            <li>Marie Noury</li>
+            <li>Hugo Jauffret</li>
+            <li>49D</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>Typeface</li>
+            <li>
+              <a href="https://anatolecouteau.xyz/" target="blank"
+                >Garamond Corporate</a
+              >
+            </li>
 
-          <div class="custom-seekbar">
-            <span></span>
-          </div>
+            <li>© 2022</li>
+            <li class="none">.</li>
+            <li class="none">.</li>
+            <li class="none">.</li>
+            <li class="none">.</li>
+            <li>Samuel Dumez</li>
+          </ul>
         </div>
       </div>
-      <div class="toolMode hidden">
-        <!-- mute -->
-        <!-- record -->
-        <!-- stop -->
-        <main class="wrapper">
-          <div id="joinPage" class="main-bg" style="display: flex">
-            <div class="wrapper-join">
-              <div
-                class="join-left"
-                style="
-                  /* border: 1px solid black; */
-                  width: 400px;
-                  height: 300px;
-                  margin-right: 40px;
-                  position: relative;
-                "
-              >
-                <h1 style="text-align: center">Rejoindre une room</h1>
+      <footer class="home-logo-wrap">
+        <img class="home-logo" src="/assets/img/logo.svg" alt="" />
+      </footer>
+    </main>
 
-                <video class="drag resize-drag" id="joinCam"></video>
-                <div>
-                  <div style="text-align: center">
-                    <label>Nom</label>
-                    <input
-                      style="
-                        text-align: center;
-                        display: block;
-                        width: 100%;
-                        padding: 5px;
-                        border: 1px solid black;
-                        margin-bottom: 1vh;
-                      "
-                      type="text"
-                      name="name"
-                      id="joinMeetingName"
-                      required
-                    />
-                  </div>
-                  <div style="text-align: center">
-                    <label>Room ID</label>
-                    <input
-                      style="
-                        text-align: center;
-                        display: block;
-                        width: 100%;
-                        padding: 5px;
-                        border: 1px solid black;
-                      "
-                      type="text"
-                      name="name"
-                      id="joinMeetingId"
-                    />
-                  </div>
-                  <div>
-                    <button
-                      style="margin-top: 2rem; display: block; width: 100%"
-                      class="btn secondary text-white"
-                      id="meetingJoinButton"
-                      onclick="joinMeeting(true)"
-                    >
-                      Crée une room
-                    </button>
-                  </div>
-                  <div>
-                    <button
-                      style="margin-top: 2rem; display: block; width: 100%"
-                      class="btn secondary text-white"
-                      id="meetingJoinButton"
-                      onclick="joinMeeting()"
-                    >
-                      Rejoindre la room
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="tool-control">
-            <div class="sur-footer">
-              <button class="btn" id="sendMessage-btn">Send Message</button>
-            </div>
-            <footer style="position: absolute; bottom: 20px">
-              <button class="btn primary text-white" id="startRecording-btn">
-                Start Recording
-              </button>
-              <button class="btn primary text-white" id="stopRecording-btn">
-                Stop Recording
-              </button>
-
-              <button class="mute btn primary text-white" id="mic-btn">
-                Mute Mic
-              </button>
-              <input type="text" required id="inputMessage" style="" />
-              <button class="cam-btn cam btn primary text-white">
-                Hide Cam
-              </button>
-              <label for="vidfiles" class="btn">Select Video</label>
-              <input
-                id="vidfiles"
-                style="display: none"
-                type="file"
-                accept="video/*"
-              />
-              <input
-                type="text"
-                required
-                id="inputMessage"
-                onfocusin="showButton()"
-                onfocusout="hideButton()"
-              />
-              <label for="imgfiles" class="btn">Select Image</label>
-              <input
-                id="imgfiles"
-                style="display: none"
-                type="file"
-                accept="image/*"
-              />
-            </footer>
-          </div>
-          <div style="position: absolute; left: 20%; bottom: 65px"></div>
-
-          <div class="playGround">
-            <div class="startButtonWrapper">
-              <button class="startButton btn">Commencer l'interview</button>
-              <button class="startOtherButton btn">En attendant ta rep</button>
-            </div>
-          </div>
-        </main>
-      </div>
+    <div class="conf-button">
+      <span class="conf-button-info">See lectures</span>
     </div>
+
+    <main class="conferences"></main>
+
+    <script>
+      let mainHome = document.querySelector(".home-wrap");
+      let homeToggle = document.querySelector(".credits");
+      let homeInfo = document.querySelector(".home-info");
+      let homeCredits = document.querySelector(".home-credits");
+      let homeLogo = document.querySelector(".home-logo");
+      let confButton = document.querySelector(".conf-button");
+      let conf = document.querySelector(".conferences");
+
+      let confBChildren = document.querySelector(".conf-button-info");
+
+      let homeBool = true;
+      let goToConf = true;
+
+      homeToggle.addEventListener("click", function () {
+        if (homeBool === true) {
+          homeToggle.textContent = "About";
+
+          homeInfo.style.display = "none";
+          homeCredits.style.display = "flex";
+
+          homeBool = false;
+        } else {
+          homeToggle.textContent = "Credits";
+          homeInfo.style.display = "flex";
+          homeCredits.style.display = "none";
+          homeBool = true;
+        }
+      });
+      confButton.addEventListener("click", function () {
+        if (goToConf === true) {
+          mainHome.classList.add("go-to-conf");
+          conf.classList.toggle("enter-conf");
+          confBChildren.textContent = "Home";
+          goToConf = false;
+        } else {
+          // conf.classList.toggle("enter-conf");
+          confBChildren.textContent = "See lectures";
+
+          conf.classList.add("leave-conf");
+          setTimeout(() => {
+            conf.classList.remove("leave-conf");
+            conf.classList.remove("enter-conf");
+          }, 900);
+
+          goToConf = true;
+        }
+      });
+    </script>
   </body>
 </html>

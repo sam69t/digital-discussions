@@ -3,9 +3,15 @@
 const previewContainer = document.querySelector(".previewContainer");
 const previewContainerGrid = document.querySelector(".previewContainerGrid");
 const videoContainer = document.querySelector(".videos-container");
+const gridVideo = document.querySelector(".cam-grid");
+
 const playerContainer = document.querySelector(".playerMode");
 let gridColRight = document.querySelector(".container-right");
 let gridColLeft = document.querySelector(".container-left");
+let mainCarousel = document.querySelector(".slider");
+let navCarousel = document.querySelector(".carousel-nav");
+let gridThumbWrapper = document.querySelector(".grid-assets");
+
 let body = document.querySelector("body");
 let SumAssets = document.querySelector(".sum-assets");
 let cross = document.querySelector(".cross");
@@ -29,9 +35,9 @@ function playerSetup() {
 
   player = new Player({
     parent: body,
-    csvSrc: "./assets/chats/modif_2.csv",
-    leftVideoSrc: "./assets/videos/6290cf12f5cc40fcdf9d02c9.mp4",
-    rightVideoSrc: "",
+    csvSrc: "./assets/chats/HUGO_J2.csv",
+    liveVideoSrc: "./assets/videos/HUGO_J2.mp4",
+    gridVideoSrc: "./assets/videos/HUGO_J2.mp4",
   });
 
   animator.on("frame", () => {
@@ -50,16 +56,16 @@ function playerSetup() {
     // console.log(data.message);
     // console.log(data.message.type.message);
     $(".videoWrapper-two").css("left", "calc(50% - 20vh");
-    $(".videoWrapper-two").css("height", "20vh");
+    // $(".videoWrapper-two").css("height", "20vh");
 
     if (data.message.type == "launch-presentation") {
-      chatContainer.style.backgroundColor = data.message.dataColor;
-      document.body.style.backgroundColor = data.message.dataColor;
+      // chatContainer.style.backgroundColor = data.message.dataColor;
+      // document.body.style.backgroundColor = data.message.dataColor;
     }
 
     if (data.message.type == "launch-projet") {
-      chatContainer.style.backgroundColor = data.message.dataColor;
-      document.body.style.backgroundColor = data.message.dataColor;
+      // chatContainer.style.backgroundColor = data.message.dataColor;
+      // document.body.style.backgroundColor = data.message.dataColor;
       let instruction = document.createElement("span");
       instruction.textContent = "Projet";
       instruction.classList.add("instructions");
@@ -161,13 +167,70 @@ function playerSetup() {
       imgCounter++;
 
       if (imgCounter >= 3) {
-        gridColRight.removeChild(gridColRight.lastChild);
+        // gridColRight.removeChild(gridColRight.lastChild);
       }
 
+      let mainFlickSlider = document.querySelector(".flickity-slider");
       let imageGrid = document.createElement("img");
+      let mainCell = document.createElement("div");
+      mainCell.classList.add("slide");
       imageGrid.src = data.message.srcImgUrl;
-      gridColRight.appendChild(imageGrid);
+      mainCell.appendChild(imageGrid);
+      mainCarousel.appendChild(mainCell);
 
+      const slides = document.querySelectorAll(".slide");
+
+      // loop through slides and set each slides translateX
+      slides.forEach((slide, indx) => {
+        slide.style.transform = `translateX(${indx * 100}%)`;
+      });
+
+      // select next slide button
+      const nextSlide = document.querySelector(".btn-next");
+
+      // current slide counter
+      let curSlide = 0;
+      // maximum number of slides
+      let maxSlide = slides.length - 1;
+
+      // add event listener and navigation functionality
+      nextSlide.addEventListener("click", function () {
+        console.log(curSlide, maxSlide);
+
+        // check if current slide is the last and reset current slide
+        if (curSlide === maxSlide) {
+          curSlide = 0;
+        } else {
+          curSlide++;
+        }
+
+        //   move slide by -100%
+        slides.forEach((slide, indx) => {
+          slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+        });
+      });
+
+      // select next slide button
+      const prevSlide = document.querySelector(".btn-prev");
+
+      // add event listener and navigation functionality
+      prevSlide.addEventListener("click", function () {
+        console.log(curSlide, maxSlide);
+
+        // check if current slide is the first and reset current slide to last
+        if (curSlide === 0) {
+          curSlide = maxSlide;
+        } else {
+          curSlide--;
+        }
+
+        //   move slide by 100%
+        slides.forEach((slide, indx) => {
+          slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+        });
+      });
+
+      console.log(curSlide, maxSlide);
       let imageThumbWrap = document.createElement("div");
       let imageGridThumb = document.createElement("img");
       let imageNumber = document.createElement("span");
@@ -175,12 +238,11 @@ function playerSetup() {
       imageGridThumb.src = data.message.srcImgUrl;
       imageNumber.textContent = imgCounter;
       imageNumber.classList.add("thumb-numb");
-      imageThumbWrap.classList.add("thumb-img");
+      imageThumbWrap.classList.add("thumb-grid-img");
       imageThumbWrap.classList.add(`${"grid-assets" + imgCounter}`);
       imageThumbWrap.appendChild(imageNumber);
       imageThumbWrap.appendChild(imageGridThumb);
-
-      gridColLeft.appendChild(imageThumbWrap);
+      gridThumbWrapper.appendChild(imageThumbWrap);
 
       let imageThumbNail = document.createElement("img");
       imageThumbNail.src = data.message.srcImgUrl;
@@ -462,65 +524,89 @@ function playerSetup() {
       $webcam.css("width", data.message.resizeWebcam.w);
       $webcam.css("height", data.message.resizeWebcam.h);
     }
+
+    if (data.message.type == "resize-img-participant") {
+      var $webcam = $(".imageBlock");
+      $webcam.css("width", data.message.resizeWebcam.w);
+      // $webcam.css("height", data.message.resizeWebcam.h);
+    }
+    if (data.message.type == "resize-img-participant") {
+      var $webcam = $(".imageBlock1");
+      $webcam.css("width", data.message.resizeWebcam.w);
+      // $webcam.css("height", data.message.resizeWebcam.h);
+    }
+
+    if (data.message.type == "resize-img-participant-2") {
+      var $webcam = $(".imageBlock2");
+      $webcam.css("width", data.message.resizeWebcam.w);
+      // $webcam.css("height", data.message.resizeWebcam.h);
+    }
+
+    if (data.message.type == "resize-img-participant-3") {
+      var $webcam = $(".imageBlock3");
+      $webcam.css("width", data.message.resizeWebcam.w);
+      // $webcam.css("height", data.message.resizeWebcam.h);
+    }
+
     if (data.message.type == "resize-img-participant-4") {
       var $webcam = $(".imageBlock4");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-5") {
       var $webcam = $(".imageBlock5");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-6") {
       var $webcam = $(".imageBlock6");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-7") {
       var $webcam = $(".imageBlock7");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-8") {
       var $webcam = $(".imageBlock8");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-9") {
       var $webcam = $(".imageBlock9");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-10") {
       var $webcam = $(".imageBlock10");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-11") {
       var $webcam = $(".imageBlock11");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-12") {
       var $webcam = $(".imageBlock12");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-13") {
       var $webcam = $(".imageBlock13");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-14") {
       var $webcam = $(".imageBlock14");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-15") {
       var $webcam = $(".imageBlock15");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
   });
 
@@ -753,77 +839,77 @@ function playerSetup() {
       if (data.message.type == "resize-img-participant") {
         var $webcam = $(".imageBlock1");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-2") {
         var $webcam = $(".imageBlock2");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-3") {
         var $webcam = $(".imageBlock3");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-4") {
         var $webcam = $(".imageBlock4");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-5") {
         var $webcam = $(".imageBlock5");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-6") {
         var $webcam = $(".imageBlock6");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-7") {
         var $webcam = $(".imageBlock7");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-8") {
         var $webcam = $(".imageBlock8");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-9") {
         var $webcam = $(".imageBlock9");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-10") {
         var $webcam = $(".imageBlock10");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-11") {
         var $webcam = $(".imageBlock11");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-12") {
         var $webcam = $(".imageBlock12");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-13") {
         var $webcam = $(".imageBlock13");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-14") {
         var $webcam = $(".imageBlock14");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
       if (data.message.type == "resize-img-participant-15") {
         var $webcam = $(".imageBlock15");
         $webcam.css("width", data.message.resizeWebcam.w);
-        $webcam.css("height", data.message.resizeWebcam.h);
+        // $webcam.css("height", data.message.resizeWebcam.h);
       }
     }
   });
@@ -907,11 +993,11 @@ function zoomOut() {
 onInactive(3000, function () {
   console.log("incative");
 
-  SumAssets.style.opacity = 0;
-  playerContainer.style.opacity = 0;
-  gridLiveContainer.style.opacity = 0;
-  overViewButtonBottom.style.opacity = 0;
-  nav.style.opacity = 0;
+  // SumAssets.style.opacity = 0;
+  // playerContainer.style.opacity = 0;
+  // gridLiveContainer.style.opacity = 0;
+  // overViewButtonBottom.style.opacity = 0;
+  // nav.style.opacity = 0;
 });
 
 function onInactive(ms, cb) {
@@ -948,7 +1034,8 @@ $(".toggle-layout").on("click", function (e) {
 
     $(".previewContainer").css("opacity", "0");
     $(".previewContainerGrid").css("opacity", "1");
-    videoContainer.classList.toggle("movinggg");
+    videoContainer.classList.toggle("hide-live");
+    gridVideo.classList.toggle("show-grid");
 
     switchMode = false;
   } else if (switchMode === false) {
@@ -957,7 +1044,8 @@ $(".toggle-layout").on("click", function (e) {
     $(".liveMode").css("opacity", "1");
     $(this).toggleClass("shadowLeft");
 
-    videoContainer.classList.toggle("movinggg");
+    videoContainer.classList.toggle("hide-live");
+    gridVideo.classList.toggle("show-grid");
     $(".previewContainer").css("opacity", "1");
     $(".previewContainerGrid").css("opacity", "0");
     switchMode = true;
@@ -966,12 +1054,10 @@ $(".toggle-layout").on("click", function (e) {
 $(".toggle-view").on("click", function (e) {
   // $(this).toggleClass("switch");
   if (switchMode === true) {
-    $(this).css("left", "48%");
+    $(this).css("left", "68%");
     $(".microView").css("opacity", "0");
     $(".macroView").css("opacity", "1");
     $(this).toggleClass("shadowLeft");
-
-    videoContainer.classList.toggle("movinggg");
 
     switchMode = false;
   } else if (switchMode === false) {
@@ -979,8 +1065,6 @@ $(".toggle-view").on("click", function (e) {
     $(".microView").css("opacity", "1");
     $(".macroView").css("opacity", "0");
     $(this).toggleClass("shadowLeft");
-
-    videoContainer.classList.toggle("movinggg");
 
     switchMode = true;
   }

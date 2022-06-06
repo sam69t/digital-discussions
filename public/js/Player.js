@@ -2,7 +2,7 @@ let amount;
 const getOriginal = true;
 
 class Player {
-  constructor({ parent, csvSrc, leftVideoSrc, rightVideoSrc }) {
+  constructor({ parent, csvSrc, liveVideoSrc, gridVideoSrc }) {
     this.emitter = new EventEmitter();
     this.startStamp = 0; //! in seconds
     this.oldTime = 0;
@@ -12,12 +12,12 @@ class Player {
 
     this.leftVideo = this.createVideo({
       parent: parent.querySelector(".videoWrapper-two"),
-      src: leftVideoSrc,
+      src: liveVideoSrc,
     });
 
     this.rightVideo = this.createVideo({
-      parent: parent.querySelector(".videoWrapper-two"),
-      src: rightVideoSrc,
+      parent: parent.querySelector(".cam-grid-wrap"),
+      src: gridVideoSrc,
     });
 
     this.exportBtn = document.querySelector("#exportBtn");
@@ -216,6 +216,8 @@ class Player {
 
     const vid = this.leftVideo;
     const vid2 = this.rightVideo;
+
+    vid2.muted = true;
     const spanElem = sliderElem.querySelector("span");
 
     const moveSlider = (clientX) => {
@@ -224,7 +226,7 @@ class Player {
       const amount = mapClamped(clientX, left, right, 0, 1);
       const time = vid.duration * amount;
       vid.currentTime = time;
-      vid2.currentTime = time;
+      // vid2.currentTime = time;
 
       updateSlider(amount);
       this.updateMessages(vid.currentTime);
@@ -311,13 +313,13 @@ class Player {
 
     function pauseVideo() {
       vid.pause();
-      // vid2.pause();
+      vid2.pause();
       videoPlaying = false;
       pauseElem.textContent = "Play";
     }
     function playVideo() {
       vid.play();
-      // vid2.play();
+      vid2.play();
       videoPlaying = true;
       pauseElem.textContent = "Pause";
       hoverPublicImage();

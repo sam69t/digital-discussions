@@ -1,7 +1,7 @@
 let inputImg = document.querySelector("#imgfiles");
 let inputVid = document.querySelector("#vidfiles");
 
-let folderPath = "HUGO_JAUFFET";
+let folderPath = "HUGO_JAUFFET_2";
 
 let imgSelect = "resize-ref";
 let vidSelect = "resize-vid";

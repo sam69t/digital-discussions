@@ -6,6 +6,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/vc-toggle-switch.css" />
+    <link rel="stylesheet" href="./css/flick.css" />
+
     <script src="./libs/papaparse.min.js"></script>
 
     <script
@@ -24,9 +26,8 @@
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     <script src="https://sdk.videosdk.live/js-sdk/0.0.20/videosdk.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+    <script src="js/flick.js"></script>
     <script src="js/fetch.js"></script>
-
     <script src="js/Animator.js"></script>
     <script src="js/replayBehavior.js" defer></script>
     <script src="js/utils.js"></script>
@@ -44,10 +45,11 @@
     <script src="./js/router.js" defer></script>
     <script src="js/video.js" defer></script>
     <script src="js/overWritePlayer.js" defer></script>
+    <script src="js/carousel.js" defer></script>
   </head>
 
   <body>
-    <header class="nav">
+    <header class="nav" style="display: none">
       <nav>
         <a href="http://localhost:3000/index.html">Home</a>
       </nav>
@@ -107,18 +109,28 @@
 
     <div class="chapters-controls">
       <button class="btn presentation" id="">Présentation</button>
-      <button class="btn projet" id="">Projets</button>
-      <button class="btn reference" id="">Références</button>
     </div>
-    <div class="cam-mic-controls">
-      <button class="mute btn primary text-white" id="mic-btn">
-        Couper micro
-      </button>
-
-      <button class="cam-btn cam btn primary text-white">
+    <div class="end-button">
+      <button class="btn endBtn" id="">Fin</button>
+    </div>
+    <div class="chapters-controls-participant">
+      <button
+        class="cam-btn cam btn primary text-white"
+        style="background-color: rgba(240, 240, 240, 0.2) !important"
+      >
         Flouter sa caméra
       </button>
+      <button class="btn fin-presentation" id="">Fin Présentation</button>
+
+      <button
+        class="mute btn primary text-white"
+        id="mic-btn"
+        style="background-color: rgba(240, 240, 240, 0.2) !important"
+      >
+        Couper micro
+      </button>
     </div>
+    <div class="cam-mic-controls"></div>
     <div class="color-controls">
       <div>
         <input type="color" id="colorPicker" name="head" value="#ffffff" />
@@ -151,13 +163,23 @@
       <div class="videoWrapper-two" smoothen></div>
     </div>
     <div class="previewContainerGrid">
-      <div class="col-left">
-        <div class="container-left"></div>
+      <div class="slider">
+        <button class="btn-slider btn-next">></button>
+        <button class="btn-slider btn-prev"></button>
       </div>
-      <div class="col-right">
-        <div class="container-right"></div>
+
+      <div class="cam-grid">
+        <div class="cam-grid-wrap"></div>
+      </div>
+
+      <div class="grid-assets">
+        <div class="thumb-grid-img"></div>
+        <div class="thumb-grid-img"></div>
+        <div class="thumb-grid-img"></div>
+        <div class="thumb-grid-img"></div>
       </div>
     </div>
+
     <div class="previewContainer">
       <div class="chat-wrapper">
         <div id="chats"></div>
@@ -344,7 +366,7 @@
     </div>
 
     <footer class="player-actions-bottom">
-      <div class="switch-container" onclick="zoomOut()">
+      <div class="switch-container-bottom" onclick="zoomOut()">
         <div class="toggle-view"></div>
         <div class="toggle-info">
           <span class="macroView">Public</span>

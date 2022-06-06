@@ -26,7 +26,7 @@ function onMessage(chatEvent) {
 
     if (mode === "toolP") {
       console.log("start Participant Rec");
-      camMicControls.style.setProperty("display", "flex", "important");
+      // camMicControls.style.setProperty("display", "flex", "important");
       overViewButtonBottom.style.setProperty("display", "none", "important");
       sumAssets.style.setProperty("display", "none", "important");
       gridLiveContainer.style.setProperty("display", "none", "important");
@@ -336,25 +336,32 @@ function onMessage(chatEvent) {
     //! PRESENTATION
     parsedText?.type == "launch-presentation"
   ) {
+    let instruction = document.createElement("span");
+    instruction.textContent = "Présentation";
+    instruction.classList.add("instructions");
+    instruction.classList.add("style-presentation");
+    videoContainerTwo.classList.add("resize-drag");
+    previewContainer.appendChild(instruction);
+    instruction.style.opacity = 1;
+    chapterCrontrols.style.setProperty("display", "none", "important");
+
+    setTimeout(() => {
+      instruction.style.opacity = 0;
+    }, 2000);
+    setTimeout(() => {
+      previewContainer.removeChild(instruction);
+    }, 2500);
     if (meeting.localParticipant.id != senderId) {
-      let instruction = document.createElement("span");
-      instruction.textContent = "Présentation";
-      instruction.classList.add("instructions");
-      instruction.classList.add("style-presentation");
-      videoContainerTwo.classList.add("resize-drag");
-      previewContainer.appendChild(instruction);
       setTimeout(() => {
-        instruction.style.opacity = 1;
         toolControllerP.style.setProperty("display", "block", "important");
+        chapterCrontrolsParticipant.style.setProperty(
+          "display",
+          "flex",
+          "important"
+        );
       }, 300);
 
       console.log("spawn instruction");
-      setTimeout(() => {
-        instruction.style.opacity = 0;
-      }, 2000);
-      setTimeout(() => {
-        previewContainer.removeChild(instruction);
-      }, 2500);
     }
 
     setTimeout(() => {
@@ -365,27 +372,29 @@ function onMessage(chatEvent) {
     //! PROJET
     parsedText?.type == "launch-projet"
   ) {
-    if (meeting.localParticipant.id != senderId) {
-      let instruction = document.createElement("span");
-      instruction.textContent = "Projets";
-      instruction.classList.add("instructions");
-      instruction.classList.add("style-projet");
+    let instruction = document.createElement("span");
+    instruction.textContent = "Projets";
+    instruction.classList.add("instructions");
+    instruction.classList.add("style-projet");
 
-      previewContainer.appendChild(instruction);
-      setTimeout(() => {
-        instruction.style.opacity = 1;
-      }, 300);
+    previewContainer.appendChild(instruction);
+    setTimeout(() => {
+      instruction.style.opacity = 1;
+    }, 300);
 
-      console.log("spawn instruction");
+    console.log("spawn instruction");
 
-      setTimeout(() => {
-        instruction.style.opacity = 0;
-      }, 2000);
-      setTimeout(() => {
-        previewContainer.removeChild(instruction);
-      }, 2500);
-    }
-
+    setTimeout(() => {
+      instruction.style.opacity = 0;
+      chapterCrontrolsParticipant.style.setProperty(
+        "display",
+        "none",
+        "important"
+      );
+    }, 2000);
+    setTimeout(() => {
+      previewContainer.removeChild(instruction);
+    }, 2500);
     setTimeout(() => {
       previewContainer.style.backgroundColor = parsedText.dataColor;
       let assets = document.querySelectorAll(".assets");
@@ -393,29 +402,37 @@ function onMessage(chatEvent) {
         assets.remove();
       });
     }, 700);
+    if (meeting.localParticipant.id != senderId) {
+    } else {
+      endButton.style.setProperty("display", "flex", "important");
+    }
   }
   if (
     //! REFERENCE
-    parsedText?.type == "launch-ref"
+    parsedText?.type == "end"
   ) {
+    let instruction = document.createElement("span");
+    instruction.textContent = "Fin";
+    instruction.classList.add("instructions");
+    instruction.classList.add("style-ref");
+
+    previewContainer.appendChild(instruction);
+    setTimeout(() => {
+      instruction.style.opacity = 1;
+    }, 300);
+
+    console.log("spawn instruction");
+    setTimeout(() => {
+      instruction.style.opacity = 0;
+    }, 2000);
+    setTimeout(() => {
+      previewContainer.removeChild(instruction);
+    }, 2500);
     if (meeting.localParticipant.id != senderId) {
-      let instruction = document.createElement("span");
-      instruction.textContent = "Références";
-      instruction.classList.add("instructions");
-      instruction.classList.add("style-ref");
-
-      previewContainer.appendChild(instruction);
+    } else {
       setTimeout(() => {
-        instruction.style.opacity = 1;
-      }, 300);
-
-      console.log("spawn instruction");
-      setTimeout(() => {
-        instruction.style.opacity = 0;
-      }, 2000);
-      setTimeout(() => {
-        previewContainer.removeChild(instruction);
-      }, 2500);
+        toolControllerP.style.setProperty("display", "none", "important");
+      }, 400);
     }
 
     setTimeout(() => {
@@ -657,6 +674,81 @@ function onMessage(chatEvent) {
           "px )"
       );
     }
+  } else if (
+    parsedText?.type == "moving-img-participant-16" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    if (mode === "toolH") {
+      var $webcam = $(".imageBlock16");
+      $webcam.css(
+        "-webkit-transform",
+        "translate(" +
+          parsedText.movingWebcam.x +
+          "px," +
+          parsedText.movingWebcam.y +
+          "px )"
+      );
+    }
+  } else if (
+    parsedText?.type == "moving-img-participant-17" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    if (mode === "toolH") {
+      var $webcam = $(".imageBlock17");
+      $webcam.css(
+        "-webkit-transform",
+        "translate(" +
+          parsedText.movingWebcam.x +
+          "px," +
+          parsedText.movingWebcam.y +
+          "px )"
+      );
+    }
+  } else if (
+    parsedText?.type == "moving-img-participant-18" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    if (mode === "toolH") {
+      var $webcam = $(".imageBlock18");
+      $webcam.css(
+        "-webkit-transform",
+        "translate(" +
+          parsedText.movingWebcam.x +
+          "px," +
+          parsedText.movingWebcam.y +
+          "px )"
+      );
+    }
+  } else if (
+    parsedText?.type == "moving-img-participant-19" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    if (mode === "toolH") {
+      var $webcam = $(".imageBlock19");
+      $webcam.css(
+        "-webkit-transform",
+        "translate(" +
+          parsedText.movingWebcam.x +
+          "px," +
+          parsedText.movingWebcam.y +
+          "px )"
+      );
+    }
+  } else if (
+    parsedText?.type == "moving-img-participant-20" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    if (mode === "toolH") {
+      var $webcam = $(".imageBlock20");
+      $webcam.css(
+        "-webkit-transform",
+        "translate(" +
+          parsedText.movingWebcam.x +
+          "px," +
+          parsedText.movingWebcam.y +
+          "px )"
+      );
+    }
   }
   if (
     //! RESIZE IMAGE PARTICIPANT
@@ -835,6 +927,66 @@ function onMessage(chatEvent) {
     if (senderId != meeting.localParticipant.id) {
       if (mode === "toolH") {
         var $webcam = $(".imageBlock15");
+
+        $webcam.css("width", parsedText.resizeWebcam.w);
+        $webcam.css("height", parsedText.resizeWebcam.h);
+      }
+    }
+  } else if (
+    parsedText?.type == "resize-img-participant-16" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    if (senderId != meeting.localParticipant.id) {
+      if (mode === "toolH") {
+        var $webcam = $(".imageBlock16");
+
+        $webcam.css("width", parsedText.resizeWebcam.w);
+        $webcam.css("height", parsedText.resizeWebcam.h);
+      }
+    }
+  } else if (
+    parsedText?.type == "resize-img-participant-17" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    if (senderId != meeting.localParticipant.id) {
+      if (mode === "toolH") {
+        var $webcam = $(".imageBlock17");
+
+        $webcam.css("width", parsedText.resizeWebcam.w);
+        $webcam.css("height", parsedText.resizeWebcam.h);
+      }
+    }
+  } else if (
+    parsedText?.type == "resize-img-participant-18" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    if (senderId != meeting.localParticipant.id) {
+      if (mode === "toolH") {
+        var $webcam = $(".imageBlock18");
+
+        $webcam.css("width", parsedText.resizeWebcam.w);
+        $webcam.css("height", parsedText.resizeWebcam.h);
+      }
+    }
+  } else if (
+    parsedText?.type == "resize-img-participant-19" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    if (senderId != meeting.localParticipant.id) {
+      if (mode === "toolH") {
+        var $webcam = $(".imageBlock19");
+
+        $webcam.css("width", parsedText.resizeWebcam.w);
+        $webcam.css("height", parsedText.resizeWebcam.h);
+      }
+    }
+  } else if (
+    parsedText?.type == "resize-img-participant-20" &&
+    senderId != meeting.localParticipant.id
+  ) {
+    if (senderId != meeting.localParticipant.id) {
+      if (mode === "toolH") {
+        var $webcam = $(".imageBlock20");
 
         $webcam.css("width", parsedText.resizeWebcam.w);
         $webcam.css("height", parsedText.resizeWebcam.h);

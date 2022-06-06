@@ -1,8 +1,11 @@
 let colorPicker = document.querySelector("#colorPicker");
 
 let presentationButton = document.querySelector(".presentation");
+let FinpresentationButton = document.querySelector(".fin-presentation");
+
 let projetButton = document.querySelector(".projet");
 let refButton = document.querySelector(".reference");
+let endingButton = document.querySelector(".endBtn");
 
 presentationButton.addEventListener("click", async () => {
   console.log("shotPresentation");
@@ -11,18 +14,18 @@ presentationButton.addEventListener("click", async () => {
     JSON.stringify({ type: "launch-presentation", dataColor })
   );
 });
-projetButton.addEventListener("click", async () => {
+FinpresentationButton.addEventListener("click", async () => {
   console.log("shotProjet");
   let dataColor = "FBFFC9";
 
   meeting.sendChatMessage(JSON.stringify({ type: "launch-projet", dataColor }));
 });
 
-refButton.addEventListener("click", async () => {
+endingButton.addEventListener("click", async () => {
   console.log("shotRef");
   let dataColor = "D6E3FF";
 
-  meeting.sendChatMessage(JSON.stringify({ type: "launch-ref", dataColor }));
+  meeting.sendChatMessage(JSON.stringify({ type: "end", dataColor }));
 });
 
 // colorPicker.addEventListener("change", async () => {
