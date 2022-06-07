@@ -36,8 +36,8 @@ function playerSetup() {
   player = new Player({
     parent: body,
     csvSrc: "./assets/chats/HUGO_J2.csv",
-    liveVideoSrc: "./assets/videos/HUGO_J2.mp4",
-    gridVideoSrc: "./assets/videos/HUGO_J2.mp4",
+    liveVideoSrc: "./assets/videos/HUGO_J2(CUT).mp4",
+    gridVideoSrc: "./assets/videos/HUGO_J2(CUT).mp4",
   });
 
   animator.on("frame", () => {
@@ -71,18 +71,20 @@ function playerSetup() {
       instruction.classList.add("instructions");
       instruction.classList.add("style-projet");
       videoContainerTwo.classList.add("resize-drag");
-      previewContainer.appendChild(instruction);
+      document.body.appendChild(instruction);
       setTimeout(() => {
         instruction.style.opacity = 1;
         toolControllerP.style.setProperty("display", "block", "important");
+
+        videoContainerTwo.style.marginLeft = "-60vh";
       }, 300);
 
       console.log("spawn instruction");
       setTimeout(() => {
         instruction.style.opacity = 0;
-      }, 20000);
+      }, 2000);
       setTimeout(() => {
-        previewContainer.removeChild(instruction);
+        document.body.removeChild(instruction);
       }, 2500);
     }
 
@@ -163,12 +165,16 @@ function playerSetup() {
     if (data.message.type == "img-url") {
       let widthTimeStamp = amount * 100;
 
-      console.log(widthTimeStamp);
+      // console.log(widthTimeStamp);
       imgCounter++;
 
       if (imgCounter >= 3) {
         // gridColRight.removeChild(gridColRight.lastChild);
       }
+
+      document.querySelector(".chat-wrapper").style.zIndex = "9999";
+      document.querySelector(".chats__message").style.color =
+        "rgb(230,230,230)";
 
       let mainFlickSlider = document.querySelector(".flickity-slider");
       let imageGrid = document.createElement("img");
@@ -215,7 +221,7 @@ function playerSetup() {
 
       // add event listener and navigation functionality
       prevSlide.addEventListener("click", function () {
-        console.log(curSlide, maxSlide);
+        // console.log(curSlide, maxSlide);
 
         // check if current slide is the first and reset current slide to last
         if (curSlide === 0) {
@@ -234,13 +240,38 @@ function playerSetup() {
       let imageThumbWrap = document.createElement("div");
       let imageGridThumb = document.createElement("img");
       let imageNumber = document.createElement("span");
+      let imageNumberMin = document.createElement("span");
+      let space = document.createElement("span");
+      let wrapImageTime = document.createElement("div");
 
+      console.log(amountTimer);
+      var m = Math.floor(amountTimer / 60);
+      var s = Math.round(amountTimer - m * 60);
+      // console.log(s);
+
+      imageNumberMin.textContent = m;
+      if (s < 10) {
+        imageNumber.textContent = "0" + s;
+      } else if (s >= 10) {
+        imageNumber.textContent = s;
+      }
+      if (s === 60) {
+        imageNumber.textContent = "00";
+      }
+
+      space.textContent = ":";
+      space.classList.add("thumb-numb");
       imageGridThumb.src = data.message.srcImgUrl;
-      imageNumber.textContent = imgCounter;
       imageNumber.classList.add("thumb-numb");
+      imageNumberMin.classList.add("thumb-numb");
+      wrapImageTime.classList.add("flex-time");
       imageThumbWrap.classList.add("thumb-grid-img");
       imageThumbWrap.classList.add(`${"grid-assets" + imgCounter}`);
-      imageThumbWrap.appendChild(imageNumber);
+      wrapImageTime.appendChild(imageNumberMin);
+      wrapImageTime.appendChild(space);
+      wrapImageTime.appendChild(imageNumber);
+
+      imageThumbWrap.appendChild(wrapImageTime);
       imageThumbWrap.appendChild(imageGridThumb);
       gridThumbWrapper.appendChild(imageThumbWrap);
 
@@ -287,7 +318,7 @@ function playerSetup() {
       imageWrap.appendChild(infoTextWrap);
       imageWrap.appendChild(image);
       imageWrap.appendChild(cross);
-      imageWrap.appendChild(info);
+      // imageWrap.appendChild(info);
       imageWrap.appendChild(grow);
 
       previewContainer.appendChild(imageWrap);
@@ -936,7 +967,7 @@ if (mode === "player-2") {
   const createMeeting = document.querySelector("#meetingCreateButton");
   createMeeting.style.display = "none";
 } else if (mode === "public") {
-  console.log("public");
+  // console.log("public");
   const container = document.querySelector(".toolMode");
   container.classList.remove("hidden");
   // const JoinMeeting = document.querySelector("#joinPage");
@@ -973,13 +1004,15 @@ function zoomOut() {
   gridLiveContainer.classList.toggle("top-live-button");
   publicButton.classList.toggle("enabled-flex");
   publicAssetsWrapper.classList.toggle("enabled-flex");
+  document.querySelector(".macroView").classList.toggle("dodgeColor");
+  document.querySelector(".chats__message").classList.toggle("fontScale");
 
   setTimeout(() => {
     publicButton.classList.toggle("enabled-opa");
     publicAssetsWrapper.classList.toggle("enabled-opa");
   }, 100);
 
-  console.log("Grid");
+  // console.log("Grid");
 }
 
 // console.log(elem === document.activeElement);
@@ -1010,7 +1043,7 @@ function onInactive(ms, cb) {
     document.onkeyup =
     document.focus =
       function () {
-        console.log("incative");
+        // console.log("incative");
         overViewButtonBottom.style.opacity = 1;
         gridLiveContainer.style.opacity = 1;
         SumAssets.style.opacity = 1;
@@ -1033,9 +1066,17 @@ $(".toggle-layout").on("click", function (e) {
     $(this).toggleClass("shadowLeft");
 
     $(".previewContainer").css("opacity", "0");
-    $(".previewContainerGrid").css("opacity", "1");
+
+    $(".previewContainerGrid").css("display", "flex");
+
     videoContainer.classList.toggle("hide-live");
     gridVideo.classList.toggle("show-grid");
+    setTimeout(() => {
+      $(".previewContainerGrid").css("opacity", "1");
+    }, 200);
+    setTimeout(() => {
+      $(".previewContainer").css("display", "none");
+    }, 500);
 
     switchMode = false;
   } else if (switchMode === false) {
@@ -1046,18 +1087,28 @@ $(".toggle-layout").on("click", function (e) {
 
     videoContainer.classList.toggle("hide-live");
     gridVideo.classList.toggle("show-grid");
-    $(".previewContainer").css("opacity", "1");
+    $(".previewContainer").css("display", "block");
     $(".previewContainerGrid").css("opacity", "0");
+
+    setTimeout(() => {
+      $(".previewContainer").css("opacity", "1");
+    }, 200);
+
+    setTimeout(() => {
+      $(".previewContainerGrid").css("display", "none");
+    }, 500);
+
     switchMode = true;
   }
 });
 $(".toggle-view").on("click", function (e) {
   // $(this).toggleClass("switch");
   if (switchMode === true) {
-    $(this).css("left", "68%");
+    $(this).css("left", "65%");
     $(".microView").css("opacity", "0");
     $(".macroView").css("opacity", "1");
     $(this).toggleClass("shadowLeft");
+    $("body").css("background-color", "white");
 
     switchMode = false;
   } else if (switchMode === false) {
@@ -1065,6 +1116,7 @@ $(".toggle-view").on("click", function (e) {
     $(".microView").css("opacity", "1");
     $(".macroView").css("opacity", "0");
     $(this).toggleClass("shadowLeft");
+    $("body").css("background-color", "dodgerblue");
 
     switchMode = true;
   }

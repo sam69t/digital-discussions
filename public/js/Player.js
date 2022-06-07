@@ -1,4 +1,5 @@
 let amount;
+let amountTimer;
 const getOriginal = true;
 
 class Player {
@@ -230,7 +231,7 @@ class Player {
 
       updateSlider(amount);
       this.updateMessages(vid.currentTime);
-      console.log(vid.currentTime);
+      // console.log(vid.currentTime);
 
       // var timer = vid.currentTime;
       // var minutes = Math.floor(timer / 60);
@@ -249,6 +250,8 @@ class Player {
     this.update = () => {
       if (drag) return;
       amount = vid.currentTime / vid.duration;
+      amountTimer = vid.currentTime;
+
       this.updateMessages(vid.currentTime);
       // // console.log(vid.currentTime);
       // //   this.rightVideo.currentTime = vid.currentTime;
@@ -267,8 +270,11 @@ class Player {
       // //   $("#custom-seekbar span").css("width", percentage + "%");
       // updateSlider(amount);
       var timer = vid.currentTime;
+      // console.log(timer);
       var minutes = Math.floor(timer / 60);
       var seconds = Math.floor(timer - minutes * 60);
+
+      // console.log(minutes + ":" + seconds);
 
       // var seconds = Math.floor(timer);
       // console.log(seconds);
@@ -295,6 +301,9 @@ class Player {
         buttonElem.style.display = "none";
         videoPlaying ? pauseVideo() : playVideo();
       }, 500);
+
+      document.querySelector(".chat-wrapper").style.display = "block";
+      document.querySelector(".playGround").style.display = "none";
     };
 
     window.addEventListener("mousemove", (event) => {

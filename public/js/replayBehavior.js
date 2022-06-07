@@ -56,11 +56,16 @@ function growAssets() {
       console.log(src);
       let fullImageWrapper = document.createElement("div");
       let fullImage = document.createElement("img");
-
+      let fullImageDesc = document.createElement("span");
+      fullImageDesc.textContent =
+        "Ceci est un texte de description d'une possible références, 1972";
+      fullImageDesc.classList.add("fullImageDesc");
       fullImage.src = src;
       fullImageWrapper.classList.add("fullImageWrapper");
       fullImageWrapper.appendChild(fullImage);
-      previewContainer.appendChild(fullImageWrapper);
+      fullImageWrapper.appendChild(fullImageDesc);
+
+      document.body.appendChild(fullImageWrapper);
       removeGrowAssets();
       console.log("SHOTS");
       bool = false;
