@@ -33,7 +33,18 @@ let gridLiveContainer = document.querySelector(".player-actions");
 let overViewButtonBottom = document.querySelector(".player-actions-bottom");
 
 let publicButton = document.querySelector(".public-add");
-let publicAssetsWrapper = document.querySelector(".public-assets");
+let publicAssetsWrapperTopFirst = document.querySelector(
+  ".public-assets-topFirst"
+);
+let publicAssetsWrapperTopLast = document.querySelector(
+  ".public-assets-topLast"
+);
+
+// let publicAssetsWrapper = document.querySelector(".public-assets-topLast");
+
+let publicAssetsWrapperBottom = document.querySelector(".public-assets-bottom");
+let publicAssetsWrapperLeft = document.querySelector(".public-assets-left");
+let publicAssetsWrapperRight = document.querySelector(".public-assets-right");
 
 let sumAssets = document.querySelector(".sum-assets");
 

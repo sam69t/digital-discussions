@@ -16,7 +16,7 @@ presentationButton.addEventListener("click", async () => {
 });
 FinpresentationButton.addEventListener("click", async () => {
   console.log("shotProjet");
-  let dataColor = "FBFFC9";
+  let dataColor = "";
 
   meeting.sendChatMessage(JSON.stringify({ type: "launch-projet", dataColor }));
 });

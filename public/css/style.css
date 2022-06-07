@@ -847,7 +847,7 @@ main {
 }
 .custom-seekbar span {
   /* background-color: var(--allColors); */
-  background-color: black;
+  background-color: dodgerblue;
   position: absolute;
   top: 0;
   left: 0;
@@ -958,7 +958,7 @@ input[type="color"] {
   position: absolute;
   font-size: 13px;
   z-index: 99999999 !important;
-  color: black;
+  color: dodgerblue;
   bottom: 0;
   right: 0;
   margin-right: 1vh;
@@ -1066,7 +1066,7 @@ input[type="color"] {
   top: 0;
   width: 100%;
   z-index: 9999999;
-
+  opacity: 0;
   display: flex;
   justify-content: center;
 }
@@ -1088,6 +1088,7 @@ input[type="color"] {
   height: 3vh;
   margin-bottom: 3vh;
   /* height: 30px; */
+  opacity: 0;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -1096,8 +1097,8 @@ input[type="color"] {
 
 .player-actions-bottom > div {
   cursor: pointer;
-  margin-left: 2vh;
-  margin-right: 2vh;
+  margin-left: 1vh;
+  margin-right: 1vh;
 }
 .scale {
   transform: scale(0.5);
@@ -1112,6 +1113,7 @@ input[type="color"] {
   z-index: 9999999;
   position: absolute;
   top: 0;
+  opacity: 0;
   width: 100%;
   display: flex;
   align-items: center;
@@ -1142,9 +1144,9 @@ input[type="color"] {
 .presentation:hover {
   background-color: rgb(255, 216, 164) !important;
 }
-.projet:hover {
+/* .projet:hover {
   background-color: rgb(251, 255, 201) !important;
-}
+} */
 .reference:hover {
   background-color: rgb(214, 227, 255) !important;
 }
@@ -1264,6 +1266,7 @@ input[type="color"] {
   position: absolute;
   z-index: 10000;
   height: 100vh;
+  top: 0;
   opacity: 1;
   flex-direction: column;
   display: none;
@@ -1495,6 +1498,14 @@ input[type="color"] {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), -5px 0px 6px rgba(0, 0, 0, 0.15) !important
   ;
 }
+.public-comment {
+  width: 24%;
+  height: 15vh;
+  font-size: 14px;
+  box-shadow: 0px -2px 10px 0px rgb(0 0 0 / 10%);
+  padding: 1vh;
+  font-family: "Unica";
+}
 
 .public-add {
   position: absolute;
@@ -1505,7 +1516,7 @@ input[type="color"] {
   justify-content: center;
   width: 100%;
   align-items: center;
-  top: 6vh;
+  top: 4vh;
   height: 3vh;
 
   z-index: 99999999;
@@ -1516,25 +1527,101 @@ input[type="color"] {
   -webkit-backdrop-filter: blur(10px);
   color: grey;
 }
-.public-assets {
+.first-range-public {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.first-range {
+  width: 86%;
+  /* transform: scale(0.7); */
+  height: 82%;
+  /* background-color: lightgray; */
+}
+.public-assets-topFirst {
   position: absolute;
   transition: 333ms ease;
   opacity: 0;
   /* background-color: red; */
   display: none;
   transition: 800ms ease;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: space-between;
+  width: 43%;
+  right: 7%;
   align-items: center;
   top: 9vh;
   height: 15vh;
-
   z-index: 99999999;
 }
-
+.public-assets-topLast {
+  position: absolute;
+  transition: 333ms ease;
+  opacity: 1;
+  /* background-color: violet; */
+  display: none;
+  transition: 800ms ease;
+  justify-content: space-between;
+  width: 43%;
+  left: 7%;
+  align-items: center;
+  top: 9vh;
+  height: 15vh;
+  z-index: 99999999;
+}
+.public-assets-bottom {
+  position: absolute;
+  transition: 333ms ease;
+  opacity: 1;
+  /* background-color: green; */
+  flex-direction: row-reverse;
+  display: none;
+  transition: 800ms ease;
+  justify-content: space-between;
+  width: 86%;
+  align-items: center;
+  bottom: 9vh;
+  right: 7%;
+  height: 15vh;
+  z-index: 99999999;
+}
+.public-assets-left {
+  position: absolute;
+  transition: 333ms ease;
+  opacity: 1;
+  /* background-color: yellow; */
+  display: none;
+  flex-direction: column;
+  transition: 800ms ease;
+  justify-content: space-evenly;
+  height: 50%;
+  top: 25%;
+  width: 10%;
+  align-items: flex-start;
+  left: 7%;
+  z-index: 99999999;
+}
+.public-assets-right {
+  position: absolute;
+  transition: 333ms ease;
+  opacity: 1;
+  flex-direction: column;
+  /* background-color: orange; */
+  display: none;
+  transition: 800ms ease;
+  justify-content: space-evenly;
+  height: 50%;
+  top: 25%;
+  width: 10%;
+  align-items: flex-end;
+  right: 7%;
+  z-index: 99999999;
+}
 .public-img {
   position: relative;
-  width: 5%;
+  height: 15vh;
+  box-shadow: 0px -2px 10px 0px rgb(0 0 0 / 10%);
 }
 .public-vid video {
   width: 15%;

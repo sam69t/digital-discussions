@@ -76,7 +76,7 @@ function playerSetup() {
         instruction.style.opacity = 1;
         toolControllerP.style.setProperty("display", "block", "important");
 
-        videoContainerTwo.style.marginLeft = "-60vh";
+        videoContainerTwo.style.marginLeft = "-30vh";
       }, 300);
 
       console.log("spawn instruction");
@@ -96,7 +96,7 @@ function playerSetup() {
       publicImg.classList.add("imageBlockwrapper");
       publicImg.classList.add("assets");
       publicImg.appendChild(image);
-      publicAssetsWrapper.appendChild(publicImg);
+      publicAssetsWrapperTopFirst.appendChild(publicImg);
 
       let imgSlide = document.createElement("div");
       let imgofSlide = document.createElement("img");
@@ -121,7 +121,7 @@ function playerSetup() {
       publicVid.classList.add("public-vid");
       publicVid.classList.add("vid");
       publicVid.appendChild(vid);
-      publicAssetsWrapper.appendChild(publicVid);
+      publicAssetsWrapperTopFirst.appendChild(publicVid);
 
       let vidSlide = document.createElement("div");
       let vidofSlide = document.createElement("video");
@@ -168,7 +168,10 @@ function playerSetup() {
       // console.log(widthTimeStamp);
       imgCounter++;
 
-      if (imgCounter >= 3) {
+      if (imgCounter <= 1) {
+        SumAssets.style.opacity = "1";
+        overViewButtonBottom.style.opacity = 1;
+        gridLiveContainer.style.opacity = 1;
         // gridColRight.removeChild(gridColRight.lastChild);
       }
 
@@ -1003,13 +1006,19 @@ function zoomOut() {
   gridLiveContainer.classList.toggle("scale");
   gridLiveContainer.classList.toggle("top-live-button");
   publicButton.classList.toggle("enabled-flex");
-  publicAssetsWrapper.classList.toggle("enabled-flex");
+  publicAssetsWrapperTopFirst.classList.toggle("enabled-flex");
+  publicAssetsWrapperTopLast.classList.toggle("enabled-flex");
+  publicAssetsWrapperBottom.classList.toggle("enabled-flex");
+  publicAssetsWrapperLeft.classList.toggle("enabled-flex");
+  publicAssetsWrapperRight.classList.toggle("enabled-flex");
+  sumAssets.classList.toggle("disabled-opa");
+
   document.querySelector(".macroView").classList.toggle("dodgeColor");
   document.querySelector(".chats__message").classList.toggle("fontScale");
 
   setTimeout(() => {
     publicButton.classList.toggle("enabled-opa");
-    publicAssetsWrapper.classList.toggle("enabled-opa");
+    publicAssetsWrapperTopFirst.classList.toggle("enabled-opa");
   }, 100);
 
   // console.log("Grid");
@@ -1044,11 +1053,11 @@ function onInactive(ms, cb) {
     document.focus =
       function () {
         // console.log("incative");
-        overViewButtonBottom.style.opacity = 1;
-        gridLiveContainer.style.opacity = 1;
-        SumAssets.style.opacity = 1;
-        playerContainer.style.opacity = 1;
-        nav.style.opacity = 1;
+        // overViewButtonBottom.style.opacity = 1;
+        // gridLiveContainer.style.opacity = 1;
+        // SumAssets.style.opacity = 1;
+        // playerContainer.style.opacity = 1;
+        // nav.style.opacity = 1;
 
         // isPaused = false;
 
