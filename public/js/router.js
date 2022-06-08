@@ -25,6 +25,10 @@ const animator = new Animator();
 let imgCounter = 0;
 let vidCounter = 0;
 let player;
+let step1 = true;
+let step2 = false;
+let step3 = false;
+let step4 = false;
 
 // const meeting = params.get("meetingID");
 function playerSetup() {
@@ -190,9 +194,6 @@ function playerSetup() {
       const slides = document.querySelectorAll(".slide");
 
       // loop through slides and set each slides translateX
-      slides.forEach((slide, indx) => {
-        slide.style.transform = `translateX(${indx * 100}%)`;
-      });
 
       // select next slide button
       const nextSlide = document.querySelector(".btn-next");
@@ -236,7 +237,13 @@ function playerSetup() {
         //   move slide by 100%
         slides.forEach((slide, indx) => {
           slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+          // console.log(indx);
         });
+      });
+
+      slides.forEach((slide, maxSlide) => {
+        slide.style.transform = `translateX(${maxSlide * 100}%)`;
+        // console.log(indx);
       });
 
       console.log(curSlide, maxSlide);
@@ -1039,13 +1046,64 @@ function zoomIn() {
   }, 400);
 }
 function rangeScaling() {
-  firstRange.classList.toggle("range-1");
-  previewContainer.classList.toggle("range-1-lecture");
-  previewContainerGrid.classList.toggle("range-1-lecture");
+  if (step1 === true) {
+    firstRange.classList.toggle("range-1");
+    previewContainer.classList.toggle("range-1-lecture");
+    previewContainerGrid.classList.toggle("range-1-lecture");
+    videoContainer.classList.toggle("range-1-lecture");
+    videoContainer.classList.toggle("top-cam-live");
+    gridLiveContainer.classList.toggle("range-1-lecture");
+    gridLiveContainer.classList.toggle("top-live-button-2");
+
+    step1 = false;
+    step2 = true;
+    console.log("step1");
+    $(".descaling-range").css("opacity", "1");
+  } else if (step2 === true) {
+    console.log("step2");
+    firstRange.classList.toggle("range-2");
+    previewContainer.classList.toggle("range-2-lecture");
+    previewContainerGrid.classList.toggle("range-2-lecture");
+    videoContainer.classList.toggle("range-2-lecture");
+    videoContainer.classList.toggle("top-cam-live-2");
+
+    gridLiveContainer.classList.toggle("range-2-lecture");
+    gridLiveContainer.classList.toggle("top-live-button-3");
+
+    // $(".scaling-range").css("opacity", "0");
+    step2 = false;
+    step3 = true;
+  } else if (step3 === true) {
+    console.log("step3");
+    firstRange.classList.toggle("range-2");
+    previewContainer.classList.toggle("range-2-lecture");
+    previewContainerGrid.classList.toggle("range-2-lecture");
+    videoContainer.classList.toggle("range-2-lecture");
+    videoContainer.classList.toggle("top-cam-live-2");
+    gridLiveContainer.classList.toggle("range-2-lecture");
+    gridLiveContainer.classList.toggle("top-live-button-3");
+
+    // $(".scaling-range").css("opacity", "0");
+    step3 = false;
+    step4 = true;
+  } else if (step4 === true) {
+    console.log("step4");
+    firstRange.classList.toggle("range-1");
+    previewContainer.classList.toggle("range-1-lecture");
+    previewContainerGrid.classList.toggle("range-1-lecture");
+    videoContainer.classList.toggle("range-1-lecture");
+    videoContainer.classList.toggle("top-cam-live");
+    gridLiveContainer.classList.toggle("range-1-lecture");
+    gridLiveContainer.classList.toggle("top-live-button-2");
+
+    step4 = false;
+    step1 = true;
+  }
   // videoContainer.classList.toggle("scale");
   // gridLiveContainer.classList.toggle("scale");
   // gridLiveContainer.classList.toggle("top-live-button");
 }
+
 // console.log(elem === document.activeElement);
 // if (elem === document.activeElement) {
 //   console.log("Element has focus!");
@@ -1140,11 +1198,15 @@ $(".toggle-view").on("click", function (e) {
     $(".macroView").css("opacity", "1");
     $(this).toggleClass("shadowLeft");
     $("body").css("background-color", "white");
+    $(".scaling-range").css("opacity", "1");
+
     zoomOut();
     console.log("one");
 
     switchMode = false;
   } else if (switchMode === false) {
+    $(".scaling-range").css("opacity", "0");
+
     $(this).css("left", "0%");
     $(".microView").css("opacity", "1");
     $(".macroView").css("opacity", "0");
