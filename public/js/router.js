@@ -175,7 +175,7 @@ function playerSetup() {
         // gridColRight.removeChild(gridColRight.lastChild);
       }
 
-      document.querySelector(".chat-wrapper").style.zIndex = "9999";
+      document.querySelector(".chat-wrapper").style.display = "none";
       document.querySelector(".chats__message").style.color =
         "rgb(230,230,230)";
 
@@ -1000,30 +1000,52 @@ function hideButton() {
 animator.start();
 
 function zoomOut() {
+  firstR.classList.toggle("enabled-flex");
+  setTimeout(() => {
+    firstR.classList.toggle("enabled-opa");
+    previewContainer.classList.toggle("scale");
+    previewContainerGrid.classList.toggle("scale");
+    videoContainer.classList.toggle("scale");
+    gridLiveContainer.classList.toggle("scale");
+    gridLiveContainer.classList.toggle("top-live-button");
+    // publicButton.classList.toggle("enabled-flex");
+
+    sumAssets.classList.toggle("disabled-opa");
+
+    document.querySelector(".macroView").classList.toggle("dodgeColor");
+    document.querySelector(".chats__message").classList.toggle("fontScale");
+    publicButton.classList.toggle("enabled-opa");
+    publicAssetsWrapperTopFirst.classList.toggle("enabled-opa");
+  }, 100);
+}
+function zoomIn() {
+  firstR.classList.toggle("enabled-opa");
   previewContainer.classList.toggle("scale");
   previewContainerGrid.classList.toggle("scale");
   videoContainer.classList.toggle("scale");
   gridLiveContainer.classList.toggle("scale");
   gridLiveContainer.classList.toggle("top-live-button");
-  publicButton.classList.toggle("enabled-flex");
-  publicAssetsWrapperTopFirst.classList.toggle("enabled-flex");
-  publicAssetsWrapperTopLast.classList.toggle("enabled-flex");
-  publicAssetsWrapperBottom.classList.toggle("enabled-flex");
-  publicAssetsWrapperLeft.classList.toggle("enabled-flex");
-  publicAssetsWrapperRight.classList.toggle("enabled-flex");
-  sumAssets.classList.toggle("disabled-opa");
-
-  document.querySelector(".macroView").classList.toggle("dodgeColor");
-  document.querySelector(".chats__message").classList.toggle("fontScale");
-
   setTimeout(() => {
+    sumAssets.classList.toggle("disabled-opa");
+
+    document.querySelector(".macroView").classList.toggle("dodgeColor");
+    document.querySelector(".chats__message").classList.toggle("fontScale");
     publicButton.classList.toggle("enabled-opa");
     publicAssetsWrapperTopFirst.classList.toggle("enabled-opa");
   }, 100);
-
-  // console.log("Grid");
+  setTimeout(() => {
+    $("body").css("background-color", "dodgerblue");
+    firstR.classList.toggle("enabled-flex");
+  }, 400);
 }
-
+function rangeScaling() {
+  firstRange.classList.toggle("range-1");
+  previewContainer.classList.toggle("range-1-lecture");
+  previewContainerGrid.classList.toggle("range-1-lecture");
+  // videoContainer.classList.toggle("scale");
+  // gridLiveContainer.classList.toggle("scale");
+  // gridLiveContainer.classList.toggle("top-live-button");
+}
 // console.log(elem === document.activeElement);
 // if (elem === document.activeElement) {
 //   console.log("Element has focus!");
@@ -1077,7 +1099,7 @@ $(".toggle-layout").on("click", function (e) {
     $(".previewContainer").css("opacity", "0");
 
     $(".previewContainerGrid").css("display", "flex");
-
+    sumAssets.classList.toggle("disabled-opa");
     videoContainer.classList.toggle("hide-live");
     gridVideo.classList.toggle("show-grid");
     setTimeout(() => {
@@ -1093,7 +1115,7 @@ $(".toggle-layout").on("click", function (e) {
     $(".gridMode").css("opacity", "0");
     $(".liveMode").css("opacity", "1");
     $(this).toggleClass("shadowLeft");
-
+    sumAssets.classList.toggle("disabled-opa");
     videoContainer.classList.toggle("hide-live");
     gridVideo.classList.toggle("show-grid");
     $(".previewContainer").css("display", "block");
@@ -1118,6 +1140,8 @@ $(".toggle-view").on("click", function (e) {
     $(".macroView").css("opacity", "1");
     $(this).toggleClass("shadowLeft");
     $("body").css("background-color", "white");
+    zoomOut();
+    console.log("one");
 
     switchMode = false;
   } else if (switchMode === false) {
@@ -1125,7 +1149,8 @@ $(".toggle-view").on("click", function (e) {
     $(".microView").css("opacity", "1");
     $(".macroView").css("opacity", "0");
     $(this).toggleClass("shadowLeft");
-    $("body").css("background-color", "dodgerblue");
+    zoomIn();
+    console.log("two");
 
     switchMode = true;
   }
