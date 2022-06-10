@@ -33,7 +33,7 @@
 }
 @font-face {
   font-family: Corporate;
-  src: url("../font/GaramondCorporate-Regular.otf");
+  src: url("../font/GaramondCorporate-Regular.woff2");
 }
 
 * {
@@ -225,6 +225,8 @@
 body {
   margin: 0;
   background-color: dodgerblue;
+  font-feature-settings: "liga";
+  -webkit-font-feature-settings: "liga";
 }
 
 .wrapper-join {
@@ -1055,8 +1057,8 @@ input[type="color"] {
 }
 .growSymb {
   border-radius: 1.5px;
-  width: 8px;
-  height: 8px;
+  width: 4px;
+  height: 4px;
   border: 2px solid black;
 }
 
@@ -1153,6 +1155,11 @@ input[type="color"] {
   padding-top: 0.1vh;
   height: 2.5vh;
   position: absolute;
+}
+
+.sum-assets > img:hover {
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 .zoom-out {
@@ -1323,7 +1330,7 @@ input[type="color"] {
 }
 .grid-assets {
   position: absolute;
-  display: flex;
+  display: none;
   align-items: end;
   justify-content: flex-start;
   bottom: 3.2vh;
@@ -1349,6 +1356,7 @@ input[type="color"] {
   display: flex;
   flex-direction: column-reverse;
   margin-left: 0.75vh;
+  justify-content: initial !important;
 }
 .thumb-grid-img img {
   height: 100%;

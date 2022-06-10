@@ -3,7 +3,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Public Lectures</title> 
+  
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/vc-toggle-switch.css" />
     <link rel="stylesheet" href="./css/flick.css" />
@@ -26,7 +27,8 @@
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     <script src="https://sdk.videosdk.live/js-sdk/0.0.20/videosdk.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="js/flick.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/keen-slider@6.6.14/keen-slider.min.js"></script>
+    <script src="js/flick.js" defer></script>
     <script src="js/fetch.js"></script>
     <script src="js/Animator.js"></script>
     <script src="js/replayBehavior.js" defer></script>
@@ -46,6 +48,7 @@
     <script src="js/video.js" defer></script>
     <script src="js/overWritePlayer.js" defer></script>
     <script src="js/carousel.js" defer></script>
+
   </head>
 
   <body>
@@ -264,11 +267,20 @@
       <div class="videoWrapper-two" smoothen></div>
     </div>
     <div class="previewContainerGrid">
-      <div class="slider">
+      <!-- <div class="slider">
         <button class="btn-slider btn-next">></button>
         <button class="btn-slider btn-prev"></button>
+      </div> -->
+<div class="slider-wrapper">
+      <div id="my-keen-slider" class="keen-slider grabbable">
+        <div class="keen-slider__slide ">
+        </div>
       </div>
-
+      <div id="thumbnails" class="keen-slider2 thumbnail grabbable">
+        <div class="keen-slider__slide "></div>
+      </div>
+    </div>
+    
       <div class="cam-grid">
         <div class="cam-grid-wrap"></div>
       </div>
@@ -299,7 +311,7 @@
 
     <div class="overlayContainer">
       <div class="playerMode hidden">
-        <div class="preview-start">Play</div>
+        <!-- <div class="preview-start">Play</div> -->
         <div class="slider-container">
           <div class="custom-seekbar">
             <span></span>
@@ -482,5 +494,7 @@
         </div>
       </div>
     </footer>
+   
+
   </body>
 </html>

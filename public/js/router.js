@@ -8,8 +8,6 @@ const gridVideo = document.querySelector(".cam-grid");
 const playerContainer = document.querySelector(".playerMode");
 let gridColRight = document.querySelector(".container-right");
 let gridColLeft = document.querySelector(".container-left");
-let mainCarousel = document.querySelector(".slider");
-let navCarousel = document.querySelector(".carousel-nav");
 let gridThumbWrapper = document.querySelector(".grid-assets");
 
 let body = document.querySelector("body");
@@ -183,70 +181,16 @@ function playerSetup() {
       document.querySelector(".chats__message").style.color =
         "rgb(230,230,230)";
 
-      let mainFlickSlider = document.querySelector(".flickity-slider");
       let imageGrid = document.createElement("img");
       let mainCell = document.createElement("div");
-      mainCell.classList.add("slide");
+      mainCell.classList.add("keen-slider__slide");
+      imageGrid.classList.add("main-carousel-img");
       imageGrid.src = data.message.srcImgUrl;
       mainCell.appendChild(imageGrid);
       mainCarousel.appendChild(mainCell);
+      slider.update();
+      // slider.next();
 
-      const slides = document.querySelectorAll(".slide");
-
-      // loop through slides and set each slides translateX
-
-      // select next slide button
-      const nextSlide = document.querySelector(".btn-next");
-
-      // current slide counter
-      let curSlide = 0;
-      // maximum number of slides
-      let maxSlide = slides.length - 1;
-
-      // add event listener and navigation functionality
-      nextSlide.addEventListener("click", function () {
-        console.log(curSlide, maxSlide);
-
-        // check if current slide is the last and reset current slide
-        if (curSlide === maxSlide) {
-          curSlide = 0;
-        } else {
-          curSlide++;
-        }
-
-        //   move slide by -100%
-        slides.forEach((slide, indx) => {
-          slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
-        });
-      });
-
-      // select next slide button
-      const prevSlide = document.querySelector(".btn-prev");
-
-      // add event listener and navigation functionality
-      prevSlide.addEventListener("click", function () {
-        // console.log(curSlide, maxSlide);
-
-        // check if current slide is the first and reset current slide to last
-        if (curSlide === 0) {
-          curSlide = maxSlide;
-        } else {
-          curSlide--;
-        }
-
-        //   move slide by 100%
-        slides.forEach((slide, indx) => {
-          slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
-          // console.log(indx);
-        });
-      });
-
-      slides.forEach((slide, maxSlide) => {
-        slide.style.transform = `translateX(${maxSlide * 100}%)`;
-        // console.log(indx);
-      });
-
-      console.log(curSlide, maxSlide);
       let imageThumbWrap = document.createElement("div");
       let imageGridThumb = document.createElement("img");
       let imageNumber = document.createElement("span");
@@ -276,6 +220,7 @@ function playerSetup() {
       imageNumberMin.classList.add("thumb-numb");
       wrapImageTime.classList.add("flex-time");
       imageThumbWrap.classList.add("thumb-grid-img");
+      imageThumbWrap.classList.add("keen-slider__slide");
       imageThumbWrap.classList.add(`${"grid-assets" + imgCounter}`);
       wrapImageTime.appendChild(imageNumberMin);
       wrapImageTime.appendChild(space);
@@ -283,7 +228,9 @@ function playerSetup() {
 
       imageThumbWrap.appendChild(wrapImageTime);
       imageThumbWrap.appendChild(imageGridThumb);
-      gridThumbWrapper.appendChild(imageThumbWrap);
+      navCarousel.appendChild(imageThumbWrap);
+
+      thumbnails.update();
 
       let imageThumbNail = document.createElement("img");
       imageThumbNail.src = data.message.srcImgUrl;
@@ -654,11 +601,11 @@ function playerSetup() {
   //! REVERT
   player.on("revert-chat-message", (data) => {
     if (data.message.type == "launch-presentation") {
-      fond.style.backgroundColor = data.message.dataColor;
+      // fond.style.backgroundColor = data.message.dataColor;
     }
 
     if (data.message.type == "launch-projet") {
-      fond.style.backgroundColor = data.message.dataColor;
+      // fond.style.backgroundColor = data.message.dataColor;
     }
     if (data.message.type == "upload-public-vid") {
       let vidSlide = document.createElement("div");

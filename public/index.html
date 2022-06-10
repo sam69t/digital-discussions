@@ -44,7 +44,7 @@
     <script src="./js/router.js" defer></script>
   </head>
 
-  <body style="">
+  <body style="background-color: white">
     <header>
       <nav>
         <a href="http://localhost:3000/index.html">Home</a>
@@ -136,7 +136,44 @@
       <span class="conf-button-info">See lectures</span>
     </div>
 
-    <main class="conferences"></main>
+    <main class="conferences">
+      <div class="signature-wrap">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          src="/assets/videos/HUGOJAUFFRET.mp4"
+        ></video>
+      </div>
+      <div class="conf-preview-cam">
+        <video
+          muted
+          autoplay
+          loop
+          playsinline
+          src="/assets/videos/previewHugoJauffret.mp4"
+        ></video>
+        <a href="http://localhost:3000/room.html?mode=player">Play</a>
+      </div>
+      <div class="conf-img-preview">
+        <img src="/assets/img/public1.jpg" alt="" />
+        <img src="/assets/img/public1.jpg" alt="none" />
+        <img src="error.src" alt="" style="opacity: 0" />
+
+        <img src="/assets/img/public1.jpg" alt="" />
+        <img src="/assets/img/public1.jpg" alt="" />
+      </div>
+      <div class="title-conference-wrap">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          src="/assets/videos/HUGOJAUFFRET.mp4"
+        ></video>
+      </div>
+    </main>
 
     <script>
       let mainHome = document.querySelector(".home-wrap");

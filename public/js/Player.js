@@ -211,7 +211,7 @@ class Player {
     let dragWhilePlaying = false;
     let drag = false;
 
-    const buttonElem = document.querySelector(".preview-start");
+    // const buttonElem = document.querySelector(".preview-start");
     const pauseElem = document.querySelector(".pause");
 
     // buttonElem.textContent = "Play";
@@ -297,16 +297,16 @@ class Player {
       videoPlaying ? pauseVideo() : playVideo();
     };
 
-    buttonElem.onclick = () => {
-      buttonElem.style.opacity = "0";
-      setTimeout(() => {
-        buttonElem.style.display = "none";
-        videoPlaying ? pauseVideo() : playVideo();
-      }, 500);
+    // buttonElem.onclick = () => {
+    //   buttonElem.style.opacity = "0";
+    //   setTimeout(() => {
+    //     buttonElem.style.display = "none";
+    //     videoPlaying ? pauseVideo() : playVideo();
+    //   }, 500);
 
-      document.querySelector(".chat-wrapper").style.display = "block";
-      document.querySelector(".playGround").style.display = "none";
-    };
+    //   document.querySelector(".chat-wrapper").style.display = "block";
+    //   document.querySelector(".playGround").style.display = "none";
+    // };
 
     window.addEventListener("mousemove", (event) => {
       if (drag) moveSlider(event.clientX);
@@ -335,6 +335,9 @@ class Player {
       pauseElem.textContent = "Pause";
       hoverPublicImage();
     }
+    setTimeout(() => {
+      playVideo();
+    }, 150);
 
     sliderElem.onmousedown = (event) => {
       if (videoPlaying) dragWhilePlaying = true;
@@ -380,7 +383,6 @@ class Player {
     setupSubTitle(vid);
   }
 }
-
 function deepClone(obj) {
   // console.warn('deepClone() is deprecated, use structuredClone() instead')
   return JSON.parse(JSON.stringify(obj));

@@ -27,6 +27,9 @@ let chapterCrontrolsParticipant = document.querySelector(
   ".chapters-controls-participant"
 );
 
+let mainCarousel = document.querySelector("#my-keen-slider");
+let navCarousel = document.querySelector("#thumbnails");
+
 let camMicControls = document.querySelector(".cam-mic-controls");
 let colorControls = document.querySelector(".color-controls");
 let gridLiveContainer = document.querySelector(".player-actions");

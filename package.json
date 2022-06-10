@@ -13,6 +13,7 @@
     "fs": "0.0.1-security",
     "imagekit": "^3.2.5",
     "jsonwebtoken": "^8.5.1",
+    "keen-slider": "^6.6.14",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
     "open": "^8.4.0",
