@@ -68,53 +68,51 @@ function playerSetup() {
     if (data.message.type == "launch-projet") {
       // chatContainer.style.backgroundColor = data.message.dataColor;
       // document.body.style.backgroundColor = data.message.dataColor;
-      let instruction = document.createElement("span");
-      instruction.textContent = "Projet";
-      instruction.classList.add("instructions");
-      instruction.classList.add("style-projet");
-      videoContainerTwo.classList.add("resize-drag");
-      document.body.appendChild(instruction);
-      setTimeout(() => {
-        instruction.style.opacity = 1;
-        toolControllerP.style.setProperty("display", "block", "important");
-
-        videoContainerTwo.style.marginLeft = "-30vh";
-      }, 300);
-
-      console.log("spawn instruction");
-      setTimeout(() => {
-        instruction.style.opacity = 0;
-      }, 2000);
-      setTimeout(() => {
-        document.body.removeChild(instruction);
-      }, 2500);
+      // let instruction = document.createElement("span");
+      // instruction.textContent = "Projet";
+      // instruction.classList.add("instructions");
+      // instruction.classList.add("style-projet");
+      // videoContainerTwo.classList.add("resize-drag");
+      // document.body.appendChild(instruction);
+      // setTimeout(() => {
+      //   instruction.style.opacity = 1;
+      //   toolControllerP.style.setProperty("display", "block", "important");
+      //   videoContainerTwo.style.marginLeft = "-30vh";
+      // }, 300);
+      // console.log("spawn instruction");
+      // setTimeout(() => {
+      //   instruction.style.opacity = 0;
+      // }, 2000);
+      // setTimeout(() => {
+      //   document.body.removeChild(instruction);
+      // }, 2500);
     }
 
     if (data.message.type == "upload-public-img") {
       let publicImg = document.createElement("div");
       let image = document.createElement("img");
       image.src = data.message.srcUrl;
-      publicImg.classList.add("public-img");
+      image.classList.add("public-img");
       publicImg.classList.add("imageBlockwrapper");
       publicImg.classList.add("assets");
       publicImg.appendChild(image);
       publicAssetsWrapperTopFirst.appendChild(publicImg);
 
-      let imgSlide = document.createElement("div");
-      let imgofSlide = document.createElement("img");
-      imgSlide.classList.add("moving-banner-v");
-      imgSlide.classList.add("moving-img");
+      // let imgSlide = document.createElement("div");
+      // let imgofSlide = document.createElement("img");
+      // imgSlide.classList.add("moving-banner-v");
+      // imgSlide.classList.add("moving-img");
 
-      imgofSlide.src = data.message.srcUrl;
-      imgSlide.appendChild(imgofSlide);
-      document.body.appendChild(imgSlide);
-      imgSlide.addEventListener(
-        "animationend",
-        function () {
-          document.body.removeChild(imgSlide);
-        },
-        false
-      );
+      // imgofSlide.src = data.message.srcUrl;
+      // imgSlide.appendChild(imgofSlide);
+      // document.body.appendChild(imgSlide);
+      // imgSlide.addEventListener(
+      //   "animationend",
+      //   function () {
+      //     document.body.removeChild(imgSlide);
+      //   },
+      //   false
+      // );
     }
     if (data.message.type == "upload-public-vid") {
       let publicVid = document.createElement("div");
@@ -647,8 +645,12 @@ function playerSetup() {
       CHAT.addTextToLastMsg(data.message.message);
     }
     if (data.message.type == "img-url") {
-      // previewContainer.removeChild(previewContainer.lastChild);
-      // SumAssets.removeChild(SumAssets.lastChild);
+      try {
+        previewContainer.removeChild(previewContainer.lastChild);
+        SumAssets.removeChild(SumAssets.lastChild);
+      } catch (e) {
+        console.warn("could not remove img-url", data.message);
+      }
       // gridColRight.removeChild(gridColRight.lastChild);
       // gridColLeft.removeChild(gridColLeft.lastChild);
       // if (gridColRight.childNodes.length === 0) {
@@ -954,9 +956,10 @@ function hideButton() {
 animator.start();
 
 function zoomOut() {
+  publicButton.classList.toggle("enabled-flex");
   firstR.classList.toggle("enabled-flex");
+
   setTimeout(() => {
-    firstR.classList.toggle("enabled-opa");
     previewContainer.classList.toggle("scale");
     previewContainerGrid.classList.toggle("scale");
     videoContainer.classList.toggle("scale");
@@ -969,11 +972,14 @@ function zoomOut() {
     document.querySelector(".macroView").classList.toggle("dodgeColor");
     document.querySelector(".chats__message").classList.toggle("fontScale");
     publicButton.classList.toggle("enabled-opa");
+    firstR.classList.toggle("enabled-opa");
     publicAssetsWrapperTopFirst.classList.toggle("enabled-opa");
   }, 100);
 }
 function zoomIn() {
+  publicButton.classList.toggle("enabled-opa");
   firstR.classList.toggle("enabled-opa");
+
   previewContainer.classList.toggle("scale");
   previewContainerGrid.classList.toggle("scale");
   videoContainer.classList.toggle("scale");
@@ -989,6 +995,7 @@ function zoomIn() {
   }, 100);
   setTimeout(() => {
     $("body").css("background-color", "dodgerblue");
+    publicButton.classList.toggle("enabled-flex");
     firstR.classList.toggle("enabled-flex");
   }, 400);
 }

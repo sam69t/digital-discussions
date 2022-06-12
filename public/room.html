@@ -3,8 +3,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Public Lectures</title> 
-  
+    <title>Public Lectures</title>
+
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/vc-toggle-switch.css" />
     <link rel="stylesheet" href="./css/flick.css" />
@@ -48,7 +48,6 @@
     <script src="js/video.js" defer></script>
     <script src="js/overWritePlayer.js" defer></script>
     <script src="js/carousel.js" defer></script>
-
   </head>
 
   <body>
@@ -89,24 +88,35 @@
       <!-- <button class="btn">+</button> -->
 
       <button id="exportBtn" class="btn export">Export</button>
-
-      <label for="publicImg" class="btn">+</label>
-      <input
-        id="publicImg"
-        style="display: none"
-        type="file"
-        accept="image/*"
-      />
-      <label for="publicVid" class="btn">=+</label>
-      <input
-        id="publicVid"
-        style="display: none"
-        type="file"
-        accept="video/*"
-      />
+      <button class="btn add-comment" onclick="comInterface()">
+        Add comment
+      </button>
+      <div class="comment-interface" onclick="">
+        <span class="info-comment"
+          >* Here you can add
+          blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla
+          *</span
+        >
+        <span class="close-i-com" onclick="hideInterface()">Close</span>
+        <label for="publicImg" class="btn">Add image</label>
+        <input
+          id="publicImg"
+          style="display: none"
+          type="file"
+          accept="image/*"
+        />
+        <label for="publicVid" class="btn">Add video</label>
+        <input
+          id="publicVid"
+          style="display: none"
+          type="file"
+          accept="video/*"
+        />
+        <input id="publicText" placeholder="Add text" type="text" />
+      </div>
     </div>
     <div class="public-assets-topFirst2">
-      <div class="imageBlockWrapper">
+      <!-- <div class="imageBlockWrapper">
         <img class="public-img"src="assets/img/public3.jpg"></img>
       </div>
       <div class="imageBlockWrapper">
@@ -120,32 +130,30 @@
       </div>
       <div class="public-comment">
         https://convertingcolors.com/rgb-color-255_251_201.html</span>
-      </div>
-   </div>
-   <div class="public-assets-right2">
-        
-    <div class="imageBlockWrapper">
+      </div> -->
+    </div>
+    <div class="public-assets-right2">
+      <!-- <div class="imageBlockWrapper">
       <img class="public-img"src="assets/img/public2.jpg"></img>
-    </div>
+     </div>
 
-    <div class="imageBlockWrapper">
-      <img class="public-img"src="https://ik.imagekit.io/diploma/PUBlIC/test_image_HDTrlMO5x.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654069554322"></img>
+      <div class="imageBlockWrapper">
+     <img class="public-img"src="https://ik.imagekit.io/diploma/PUBlIC/test_image_HDTrlMO5x.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654069554322"></img>
+     </div> -->
     </div>
-  </div>
-  <div class="public-assets-left2">
-        
-    <div class="imageBlockWrapper">
+    <div class="public-assets-left2">
+      <!-- <div class="imageBlockWrapper">
       <img class="public-img"src="https://ik.imagekit.io/diploma/HUGO_JAUFFET/test_image_IkgFPxI5D.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1653658308024"></img>
     </div>
 
     <div class="imageBlockWrapper">
       <img class="public-img"src="assets/img/public6.jpg"></img>
+    </div> -->
     </div>
-  </div>
     <div class="first-range-public">
       <div class="first-range">
         <div class="public-assets-topFirst">
-          <div class="imageBlockWrapper">
+          <!-- <div class="imageBlockWrapper">
             <img class="public-img"src="assets/img/public5.jpg"></img>
           </div>
           <div class="imageBlockWrapper">
@@ -153,11 +161,10 @@
           </div>
           <div class="imageBlockWrapper">
             <img class="public-img"src="https://ik.imagekit.io/diploma/PUBlIC/image_1_425005_XfL14AFwN.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654156131201"></img>
-          </div>
-     
+          </div> -->
         </div>
         <div class="public-assets-topLast">
-          <div class="imageBlockWrapper">
+          <!-- <div class="imageBlockWrapper">
             <img class="public-img"src="/assets/img/public1.jpg"></img>
           </div>
           <div class="public-comment">
@@ -165,10 +172,10 @@
           </div>
           <div class="imageBlockWrapper">
             <img class="public-img"src="assets/img/public7.jpg"></img>
-          </div>
+          </div> -->
         </div>
         <div class="public-assets-bottom">
-          <div class="imageBlockWrapper">
+          <!-- <div class="imageBlockWrapper">
             <img class="public-img"src="assets/img/public3.jpg"></img>
           </div>
           <div class="imageBlockWrapper">
@@ -182,10 +189,10 @@
           </div>
           <div class="public-comment">
             https://convertingcolors.com/rgb-color-255_251_201.html</span>
-          </div>
+          </div> -->
         </div>
         <div class="public-assets-left">
-          <div class="imageBlockWrapper">
+          <!-- <div class="imageBlockWrapper">
             <img class="public-img"src="assets/img/public2.jpg"></img>
           </div>
       
@@ -201,7 +208,7 @@
       
           <div class="imageBlockWrapper">
             <img class="public-img"src="assets/img/public6.jpg"></img>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -239,7 +246,7 @@
         <p><img style="position:absolute; z-index:9999999999"></img></p>
     </div> -->
     <header class="player-actions">
-      <div class="name-lecture">     
+      <div class="name-lecture">
         <span> Hugo Jauffret</span>
       </div>
       <div class="switch-container">
@@ -249,7 +256,7 @@
           <span class="liveMode">Live</span>
         </div>
       </div>
-      <div class="name-lecture">     
+      <div class="name-lecture">
         <span> Archipelago</span>
       </div>
       <!-- <div class="toggle-container">
@@ -271,16 +278,15 @@
         <button class="btn-slider btn-next">></button>
         <button class="btn-slider btn-prev"></button>
       </div> -->
-<div class="slider-wrapper">
-      <div id="my-keen-slider" class="keen-slider grabbable">
-        <div class="keen-slider__slide ">
+      <div class="slider-wrapper">
+        <div id="my-keen-slider" class="keen-slider grabbable">
+          <div class="keen-slider__slide"></div>
+        </div>
+        <div id="thumbnails" class="keen-slider2 thumbnail grabbable">
+          <div class="keen-slider__slide"></div>
         </div>
       </div>
-      <div id="thumbnails" class="keen-slider2 thumbnail grabbable">
-        <div class="keen-slider__slide "></div>
-      </div>
-    </div>
-    
+
       <div class="cam-grid">
         <div class="cam-grid-wrap"></div>
       </div>
@@ -481,11 +487,13 @@
         </div>
       </div>
     </div>
-<div class="sub-titles-wrapper">
-  <span class="sub-title-container"></span>
-</div>
+    <div class="sub-titles-wrapper">
+      <span class="sub-title-container"></span>
+    </div>
     <footer class="player-actions-bottom">
-      <div><button class="btn scaling-range" onclick="rangeScaling()">+</button></div>
+      <div>
+        <button class="btn scaling-range" onclick="rangeScaling()">+</button>
+      </div>
       <div class="switch-container-bottom" onclick="">
         <div class="toggle-view"></div>
         <div class="toggle-info">
@@ -494,7 +502,5 @@
         </div>
       </div>
     </footer>
-   
-
   </body>
 </html>

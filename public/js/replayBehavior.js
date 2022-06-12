@@ -121,3 +121,12 @@ function showText() {
     bool = true;
   }, 50);
 }
+let comIn = document.querySelector(".comment-interface");
+
+function comInterface() {
+  comIn.classList.toggle("enabled-flex");
+}
+
+function hideInterface() {
+  comIn.classList.toggle("enabled-flex");
+}

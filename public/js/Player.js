@@ -1,6 +1,7 @@
 let amount;
 let amountTimer;
-const getOriginal = true;
+const getOriginal = false;
+let shotProjet = true;
 
 let subtitleContainer = document.querySelector(".sub-title-container");
 
@@ -393,51 +394,51 @@ function setupSubTitle(vid) {
     var captionCues = [
         {
           time: 0,
-          text: "Hello everybody",
+          text: "",
+        },
+        {
+          time: 2,
+          text: "Hi, hi, hi!",
         },
         {
           time: 5,
-          text: "relatively small rectangle on the screen,",
+          text: "Super glad to be here today",
         },
         {
-          time: 9,
-          text: "often displayed alongside ads, comments, and ",
+          time: 8,
+          text: "My name is Hugo Jauffret, I'm French,",
         },
         {
-          time: 13.5,
-          text: "suggestions of other videos.",
+          time: 10.5,
+          text: "I come from a small town, near Paris",
+        },
+        {
+          time: 14,
+          text: "and today I'm going to tell you a bit about my work",
+        },
+        {
+          time: 16.5,
+          text: "and my practice",
         },
         {
           time: 18,
-          text: "Video sharing platforms are indifferent to ambiance",
+          text: "I'm going to present you a particular project,",
         },
         {
-          time: 23,
-          text: "but it doesn’t necessarily have to be that way!",
+          time: 20,
+          text: "my practice, which is situated between CGI and graphic design,",
         },
         {
-          time: 28,
-          text: "Imagine a media player that could grow in order to emphasize",
+          time: 26,
+          text: "particularly the visual identity which is inspired by",
         },
         {
-          time: 36,
-          text: "a specific moment in a story,",
+          time: 29,
+          text: "vernacular codes and urban space.",
         },
         {
-          time: 38,
-          text: "spin around to get your point across,",
-        },
-        {
-          time: 42,
-          text: "change the website’s background color",
-        },
-        {
-          time: 45,
-          text: "to reflect a brighter tone",
-        },
-        {
-          time: 47.5,
-          text: "or even shake the screen",
+          time: 37,
+          text: "So I'm going to tell you about a project called Archipelago.",
         },
         {
           time: 50,
@@ -562,6 +563,35 @@ function setupSubTitle(vid) {
       ],
       _loop = function (e) {
         vid.addEventListener("timeupdate", function () {
+          console.log(vid.currentTime);
+          if (shotProjet === true) {
+            if (vid.currentTime > 32 && vid.currentTime < 32.5) {
+              let instruction = document.createElement("span");
+              instruction.textContent = "Projet";
+              instruction.classList.add("instructions");
+              instruction.classList.add("style-projet");
+              videoContainerTwo.classList.add("resize-drag");
+              document.body.appendChild(instruction);
+              setTimeout(() => {
+                instruction.style.opacity = 1;
+                toolControllerP.style.setProperty(
+                  "display",
+                  "block",
+                  "important"
+                );
+                videoContainerTwo.style.marginLeft = "-30vh";
+              }, 300);
+              console.log("spawn instruction");
+              setTimeout(() => {
+                instruction.style.opacity = 0;
+              }, 2500);
+              setTimeout(() => {
+                document.body.removeChild(instruction);
+              }, 3000);
+              shotProjet = false;
+            }
+          }
+
           vid.currentTime > captionCues[e].time &&
             vid.currentTime < captionCues[e].time + 1 &&
             (subtitleContainer.textContent = captionCues[e].text);

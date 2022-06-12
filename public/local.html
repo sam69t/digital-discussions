@@ -8,40 +8,140 @@
   <body>
     <button id="insertBtn">Insert</button>
     <button id="saveBtn">save</button>
+    <div id="container-conf1-top"></div>
+    <div id="container-conf2-top"></div>
     <script>
-      const filename = "12344efgz6890.csv";
+      class Typer {
+        constructor(options) {
+          this.props = {
+            element: document.body,
+            speed: 500, // millis, top speed
+            variation: 0.8,
+          };
 
-      const importedCSV = JSON.parse(localStorage.getItem(filename) || "[]");
+          this.setOptions(options);
+          this.text = "";
+        }
 
-      console.log(importedCSV);
+        setOptions(options) {
+          Object.assign(this.props, options);
+        }
 
-      if (importedCSV.length === 0) {
-        for (let i = 0; i < 10; i++) {
-          const lastEntry = importedCSV[importedCSV.length - 1];
-          const timestamp = lastEntry ? lastEntry.timestamp + 100 : 100;
+        async update(resolve) {
+          const { props } = this;
+          const delay = props.speed * (1 - Math.random() * props.variation);
 
-          importedCSV.push({ timestamp, msg: "tklyj" });
-          console.log(importedCSV);
+          const leftChars = this.text.split("");
+
+          if (leftChars.length === 0) {
+            resolve();
+            return;
+          }
+          const nextChar = leftChars.shift() || "";
+          this.props.element.textContent += nextChar;
+          this.text = leftChars.join("");
+
+          await this.wait(delay);
+
+          this.update(resolve);
+        }
+
+        write(text, options) {
+          const { props } = this;
+          this.text += text;
+          this.setOptions(options);
+
+          return new Promise((resolve) => {
+            this.update(resolve);
+          });
+        }
+
+        eraseAll() {
+          this.props.element.textContent = "";
+        }
+
+        wait(delay) {
+          return new Promise((resolve) =>
+            setTimeout(() => {
+              resolve();
+            }, delay)
+          );
         }
       }
 
-      document.querySelector("#insertBtn").onclick = () => {
-        insertMsg({ timestamp: Math.random() * 500, msg: "inserted stuff" });
-        console.log(importedCSV);
-      };
+      const div1 = new Typer({
+        element: document.querySelector("#container-conf1-top"),
+        // speed
+      });
 
-      document.querySelector("#saveBtn").onclick = () => {
-        localStorage.setItem(filename, JSON.stringify(importedCSV));
-        console.log("saved");
-      };
-
-      function insertMsg(data) {
-        const index = importedCSV.findIndex((prevEntry, index) => {
-          return data.timestamp < prevEntry.timestamp;
+      async function writeIntro() {
+        await div1.write("hello");
+        await div1.wait(1000);
+        await div1.eraseAll();
+        await div1.write("whatsup", {
+          element: document.querySelector("#container-conf2-top"),
         });
+        await div1.wait(1000);
+        await div1.eraseAll();
 
-        importedCSV.splice(index, 0, data);
+        await writeIntro();
       }
+
+      async function writeLoop() {
+        await div1.write("this", {
+          element: document.querySelector("#container-conf1-top"),
+        });
+        await div1.wait(1000);
+        await div1.eraseAll();
+        await div1.write("is a loop", {
+          element: document.querySelector("#container-conf2-top"),
+        });
+        await div1.wait(1000);
+        await div1.eraseAll();
+
+        await writeLoop();
+      }
+      animate();
+
+      async function animate() {
+        await writeIntro();
+        // await div1.wait(1000);
+        // await writeLoop();
+      }
+
+      // const filename = "12344efgz6890.csv";
+
+      // const importedCSV = JSON.parse(localStorage.getItem(filename) || "[]");
+
+      // console.log(importedCSV);
+
+      // if (importedCSV.length === 0) {
+      //   for (let i = 0; i < 10; i++) {
+      //     const lastEntry = importedCSV[importedCSV.length - 1];
+      //     const timestamp = lastEntry ? lastEntry.timestamp + 100 : 100;
+
+      //     importedCSV.push({ timestamp, msg: "tklyj" });
+      //     console.log(importedCSV);
+      //   }
+      // }
+
+      // document.querySelector("#insertBtn").onclick = () => {
+      //   insertMsg({ timestamp: Math.random() * 500, msg: "inserted stuff" });
+      //   console.log(importedCSV);
+      // };
+
+      // document.querySelector("#saveBtn").onclick = () => {
+      //   localStorage.setItem(filename, JSON.stringify(importedCSV));
+      //   console.log("saved");
+      // };
+
+      // function insertMsg(data) {
+      //   const index = importedCSV.findIndex((prevEntry, index) => {
+      //     return data.timestamp < prevEntry.timestamp;
+      //   });
+
+      //   importedCSV.splice(index, 0, data);
+      // }
     </script>
   </body>
 </html>
