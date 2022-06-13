@@ -232,8 +232,8 @@ function playerSetup() {
 
       let imageThumbNail = document.createElement("img");
       imageThumbNail.src = data.message.srcImgUrl;
-      imageThumbNail.style.marginLeft = widthTimeStamp + "%";
-      imageThumbNail.classList.add(`${"assets" + imgCounter}`);
+      imageThumbNail.setAttribute("number", imgCounter);
+      imageThumbNail.classList.add(`${"assets"}`);
       SumAssets.appendChild(imageThumbNail);
       let imageWrap = document.createElement("div");
       let cross = document.createElement("div");
@@ -249,7 +249,9 @@ function playerSetup() {
       let infoSymb = document.createElement("span");
 
       imageWrap.classList.add(`${"imageBlock" + imgCounter}`);
+      // imageWrap.setAttribute("number", imgCounter);
       imageWrap.classList.add(`${"imageStyle"}`);
+      imageWrap.classList.add(`${"move-public"}`);
       imageWrap.style.zIndex = zCounter;
 
       cross.classList.add("cross");
@@ -282,6 +284,11 @@ function playerSetup() {
       assetsCliked();
       growAssets();
       showText();
+      reEnabled();
+      setTimeout(() => {
+        imageThumbNail.style.opacity = 1;
+        imageThumbNail.style.marginLeft = widthTimeStamp + "%";
+      }, 300);
     }
     if (data.message.type == "vid-url") {
       let widthTimeStamp = amount * 100;
@@ -303,8 +310,15 @@ function playerSetup() {
       previewContainer.appendChild(video);
     }
 
+    // if (
+    //   data.message.type == "moving-img-participant" ||
+    //   data.message.type == "resize-img-participant"
+    // ) {
+    // }
     if (data.message.type == "moving-img-participant") {
       var $webcam = $(".imageBlock1");
+      $webcam.addClass("isMoving-b");
+      $webcam.removeClass("move-public");
 
       $webcam.css(
         "-webkit-transform",
@@ -314,9 +328,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock1");
+      $webcam.removeClass("isMoving-b");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-2") {
       var $webcam = $(".imageBlock2");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -325,10 +345,16 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock2");
+      $webcam.removeClass("isMoving-w");
+      $webcam.addClass("move-public");
     }
 
     if (data.message.type == "moving-img-participant-3") {
       var $webcam = $(".imageBlock3");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -337,9 +363,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock3");
+      $webcam.removeClass("isMoving-w");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-4") {
       var $webcam = $(".imageBlock4");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -348,9 +380,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock4");
+      $webcam.removeClass("isMoving-w");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-5") {
       var $webcam = $(".imageBlock5");
+      $webcam.addClass("isMoving-b");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -359,9 +397,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock5");
+      $webcam.removeClass("isMoving-b");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-6") {
       var $webcam = $(".imageBlock6");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -370,9 +414,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock6");
+      $webcam.removeClass("isMoving-w");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-7") {
       var $webcam = $(".imageBlock7");
+      $webcam.addClass("isMoving-b");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -381,9 +431,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock7");
+      $webcam.removeClass("isMoving-b");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-8") {
       var $webcam = $(".imageBlock8");
+      $webcam.addClass("isMoving-b");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -392,9 +448,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock8");
+      $webcam.removeClass("isMoving-b");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-9") {
       var $webcam = $(".imageBlock9");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -403,9 +465,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock9");
+      $webcam.removeClass("isMoving-w");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-10") {
       var $webcam = $(".imageBlock10");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -414,9 +482,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock10");
+      $webcam.removeClass("isMoving-w");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-11") {
       var $webcam = $(".imageBlock11");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -425,9 +499,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock11");
+      $webcam.removeClass("isMoving-w");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-12") {
       var $webcam = $(".imageBlock12");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -436,9 +516,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock12");
+      $webcam.removeClass("isMoving-w");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-13") {
       var $webcam = $(".imageBlock13");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -447,9 +533,15 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock13");
+      $webcam.removeClass("isMoving-w");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-14") {
       var $webcam = $(".imageBlock14");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css(
         "-webkit-transform",
         "translate(" +
@@ -458,6 +550,10 @@ function playerSetup() {
           data.message.movingWebcam.y +
           "px )"
       );
+    } else {
+      var $webcam = $(".imageBlock14");
+      $webcam.removeClass("isMoving-w");
+      $webcam.addClass("move-public");
     }
     if (data.message.type == "moving-img-participant-15") {
       var $webcam = $(".imageBlock15");
@@ -503,33 +599,42 @@ function playerSetup() {
       var $webcam = $(".video-test2");
 
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-3") {
       var $webcam = $(".imageBlock3");
       $webcam.css("width", data.message.resizeWebcam.w);
-      $webcam.css("height", data.message.resizeWebcam.h);
+      // $webcam.css("height", data.message.resizeWebcam.h);
     }
 
     if (data.message.type == "resize-img-participant") {
-      var $webcam = $(".imageBlock");
-      $webcam.css("width", data.message.resizeWebcam.w);
-      // $webcam.css("height", data.message.resizeWebcam.h);
-    }
-    if (data.message.type == "resize-img-participant") {
       var $webcam = $(".imageBlock1");
+
+      $webcam.addClass("isMoving-b");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
+      // $webcam.css("opacity", "0.7");
+
       // $webcam.css("height", data.message.resizeWebcam.h);
+    } else {
+      // var $webcam = $(".imageBlock1");
+      // $webcam.css("opacity", "1");
     }
 
     if (data.message.type == "resize-img-participant-2") {
       var $webcam = $(".imageBlock2");
+
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
 
     if (data.message.type == "resize-img-participant-3") {
       var $webcam = $(".imageBlock3");
+
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
@@ -541,51 +646,74 @@ function playerSetup() {
     }
     if (data.message.type == "resize-img-participant-5") {
       var $webcam = $(".imageBlock5");
+
+      $webcam.addClass("isMoving-b");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-6") {
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       var $webcam = $(".imageBlock6");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-7") {
       var $webcam = $(".imageBlock7");
+
+      $webcam.addClass("isMoving-b");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-8") {
       var $webcam = $(".imageBlock8");
+
+      $webcam.addClass("isMoving-b");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-9") {
       var $webcam = $(".imageBlock9");
+      $webcam.addClass("isMoving-b");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-10") {
       var $webcam = $(".imageBlock10");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-11") {
       var $webcam = $(".imageBlock11");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-12") {
       var $webcam = $(".imageBlock12");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-13") {
       var $webcam = $(".imageBlock13");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
     if (data.message.type == "resize-img-participant-14") {
       var $webcam = $(".imageBlock14");
+      $webcam.addClass("isMoving-w");
+      $webcam.removeClass("move-public");
       $webcam.css("width", data.message.resizeWebcam.w);
       // $webcam.css("height", data.message.resizeWebcam.h);
     }
@@ -625,6 +753,7 @@ function playerSetup() {
         false
       );
     }
+
     // console.log(data.message.type + "revert");
     if (data.message.type == "moving-webcam-participant") {
       // console.log(data.message.movingWebcam);

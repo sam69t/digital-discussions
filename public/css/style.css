@@ -1136,6 +1136,18 @@ input[type="color"] {
 .scale {
   transform: scale(0.5);
 }
+.assets {
+  opacity: 0;
+}
+
+.isMoving-b {
+  cursor: not-allowed !important;
+  border: 1px solid black;
+}
+.isMoving-w {
+  cursor: not-allowed !important;
+  border: 1px solid white;
+}
 
 .sum-assets {
   transition: var(--inactive);

@@ -563,7 +563,7 @@ function setupSubTitle(vid) {
       ],
       _loop = function (e) {
         vid.addEventListener("timeupdate", function () {
-          console.log(vid.currentTime);
+          // console.log(vid.currentTime);
           if (shotProjet === true) {
             if (vid.currentTime > 32 && vid.currentTime < 32.5) {
               let instruction = document.createElement("span");

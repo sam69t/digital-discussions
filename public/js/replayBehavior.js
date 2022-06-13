@@ -17,10 +17,40 @@ function imageBehavior() {
 function disabled() {
   $(".cross").on("click", function (e) {
     console.log("click");
-    $(this).siblings().remove();
-    $(this).parent().remove();
+    // $(this).siblings().remove();
+    // $(this).parent().remove();
+    // $(this).siblings().css("opacity", "0");
+    $(this).parent().css("opacity", "0");
+
+    setTimeout(() => {
+      $(this).parent().css("display", "none");
+    }, 500);
   });
   // console.log("disabled");
+}
+
+function reEnabled() {
+  const imgNumber = document.querySelectorAll("[number]");
+  imgNumber.forEach((img) => {
+    img.addEventListener("click", () => {
+      console.log(img.getAttribute("number"));
+      let number = img.getAttribute("number");
+      setTimeout(() => {
+        $(`${".imageBlock" + number}`).css("display", "block");
+      }, 500);
+      $(`${".imageBlock" + number}`).css("opacity", "1");
+    });
+    // img.addEventListener("mouseenter", () => {
+    //   console.log(img.getAttribute("number"));
+    //   let number = img.getAttribute("number");
+    //   $(`${".desc" + number}`).css("opacity", "1");
+    // });
+    // img.addEventListener("mouseleave", () => {
+    //   console.log(img.getAttribute("number"));
+    //   let number = img.getAttribute("number");
+    //   $(`${".desc" + number}`).css("opacity", "0");
+    // });
+  });
 }
 function onHover() {
   $(".imageStyle").hover(
