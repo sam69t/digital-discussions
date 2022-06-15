@@ -37,8 +37,11 @@ let overViewButtonBottom = document.querySelector(".player-actions-bottom");
 
 let publicButton = document.querySelector(".public-add");
 let firstR = document.querySelector(".first-range");
+let secondR = document.querySelector(".second-range");
 
 let firstRange = document.querySelector(".first-range-public");
+let secondRange = document.querySelector(".second-range-public");
+
 let publicAssetsWrapperTopFirst = document.querySelector(
   ".public-assets-topFirst"
 );
@@ -48,6 +51,13 @@ let publicAssetsWrapperTopLast = document.querySelector(
 let publicAssetsWrapperBottom = document.querySelector(".public-assets-bottom");
 let publicAssetsWrapperLeft = document.querySelector(".public-assets-left");
 let publicAssetsWrapperRight = document.querySelector(".public-assets-right");
+
+let publicAssetsWrapperTopFirst2 = document.querySelector(
+  ".public-assets-topFirst2"
+);
+
+// let publicAssetsWrapperLeft2 = document.querySelector(".public-assets-left2");
+let publicAssetsWrapperRight2 = document.querySelector(".public-assets-right2");
 
 let sumAssets = document.querySelector(".sum-assets");
 

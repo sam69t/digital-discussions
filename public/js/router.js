@@ -5,6 +5,10 @@ const previewContainerGrid = document.querySelector(".previewContainerGrid");
 const videoContainer = document.querySelector(".videos-container");
 const gridVideo = document.querySelector(".cam-grid");
 
+let publicCounter = 0;
+const homeUrl = "http://localhost:3000";
+const UrlConf = "http://localhost:3000/room.html?mode=player";
+
 const playerContainer = document.querySelector(".playerMode");
 let gridColRight = document.querySelector(".container-right");
 let gridColLeft = document.querySelector(".container-left");
@@ -89,14 +93,33 @@ function playerSetup() {
     }
 
     if (data.message.type == "upload-public-img") {
+      publicCounter++;
       let publicImg = document.createElement("div");
       let image = document.createElement("img");
       image.src = data.message.srcUrl;
       image.classList.add("public-img");
       publicImg.classList.add("imageBlockwrapper");
-      publicImg.classList.add("assets");
+      publicImg.classList.add("assets-public");
       publicImg.appendChild(image);
       publicAssetsWrapperTopFirst.appendChild(publicImg);
+
+      if (publicCounter >= 1 && publicCounter <= 3) {
+        publicAssetsWrapperTopFirst.appendChild(publicImg);
+      } else if (publicCounter >= 4 && publicCounter <= 5) {
+        publicAssetsWrapperRight.appendChild(publicImg);
+      } else if (publicCounter >= 6 && publicCounter <= 10) {
+        publicAssetsWrapperBottom.appendChild(publicImg);
+      } else if (publicCounter >= 11 && publicCounter <= 12) {
+        publicAssetsWrapperLeft.appendChild(publicImg);
+      } else if (publicCounter >= 13 && publicCounter <= 15) {
+        publicAssetsWrapperTopLast.appendChild(publicImg);
+      } else if (publicCounter >= 16 && publicCounter <= 20) {
+        publicAssetsWrapperTopFirst2.appendChild(publicImg);
+      } else if (publicCounter >= 21 && publicCounter <= 22) {
+        publicAssetsWrapperRight2.appendChild(publicImg);
+      }
+
+      console.log("Create Comment", publicCounter);
 
       // let imgSlide = document.createElement("div");
       // let imgofSlide = document.createElement("img");
@@ -172,6 +195,7 @@ function playerSetup() {
         SumAssets.style.opacity = "1";
         overViewButtonBottom.style.opacity = 1;
         gridLiveContainer.style.opacity = 1;
+
         // gridColRight.removeChild(gridColRight.lastChild);
       }
 
@@ -288,6 +312,9 @@ function playerSetup() {
       setTimeout(() => {
         imageThumbNail.style.opacity = 1;
         imageThumbNail.style.marginLeft = widthTimeStamp + "%";
+        if (imgCounter <= 1) {
+          // previewContainerGrid.style.display = "none";
+        }
       }, 300);
     }
     if (data.message.type == "vid-url") {
@@ -757,14 +784,14 @@ function playerSetup() {
     // console.log(data.message.type + "revert");
     if (data.message.type == "moving-webcam-participant") {
       // console.log(data.message.movingWebcam);
-      var $webcam = $(".videoWrapper-one");
+      var $webcam = $(".videoWrapper-two");
 
       $webcam.css("left", data.message.movingWebcam.x);
       $webcam.css("top", data.message.movingWebcam.y);
     }
     if (data.message.type == "resize-webcam-participant") {
       // console.log(data.message.movingWebcam);
-      var $webcam = $(".videoWrapper-one");
+      var $webcam = $(".videoWrapper-two");
 
       $webcam.css("width", data.message.resizeWebcam.w);
       $webcam.css("height", data.message.resizeWebcam.h);
@@ -1138,6 +1165,13 @@ function rangeScaling() {
     gridLiveContainer.classList.toggle("range-1-lecture");
     gridLiveContainer.classList.toggle("top-live-button-2");
 
+    publicAssetsWrapperTopFirst2.classList.toggle("enabled-flex");
+    publicAssetsWrapperRight2.classList.toggle("enabled-flex");
+
+    secondRange.classList.toggle("enabled-flex");
+    secondR.classList.toggle("enabled-flex");
+    secondR.classList.toggle("enabled-opa");
+
     step1 = false;
     step2 = true;
     console.log("step1");
@@ -1145,6 +1179,8 @@ function rangeScaling() {
   } else if (step2 === true) {
     console.log("step2");
     firstRange.classList.toggle("range-2");
+    secondRange.classList.toggle("range-1");
+
     previewContainer.classList.toggle("range-2-lecture");
     previewContainerGrid.classList.toggle("range-2-lecture");
     videoContainer.classList.toggle("range-2-lecture");
@@ -1159,6 +1195,7 @@ function rangeScaling() {
   } else if (step3 === true) {
     console.log("step3");
     firstRange.classList.toggle("range-2");
+    secondRange.classList.toggle("range-1");
     previewContainer.classList.toggle("range-2-lecture");
     previewContainerGrid.classList.toggle("range-2-lecture");
     videoContainer.classList.toggle("range-2-lecture");
@@ -1178,6 +1215,13 @@ function rangeScaling() {
     videoContainer.classList.toggle("top-cam-live");
     gridLiveContainer.classList.toggle("range-1-lecture");
     gridLiveContainer.classList.toggle("top-live-button-2");
+
+    publicAssetsWrapperTopFirst2.classList.toggle("enabled-flex");
+    publicAssetsWrapperRight2.classList.toggle("enabled-flex");
+
+    secondR.classList.toggle("enabled-opa");
+    secondR.classList.toggle("enabled-flex");
+    secondRange.classList.toggle("enabled-flex");
 
     step4 = false;
     step1 = true;
@@ -1232,6 +1276,8 @@ function onInactive(ms, cb) {
 $(".toggle-layout").on("click", function (e) {
   // $(this).toggleClass("switch");
   if (switchMode === true) {
+    slider.next();
+    console.log("slider-upd");
     $(this).css("left", "48%");
     $(".gridMode").css("opacity", "1");
     $(".liveMode").css("opacity", "0");

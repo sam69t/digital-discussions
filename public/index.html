@@ -46,8 +46,8 @@
     <script src="./js/router.js" defer></script>
   </head>
 
-  <body style="background-color: white">
-    <header>
+  <body class="animate-in" style="background-color: white">
+    <header style="display: none">
       <nav>
         <a href="http://localhost:3000/index.html">Home</a>
       </nav>
@@ -69,12 +69,12 @@
       <div class="home-info">
         <ul>
           <li>
-            Comment un.e artiste /designer pourrait partager et enrichir sa
-            pratique dans un contexte où la visioconférence devient l’un des
-            supports privilégié de diffusion de contenu.
+            In the form of a mini web-conference, this plateform will consist of
+            a brief presentation of the work of people active in the field of
+            culture through audiovisual content
           </li>
           <li>
-            Sous la forme de mini-conférence web, Public Lectures consistera à
+            <!-- Sous la forme de mini-conférence web, Public Lectures consistera à
             présenter succinctement le travail de personnes actives dans le
             domaine de la culture à travers un contenu audiovisuel. Encourageant
             l’interaction, par le biais de commentaires et d’échange de contenu,
@@ -82,7 +82,7 @@
             présentateur et spectateur. Une horizontalité née ainsi au sein de
             la plateforme, invitant chacun.e à apporter sa contribution afin de
             faire émerger des formes novatrices de dialogues, tentant de relever
-            les défis de ce nouveau contexte de communication.
+            les défis de ce nouveau contexte de communication. -->
           </li>
         </ul>
       </div>
@@ -164,7 +164,7 @@
         />
 
         <div class="wrap-cam-mid">
-          <a href="http://localhost:3000/room.html?mode=player">Play</a>
+          <a>Play</a>
 
           <video
             muted
@@ -193,6 +193,8 @@
       let homeToggle = document.querySelector(".credits");
       let homeInfo = document.querySelector(".home-info");
       let homeCredits = document.querySelector(".home-credits");
+
+      let wrapCamMiddle = document.querySelector(".wrap-cam-mid");
 
       let confPreview = document.querySelector(".conf-img-preview");
       let homeLogo = document.querySelector(".home-logo");
@@ -273,6 +275,15 @@
           confDeux = true;
           confUn = false;
         }
+      });
+      wrapCamMiddle.addEventListener("click", function () {
+        document.body.style.backgroundColor = "dodgerBlue";
+        setTimeout(() => {
+          document.body.style.opacity = 0;
+        }, 150);
+        setTimeout(() => {
+          document.location.href = UrlConf;
+        }, 600);
       });
     </script>
   </body>

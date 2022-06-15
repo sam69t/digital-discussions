@@ -51,7 +51,7 @@
     <script src="js/carousel.js" defer></script>
   </head>
 
-  <body>
+  <body style="overflow: scroll" class="animate-in">
     <header class="nav" style="display: none">
       <nav>
         <a href="http://localhost:3000/index.html">Home</a>
@@ -94,9 +94,8 @@
       </button>
       <div class="comment-interface" onclick="">
         <span class="info-comment"
-          >* Here you can add
-          blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla
-          *</span
+          >Here is the place where you can suggest ideas, images, thoughts about
+          what is present, feel free.</span
         >
         <span class="close-i-com" onclick="hideInterface()">Close</span>
         <label for="publicImg" class="btn">Add image</label>
@@ -116,101 +115,21 @@
         <input id="publicText" placeholder="Add text" type="text" />
       </div>
     </div>
-    <div class="public-assets-topFirst2">
-      <!-- <div class="imageBlockWrapper">
-        <img class="public-img"src="assets/img/public3.jpg"></img>
-      </div>
-      <div class="imageBlockWrapper">
-        <img class="public-img"src="assets/img/public4.jpg"></img>
-      </div>
-      <div class="public-comment">
-        <span>Super ce format de conférence, ça me rapelle blabla blabla bla bla</span>
-      </div>
-      <div class="imageBlockWrapper">
-        <img class="public-img"src="https://ik.imagekit.io/diploma/PUBlIC/test_image_RJaJAXCSXS.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654605680377"></img>
-      </div>
-      <div class="public-comment">
-        https://convertingcolors.com/rgb-color-255_251_201.html</span>
-      </div> -->
-    </div>
-    <div class="public-assets-right2">
-      <!-- <div class="imageBlockWrapper">
-      <img class="public-img"src="assets/img/public2.jpg"></img>
-     </div>
 
-      <div class="imageBlockWrapper">
-     <img class="public-img"src="https://ik.imagekit.io/diploma/PUBlIC/test_image_HDTrlMO5x.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654069554322"></img>
-     </div> -->
-    </div>
-    <div class="public-assets-left2">
-      <!-- <div class="imageBlockWrapper">
-      <img class="public-img"src="https://ik.imagekit.io/diploma/HUGO_JAUFFET/test_image_IkgFPxI5D.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1653658308024"></img>
-    </div>
-
-    <div class="imageBlockWrapper">
-      <img class="public-img"src="assets/img/public6.jpg"></img>
-    </div> -->
+    <div class="second-range-public">
+      <div class="second-range">
+        <div class="public-assets-topFirst2"></div>
+        <div class="public-assets-right2"></div>
+        <div class="public-assets-left2"></div>
+      </div>
     </div>
     <div class="first-range-public">
       <div class="first-range">
-        <div class="public-assets-topFirst">
-          <!-- <div class="imageBlockWrapper">
-            <img class="public-img"src="assets/img/public5.jpg"></img>
-          </div>
-          <div class="imageBlockWrapper">
-            <img class="public-img"src="https://ik.imagekit.io/diploma/PUBlIC/test_image_K6QX5-mi0.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654097177562"></img>
-          </div>
-          <div class="imageBlockWrapper">
-            <img class="public-img"src="https://ik.imagekit.io/diploma/PUBlIC/image_1_425005_XfL14AFwN.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654156131201"></img>
-          </div> -->
-        </div>
-        <div class="public-assets-topLast">
-          <!-- <div class="imageBlockWrapper">
-            <img class="public-img"src="/assets/img/public1.jpg"></img>
-          </div>
-          <div class="public-comment">
-            <span>Super ce format de conférence, ça me rapelle blabla blabla bla bla</span>
-          </div>
-          <div class="imageBlockWrapper">
-            <img class="public-img"src="assets/img/public7.jpg"></img>
-          </div> -->
-        </div>
-        <div class="public-assets-bottom">
-          <!-- <div class="imageBlockWrapper">
-            <img class="public-img"src="assets/img/public3.jpg"></img>
-          </div>
-          <div class="imageBlockWrapper">
-            <img class="public-img"src="assets/img/public4.jpg"></img>
-          </div>
-          <div class="public-comment">
-            <span>Super ce format de conférence, ça me rapelle blabla blabla bla bla</span>
-          </div>
-          <div class="imageBlockWrapper">
-            <img class="public-img"src="https://ik.imagekit.io/diploma/PUBlIC/test_image_RJaJAXCSXS.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654605680377"></img>
-          </div>
-          <div class="public-comment">
-            https://convertingcolors.com/rgb-color-255_251_201.html</span>
-          </div> -->
-        </div>
-        <div class="public-assets-left">
-          <!-- <div class="imageBlockWrapper">
-            <img class="public-img"src="assets/img/public2.jpg"></img>
-          </div>
-      
-          <div class="imageBlockWrapper">
-            <img class="public-img"src="https://ik.imagekit.io/diploma/PUBlIC/test_image_HDTrlMO5x.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654069554322"></img>
-          </div>
-        </div>
-        <div class="public-assets-right">
-        
-          <div class="imageBlockWrapper">
-            <img class="public-img"src="https://ik.imagekit.io/diploma/HUGO_JAUFFET/test_image_IkgFPxI5D.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1653658308024"></img>
-          </div>
-      
-          <div class="imageBlockWrapper">
-            <img class="public-img"src="assets/img/public6.jpg"></img>
-          </div> -->
-        </div>
+        <div class="public-assets-topFirst"></div>
+        <div class="public-assets-topLast"></div>
+        <div class="public-assets-bottom"></div>
+        <div class="public-assets-left"></div>
+        <div class="public-assets-right"></div>
       </div>
     </div>
     <div class="chapters-controls">
@@ -257,7 +176,7 @@
           <span class="liveMode">Live</span>
         </div>
       </div>
-      <div class="name-lecture">
+      <div class="name-project">
         <span> Archipelago</span>
       </div>
       <!-- <div class="toggle-container">

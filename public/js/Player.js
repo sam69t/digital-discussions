@@ -361,6 +361,13 @@ class Player {
       });
     }
 
+    vid.addEventListener("ended", myHandler, false);
+    function myHandler(e) {
+      document.body.style.opacity = 0;
+      setTimeout(() => {
+        document.location.href = homeUrl;
+      }, 500);
+    }
     // $(".moving-banner-v").on("hover", function (e) {
     //   console.log("hover");
     // });
@@ -579,8 +586,11 @@ function setupSubTitle(vid) {
                   "block",
                   "important"
                 );
-                videoContainerTwo.style.marginLeft = "-30vh";
               }, 300);
+
+              setTimeout(() => {
+                videoContainerTwo.style.marginLeft = "-55vh";
+              }, 700);
               console.log("spawn instruction");
               setTimeout(() => {
                 instruction.style.opacity = 0;

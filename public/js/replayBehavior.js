@@ -160,3 +160,16 @@ function comInterface() {
 function hideInterface() {
   comIn.classList.toggle("enabled-flex");
 }
+
+$(".name-lecture").on("mouseenter", function (e) {
+  $(this).text("Back");
+});
+$(".name-lecture").on("mouseleave", function (e) {
+  $(this).text("Hugo Jauffret");
+});
+$(".name-project").on("mouseenter", function (e) {
+  $(this).text("Next");
+});
+$(".name-project").on("mouseleave", function (e) {
+  $(this).text("Archipelago");
+});
