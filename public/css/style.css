@@ -532,11 +532,10 @@ button:focus {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
   transform: rotate("90");
   object-fit: cover;
   margin: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.15);
 }
 /* *BODY  PAGE */
 body {
@@ -917,7 +916,6 @@ main {
   z-index: 999999;
   margin-left: 2vh;
   overflow: hidden;
-  border-radius: 20px;
 }
 
 [smoothen] {
@@ -935,7 +933,6 @@ main {
   margin-left: 1.5vh;
   margin-top: 1vh;
   overflow: hidden;
-  border-radius: 20px;
   justify-content: center;
   display: flex;
   /* margin-left: -60vh; */
@@ -1201,7 +1198,7 @@ input[type="color"] {
 }
 
 .sum-assets > img:hover {
-  opacity: 0.7;
+  opacity: 0.6 !important;
   cursor: pointer;
 }
 
@@ -1479,6 +1476,7 @@ input[type="color"] {
   opacity: 1;
   /* transform: scale(0.7); */
 }
+
 .switch-container {
   background-color: rgba(230, 230, 230, 0.1);
   backdrop-filter: blur(10px);
@@ -1602,6 +1600,7 @@ input[type="color"] {
   padding: 1vh;
   font-family: "Unica";
 }
+
 .add-comment {
   border-radius: 0px;
   font-family: Unica;
@@ -1614,6 +1613,10 @@ input[type="color"] {
   /* right: 0; */
   bottom: 10vh;
   font-family: "Unica";
+}
+.close-i-com:hover {
+  opacity: 0.7;
+  cursor: pointer;
 }
 #publicText {
   font-family: Unica;
@@ -1635,7 +1638,7 @@ input[type="color"] {
   width: 50%;
   line-height: 25px;
   position: absolute;
-  top: 0;
+  top: 10%;
   text-align: center;
   line-break: anywhere;
   font-family: "Unica";

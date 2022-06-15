@@ -94,6 +94,10 @@ function playerSetup() {
 
     if (data.message.type == "upload-public-img") {
       publicCounter++;
+      console.log(publicCounter);
+
+      //! APPEND PUBLIC COMMENTAIRES
+
       let publicImg = document.createElement("div");
       let image = document.createElement("img");
       image.src = data.message.srcUrl;
@@ -119,7 +123,30 @@ function playerSetup() {
         publicAssetsWrapperRight2.appendChild(publicImg);
       }
 
-      console.log("Create Comment", publicCounter);
+      //! APPEND PUBLIC NOTIF
+
+      let notifwrap = document.createElement("div");
+      let notifImg = document.createElement("img");
+      notifImg.src = data.message.srcUrl;
+      notifImg.style.width = "100%";
+      notifwrap.classList.add("public-notification");
+      if (publicCounter <= 1 && publicCounter < 2) {
+        notifwrap.classList.add("animated-right");
+        notifwrap.classList.add("public-notif-wrap-right");
+      } else if (publicCounter >= 2 && publicCounter < 3) {
+        notifwrap.classList.add("animated-left");
+        notifwrap.classList.add("public-notif-wrap-left");
+      } else if (publicCounter >= 3 && publicCounter < 4) {
+        notifwrap.classList.add("animated-bottom");
+        notifwrap.classList.add("public-notif-wrap-bottom");
+      } else if (publicCounter >= 4 && publicCounter < 5) {
+        notifwrap.classList.add("animated-top");
+        notifwrap.classList.add("public-notif-wrap-top");
+      }
+
+      notifwrap.appendChild(notifImg);
+      previewContainer.appendChild(notifwrap);
+      //! APPEND SCROLLING PUBLIC COM
 
       // let imgSlide = document.createElement("div");
       // let imgofSlide = document.createElement("img");
@@ -191,6 +218,8 @@ function playerSetup() {
       // console.log(widthTimeStamp);
       imgCounter++;
 
+      //! SHOW UX
+
       if (imgCounter <= 1) {
         SumAssets.style.opacity = "1";
         overViewButtonBottom.style.opacity = 1;
@@ -202,6 +231,8 @@ function playerSetup() {
       document.querySelector(".chat-wrapper").style.display = "none";
       document.querySelector(".chats__message").style.color =
         "rgb(230,230,230)";
+
+      //! APPEND MAIN CAROUSEL
 
       let imageGrid = document.createElement("img");
       let mainCell = document.createElement("div");
@@ -235,6 +266,8 @@ function playerSetup() {
         imageNumber.textContent = "00";
       }
 
+      //! APPEND NAV CAROUSEL
+
       space.textContent = ":";
       space.classList.add("thumb-numb");
       imageGridThumb.src = data.message.srcImgUrl;
@@ -254,11 +287,16 @@ function playerSetup() {
 
       thumbnails.update();
 
+      //! APPEND TOP TIMELINE IMAGE
+
       let imageThumbNail = document.createElement("img");
       imageThumbNail.src = data.message.srcImgUrl;
       imageThumbNail.setAttribute("number", imgCounter);
       imageThumbNail.classList.add(`${"assets"}`);
       SumAssets.appendChild(imageThumbNail);
+
+      //! APPEND LIVE  IMAGE
+
       let imageWrap = document.createElement("div");
       let cross = document.createElement("div");
       let crossBar = document.createElement("div");
@@ -804,6 +842,8 @@ function playerSetup() {
       try {
         previewContainer.removeChild(previewContainer.lastChild);
         SumAssets.removeChild(SumAssets.lastChild);
+        navCarousel.removeChild(navCarousel.lastChild);
+        mainCarousel.removeChild(mainCarousel.lastChild);
       } catch (e) {
         console.warn("could not remove img-url", data.message);
       }
