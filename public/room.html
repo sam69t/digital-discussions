@@ -96,24 +96,43 @@
       <div class="comment-interface" onclick="">
         <span class="info-comment"
           >Here is the place where you can suggest ideas, images, thoughts about
-          what is present, feel free.</span
+          what is presented, feel free.</span
         >
         <span class="close-i-com" onclick="hideInterface()">Close</span>
-        <label for="publicImg" class="btn">Add image</label>
+        <label id="sender-img" for="publicImg" class="btn">Add image</label>
         <input
           id="publicImg"
           style="display: none"
           type="file"
           accept="image/*"
         />
-        <label for="publicVid" class="btn">Add video</label>
+        <label id="sender-vid" for="publicVid" class="btn">Add video</label>
         <input
           id="publicVid"
           style="display: none"
           type="file"
           accept="video/*"
         />
-        <input id="publicText" placeholder="Add text" type="text" />
+        <input
+          id="publicLink"
+          onfocusin="displayInLink()"
+          onfocusout="displayOutLink()"
+          placeholder="Add Link"
+          type="text"
+        />
+
+        <input
+          id="publicText"
+          onfocusin="displayIn()"
+          onfocusout="displayOut()"
+          placeholder="Add captions ?"
+          type="text"
+        />
+        <button class="btn" id="send-link" onclick="sendLinkValue()">
+          Sender
+        </button>
+        <button class="btn" id="send-comment">Send</button>
+        <button class="btn" id="send-final-link">SendL</button>
       </div>
     </div>
 

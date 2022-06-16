@@ -61,10 +61,20 @@ function onHover() {
       $(this).find(".grow").css("opacity", "1");
     },
     function () {
-      console.log("mouseout");
+      // console.log("mouseout");
       $(this).find(".cross").css("opacity", "0");
       $(this).find(".info").css("opacity", "0");
       $(this).find(".grow").css("opacity", "0");
+    }
+  );
+}
+function onHoverPublic() {
+  $(".imageBlockWrapper").hover(
+    function () {
+      $(this).find(".grow-p").css("opacity", "1");
+    },
+    function () {
+      $(this).find(".grow-p").css("opacity", "0");
     }
   );
 }
@@ -90,6 +100,41 @@ function growAssets() {
       fullImageDesc.textContent =
         "Ceci est un texte de description d'une possible références, 1972";
       fullImageDesc.classList.add("fullImageDesc");
+      fullImage.src = src;
+      fullImageWrapper.classList.add("fullImageWrapper");
+      fullImageWrapper.appendChild(fullImage);
+      fullImageWrapper.appendChild(fullImageDesc);
+
+      document.body.appendChild(fullImageWrapper);
+      removeGrowAssets();
+      console.log("SHOTS");
+      bool = false;
+    }
+    setTimeout(() => {
+      bool = true;
+    }, 50);
+  });
+}
+function growAssetsPublic() {
+  $(".grow-p").on("click", function (e) {
+    if (bool === true) {
+      // $(this).parent().css("width", "100%");
+      // $(this).parent().css("top", "0%");
+      // $(this).parent().css("left", "0%");
+      let src = $(this).prevAll("img").first().attr("src");
+      console.log(src);
+      let fullImageWrapper = document.createElement("div");
+      let fullImage = document.createElement("img");
+      let fullImageDesc = document.createElement("span");
+
+      // console.log($(this).find(".public-assets-desc").val());l
+      let captions = $(this).prevAll("span").first().text();
+      console.log(captions);
+
+      fullImageDesc.textContent = captions;
+
+      fullImageDesc.classList.add("fullImageDesc");
+      fullImageDesc.style.color = "black";
       fullImage.src = src;
       fullImageWrapper.classList.add("fullImageWrapper");
       fullImageWrapper.appendChild(fullImage);

@@ -6,6 +6,7 @@ const videoContainer = document.querySelector(".videos-container");
 const gridVideo = document.querySelector(".cam-grid");
 
 let publicCounter = 0;
+let linkCounter = 0;
 const homeUrl = "http://localhost:3000";
 const UrlConf = "http://localhost:3000/room.html?mode=player";
 
@@ -91,10 +92,38 @@ function playerSetup() {
       //   document.body.removeChild(instruction);
       // }, 2500);
     }
+    if (data.message.type == "upload-public-link") {
+      linkCounter++;
+      console.log(data.message, data.message.linkValue);
+
+      let publicImg = document.createElement("div");
+      let link = document.createElement("a");
+
+      publicImg.classList.add("imageBlockwrapper");
+      publicImg.classList.add("assets-public");
+      link.classList.add("public-link");
+      link.textContent = data.message.linkValue;
+      link.href = data.message.linkValue;
+      link.setAttribute("target", "_blank");
+      publicImg.appendChild(link);
+      publicAssetsWrapperTopFirst.appendChild(publicImg);
+    }
 
     if (data.message.type == "upload-public-img") {
       publicCounter++;
-      console.log(publicCounter);
+      console.log(data.message, data.message.captionsV);
+
+      //! APPEND PUBLIC DESCRIPTION ASSSETS
+
+      let publicDescAssets = document.createElement("span");
+      publicDescAssets.textContent = data.message.captionsV;
+      publicDescAssets.classList.add("public-assets-desc");
+
+      let grow = document.createElement("div");
+      let growSymb = document.createElement("div");
+      grow.classList.add("grow-p");
+      growSymb.classList.add("growSymb");
+      grow.appendChild(growSymb);
 
       //! APPEND PUBLIC COMMENTAIRES
 
@@ -105,21 +134,23 @@ function playerSetup() {
       publicImg.classList.add("imageBlockwrapper");
       publicImg.classList.add("assets-public");
       publicImg.appendChild(image);
+      publicImg.appendChild(publicDescAssets);
+      publicImg.appendChild(grow);
       publicAssetsWrapperTopFirst.appendChild(publicImg);
 
       if (publicCounter >= 1 && publicCounter <= 3) {
         publicAssetsWrapperTopFirst.appendChild(publicImg);
       } else if (publicCounter >= 4 && publicCounter <= 5) {
         publicAssetsWrapperRight.appendChild(publicImg);
-      } else if (publicCounter >= 6 && publicCounter <= 10) {
+      } else if (publicCounter >= 6 && publicCounter <= 11) {
         publicAssetsWrapperBottom.appendChild(publicImg);
-      } else if (publicCounter >= 11 && publicCounter <= 12) {
+      } else if (publicCounter >= 12 && publicCounter <= 13) {
         publicAssetsWrapperLeft.appendChild(publicImg);
-      } else if (publicCounter >= 13 && publicCounter <= 15) {
+      } else if (publicCounter >= 14 && publicCounter <= 16) {
         publicAssetsWrapperTopLast.appendChild(publicImg);
-      } else if (publicCounter >= 16 && publicCounter <= 20) {
+      } else if (publicCounter >= 17 && publicCounter <= 21) {
         publicAssetsWrapperTopFirst2.appendChild(publicImg);
-      } else if (publicCounter >= 21 && publicCounter <= 22) {
+      } else if (publicCounter >= 22 && publicCounter <= 23) {
         publicAssetsWrapperRight2.appendChild(publicImg);
       }
 
@@ -163,6 +194,8 @@ function playerSetup() {
       //   },
       //   false
       // );
+      onHoverPublic();
+      growAssetsPublic();
     }
     if (data.message.type == "upload-public-vid") {
       let publicVid = document.createElement("div");
@@ -251,7 +284,7 @@ function playerSetup() {
       let space = document.createElement("span");
       let wrapImageTime = document.createElement("div");
 
-      console.log(amountTimer);
+      // console.log(amountTimer);
       var m = Math.floor(amountTimer / 60);
       var s = Math.round(amountTimer - m * 60);
       // console.log(s);
@@ -1280,8 +1313,7 @@ function rangeScaling() {
 // }
 
 onInactive(3000, function () {
-  console.log("incative");
-
+  // console.log("incative");
   // SumAssets.style.opacity = 0;
   // playerContainer.style.opacity = 0;
   // gridLiveContainer.style.opacity = 0;
