@@ -263,3 +263,21 @@ $(".name-project").on("mouseenter", function (e) {
 $(".name-project").on("mouseleave", function (e) {
   $(this).text("Archipelago");
 });
+
+let togSubtitle = document.querySelector(".toggle-subtitle");
+let subtitles = document.querySelector(".sub-titles-wrapper");
+
+let subOn = true;
+console.log();
+
+togSubtitle.addEventListener("click", function (event) {
+  if (togSubtitle.textContent === "Subtitle off") {
+    subtitles.style.display = "none";
+    console.log("off");
+    togSubtitle.textContent = "Subtitle on";
+  } else if (togSubtitle.textContent === "Subtitle on") {
+    console.log("on");
+    subtitles.style.display = "flex";
+    togSubtitle.textContent = "Subtitle off";
+  }
+});

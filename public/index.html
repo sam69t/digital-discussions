@@ -183,6 +183,66 @@
           alt=""
         />
       </div>
+      <div class="conf-img-preview-2">
+        <img
+          src="        https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_KaR9ApXXj.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441964294"
+          alt="none"
+        />
+        <img
+          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_j7NMEMig-.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441737965"
+          alt="none"
+        />
+
+        <div class="wrap-cam-mid">
+          <a>Soon</a>
+
+          <video
+            muted
+            autoplay
+            loop
+            playsinline
+            src="/assets/videos/2.mp4"
+          ></video>
+        </div>
+        <img
+          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_heSnErSlT.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441658615"
+          alt=""
+        />
+        <img
+          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_MJMSQu50C.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654442020823"
+          alt=""
+        />
+      </div>
+      <div class="conf-img-preview-3">
+        <img
+          src="        https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_KaR9ApXXj.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441964294"
+          alt="none"
+        />
+        <img
+          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_j7NMEMig-.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441737965"
+          alt="none"
+        />
+
+        <div class="wrap-cam-mid">
+          <a>Soon</a>
+
+          <video
+            muted
+            autoplay
+            loop
+            playsinline
+            src="/assets/videos/3.mp4"
+          ></video>
+        </div>
+        <img
+          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_heSnErSlT.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441658615"
+          alt=""
+        />
+        <img
+          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_MJMSQu50C.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654442020823"
+          alt=""
+        />
+      </div>
       <div class="title-conference-wrap">
         <div class="intro" id="container-conf2-top"></div>
       </div>
@@ -197,6 +257,9 @@
       let wrapCamMiddle = document.querySelector(".wrap-cam-mid");
 
       let confPreview = document.querySelector(".conf-img-preview");
+      let confPreview2 = document.querySelector(".conf-img-preview-2");
+      let confPreview3 = document.querySelector(".conf-img-preview-3");
+
       let homeLogo = document.querySelector(".home-logo");
       let confButton = document.querySelector(".conf-button");
       let conf = document.querySelector(".conferences");
@@ -237,6 +300,8 @@
           readyToHome = true;
         } else if (readyToHome === true) {
           // conf.classList.toggle("enter-conf");
+          console.log("BACK Home");
+
           confBChildren.textContent = "See lectures";
           nextConf.style.opacity = 0;
           confButton.style.color = "black";
@@ -250,20 +315,34 @@
           goToConf = true;
         }
         if (confDeux === true) {
-          console.log("back");
+          console.log("BACk CONF 1");
           confPreview.classList.remove("move-to-next-leave");
+          confPreview2.classList.remove("move-to-next-enter");
+
           conf.style.backgroundColor = "dodgerblue";
           confBChildren.textContent = "Home";
-
+          readyToHome = true;
+          confUn = false;
           confUn = true;
           conf1 = true;
           conf2 = false;
+        } else if (confTrois === true) {
+          console.log("BACk CONF 2");
+          confTrois = false;
+          confDeux = true;
+          confPreview2.classList.remove("move-to-next-leave");
+          confPreview2.classList.add("move-to-next-enter");
+          confPreview3.classList.remove("move-to-next-enter");
+          confPreview3.classList.remove("move-to-next-leave");
+
+          conf.style.backgroundColor = "lightgreen";
         }
       });
       nextConf.addEventListener("click", function () {
         if (confUn === true) {
-          console.log("next");
+          console.log("CONF UN");
           confPreview.classList.add("move-to-next-leave");
+          confPreview2.classList.add("move-to-next-enter");
           conf.style.backgroundColor = "lightgreen";
           confBChildren.textContent = "Prev";
           goToConf = false;
@@ -274,6 +353,17 @@
 
           confDeux = true;
           confUn = false;
+        } else if (confDeux === true) {
+          console.log("CONF DEUX");
+          confPreview2.classList.remove("move-to-next-enter");
+          confPreview2.classList.add("move-to-next-leave");
+          confPreview3.classList.add("move-to-next-enter");
+
+          conf.style.backgroundColor = "sandybrown";
+          confDeux = false;
+          confTrois = true;
+          conf2 = false;
+          conf3 = true;
         }
       });
       wrapCamMiddle.addEventListener("click", function () {

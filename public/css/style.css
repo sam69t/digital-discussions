@@ -1413,6 +1413,33 @@ input[type="color"] {
   height: 70%;
 }
 
+.toggle-subtitle {
+  position: absolute;
+  bottom: 4vh;
+  z-index: 9999999;
+  font-family: "Unica";
+  right: 1vh;
+  color: white;
+  font-size: 13px;
+}
+.back-home {
+  position: absolute;
+  bottom: 4vh;
+  z-index: 9999999;
+  font-family: "Unica";
+  left: 1vh;
+  color: white;
+  font-size: 13px;
+}
+.toggle-subtitle:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+.back-home:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
 .fullImageDesc {
   color: white;
   font-family: "Unica";
