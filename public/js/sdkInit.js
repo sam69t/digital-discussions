@@ -56,6 +56,9 @@ let publicAssetsWrapperTopFirst2 = document.querySelector(
   ".public-assets-topFirst2"
 );
 
+let publicAssetsWrapperBottom2 = document.querySelector(
+  ".public-assets-bottom2"
+);
 // let publicAssetsWrapperLeft2 = document.querySelector(".public-assets-left2");
 let publicAssetsWrapperRight2 = document.querySelector(".public-assets-right2");
 

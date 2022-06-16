@@ -6,6 +6,8 @@ const videoContainer = document.querySelector(".videos-container");
 const gridVideo = document.querySelector(".cam-grid");
 
 let publicCounter = 0;
+let publicVidCounter = 0;
+
 let linkCounter = 0;
 const homeUrl = "http://localhost:3000";
 const UrlConf = "http://localhost:3000/room.html?mode=player";
@@ -42,7 +44,7 @@ function playerSetup() {
 
   player = new Player({
     parent: body,
-    csvSrc: "./assets/chats/HUGO_J2.csv",
+    csvSrc: "./assets/chats/PL_1_16.6.22.csv",
     liveVideoSrc: "./assets/videos/HUGO_J2(CUT).mp4",
     gridVideoSrc: "./assets/videos/HUGO_J2(CUT).mp4",
   });
@@ -142,17 +144,21 @@ function playerSetup() {
         publicAssetsWrapperTopFirst.appendChild(publicImg);
       } else if (publicCounter >= 4 && publicCounter <= 5) {
         publicAssetsWrapperRight.appendChild(publicImg);
-      } else if (publicCounter >= 6 && publicCounter <= 11) {
+      } else if (publicCounter >= 6 && publicCounter <= 10) {
         publicAssetsWrapperBottom.appendChild(publicImg);
-      } else if (publicCounter >= 12 && publicCounter <= 13) {
+      } else if (publicCounter >= 11 && publicCounter <= 11) {
         publicAssetsWrapperLeft.appendChild(publicImg);
-      } else if (publicCounter >= 14 && publicCounter <= 16) {
+      } else if (publicCounter >= 12 && publicCounter <= 14) {
         publicAssetsWrapperTopLast.appendChild(publicImg);
-      } else if (publicCounter >= 17 && publicCounter <= 21) {
+      } else if (publicCounter >= 15 && publicCounter <= 20) {
         publicAssetsWrapperTopFirst2.appendChild(publicImg);
-      } else if (publicCounter >= 22 && publicCounter <= 23) {
+      } else if (publicCounter >= 21 && publicCounter <= 23) {
         publicAssetsWrapperRight2.appendChild(publicImg);
+      } else if (publicCounter >= 24 && publicCounter <= 30) {
+        publicAssetsWrapperBottom2.appendChild(publicImg);
       }
+
+      console.log(publicCounter);
 
       //! APPEND PUBLIC NOTIF
 
@@ -198,32 +204,51 @@ function playerSetup() {
       growAssetsPublic();
     }
     if (data.message.type == "upload-public-vid") {
+      publicVidCounter++;
       let publicVid = document.createElement("div");
       let vid = document.createElement("video");
       vid.src = data.message.srcUrl;
-      publicVid.classList.add("public-vid");
+      publicVid.classList.add("imageBlockWrapper");
       publicVid.classList.add("vid");
       publicVid.appendChild(vid);
-      publicAssetsWrapperTopFirst.appendChild(publicVid);
 
-      let vidSlide = document.createElement("div");
-      let vidofSlide = document.createElement("video");
-      vidSlide.classList.add("moving-banner-h");
-      vidSlide.classList.add("moving-vid");
+      let grow = document.createElement("div");
+      let growSymb = document.createElement("div");
+      grow.classList.add("grow-p");
+      growSymb.classList.add("growSymb");
+      grow.appendChild(growSymb);
 
-      vidofSlide.src = data.message.srcUrl;
-      vidSlide.appendChild(vidofSlide);
-      document.body.appendChild(vidSlide);
-      vidofSlide.autoplay = true;
-      vidofSlide.muted = true;
-      vidofSlide.loop = true;
-      vidSlide.addEventListener(
-        "animationend",
-        function () {
-          document.body.removeChild(vidSlide);
-        },
-        false
-      );
+      publicVid.appendChild(vid);
+      publicVid.appendChild(grow);
+
+      vid.autoplay = true;
+      vid.muted = true;
+      vid.loop = true;
+      if (publicVidCounter <= 1 && publicVidCounter < 2) {
+        publicAssetsWrapperBottom.appendChild(publicVid);
+      } else if (publicVidCounter >= 2 && publicVidCounter < 3) {
+        publicAssetsWrapperLeft.appendChild(publicVid);
+      }
+      growAssetsPublicVid();
+
+      // let vidSlide = document.createElement("div");
+      // let vidofSlide = document.createElement("video");
+      // vidSlide.classList.add("moving-banner-h");
+      // vidSlide.classList.add("moving-vid");
+
+      // vidofSlide.src = data.message.srcUrl;
+      // vidSlide.appendChild(vidofSlide);
+      // document.body.appendChild(vidSlide);
+      // vidofSlide.autoplay = true;
+      // vidofSlide.muted = true;
+      // vidofSlide.loop = true;
+      // vidSlide.addEventListener(
+      //   "animationend",
+      //   function () {
+      //     document.body.removeChild(vidSlide);
+      //   },
+      //   false
+      // );
     }
 
     if (data.message.type == "moving-webcam-participant") {
@@ -832,24 +857,23 @@ function playerSetup() {
       // fond.style.backgroundColor = data.message.dataColor;
     }
     if (data.message.type == "upload-public-vid") {
-      let vidSlide = document.createElement("div");
-      let vidofSlide = document.createElement("video");
-      vidSlide.classList.add("moving-banner-h-invert");
-      vidSlide.classList.add("moving-vid");
-
-      vidofSlide.src = data.message.srcUrl;
-      vidSlide.appendChild(vidofSlide);
-      document.body.appendChild(vidSlide);
-      vidofSlide.autoplay = true;
-      vidofSlide.muted = true;
-      vidofSlide.loop = true;
-      vidSlide.addEventListener(
-        "animationend",
-        function () {
-          document.body.removeChild(vidSlide);
-        },
-        false
-      );
+      // let vidSlide = document.createElement("div");
+      // let vidofSlide = document.createElement("video");
+      // vidSlide.classList.add("moving-banner-h-invert");
+      // vidSlide.classList.add("moving-vid");
+      // vidofSlide.src = data.message.srcUrl;
+      // vidSlide.appendChild(vidofSlide);
+      // document.body.appendChild(vidSlide);
+      // vidofSlide.autoplay = true;
+      // vidofSlide.muted = true;
+      // vidofSlide.loop = true;
+      // vidSlide.addEventListener(
+      //   "animationend",
+      //   function () {
+      //     document.body.removeChild(vidSlide);
+      //   },
+      //   false
+      // );
     }
 
     // console.log(data.message.type + "revert");
@@ -1240,10 +1264,17 @@ function rangeScaling() {
 
     publicAssetsWrapperTopFirst2.classList.toggle("enabled-flex");
     publicAssetsWrapperRight2.classList.toggle("enabled-flex");
+    publicAssetsWrapperBottom2.classList.toggle("enabled-flex");
 
     secondRange.classList.toggle("enabled-flex");
     secondR.classList.toggle("enabled-flex");
     secondR.classList.toggle("enabled-opa");
+
+    setTimeout(() => {
+      publicAssetsWrapperTopFirst2.classList.toggle("enabled-opa");
+      publicAssetsWrapperRight2.classList.toggle("enabled-opa");
+      publicAssetsWrapperBottom2.classList.toggle("enabled-opa");
+    }, 100);
 
     step1 = false;
     step2 = true;
@@ -1289,12 +1320,20 @@ function rangeScaling() {
     gridLiveContainer.classList.toggle("range-1-lecture");
     gridLiveContainer.classList.toggle("top-live-button-2");
 
-    publicAssetsWrapperTopFirst2.classList.toggle("enabled-flex");
-    publicAssetsWrapperRight2.classList.toggle("enabled-flex");
+    publicAssetsWrapperTopFirst2.classList.toggle("enabled-opa");
+    publicAssetsWrapperRight2.classList.toggle("enabled-opa");
+    publicAssetsWrapperBottom2.classList.toggle("enabled-opa");
 
     secondR.classList.toggle("enabled-opa");
-    secondR.classList.toggle("enabled-flex");
-    secondRange.classList.toggle("enabled-flex");
+
+    setTimeout(() => {
+      publicAssetsWrapperTopFirst2.classList.toggle("enabled-flex");
+      publicAssetsWrapperRight2.classList.toggle("enabled-flex");
+      publicAssetsWrapperBottom2.classList.toggle("enabled-flex");
+
+      secondR.classList.toggle("enabled-flex");
+      secondRange.classList.toggle("enabled-flex");
+    }, 450);
 
     step4 = false;
     step1 = true;

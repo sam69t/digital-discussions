@@ -89,7 +89,9 @@
     <div class="public-add">
       <!-- <button class="btn">+</button> -->
 
-      <button id="exportBtn" class="btn export">Export</button>
+      <button style="display: none" id="exportBtn" class="btn export">
+        Export
+      </button>
       <button class="btn add-comment" onclick="comInterface()">
         Add comment
       </button>
@@ -140,6 +142,7 @@
       <div class="second-range">
         <div class="public-assets-topFirst2"></div>
         <div class="public-assets-right2"></div>
+        <div class="public-assets-bottom2"></div>
         <div class="public-assets-left2"></div>
       </div>
     </div>
@@ -440,6 +443,9 @@
           <span class="macroView">Public</span>
           <span class="microView">Lectures </span>
         </div>
+      </div>
+      <div>
+        <button class="btn scaling-range" onclick="rangeScaling()">-</button>
       </div>
     </footer>
   </body>

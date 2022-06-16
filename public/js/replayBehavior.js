@@ -150,11 +150,56 @@ function growAssetsPublic() {
     }, 50);
   });
 }
+function growAssetsPublicVid() {
+  $(".grow-p").on("click", function (e) {
+    if (bool === true) {
+      // $(this).parent().css("width", "100%");
+      // $(this).parent().css("top", "0%");
+      // $(this).parent().css("left", "0%");
+      let src = $(this).prevAll("video").first().attr("src");
+      console.log(src);
+      let fullVidWrapper = document.createElement("div");
+      let fullVid = document.createElement("video");
+      let fullImageDesc = document.createElement("span");
+
+      fullVid.autoplay = true;
+      fullVid.loop = true;
+      let captions = $(this).prevAll("span").first().text();
+      console.log(captions);
+
+      fullImageDesc.textContent = captions;
+
+      fullImageDesc.classList.add("fullImageDesc");
+      fullImageDesc.style.color = "black";
+      fullVid.src = src;
+      fullVidWrapper.classList.add("fullImageWrapper-vid");
+      fullVidWrapper.appendChild(fullVid);
+      fullVidWrapper.appendChild(fullImageDesc);
+
+      document.body.appendChild(fullVidWrapper);
+      removeGrowAssetsPublic();
+      console.log("SHOTS");
+      bool = false;
+    }
+    setTimeout(() => {
+      bool = true;
+    }, 50);
+  });
+}
+
 function removeGrowAssets() {
   $(".fullImageWrapper").on("click", function (e) {
     $(this).remove();
   });
 }
+
+function removeGrowAssetsPublic() {
+  $(".fullImageWrapper-vid").on("click", function (e) {
+    console.log("fullViDclique");
+    $(this).remove();
+  });
+}
+
 function showText() {
   if (bool === true) {
     // if (toggle === true) {
