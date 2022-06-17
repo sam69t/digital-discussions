@@ -36,6 +36,17 @@ let step3 = false;
 let step4 = false;
 
 // const meeting = params.get("meetingID");
+
+if (mode === "toolH") {
+  // console.log(meeting.localParticipant.id);
+  previewContainer.style.backgroundColor = "white";
+  console.log("whitemode");
+}
+if (mode === "toolP") {
+  // console.log(meeting.localParticipant.id);
+  previewContainer.style.backgroundColor = "white";
+  console.log("whitemode");
+}
 function playerSetup() {
   const container = document.querySelector(".playerMode");
   container.classList.remove("hidden");
@@ -1200,6 +1211,7 @@ const surfooterPublic = document.querySelector("#public-sur-footer");
 function showButton() {
   surfooter.style.opacity = "1";
   surfooterPublic.style.opacity = "1";
+  fond.style.zIndex = "99999";
 }
 function hideButton() {
   surfooter.style.opacity = "0";

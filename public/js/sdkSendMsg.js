@@ -30,6 +30,7 @@ function onMessage(chatEvent) {
       overViewButtonBottom.style.setProperty("display", "none", "important");
       sumAssets.style.setProperty("display", "none", "important");
       gridLiveContainer.style.setProperty("display", "none", "important");
+      colorControls.style.setProperty("display", "flex", "important");
     }
     if (mode === "toolH") {
       toolControllerH.style.setProperty("display", "block", "important");
@@ -117,6 +118,8 @@ function onMessage(chatEvent) {
     parsedText?.type == "ontap-chat"
   ) {
     CHAT.addTextToLastMsg(parsedText.message);
+    fond.style.zIndex = "99999";
+    console.log("type");
   }
   // if (
   //   //! WEBCAM MOVEMENT
@@ -365,7 +368,7 @@ function onMessage(chatEvent) {
     }
 
     setTimeout(() => {
-      previewContainer.style.backgroundColor = parsedText.dataColor;
+      // previewContainer.style.backgroundColor = parsedText.dataColor;
     }, 300);
   }
   if (
@@ -442,6 +445,12 @@ function onMessage(chatEvent) {
         assets.remove();
       });
     }, 700);
+  }
+  if (
+    //! REFERENCE
+    parsedText?.type == "couleur-fond"
+  ) {
+    previewContainer.style.backgroundColor = parsedText.dataColor;
   }
   if (
     //! MOVING IMAGE PARTICIPANt

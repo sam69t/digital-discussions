@@ -28,11 +28,11 @@ endingButton.addEventListener("click", async () => {
   meeting.sendChatMessage(JSON.stringify({ type: "end", dataColor }));
 });
 
-// colorPicker.addEventListener("change", async () => {
-//   console.log(colorPicker.value);
+colorPicker.addEventListener("change", async () => {
+  console.log(colorPicker.value);
 
-//   let dataColor = "D6E3FF";
-//   previewContainer.style.backgroundColor = colorPicker.value;
+  let dataColor = colorPicker.value;
+  // previewContainer.style.backgroundColor = colorPicker.value;
 
-//   meeting.sendChatMessage(JSON.stringify({ type: "couleur-fond", dataColor }));
-// });
+  meeting.sendChatMessage(JSON.stringify({ type: "couleur-fond", dataColor }));
+});

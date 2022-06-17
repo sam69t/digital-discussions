@@ -12,6 +12,7 @@ const offSetParticipant = 1050;
 let chatContainer = document.querySelector("#chats");
 
 let nav = document.querySelector(".nav");
+let buttonBackHome = document.querySelector(".back-home");
 
 let startButton = document.querySelector(".startButton");
 let startOtherButton = document.querySelector(".startOtherButton");
@@ -148,11 +149,14 @@ function createLocalParticipant() {
 function startMeeting(token, meetingId, name) {
   // Meeting config
   window.ZujoSDK.config(token);
-
   gridLiveContainer.style.display = "none";
   overViewButtonBottom.style.display = "none";
   sumAssets.style.display = "none";
   nav.style.display = "none";
+  subtitles.style.display = "none";
+  togSubtitle.style.display = "none";
+  buttonBackHome.style.display = "none";
+  fond.style.zIndex = "999";
 
   // Meeting Init
   meeting = window.ZujoSDK.initMeeting({
@@ -560,7 +564,7 @@ function addDomEvents() {
   inputUser.addEventListener("input", function () {
     const message = inputUser.value;
     meeting.sendChatMessage(JSON.stringify({ type: "ontap-chat", message }));
-    console.log(message);
+    // console.log(message);
   });
   publicSendMessageBtn.addEventListener("click", async () => {
     const message = inputPublic.value;
