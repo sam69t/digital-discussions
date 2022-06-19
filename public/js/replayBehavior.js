@@ -89,21 +89,42 @@ function assetsCliked() {
 function growAssets() {
   $(".grow").on("click", function (e) {
     if (bool === true) {
+      console.log(imgCounter);
       // $(this).parent().css("width", "100%");
       // $(this).parent().css("top", "0%");
       // $(this).parent().css("left", "0%");
       let src = $(this).prevAll("img").first().attr("src");
       console.log(src);
+
+      let parent = $(this).parent();
+      let getDesc = $(parent).attr("data-desc");
+
+      console.log(getDesc);
       let fullImageWrapper = document.createElement("div");
       let fullImage = document.createElement("img");
       let fullImageDesc = document.createElement("span");
-      fullImageDesc.textContent =
-        "Ceci est un texte de description d'une possible références, 1972";
+      // let fullImageDwn = document.createElement("<span>&#8595;</span>");
+      // fullImageDwn.textContent = "U+02193";
+
       fullImageDesc.classList.add("fullImageDesc");
+      fullImageDesc.textContent = getDesc;
+      // fullImageDwn.classList.add("fullImageDwn");
       fullImage.src = src;
       fullImageWrapper.classList.add("fullImageWrapper");
       fullImageWrapper.appendChild(fullImage);
       fullImageWrapper.appendChild(fullImageDesc);
+      // fullImageWrapper.appendChild(fullImageDwn);
+
+      $(fullImageWrapper).append('<a class="fullImageDwn">&#8595;</a>');
+      setTimeout(() => {
+        let aDown = document.querySelector(".fullImageDwn");
+        aDown.setAttribute("target", "_blank");
+        // aDown.setAttribute("download", "ref");
+        aDown.href = src;
+        aDown.download = "";
+
+        console.log(aDown);
+      }, 50);
 
       document.body.appendChild(fullImageWrapper);
       removeGrowAssets();
@@ -127,11 +148,14 @@ function growAssetsPublic() {
       let fullImage = document.createElement("img");
       let fullImageDesc = document.createElement("span");
 
+      let parent = $(this).parent();
+      let getDesc = $(parent).attr("data-desc");
+
       // console.log($(this).find(".public-assets-desc").val());l
       let captions = $(this).prevAll("span").first().text();
       console.log(captions);
 
-      fullImageDesc.textContent = captions;
+      fullImageDesc.textContent = getDesc;
 
       fullImageDesc.classList.add("fullImageDesc");
       fullImageDesc.style.color = "black";
@@ -139,6 +163,17 @@ function growAssetsPublic() {
       fullImageWrapper.classList.add("fullImageWrapper");
       fullImageWrapper.appendChild(fullImage);
       fullImageWrapper.appendChild(fullImageDesc);
+
+      $(fullImageWrapper).append('<a class="fullImageDwnP">&#8595;</a>');
+      setTimeout(() => {
+        let aDown = document.querySelector(".fullImageDwnP");
+        aDown.setAttribute("target", "_blank");
+        // aDown.setAttribute("download", "ref");
+        aDown.href = src;
+        aDown.download = "";
+
+        console.log(aDown);
+      }, 50);
 
       document.body.appendChild(fullImageWrapper);
       removeGrowAssets();

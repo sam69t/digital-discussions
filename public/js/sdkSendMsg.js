@@ -31,6 +31,7 @@ function onMessage(chatEvent) {
       sumAssets.style.setProperty("display", "none", "important");
       gridLiveContainer.style.setProperty("display", "none", "important");
       colorControls.style.setProperty("display", "flex", "important");
+      videoContainerTwo.classList.add("resize-drag");
     }
     if (mode === "toolH") {
       toolControllerH.style.setProperty("display", "block", "important");

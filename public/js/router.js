@@ -24,6 +24,7 @@ let widthTimeStamp = amount * 100;
 let switchMode = true;
 
 const params = new URLSearchParams(window.location.search);
+console.log(window.location.search);
 const mode = params.get("mode");
 const animator = new Animator();
 
@@ -139,36 +140,84 @@ function playerSetup() {
       grow.appendChild(growSymb);
 
       //! APPEND PUBLIC COMMENTAIRES
-
-      let publicImg = document.createElement("div");
-      let image = document.createElement("img");
-      image.src = data.message.srcUrl;
-      image.classList.add("public-img");
-      publicImg.classList.add("imageBlockwrapper");
-      publicImg.classList.add("assets-public");
-      publicImg.appendChild(image);
-      publicImg.appendChild(publicDescAssets);
-      publicImg.appendChild(grow);
-      publicAssetsWrapperTopFirst.appendChild(publicImg);
-
-      if (publicCounter >= 1 && publicCounter <= 3) {
+      function uploadPublicAssets() {
+        let publicImg = document.createElement("div");
+        let image = document.createElement("img");
+        image.src = data.message.srcUrl;
+        image.classList.add("public-img");
+        publicImg.classList.add("imageBlockwrapper");
+        publicImg.classList.add("assets-public");
+        publicImg.appendChild(image);
+        publicImg.appendChild(publicDescAssets);
+        publicImg.appendChild(grow);
         publicAssetsWrapperTopFirst.appendChild(publicImg);
-      } else if (publicCounter >= 4 && publicCounter <= 5) {
-        publicAssetsWrapperRight.appendChild(publicImg);
-      } else if (publicCounter >= 6 && publicCounter <= 10) {
-        publicAssetsWrapperBottom.appendChild(publicImg);
-      } else if (publicCounter >= 11 && publicCounter <= 11) {
-        publicAssetsWrapperLeft.appendChild(publicImg);
-      } else if (publicCounter >= 12 && publicCounter <= 14) {
-        publicAssetsWrapperTopLast.appendChild(publicImg);
-      } else if (publicCounter >= 15 && publicCounter <= 20) {
-        publicAssetsWrapperTopFirst2.appendChild(publicImg);
-      } else if (publicCounter >= 21 && publicCounter <= 23) {
-        publicAssetsWrapperRight2.appendChild(publicImg);
-      } else if (publicCounter >= 24 && publicCounter <= 30) {
-        publicAssetsWrapperBottom2.appendChild(publicImg);
+
+        if (publicCounter === 1) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_01");
+        } else if (publicCounter === 2) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_02");
+        } else if (publicCounter === 3) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_03");
+        } else if (publicCounter === 4) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_04");
+        } else if (publicCounter === 5) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_05");
+        } else if (publicCounter === 6) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_06");
+        } else if (publicCounter === 7) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_07");
+        } else if (publicCounter === 8) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_04");
+        } else if (publicCounter === 9) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_05");
+        } else if (publicCounter === 10) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_06");
+        } else if (publicCounter === 11) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_07");
+        } else if (publicCounter === 12) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_08");
+        } else if (publicCounter === 13) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_09");
+        } else if (publicCounter === 14) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_10");
+        } else if (publicCounter === 15) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_11");
+        } else if (publicCounter === 16) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_12");
+        } else if (publicCounter === 17) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_13");
+        } else if (publicCounter === 18) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_14");
+        } else if (publicCounter === 19) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_15");
+        } else if (publicCounter === 20) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_16");
+        } else if (publicCounter === 21) {
+          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_17");
+        }
+
+        if (publicCounter >= 1 && publicCounter <= 3) {
+          publicAssetsWrapperTopFirst.appendChild(publicImg);
+        } else if (publicCounter >= 4 && publicCounter <= 5) {
+          publicAssetsWrapperRight.appendChild(publicImg);
+        } else if (publicCounter >= 6 && publicCounter <= 10) {
+          publicAssetsWrapperBottom.appendChild(publicImg);
+        } else if (publicCounter >= 11 && publicCounter <= 11) {
+          publicAssetsWrapperLeft.appendChild(publicImg);
+        } else if (publicCounter >= 12 && publicCounter <= 14) {
+          publicAssetsWrapperTopLast.appendChild(publicImg);
+        } else if (publicCounter >= 15 && publicCounter <= 20) {
+          publicAssetsWrapperTopFirst2.appendChild(publicImg);
+        } else if (publicCounter >= 21 && publicCounter <= 23) {
+          publicAssetsWrapperRight2.appendChild(publicImg);
+        } else if (publicCounter >= 24 && publicCounter <= 30) {
+          publicAssetsWrapperBottom2.appendChild(publicImg);
+        }
+
+        setTimeout(() => publicImg.removeChild(image), 60000);
       }
 
+      uploadPublicAssets();
       console.log(publicCounter);
 
       //! APPEND PUBLIC NOTIF
@@ -195,22 +244,41 @@ function playerSetup() {
       notifwrap.appendChild(notifImg);
       previewContainer.appendChild(notifwrap);
       //! APPEND SCROLLING PUBLIC COM
+      if (publicCounter === 5) {
+        let imgSlide = document.createElement("div");
+        let imgofSlide = document.createElement("img");
+        imgSlide.classList.add("moving-banner-v");
+        imgSlide.classList.add("moving-img");
 
-      // let imgSlide = document.createElement("div");
-      // let imgofSlide = document.createElement("img");
-      // imgSlide.classList.add("moving-banner-v");
-      // imgSlide.classList.add("moving-img");
+        imgofSlide.src = data.message.srcUrl;
+        imgSlide.appendChild(imgofSlide);
+        document.body.appendChild(imgSlide);
+        imgSlide.addEventListener(
+          "animationend",
+          function () {
+            document.body.removeChild(imgSlide);
+          },
+          false
+        );
+      }
+      if (publicCounter === 2) {
+        let imgSlide = document.createElement("div");
+        let imgofSlide = document.createElement("img");
+        imgSlide.classList.add("moving-banner-v");
+        imgSlide.classList.add("moving-img");
 
-      // imgofSlide.src = data.message.srcUrl;
-      // imgSlide.appendChild(imgofSlide);
-      // document.body.appendChild(imgSlide);
-      // imgSlide.addEventListener(
-      //   "animationend",
-      //   function () {
-      //     document.body.removeChild(imgSlide);
-      //   },
-      //   false
-      // );
+        imgofSlide.src = data.message.srcUrl;
+        imgSlide.appendChild(imgofSlide);
+        document.body.appendChild(imgSlide);
+        imgSlide.addEventListener(
+          "animationend",
+          function () {
+            document.body.removeChild(imgSlide);
+          },
+          false
+        );
+      }
+
       onHoverPublic();
       growAssetsPublic();
     }
@@ -242,24 +310,26 @@ function playerSetup() {
       }
       growAssetsPublicVid();
 
-      // let vidSlide = document.createElement("div");
-      // let vidofSlide = document.createElement("video");
-      // vidSlide.classList.add("moving-banner-h");
-      // vidSlide.classList.add("moving-vid");
+      if (publicVidCounter === 1) {
+        let vidSlide = document.createElement("div");
+        let vidofSlide = document.createElement("video");
+        vidSlide.classList.add("moving-banner-h");
+        vidSlide.classList.add("moving-vid");
 
-      // vidofSlide.src = data.message.srcUrl;
-      // vidSlide.appendChild(vidofSlide);
-      // document.body.appendChild(vidSlide);
-      // vidofSlide.autoplay = true;
-      // vidofSlide.muted = true;
-      // vidofSlide.loop = true;
-      // vidSlide.addEventListener(
-      //   "animationend",
-      //   function () {
-      //     document.body.removeChild(vidSlide);
-      //   },
-      //   false
-      // );
+        vidofSlide.src = data.message.srcUrl;
+        vidSlide.appendChild(vidofSlide);
+        document.body.appendChild(vidSlide);
+        vidofSlide.autoplay = true;
+        vidofSlide.muted = true;
+        vidofSlide.loop = true;
+        vidSlide.addEventListener(
+          "animationend",
+          function () {
+            document.body.removeChild(vidSlide);
+          },
+          false
+        );
+      }
     }
 
     if (data.message.type == "moving-webcam-participant") {
@@ -364,65 +434,119 @@ function playerSetup() {
       imageThumbNail.classList.add(`${"assets"}`);
       SumAssets.appendChild(imageThumbNail);
 
+      // imageThumbNail.setAttribute("data-desc", "2");
+
       //! APPEND LIVE  IMAGE
 
-      let imageWrap = document.createElement("div");
-      let cross = document.createElement("div");
-      let crossBar = document.createElement("div");
+      function uploadLiveAssets() {
+        let imageWrap = document.createElement("div");
+        let cross = document.createElement("div");
+        let crossBar = document.createElement("div");
 
-      let infoTextWrap = document.createElement("div");
-      let infoText = document.createElement("span");
+        let infoTextWrap = document.createElement("div");
+        let infoText = document.createElement("span");
 
-      let grow = document.createElement("div");
-      let growSymb = document.createElement("div");
+        let grow = document.createElement("div");
+        let growSymb = document.createElement("div");
 
-      let info = document.createElement("div");
-      let infoSymb = document.createElement("span");
+        let info = document.createElement("div");
+        let infoSymb = document.createElement("span");
 
-      imageWrap.classList.add(`${"imageBlock" + imgCounter}`);
-      // imageWrap.setAttribute("number", imgCounter);
-      imageWrap.classList.add(`${"imageStyle"}`);
-      imageWrap.classList.add(`${"move-public"}`);
-      imageWrap.style.zIndex = zCounter;
+        imageWrap.classList.add(`${"imageBlock" + imgCounter}`);
+        // imageWrap.setAttribute("number", imgCounter);
+        imageWrap.classList.add(`${"imageStyle"}`);
+        imageWrap.classList.add(`${"move-public"}`);
+        imageWrap.style.zIndex = zCounter;
 
-      cross.classList.add("cross");
-      crossBar.classList.add("crossBar");
-      info.classList.add("info");
-      infoSymb.textContent = "i";
-      infoSymb.classList.add("infoSymb");
-      grow.classList.add("grow");
-      growSymb.classList.add("growSymb");
-      infoTextWrap.classList.add("infoTextWrap");
-      infoText.classList.add("infoText");
-      infoText.textContent =
-        "Ceci est un texte de substitution, il servira d'exemples pour ce projet";
+        cross.classList.add("cross");
+        crossBar.classList.add("crossBar");
+        info.classList.add("info");
+        infoSymb.textContent = "i";
+        infoSymb.classList.add("infoSymb");
+        grow.classList.add("grow");
+        growSymb.classList.add("growSymb");
+        infoTextWrap.classList.add("infoTextWrap");
+        infoText.classList.add("infoText");
+        infoText.textContent =
+          "Ceci est un texte de substitution, il servira d'exemples pour ce projet";
 
-      let image = document.createElement("img");
-      image.src = data.message.srcImgUrl;
-      grow.appendChild(growSymb);
-      info.appendChild(infoSymb);
-      cross.appendChild(crossBar);
-      infoTextWrap.appendChild(infoText);
-      imageWrap.appendChild(infoTextWrap);
-      imageWrap.appendChild(image);
-      imageWrap.appendChild(cross);
-      // imageWrap.appendChild(info);
-      imageWrap.appendChild(grow);
-
-      previewContainer.appendChild(imageWrap);
-      disabled();
-      onHover();
-      assetsCliked();
-      growAssets();
-      showText();
-      reEnabled();
-      setTimeout(() => {
-        imageThumbNail.style.opacity = 1;
-        imageThumbNail.style.marginLeft = widthTimeStamp + "%";
-        if (imgCounter <= 1) {
-          // previewContainerGrid.style.display = "none";
+        let image = document.createElement("img");
+        image.src = data.message.srcImgUrl;
+        grow.appendChild(growSymb);
+        info.appendChild(infoSymb);
+        cross.appendChild(crossBar);
+        infoTextWrap.appendChild(infoText);
+        imageWrap.appendChild(infoTextWrap);
+        imageWrap.appendChild(image);
+        imageWrap.appendChild(cross);
+        // imageWrap.appendChild(info);
+        imageWrap.appendChild(grow);
+        if (imgCounter === 1) {
+          console.log("desc0");
+          imageWrap.setAttribute("data-desc", "Archipelago_Orange Mesh_01");
+        } else if (imgCounter === 2) {
+          imageWrap.setAttribute(
+            "data-desc",
+            "Archipelago_Construction site a_02"
+          );
+        } else if (imgCounter === 3) {
+          imageWrap.setAttribute(
+            "data-desc",
+            "Archipelago_Construction site b_02"
+          );
+        } else if (imgCounter === 4) {
+          imageWrap.setAttribute("data-desc", "Archipelago_Storage tent_03");
+        } else if (imgCounter === 5) {
+          imageWrap.setAttribute("data-desc", "Archipelago_Weight bag_a_04");
+        } else if (imgCounter === 6) {
+          imageWrap.setAttribute("data-desc", "Archipelago_Weight bag_b_04");
+        } else if (imgCounter === 7) {
+          imageWrap.setAttribute(
+            "data-desc",
+            "Archipelago_Typeface sketch_a_05"
+          );
+        } else if (imgCounter === 8) {
+          imageWrap.setAttribute(
+            "data-desc",
+            "Archipelago_Typeface sketch_b_05"
+          );
+        } else if (imgCounter === 9) {
+          imageWrap.setAttribute("data-desc", "Archipelago_Typography_06");
+        } else if (imgCounter === 10) {
+          imageWrap.setAttribute(
+            "data-desc",
+            "Archipelago_Editorial prototype a_07"
+          );
+        } else if (imgCounter === 11) {
+          imageWrap.setAttribute(
+            "data-desc",
+            "Archipelago_Editorial layout b_07"
+          );
+        } else if (imgCounter === 12) {
+          imageWrap.setAttribute("data-desc", "Archipelago_Web layout a_08");
+        } else if (imgCounter === 13) {
+          imageWrap.setAttribute("data-desc", "Archipelago_Poster_09");
+        } else if (imgCounter === 14) {
+          imageWrap.setAttribute("data-desc", "Archipelago_Containers_10");
         }
-      }, 300);
+
+        previewContainer.appendChild(imageWrap);
+        disabled();
+        onHover();
+        assetsCliked();
+        growAssets();
+        showText();
+        reEnabled();
+        setTimeout(() => {
+          imageThumbNail.style.opacity = 1;
+          imageThumbNail.style.marginLeft = widthTimeStamp + "%";
+          if (imgCounter <= 1) {
+            // previewContainerGrid.style.display = "none";
+          }
+        }, 300);
+        setTimeout(() => (imageWrap.style.display = "none"), 60000);
+      }
+      uploadLiveAssets();
     }
     if (data.message.type == "vid-url") {
       let widthTimeStamp = amount * 100;
@@ -1266,6 +1390,7 @@ function zoomIn() {
 }
 function rangeScaling() {
   if (step1 === true) {
+    $(".switch-container-bottom").css("opacity", "0");
     firstRange.classList.toggle("range-1");
     previewContainer.classList.toggle("range-1-lecture");
     previewContainerGrid.classList.toggle("range-1-lecture");
@@ -1324,6 +1449,8 @@ function rangeScaling() {
     step4 = true;
   } else if (step4 === true) {
     console.log("step4");
+    $(".switch-container-bottom").css("opacity", "1");
+
     firstRange.classList.toggle("range-1");
     previewContainer.classList.toggle("range-1-lecture");
     previewContainerGrid.classList.toggle("range-1-lecture");
@@ -1396,16 +1523,16 @@ function onInactive(ms, cb) {
       };
 }
 
-$(".toggle-layout").on("click", function (e) {
+$(".switch-container").on("click", function (e) {
   // $(this).toggleClass("switch");
   if (switchMode === true) {
     slider.next();
     console.log("slider-upd");
-    $(this).css("left", "48%");
+    $(".toggle-layout").css("left", "48%");
     $(".gridMode").css("opacity", "1");
     $(".liveMode").css("opacity", "0");
-    $(this).toggleClass("shadowLeft");
-
+    $(".toggle-layout").toggleClass("shadowLeft");
+    slider.update();
     $(".previewContainer").css("opacity", "0");
 
     $(".previewContainerGrid").css("display", "flex");
@@ -1421,10 +1548,10 @@ $(".toggle-layout").on("click", function (e) {
 
     switchMode = false;
   } else if (switchMode === false) {
-    $(this).css("left", "0%");
+    $(".toggle-layout").css("left", "0%");
     $(".gridMode").css("opacity", "0");
     $(".liveMode").css("opacity", "1");
-    $(this).toggleClass("shadowLeft");
+    $(".toggle-layout").toggleClass("shadowLeft");
     sumAssets.classList.toggle("disabled-opa");
     videoContainer.classList.toggle("hide-live");
     gridVideo.classList.toggle("show-grid");
@@ -1442,13 +1569,13 @@ $(".toggle-layout").on("click", function (e) {
     switchMode = true;
   }
 });
-$(".toggle-view").on("click", function (e) {
+$(".switch-container-bottom").on("click", function (e) {
   // $(this).toggleClass("switch");
   if (switchMode === true) {
-    $(this).css("left", "65%");
+    $(".toggle-view").css("left", "65%");
     $(".microView").css("opacity", "0");
     $(".macroView").css("opacity", "1");
-    $(this).toggleClass("shadowLeft");
+    $(".toggle-view").toggleClass("shadowLeft");
     $("body").css("background-color", "white");
     $(".scaling-range").css("opacity", "1");
 
@@ -1459,10 +1586,10 @@ $(".toggle-view").on("click", function (e) {
   } else if (switchMode === false) {
     $(".scaling-range").css("opacity", "0");
 
-    $(this).css("left", "0%");
+    $(".toggle-view").css("left", "0%");
     $(".microView").css("opacity", "1");
     $(".macroView").css("opacity", "0");
-    $(this).toggleClass("shadowLeft");
+    $(".toggle-view").toggleClass("shadowLeft");
     zoomIn();
     console.log("two");
 

@@ -141,6 +141,7 @@
 
     <div class="conf-button">
       <span class="conf-button-info">See lectures</span>
+      <span class="release-date">Available on 01.07.22</span>
       <span class="conf-button-next">Next</span>
     </div>
 
@@ -190,41 +191,40 @@
       </div>
       <div class="conf-img-preview-2">
         <img
-          src="        https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_KaR9ApXXj.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441964294"
+          src="https://ik.imagekit.io/diploma/ASSETS/288477075_1136484783797687_4123230084634403566_n_0WY6lYGFi.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655673315343"
           alt="none"
         />
         <img
-          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_j7NMEMig-.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441737965"
+          src="https://ik.imagekit.io/diploma/ASSETS/287954054_589007392795090_6675705813461170312_n_-flGIJL-v.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655673315386"
           alt="none"
         />
 
         <div class="wrap-cam-mid">
           <a>Soon</a>
-
           <video
             muted
             autoplay
             loop
             playsinline
-            src="https://ik.imagekit.io/diploma/Fonts/2_5U2x0tlt5.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1655459574300"
+            src="https://ik.imagekit.io/diploma/ASSETS/Margauxpreview_5oQUdbKVa.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1655673524748"
           ></video>
         </div>
         <img
-          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_heSnErSlT.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441658615"
+          src="https://ik.imagekit.io/diploma/ASSETS/288475348_1206731070147766_5825547974209908001_n_vXZ7OIAdl.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655673315202"
           alt=""
         />
         <img
-          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_MJMSQu50C.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654442020823"
+          src="https://ik.imagekit.io/diploma/ASSETS/288553267_1046027689362903_3217091774277029426_n_V-E4wNaIp.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655673314938"
           alt=""
         />
       </div>
       <div class="conf-img-preview-3">
         <img
-          src="        https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_KaR9ApXXj.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441964294"
+          src="https://ik.imagekit.io/diploma/ASSETS/Screenshot_2022-06-18_at_18.50.34_s5_GWsAl5.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655571059923"
           alt="none"
         />
         <img
-          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_j7NMEMig-.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441737965"
+          src="https://ik.imagekit.io/diploma/ASSETS/Bootsfahne_RDjk8HrUb.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1655571407983"
           alt="none"
         />
 
@@ -236,17 +236,21 @@
             autoplay
             loop
             playsinline
-            src="https://ik.imagekit.io/diploma/Fonts/3_u7WotJo2w.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1655459574840"
+            src="https://ik.imagekit.io/diploma/ASSETS/previewAnto_4EhwAeOrV.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1655570991495"
           ></video>
         </div>
         <img
-          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_heSnErSlT.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654441658615"
+          src="https://ik.imagekit.io/diploma/ASSETS/420b2c3bb12b5b83fafebd979f41f6ae_LMtGy9GuL.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1655570998770"
           alt=""
         />
-        <img
-          src="https://ik.imagekit.io/diploma/HUGO_JAUFFET_2/test_image_MJMSQu50C.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1654442020823"
-          alt=""
-        />
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          src="https://ik.imagekit.io/diploma/ASSETS/screencast_2022-06-18_18-52-12_uBmtABOtO.mp4?ik-sdk-version=javascript-1.4.3&updatedAt=1655571292158"
+          alt="none"
+        ></video>
       </div>
       <div class="title-conference-wrap">
         <div class="intro" id="container-conf2-top"></div>
@@ -264,6 +268,7 @@
       let confPreview = document.querySelector(".conf-img-preview");
       let confPreview2 = document.querySelector(".conf-img-preview-2");
       let confPreview3 = document.querySelector(".conf-img-preview-3");
+      let releaseD = document.querySelector(".release-date");
 
       let homeLogo = document.querySelector(".home-logo");
       let confButton = document.querySelector(".conf-button");
@@ -331,24 +336,32 @@
           confUn = true;
           conf1 = true;
           conf2 = false;
+
+          setTimeout(() => {
+            releaseD.style.opacity = 0;
+          }, 500);
         } else if (confTrois === true) {
           console.log("BACk CONF 2");
           confTrois = false;
           confDeux = true;
+          conf2 = true;
+          conf3 = false;
           confPreview2.classList.remove("move-to-next-leave");
           confPreview2.classList.add("move-to-next-enter");
           confPreview3.classList.remove("move-to-next-enter");
           confPreview3.classList.remove("move-to-next-leave");
+          releaseD.textContent = "Available on 01.07.22";
 
-          conf.style.backgroundColor = "lightgreen";
+          conf.style.backgroundColor = "#c1c2b0";
         }
       });
       nextConf.addEventListener("click", function () {
         if (confUn === true) {
           console.log("CONF UN");
+
           confPreview.classList.add("move-to-next-leave");
           confPreview2.classList.add("move-to-next-enter");
-          conf.style.backgroundColor = "lightgreen";
+          conf.style.backgroundColor = "#c1c2b0";
           confBChildren.textContent = "Prev";
           goToConf = false;
           readyToHome = false;
@@ -358,17 +371,21 @@
 
           confDeux = true;
           confUn = false;
+          setTimeout(() => {
+            releaseD.style.opacity = 1;
+          }, 500);
         } else if (confDeux === true) {
           console.log("CONF DEUX");
           confPreview2.classList.remove("move-to-next-enter");
           confPreview2.classList.add("move-to-next-leave");
           confPreview3.classList.add("move-to-next-enter");
 
-          conf.style.backgroundColor = "sandybrown";
+          conf.style.backgroundColor = "#009f1f";
           confDeux = false;
           confTrois = true;
           conf2 = false;
           conf3 = true;
+          releaseD.textContent = "Available on 01.08.22";
         }
       });
       wrapCamMiddle.addEventListener("click", function () {

@@ -285,17 +285,14 @@
                   /* border: 1px solid black; */
                   width: 400px;
                   height: 300px;
-                  margin-right: 40px;
                   position: relative;
                 "
               >
-                <h1 class="join-title" style="text-align: center">
-                  Rejoindre une room
-                </h1>
+                <h1 class="join-title" style="text-align: center">Host</h1>
                 <div class="joinvid-wrap">
                   <video class="drag resize-drag" id="joinCam"></video>
                 </div>
-                <div>
+                <div class="wrap-button-join">
                   <div class="first-input" style="text-align: center">
                     <input
                       style="
@@ -304,9 +301,6 @@
                         width: 100%;
                         padding: 5px;
                         border: 1px solid black;
-                        margin-top: 10vh;
-
-                        margin-bottom: 4vh;
                       "
                       type="text"
                       name="name"
@@ -332,24 +326,31 @@
                     />
                   </div>
                   <button
-                    style="margin-top: 2rem; display: block; width: 100%"
+                    style="margin-top: 1rem; display: block; width: 40%"
                     class="btn secondary text-white"
                     id="meetingCreateButton"
                     onclick="joinMeeting(true)"
                   >
-                    Crée une room
+                    Create a Room
                   </button>
                   <button
-                    style="margin-top: 2rem; display: block; width: 100%"
+                    style="margin-top: 2rem; display: block; width: 40%"
                     class="btn secondary text-white"
                     id="meetingJoinButton"
                     onclick="joinMeeting()"
                   >
-                    Rejoindre la room
+                    Join a Room
                   </button>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="toolFooterLogo">
+            <img
+              class="home-logo"
+              src="https://ik.imagekit.io/diploma/Fonts/logo2-01_l-5m51np_.png?ik-sdk-version=javascript-1.4.3&updatedAt=1655460933280"
+              alt=""
+            />
           </div>
         </main>
 
@@ -437,6 +438,7 @@
 
     <a href="http://localhost:3000" class="back-home">Leave</a>
     <div class="toggle-subtitle">Subtitle off</div>
+
     <footer class="player-actions-bottom">
       <div>
         <button class="btn scaling-range" onclick="rangeScaling()">+</button>

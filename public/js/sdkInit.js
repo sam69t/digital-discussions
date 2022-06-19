@@ -157,6 +157,7 @@ function startMeeting(token, meetingId, name) {
   togSubtitle.style.display = "none";
   buttonBackHome.style.display = "none";
   fond.style.zIndex = "999";
+  previewContainer.style.zIndex = "auto";
 
   // Meeting Init
   meeting = window.ZujoSDK.initMeeting({
