@@ -56,7 +56,7 @@ function playerSetup() {
 
   player = new Player({
     parent: body,
-    csvSrc: "./assets/chats/PL_1_16.6.22.csv",
+    csvSrc: "./assets/chats/20.6.22.csv",
     liveVideoSrc: "./assets/videos/HUGO_J2(CUT).mp4",
     gridVideoSrc: "./assets/videos/HUGO_J2(CUT).mp4",
   });
@@ -106,21 +106,48 @@ function playerSetup() {
       //   document.body.removeChild(instruction);
       // }, 2500);
     }
-    if (data.message.type == "upload-public-link") {
+    if (data.message.type == "upload-public-text") {
       linkCounter++;
-      console.log(data.message, data.message.linkValue);
+      console.log(data.message, data.message.textValue);
 
       let publicImg = document.createElement("div");
-      let link = document.createElement("a");
+      let text = document.createElement("span");
 
       publicImg.classList.add("imageBlockwrapper");
       publicImg.classList.add("assets-public");
-      link.classList.add("public-link");
-      link.textContent = data.message.linkValue;
-      link.href = data.message.linkValue;
-      link.setAttribute("target", "_blank");
-      publicImg.appendChild(link);
+      text.classList.add("public-link");
+      text.textContent = data.message.textValue;
+      // text.href = data.message.linkValue;
+      // text.setAttribute("target", "_blank");
+      publicImg.appendChild(text);
       publicAssetsWrapperTopFirst.appendChild(publicImg);
+
+      console.log("appendText", linkCounter);
+
+      if (linkCounter === 1) {
+        publicAssetsWrapperTopFirst.appendChild(publicImg);
+      }
+      if (linkCounter === 2) {
+        publicAssetsWrapperRight.appendChild(publicImg);
+      }
+      if (linkCounter === 3) {
+        publicAssetsWrapperLeft.appendChild(publicImg);
+      }
+      if (linkCounter === 4) {
+        publicAssetsWrapperTopFirst2.appendChild(publicImg);
+      }
+      if (linkCounter === 5) {
+        publicAssetsWrapperRight2.appendChild(publicImg);
+      }
+      if (linkCounter === 6) {
+        publicAssetsWrapperBottom2.appendChild(publicImg);
+      }
+      if (linkCounter === 7) {
+      }
+      if (linkCounter === 8) {
+      }
+      if (linkCounter === 9) {
+      }
     }
 
     if (data.message.type == "upload-public-img") {
@@ -152,69 +179,69 @@ function playerSetup() {
         publicImg.appendChild(grow);
         publicAssetsWrapperTopFirst.appendChild(publicImg);
 
-        if (publicCounter === 1) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_01");
-        } else if (publicCounter === 2) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_02");
-        } else if (publicCounter === 3) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_03");
-        } else if (publicCounter === 4) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_04");
-        } else if (publicCounter === 5) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_05");
-        } else if (publicCounter === 6) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_06");
-        } else if (publicCounter === 7) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_07");
-        } else if (publicCounter === 8) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_04");
-        } else if (publicCounter === 9) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_05");
-        } else if (publicCounter === 10) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_06");
-        } else if (publicCounter === 11) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_07");
-        } else if (publicCounter === 12) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_08");
-        } else if (publicCounter === 13) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_09");
-        } else if (publicCounter === 14) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_10");
-        } else if (publicCounter === 15) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_11");
-        } else if (publicCounter === 16) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_12");
-        } else if (publicCounter === 17) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_13");
-        } else if (publicCounter === 18) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_14");
-        } else if (publicCounter === 19) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_15");
-        } else if (publicCounter === 20) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_16");
-        } else if (publicCounter === 21) {
-          publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_17");
-        }
+        // if (publicCounter === 1) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_01");
+        // } else if (publicCounter === 2) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_02");
+        // } else if (publicCounter === 3) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_03");
+        // } else if (publicCounter === 4) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_04");
+        // } else if (publicCounter === 5) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_05");
+        // } else if (publicCounter === 6) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_06");
+        // } else if (publicCounter === 7) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_07");
+        // } else if (publicCounter === 8) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_04");
+        // } else if (publicCounter === 9) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_05");
+        // } else if (publicCounter === 10) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_06");
+        // } else if (publicCounter === 11) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_07");
+        // } else if (publicCounter === 12) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_08");
+        // } else if (publicCounter === 13) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_09");
+        // } else if (publicCounter === 14) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_10");
+        // } else if (publicCounter === 15) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_11");
+        // } else if (publicCounter === 16) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_12");
+        // } else if (publicCounter === 17) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_13");
+        // } else if (publicCounter === 18) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_14");
+        // } else if (publicCounter === 19) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_15");
+        // } else if (publicCounter === 20) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_16");
+        // } else if (publicCounter === 21) {
+        //   publicImg.setAttribute("data-desc", "Archipelago_Public_Ref_17");
+        // }
 
-        if (publicCounter >= 1 && publicCounter <= 3) {
+        if (publicCounter >= 1 && publicCounter <= 2) {
           publicAssetsWrapperTopFirst.appendChild(publicImg);
-        } else if (publicCounter >= 4 && publicCounter <= 5) {
+        } else if (publicCounter >= 3 && publicCounter <= 4) {
           publicAssetsWrapperRight.appendChild(publicImg);
-        } else if (publicCounter >= 6 && publicCounter <= 10) {
+        } else if (publicCounter >= 5 && publicCounter <= 9) {
           publicAssetsWrapperBottom.appendChild(publicImg);
-        } else if (publicCounter >= 11 && publicCounter <= 11) {
+        } else if (publicCounter >= 10 && publicCounter <= 10) {
           publicAssetsWrapperLeft.appendChild(publicImg);
-        } else if (publicCounter >= 12 && publicCounter <= 14) {
+        } else if (publicCounter >= 11 && publicCounter <= 13) {
           publicAssetsWrapperTopLast.appendChild(publicImg);
-        } else if (publicCounter >= 15 && publicCounter <= 20) {
+        } else if (publicCounter >= 14 && publicCounter <= 19) {
           publicAssetsWrapperTopFirst2.appendChild(publicImg);
-        } else if (publicCounter >= 21 && publicCounter <= 23) {
+        } else if (publicCounter >= 20 && publicCounter <= 22) {
           publicAssetsWrapperRight2.appendChild(publicImg);
-        } else if (publicCounter >= 24 && publicCounter <= 30) {
+        } else if (publicCounter >= 23 && publicCounter <= 29) {
           publicAssetsWrapperBottom2.appendChild(publicImg);
         }
 
-        setTimeout(() => publicImg.removeChild(image), 60000);
+        // setTimeout(() => publicImg.removeChild(image), 60000);
       }
 
       uploadPublicAssets();
@@ -244,7 +271,7 @@ function playerSetup() {
       notifwrap.appendChild(notifImg);
       previewContainer.appendChild(notifwrap);
       //! APPEND SCROLLING PUBLIC COM
-      if (publicCounter === 5) {
+      if (publicCounter === 4) {
         let imgSlide = document.createElement("div");
         let imgofSlide = document.createElement("img");
         imgSlide.classList.add("moving-banner-v");
@@ -310,26 +337,26 @@ function playerSetup() {
       }
       growAssetsPublicVid();
 
-      if (publicVidCounter === 1) {
-        let vidSlide = document.createElement("div");
-        let vidofSlide = document.createElement("video");
-        vidSlide.classList.add("moving-banner-h");
-        vidSlide.classList.add("moving-vid");
+      // if (publicVidCounter === 1) {
+      //   let vidSlide = document.createElement("div");
+      //   let vidofSlide = document.createElement("video");
+      //   vidSlide.classList.add("moving-banner-h");
+      //   vidSlide.classList.add("moving-vid");
 
-        vidofSlide.src = data.message.srcUrl;
-        vidSlide.appendChild(vidofSlide);
-        document.body.appendChild(vidSlide);
-        vidofSlide.autoplay = true;
-        vidofSlide.muted = true;
-        vidofSlide.loop = true;
-        vidSlide.addEventListener(
-          "animationend",
-          function () {
-            document.body.removeChild(vidSlide);
-          },
-          false
-        );
-      }
+      //   vidofSlide.src = data.message.srcUrl;
+      //   vidSlide.appendChild(vidofSlide);
+      //   document.body.appendChild(vidSlide);
+      //   vidofSlide.autoplay = true;
+      //   vidofSlide.muted = true;
+      //   vidofSlide.loop = true;
+      //   vidSlide.addEventListener(
+      //     "animationend",
+      //     function () {
+      //       document.body.removeChild(vidSlide);
+      //     },
+      //     false
+      //   );
+      // }
     }
 
     if (data.message.type == "moving-webcam-participant") {
@@ -1525,6 +1552,8 @@ function onInactive(ms, cb) {
 
 $(".switch-container").on("click", function (e) {
   // $(this).toggleClass("switch");
+  //! LIVE TO GRID
+
   if (switchMode === true) {
     slider.next();
     console.log("slider-upd");
@@ -1570,6 +1599,7 @@ $(".switch-container").on("click", function (e) {
   }
 });
 $(".switch-container-bottom").on("click", function (e) {
+  //! LECTURES TO PUBLIC
   // $(this).toggleClass("switch");
   if (switchMode === true) {
     $(".toggle-view").css("left", "65%");
@@ -1581,6 +1611,12 @@ $(".switch-container-bottom").on("click", function (e) {
 
     zoomOut();
     console.log("one");
+    $(".toggle-subtitle").css("color", "dodgerblue");
+    $(".back-home").css("color", "dodgerblue");
+    // $(".name-lecture").css("color", "dodgerblue");
+    // $(".name-project").css("color", "dodgerblue");
+
+    console.log("hoh");
 
     switchMode = false;
   } else if (switchMode === false) {
@@ -1590,6 +1626,11 @@ $(".switch-container-bottom").on("click", function (e) {
     $(".microView").css("opacity", "1");
     $(".macroView").css("opacity", "0");
     $(".toggle-view").toggleClass("shadowLeft");
+
+    $(".toggle-subtitle").css("color", "white");
+    $(".back-home").css("color", "white");
+    $(".name-lecture").css("color", "white");
+    $(".name-project").css("color", "white");
     zoomIn();
     console.log("two");
 

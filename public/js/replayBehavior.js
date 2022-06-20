@@ -155,7 +155,7 @@ function growAssetsPublic() {
       let captions = $(this).prevAll("span").first().text();
       console.log(captions);
 
-      fullImageDesc.textContent = getDesc;
+      fullImageDesc.textContent = captions;
 
       fullImageDesc.classList.add("fullImageDesc");
       fullImageDesc.style.color = "black";

@@ -1,6 +1,6 @@
 let amount;
 let amountTimer;
-const getOriginal = false;
+const getOriginal = true;
 let shotProjet = true;
 
 let subtitleContainer = document.querySelector(".sub-title-container");
@@ -443,138 +443,502 @@ function setupSubTitle(vid) {
           time: 29,
           text: "vernacular codes and urban space.",
         },
+
+        {
+          time: 31,
+          text: "",
+        },
         {
           time: 37,
           text: "So I'm going to tell you about a project called Archipelago.",
         },
         {
-          time: 50,
-          text: "and keep your audience focused on the video.",
+          time: 41.5,
+          text: "A visual identity",
         },
         {
-          time: 54,
-          text: "Yes, that would be great!",
+          time: 42.5,
+          text: "that I used to make when I was a student.          ",
         },
         {
-          time: 56,
-          text: "If you happen to be selling a product,",
+          time: 45,
+          text: "I still am, but that I made          ",
         },
         {
-          time: 59,
-          text: "you could fill up the website with “Buy Now” buttons,",
+          time: 47,
+          text: "when I was a student in Geneva          ",
         },
         {
-          time: 64,
-          text: "and, once those buttons are gone, you could remind",
+          time: 49,
+          text: "which I made with my friend Léo Monnet",
         },
         {
-          time: 67.5,
-          text: "your audience that purchasing something on your website",
+          time: 52,
+          text: "And in fact, the brief here          ",
         },
         {
-          time: 71.5,
-          text: "is a private, safe affair.",
+          time: 56.5,
+          text: "The visual identity          ",
         },
         {
-          time: 75,
-          text: "In fact, you could go even further, and announce that",
+          time: 57.5,
+          text: "is made for a festival of architecture called Archipelago",
         },
         {
-          time: 79,
-          text: "the entire experience is encrypted,",
+          time: 60.5,
+          text: "In fact, the brief was really          ",
         },
         {
-          time: 83,
-          text: "so you’ll never really know what’s happening behind the scenes.",
+          time: 63,
+          text: "to see this event signalled          ",
         },
         {
-          time: 89,
-          text: "Selling is not the only thing you can do on the internet.",
+          time: 64.5,
+          text: "that was to take place          ",
+        },
+        {
+          time: 66.5,
+          text: "in the centre of the City of Geneva.          ",
+        },
+        {
+          time: 71,
+          text: "So to point it out to people          ",
+        },
+        {
+          time: 72,
+          text: "who are not necessarily interested in architecture",
+        },
+        {
+          time: 74.8,
+          text: "to the design neophyte itself          ",
+        },
+        {
+          time: 76.6,
+          text: "And so          ",
+        },
+        {
+          time: 77.5,
+          text: "to point it out in a fairly minimal way          ",
+        },
+        {
+          time: 80.5,
+          text: "to find elements          ",
+        },
+        {
+          time: 81.5,
+          text: "that might be of interest          ",
+        },
+        {
+          time: 82.3,
+          text: "to communicate just already          ",
+        },
+        {
+          time: 83.5,
+          text: "about the event          ",
+        },
+        {
+          time: 84.5,
+          text: "before creating communication          ",
+        },
+        {
+          time: 86.2,
+          text: "more traditional communication.          ",
+        },
+        {
+          time: 88.5,
+          text: "So we looked for elements          ",
+        },
+        {
+          time: 90,
+          text: "and we came across this orange construction mesh         ",
         },
         {
           time: 93,
-          text: "You can also inform.",
+          text: "which is an element          ",
+        },
+        {
+          time: 94.2,
+          text: "that we all know          ",
+        },
+        {
+          time: 95.2,
+          text: "because it is an element          ",
         },
         {
           time: 97,
-          text: "The problem with using video to inform is that, well,",
+          text: "that allows you to signal          ",
         },
         {
-          time: 100.5,
-          text: "videos, by nature of the medium, are stuck in time.",
+          time: 98,
+          text: "and which allows work to be supervised,          ",
+        },
+
+        {
+          time: 100,
+          text: "a building site and that we will find          ",
         },
         {
-          time: 105,
-          text: "This additional layer that I’m proposing",
+          time: 102,
+          text: "very strong          ",
+        },
+        {
+          time: 102.8,
+          text: "because it has this colorimetry       ",
+        },
+        {
+          time: 104.5,
+          text: "almost fluorescent orange, which is an identifying feature.          ",
+        },
+        {
+          time: 107.5,
+          text: "And on top of that        ",
         },
         {
           time: 108.5,
-          text: "could pull in real-time information",
+          text: "it has this modular grid          ",
         },
         {
-          time: 111.5,
-          text: "to complement the message you are trying to convey.",
+          time: 110.5,
+          text: "that we found very beautiful          ",
         },
         {
-          time: 117.5,
-          text: "I’m personally excited about having fun with this idea,",
+          time: 113.5,
+          text: "we will return to the grid after  ",
         },
         {
-          time: 123,
-          text: "Perhaps by messing around with viewers",
+          time: 114.5,
+          text: "But these modules a bit,          ",
         },
         {
-          time: 127,
-          text: "pausing the video at random times",
+          time: 115.7,
+          text: "these square modules",
         },
         {
-          time: 129,
-          text: "and then, making them... well,",
+          time: 116.5,
+          text: "that we thought were very beautiful.          ",
         },
         {
-          time: 132.5,
-          text: "think that their internet connection went down!",
+          time: 119,
+          text: "And in addition to that          ",
         },
         {
-          time: 136,
-          text: "Similar to what happened in the Sopranos finale!",
+          time: 119.9,
+          text: "this net is in a          ",
         },
         {
-          time: 140,
-          text: "Hahahahahaha!",
+          time: 121,
+          text: "in a construction site          ",
+        },
+        {
+          time: 124,
+          text: "We found it very rich          ",
+        },
+        {
+          time: 126,
+          text: "in terms of visual codes          ",
+        },
+        {
+          time: 128,
+          text: "and in terms of the atmosphere to be taken up.",
+        },
+        {
+          time: 129.8,
+          text: "So we thought we'd do",
+        },
+        {
+          time: 131,
+          text: "a first referencing phase",
+        },
+        {
+          time: 132.9,
+          text: "So there, for example          ",
+        },
+        {
+          time: 133.5,
+          text: "people who work          ",
+        },
+        {
+          time: 135.2,
+          text: "and have these orange waistcoats          ",
+        },
+        {
+          time: 137,
+          text: "fluorescent vests with those phosphorescent stripes          ",
+        },
+        {
+          time: 139,
+          text: "that we thought were really beautiful          ",
+        },
+        {
+          time: 140.7,
+          text: "so we said OK          ",
+        },
+        {
+          time: 141.6,
+          text: "What other element with this mesh ",
         },
         {
           time: 143,
-          text: "",
+          text: "that we can reinterpret          ",
+        },
+
+        {
+          time: 144.8,
+          text: " and reuse in our communication          ",
         },
         {
-          time: 185,
-          text: "This is a nascent idea,",
+          time: 148.5,
+          text: "here, for example          ",
         },
         {
-          time: 187,
-          text: "and I hope it inspires others to ditch",
+          time: 150.4,
+          text: "these sort of big construction trucks          ",
+        },
+        {
+          time: 154,
+          text: " with these lights          ",
+        },
+        {
+          time: 155,
+          text: "and this light element          ",
+        },
+        {
+          time: 156,
+          text: "which comes up quite frequently          ",
+        },
+        {
+          time: 157.8,
+          text: "and is quite beautiful         ",
+        },
+        {
+          time: 158.8,
+          text: "But here we are on night photos          ",
+        },
+        {
+          time: 160,
+          text: "but these different elements          ",
+        },
+        {
+          time: 160.8,
+          text: "that we found quite interesting          ",
+        },
+        {
+          time: 162,
+          text: "to be able to reuse         ",
+        },
+        {
+          time: 165.4,
+          text: "here for example ",
+        },
+        {
+          time: 168,
+          text: "A kind of orange tent          ",
+        },
+        {
+          time: 169.5,
+          text: "which we think is quite beautiful          ",
+        },
+        {
+          time: 170.7,
+          text: "And always this orange that comes back          ",
+        },
+        {
+          time: 172.3,
+          text: "We have targeted our research          ",
+        },
+        {
+          time: 173.5,
+          text: "a bit on the orange elements          ",
+        },
+        {
+          time: 175.5,
+          text: "but we still had this idea          ",
+        },
+        {
+          time: 177,
+          text: "to find little things          ",
+        },
+        {
+          time: 181,
+          text: "that could be reused quite easily          ",
+        },
+        {
+          time: 186,
+          text: "For example, these bags that are almost          ",
+        },
+        {
+          time: 188.6,
+          text: "sandbags        ",
+        },
+        {
+          time: 189.5,
+          text: "that could have been reused      ",
         },
         {
           time: 190,
-          text: "the race for algorithmic relevance",
+          text: "in totebag",
         },
         {
-          time: 194,
-          text: "and pursue genuinely intriguing experiences",
+          time: 191.5,
+          text: "This shows several elements          ",
+        },
+        {
+          time: 196,
+          text: "We said OK          ",
         },
         {
           time: 197,
-          text: "for internet users all around.",
+          text: "we have these different elements          ",
+        },
+        {
+          time: 199,
+          text: "we've got our orange mesh.          ",
+        },
+        {
+          time: 200.8,
+          text: " I can still see in the pictures that I had set aside ",
+        },
+        {
+          time: 206.8,
+          text: "other types of orange bags          ",
+        },
+        {
+          time: 211.5,
+          text: "that there are a lot of elements          ",
+        },
+        {
+          time: 213.5,
+          text: "that we could use for communication          ",
+        },
+        {
+          time: 215,
+          text: "And so, okay, we have this orange mesh          ",
+        },
+        {
+          time: 139,
+          text: "that we thought were really beautiful          ",
+        },
+        {
+          time: 140.7,
+          text: "so we said OK          ",
+        },
+        {
+          time: 141.6,
+          text: "What other element with this mesh ",
+        },
+        {
+          time: 143,
+          text: "that we can reinterpret          ",
+        },
+
+        {
+          time: 144.8,
+          text: " and reuse in our communication          ",
+        },
+        {
+          time: 148.5,
+          text: "here, for example          ",
+        },
+        {
+          time: 150.4,
+          text: "these sort of big construction trucks          ",
+        },
+        {
+          time: 154,
+          text: " with these lights          ",
+        },
+        {
+          time: 155,
+          text: "and this light element          ",
+        },
+        {
+          time: 156,
+          text: "which comes up quite frequently          ",
+        },
+        {
+          time: 157.8,
+          text: "and is quite beautiful         ",
+        },
+        {
+          time: 158.8,
+          text: "But here we are on night photos          ",
+        },
+        {
+          time: 160,
+          text: "but these different elements          ",
+        },
+        {
+          time: 160.8,
+          text: "that we found quite interesting          ",
+        },
+        {
+          time: 162,
+          text: "to be able to reuse         ",
+        },
+        {
+          time: 165.4,
+          text: "here for example ",
+        },
+        {
+          time: 168,
+          text: "A kind of orange tent          ",
+        },
+        {
+          time: 169.5,
+          text: "which we think is quite beautiful          ",
+        },
+        {
+          time: 170.7,
+          text: "And always this orange that comes back          ",
+        },
+        {
+          time: 172.3,
+          text: "We have targeted our research          ",
+        },
+        {
+          time: 173.5,
+          text: "a bit on the orange elements          ",
+        },
+        {
+          time: 175.5,
+          text: "but we still had this idea          ",
+        },
+        {
+          time: 177,
+          text: "to find little things          ",
+        },
+        {
+          time: 181,
+          text: "that could be reused quite easily          ",
+        },
+        {
+          time: 186,
+          text: "For example, these bags that are almost          ",
+        },
+        {
+          time: 188.6,
+          text: "sandbags        ",
+        },
+        {
+          time: 189.5,
+          text: "that could have been reused      ",
+        },
+        {
+          time: 190.8,
+          text: "in totebag",
+        },
+        {
+          time: 191.5,
+          text: "This shows several elements          ",
         },
       ],
       _loop = function (e) {
         vid.addEventListener("timeupdate", function () {
-          // console.log(vid.currentTime);
+          console.log(vid.currentTime);
           if (shotProjet === true) {
             if (vid.currentTime > 31.5 && vid.currentTime < 32.5) {
               let instruction = document.createElement("span");
-              instruction.textContent = "Projet";
+              instruction.textContent = "Project";
               instruction.classList.add("instructions");
               instruction.classList.add("style-projet");
               videoContainerTwo.classList.add("resize-drag");
