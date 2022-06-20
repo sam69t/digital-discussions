@@ -815,41 +815,254 @@ function setupSubTitle(vid) {
           text: "And so, okay, we have this orange mesh          ",
         },
         {
-          time: 139,
-          text: "that we thought were really beautiful          ",
+          time: 217.8,
+          text: "we have these different elements          ",
         },
         {
-          time: 140.7,
-          text: "so we said OK          ",
+          time: 219.3,
+          text: " ",
         },
         {
-          time: 141.6,
-          text: "What other element with this mesh ",
+          time: 220.3,
+          text: "How we're now creating a communication          ",
         },
         {
-          time: 143,
-          text: "that we can reinterpret          ",
+          time: 222,
+          text: "So",
         },
 
         {
-          time: 144.8,
-          text: " and reuse in our communication          ",
+          time: 223,
+          text: " we really started from the form          ",
         },
         {
-          time: 148.5,
-          text: "here, for example          ",
+          time: 225,
+          text: "a little bit rectangular of this mesh          ",
         },
         {
-          time: 150.4,
-          text: "these sort of big construction trucks          ",
+          time: 228.6,
+          text: "to create a typography          ",
         },
         {
-          time: 154,
-          text: " with these lights          ",
+          time: 230.5,
+          text: " So for example, i have sample of this mesh      ",
         },
         {
-          time: 155,
-          text: "and this light element          ",
+          time: 235,
+          text: "I'm going to enlarge my window a little bit          ",
+        },
+        {
+          time: 236.9,
+          text: "so i can show you.          ",
+        },
+        {
+          time: 238.5,
+          text: "So I'm pushing it a bit",
+        },
+        {
+          time: 239.6,
+          text: "a few images          ",
+        },
+        {
+          time: 240.4,
+          text: "hop   ",
+        },
+        {
+          time: 241.8,
+          text: "And we've really got this mesh          ",
+        },
+        {
+          time: 243.5,
+          text: "In fact, which is quite beautiful          ",
+        },
+        {
+          time: 244.5,
+          text: "is that we really have this module          ",
+        },
+        {
+          time: 247,
+          text: "and also this mesh",
+        },
+        {
+          time: 248,
+          text: "It's quite flexible          ",
+        },
+        {
+          time: 249.5,
+          text: "it's very strong         ",
+        },
+        {
+          time: 250.7,
+          text: "but we really have this module.          ",
+        },
+        {
+          time: 252.3,
+          text: "And for us we saw it as a kind of typography.          ",
+        },
+        {
+          time: 254.5,
+          text: "I mean, there was this idea of building modules          ",
+        },
+        {
+          time: 256.8,
+          text: "        ",
+        },
+        {
+          time: 257.5,
+          text: "We thought it was quite right         ",
+        },
+        {
+          time: 259,
+          text: "in our purpose          ",
+        },
+        {
+          time: 260,
+          text: "so we said OK,          ",
+        },
+        {
+          time: 260.8,
+          text: "we're going to try to do, to create          ",
+        },
+        {
+          time: 263.6,
+          text: "to create a kind of typography          ",
+        },
+        {
+          time: 265,
+          text: "from this mesh          ",
+        },
+        {
+          time: 267.3,
+          text: "So we started          ",
+        },
+        {
+          time: 268.8,
+          text: "to do some sketches          ",
+        },
+        {
+          time: 270.6,
+          text: "So here are some first sketches    ",
+        },
+        {
+          time: 271.7,
+          text: "It's old images, but then          ",
+        },
+        {
+          time: 272.7,
+          text: "we've created this grid           ",
+        },
+        {
+          time: 274.5,
+          text: "We've rounded it off a bit in relation to          ",
+        },
+        {
+          time: 275.8,
+          text: "to our mesh",
+        },
+        {
+          time: 277,
+          text: "but really keeping the mindset of",
+        },
+        {
+          time: 278.3,
+          text: "and the spirit of that mesh         ",
+        },
+        {
+          time: 280.3,
+          text: "So we were at the beginning okay        ",
+        },
+        {
+          time: 281.3,
+          text: "we test with serifs          ",
+        },
+        {
+          time: 282.3,
+          text: "sans serif          ",
+        },
+        {
+          time: 285,
+          text: "there were lots of possible solutions          ",
+        },
+        {
+          time: 287.8,
+          text: "and in the end          ",
+        },
+        {
+          time: 289.5,
+          text: "we did something that took up       ",
+        },
+        {
+          time: 292,
+          text: "       ",
+        },
+        {
+          time: 295.5,
+          text: "quite proportional to that base mesh",
+        },
+        {
+          time: 298.6,
+          text: "I am looking for the image          ",
+        },
+        {
+          time: 300,
+          text: "I put the image with the typeface          ",
+        },
+        {
+          time: 304,
+          text: "So, something sans serif",
+        },
+        {
+          time: 307,
+          text: "Maybe a bit more, a bit more.          ",
+        },
+        {
+          time: 309,
+          text: "Sharp in the shape",
+        },
+        {
+          time: 311.7,
+          text: "With really this idea of construction          ",
+        },
+        {
+          time: 313.2,
+          text: "and module          ",
+        },
+        {
+          time: 314,
+          text: "And so, we found it very interesting",
+        },
+        {
+          time: 315.7,
+          text: "because we really in this spirit of architecture         ",
+        },
+        {
+          time: 320,
+          text: "there we really have it's layers a bit that come          ",
+        },
+        {
+          time: 322.5,
+          text: "which have just created levels          ",
+        },
+
+        {
+          time: 324.5,
+          text: "And so, OK, we thought          ",
+        },
+        {
+          time: 326,
+          text: "So we have this typeface         ",
+        },
+        {
+          time: 328,
+          text: "that takes up this site mesh          ",
+        },
+        {
+          time: 329.3,
+          text: "Now we have to create a global communication about this ",
+        },
+        {
+          time: 336,
+          text: "So the good thing is that this mesh is quite flexible          ",
         },
         {
           time: 156,
@@ -924,12 +1137,161 @@ function setupSubTitle(vid) {
           text: "that could have been reused      ",
         },
         {
-          time: 190.8,
+          time: 190,
           text: "in totebag",
         },
         {
           time: 191.5,
           text: "This shows several elements          ",
+        },
+        {
+          time: 196,
+          text: "We said OK          ",
+        },
+        {
+          time: 197,
+          text: "we have these different elements          ",
+        },
+        {
+          time: 199,
+          text: "we've got our orange mesh.          ",
+        },
+        {
+          time: 200.8,
+          text: " I can still see in the pictures that I had set aside ",
+        },
+        {
+          time: 206.8,
+          text: "other types of orange bags          ",
+        },
+        {
+          time: 211.5,
+          text: "that there are a lot of elements          ",
+        },
+        {
+          time: 213.5,
+          text: "that we could use for communication          ",
+        },
+        {
+          time: 215,
+          text: "And so, okay, we have this orange mesh          ",
+        },
+        {
+          time: 217.8,
+          text: "we have these different elements          ",
+        },
+        {
+          time: 219.3,
+          text: " ",
+        },
+        {
+          time: 220.3,
+          text: "How we're now creating a communication          ",
+        },
+        {
+          time: 222,
+          text: "So",
+        },
+
+        {
+          time: 223,
+          text: " we really started from the form          ",
+        },
+        {
+          time: 225,
+          text: "a little bit rectangular of this mesh          ",
+        },
+        {
+          time: 228.6,
+          text: "to create a typography          ",
+        },
+        {
+          time: 230.5,
+          text: " So for example, i have sample of this mesh      ",
+        },
+        {
+          time: 235,
+          text: "I'm going to enlarge my window a little bit          ",
+        },
+        {
+          time: 236.9,
+          text: "so i can show you.          ",
+        },
+        {
+          time: 238.5,
+          text: "So I'm pushing it a bit",
+        },
+        {
+          time: 239.6,
+          text: "a few images          ",
+        },
+        {
+          time: 240.4,
+          text: "hop   ",
+        },
+        {
+          time: 241.8,
+          text: "And we've really got this mesh          ",
+        },
+        {
+          time: 243.5,
+          text: "In fact, which is quite beautiful          ",
+        },
+        {
+          time: 244.5,
+          text: "is that we really have this module          ",
+        },
+        {
+          time: 247,
+          text: "and also this mesh",
+        },
+        {
+          time: 248,
+          text: "It's quite flexible          ",
+        },
+        {
+          time: 249.5,
+          text: "it's very strong         ",
+        },
+        {
+          time: 250.7,
+          text: "but we really have this module.          ",
+        },
+        {
+          time: 252.3,
+          text: "And for us we saw it as a kind of typography.          ",
+        },
+        {
+          time: 254.5,
+          text: "I mean, there was this idea of building modules          ",
+        },
+        {
+          time: 256.8,
+          text: "        ",
+        },
+        {
+          time: 257.5,
+          text: "We thought it was quite right         ",
+        },
+        {
+          time: 259,
+          text: "in our purpose          ",
+        },
+        {
+          time: 260,
+          text: "so we said OK,          ",
+        },
+        {
+          time: 260.8,
+          text: "we're going to try to do, to create          ",
+        },
+        {
+          time: 263.6,
+          text: "to create a kind of typography          ",
+        },
+        {
+          time: 265,
+          text: "from this mesh          ",
         },
       ],
       _loop = function (e) {
