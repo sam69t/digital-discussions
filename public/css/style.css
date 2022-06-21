@@ -83,10 +83,10 @@
   -moz-animation-name: marqueX;
   -ms-animation-name: marqueX;
   animation-name: marqueX;
-  -webkit-animation-duration: 45s;
-  -moz-animation-duration: 45s;
-  -ms-animation-duration: 45s;
-  animation-duration: 45s;
+  -webkit-animation-duration: 25s;
+  -moz-animation-duration: 25s;
+  -ms-animation-duration: 25s;
+  animation-duration: 25s;
   animation-timing-function: linear;
   animation-iteration-count: 1;
 
@@ -186,10 +186,10 @@
 }
 @keyframes marqueX {
   0% {
-    transform: translate(100%, 0);
+    transform: translate(0%, 0);
   }
   100% {
-    transform: translate(-200%, 0);
+    transform: translate(-400%, 0);
   }
 }
 @keyframes marqueY {
@@ -271,12 +271,12 @@ body {
 }
 
 .first-input input {
-  width: 95% !important;
-  height: 4.5vh;
-  font-size: 15px;
+  width: 100% !important;
+  height: 4vh;
+  font-size: 13px;
 }
 .toolFooterLogo img {
-  width: 15%;
+  width: 10%;
 }
 .entry-button {
   position: absolute;
@@ -336,6 +336,7 @@ body {
 .timer {
   display: flex;
   align-items: center;
+  font-family: Unica;
 }
 
 .tool-control-P > .sur-footer {
@@ -344,17 +345,28 @@ body {
 .tool-public > .sur-footer {
   opacity: 0;
 }
+#stopRecording-btn {
+  font-family: Unica;
+  border-radius: 0px;
+  box-shadow: 0px -2px 10px 0px rgb(0 0 0 / 10%);
+}
+#startRecording-btn {
+  font-family: Unica;
+  border-radius: 0px;
+  box-shadow: 0px -2px 10px 0px rgb(0 0 0 / 10%);
+}
 footer input {
   width: 50% !important;
   height: 4vh;
   text-align: center;
+  font-family: Unica;
 }
 footer input:focus {
   /* background-color: pink; */
 }
 
 .tool-control-H > footer {
-  z-index: 999999999;
+  /* z-index: 999999999; */
   width: 99%;
   display: flex;
   flex-direction: row-reverse;
@@ -370,6 +382,12 @@ footer input:focus {
   left: 0;
   height: 4vh;
   justify-content: space-around;
+}
+.tool-control-P > footer > label:nth-child(1) {
+  margin-bottom: -4px;
+}
+.tool-control-P > footer > label:nth-child(4) {
+  margin-bottom: -4px;
 }
 .tool-public > footer {
   z-index: 999999999;
@@ -398,6 +416,12 @@ input {
   margin-top: 8px;
   border-radius: 3px;
   box-shadow: 0px -2px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.id-meet {
+  font-family: Unica;
+  background-color: rgba(230, 230, 230, 0.1);
+  backdrop-filter: blur(10px);
 }
 #joinMeetingId {
   margin-top: 8px;
@@ -431,11 +455,15 @@ input {
   justify-content: center;
   margin-top: 15vh;
 }
+
+.joinvid-wrap video {
+  box-shadow: 0px -2px 10px 0px rgba(0, 0, 0, 0.13);
+}
 #joinCam {
   backdrop-filter: blur(20px);
   margin-top: 1em;
   margin-bottom: 1em;
-  width: 90%;
+  width: 80%;
   transform: rotate("90");
   object-fit: cover;
 }
@@ -455,6 +483,11 @@ audio {
 }
 .join-title {
   margin-top: 1vh;
+  font-family: Corporate;
+}
+.join-title-p {
+  margin-top: 1vh;
+  font-family: Corporate;
 }
 label {
   text-align: center;
@@ -510,6 +543,7 @@ label {
   border-radius: 4px;
   background-color: white !important;
   /* color: #1e1d1c !important; */
+  font-family: Unica;
   cursor: pointer;
   color: black;
 }
@@ -539,7 +573,8 @@ button:focus {
   backdrop-filter: blur(10px);
   color: black;
   font-family: Unica;
-  height: 5vh;
+  height: 4vh;
+  font-size: 13px !important;
   box-shadow: 0px -2px 10px 0px rgba(0, 0, 0, 0.07);
 }
 .btn:hover {
@@ -598,9 +633,12 @@ body {
 .chat-wrapper {
   border-radius: 10px;
   z-index: 99999999999;
-  height: 45%;
+  height: 100%;
+  display: flex;
   width: 100%;
-  top: calc(50% - 22.5%);
+  align-items: center;
+  justify-content: center;
+  top: calc(0%);
   /* box-shadow: 0 0 65px #ccc; */
   /* display: none; */
   position: absolute;
@@ -617,6 +655,7 @@ body {
 
   -webkit-text-stroke: 1px black;
   font-size: 300px;
+  height: 95px;
   background: none;
   /* color: rgb(220, 255, 197); */
   color: white;
@@ -628,18 +667,37 @@ body {
   /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); */
   transition: 500ms ease-in-out;
 }
+.chats__message-tool {
+  font-family: Corporate;
+  letter-spacing: -4px;
+  line-height: 70px;
+
+  -webkit-text-stroke: 1px black;
+  font-size: 200px;
+  height: 135px;
+  background: none;
+  /* color: rgb(220, 255, 197); */
+  color: white;
+  padding: 10px;
+  padding-left: 35px;
+  padding-right: 35px;
+
+  border-radius: 100px;
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); */
+  transition: 500ms ease-in-out;
+}
+
 #chats {
   transition: 1s;
   transition-timing-function: cubic-bezier(0.53, 1, 0.32, 1);
   display: flex;
-  overflow: hidden;
   flex-direction: column;
   justify-content: center;
   top: 50%;
   align-items: center;
   text-align: center;
   width: 100%;
-  height: 100%;
+  height: auto;
   left: 50%;
 }
 
@@ -679,7 +737,7 @@ footer > button {
   justify-content: space-evenly;
   width: 100%;
   top: 0;
-  margin-top: 5vh;
+  margin-top: 3vh;
 }
 .end-button {
   display: none;
@@ -706,7 +764,15 @@ footer > button {
   margin-top: 2vh;
   top: 0;
 }
-
+.color-controls div {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+}
+.color-controls div label {
+  font-family: Unica;
+}
 .hidden {
   display: none;
 }
@@ -817,15 +883,22 @@ main {
   position: absolute;
   z-index: 1;
   display: none;
-  font-size: 90px !important;
-  padding: 25px;
-  border-radius: 10px;
+  font-size: 125px !important;
+  letter-spacing: -0.5px;
+  padding: 30px;
+  font-family: "Corporate";
+  -webkit-text-stroke: 1px black;
+  color: white;
+  box-shadow: 0px -2px 10px 0px rgb(0 0 0 / 10%) !important;
 }
 .startButton {
-  font-size: 90px !important;
+  font-size: 125px !important;
   letter-spacing: -0.5px;
-  padding: 25px;
-  border-radius: 10px;
+  padding: 30px;
+  font-family: "Corporate";
+  -webkit-text-stroke: 1px black;
+  color: white;
+  box-shadow: 0px -2px 10px 0px rgb(0 0 0 / 10%) !important;
 }
 .imageBlock {
   position: absolute;
@@ -993,6 +1066,7 @@ input[type="color"] {
   border: none !important;
   border-color: green !important;
   outline: none;
+  margin-top: 1vh;
 }
 
 /* REPLAY */
@@ -1341,7 +1415,12 @@ input[type="color"] {
   font-family: Unica;
 }
 .presentation:hover {
-  background-color: rgb(255, 216, 164) !important;
+  /* background-color: rgb(255, 216, 164) !important; */
+}
+.presentation {
+  font-family: Unica;
+  border-radius: 0px;
+  box-shadow: 0px -2px 10px 0px rgb(0 0 0 / 10%);
 }
 /* .projet:hover {
   background-color: rgb(251, 255, 201) !important;

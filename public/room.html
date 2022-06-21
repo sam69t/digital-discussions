@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/vc-toggle-switch.css" />
     <link rel="stylesheet" href="./css/flick.css" />
     <link rel="stylesheet" href="./css/imac.css" />
+    <link rel="stylesheet" href="./css/extra.css" />
 
     <script src="./libs/papaparse.min.js"></script>
 
@@ -94,7 +95,7 @@
         Export
       </button>
       <button class="btn add-comment" onclick="comInterface()">
-        Add comment
+        Add reference
       </button>
       <div class="comment-interface" onclick="">
         <span class="info-comment"
@@ -157,7 +158,7 @@
       </div>
     </div>
     <div class="chapters-controls">
-      <button class="btn presentation" id="">Présentation</button>
+      <button class="btn presentation" id="">Launch Lecture</button>
     </div>
     <div class="end-button">
       <button class="btn endBtn" id="">Fin</button>
@@ -289,6 +290,10 @@
                 "
               >
                 <h1 class="join-title" style="text-align: center">Host</h1>
+                <h1 class="join-title-p" style="text-align: center">
+                  Participant
+                </h1>
+
                 <div class="joinvid-wrap">
                   <video class="drag resize-drag" id="joinCam"></video>
                 </div>
@@ -326,7 +331,7 @@
                     />
                   </div>
                   <button
-                    style="margin-top: 1rem; display: block; width: 40%"
+                    style="margin-top: 1rem; display: block; width: 36%"
                     class="btn secondary text-white"
                     id="meetingCreateButton"
                     onclick="joinMeeting(true)"
@@ -370,8 +375,7 @@
           </div>
           <div class="tool-control-P">
             <div class="sur-footer">
-              <button class="btn" id="sendMessage-btn">Envoyer message</button>
-              <button class="btn" id="sendMessage-btn">Envoyer lien</button>
+              <button class="btn" id="sendMessage-btn">Send message</button>
             </div>
             <footer style="position: absolute; bottom: 20px">
               <label for="vidfiles" class="btn">Select Video</label>
@@ -440,7 +444,7 @@
     <div class="toggle-subtitle">Subtitle off</div>
 
     <footer class="player-actions-bottom">
-      <div>
+      <div class="addScale">
         <button class="btn scaling-range" onclick="rangeScaling()">+</button>
       </div>
       <div class="switch-container-bottom" onclick="">
@@ -450,7 +454,7 @@
           <span class="microView">Lectures </span>
         </div>
       </div>
-      <div>
+      <div class="removeScale">
         <button class="btn scaling-range" onclick="rangeScaling()">-</button>
       </div>
     </footer>

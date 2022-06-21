@@ -341,16 +341,20 @@ function onMessage(chatEvent) {
     parsedText?.type == "launch-presentation"
   ) {
     let instruction = document.createElement("span");
-    instruction.textContent = "Présentation";
+    instruction.textContent = "Project";
     instruction.classList.add("instructions");
     instruction.classList.add("style-presentation");
     videoContainerTwo.classList.add("resize-drag");
     previewContainer.appendChild(instruction);
     instruction.style.opacity = 1;
     chapterCrontrols.style.setProperty("display", "none", "important");
+    toolControllerH.style.opacity = 0;
+    toolControllerP.style.opacity = 0;
 
     setTimeout(() => {
       instruction.style.opacity = 0;
+      toolControllerH.style.opacity = 1;
+      toolControllerP.style.opacity = 1;
     }, 2000);
     setTimeout(() => {
       previewContainer.removeChild(instruction);

@@ -10,18 +10,29 @@ const CHAT = {
   },
 
   getOrAddMsgElem() {
-    const elements = chatContainer.querySelectorAll(
-      ".chats__message:not(.locked)"
-    );
+    let elements;
+    if (mode === "player") {
+      elements = chatContainer.querySelectorAll(".chats__message:not(.locked)");
+    } else {
+      elements = chatContainer.querySelectorAll(
+        ".chats__message-tool:not(.locked)"
+      );
+    }
     let lastElement = elements[elements.length - 1];
     if (!lastElement) {
       lastElement = document.createElement("div");
-      lastElement.classList.add("chats__message");
+      if (mode === "player") {
+        lastElement.classList.add("chats__message");
+      } else {
+        lastElement.classList.add("chats__message-tool");
+      }
+
       lastElement.classList.add("resize-ref");
 
       // lastElement.classList.add(
       //   `${meeting.localParticipant.id ? "chats__message" : ""}`
       // );
+      chatContainer.style.fontSize = "150px";
       chatContainer.appendChild(lastElement);
     }
 
