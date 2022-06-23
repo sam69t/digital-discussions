@@ -30,7 +30,7 @@ function onMessage(chatEvent) {
       overViewButtonBottom.style.setProperty("display", "none", "important");
       sumAssets.style.setProperty("display", "none", "important");
       gridLiveContainer.style.setProperty("display", "none", "important");
-      colorControls.style.setProperty("display", "flex", "important");
+      // colorControls.style.setProperty("display", "flex", "important");
       videoContainerTwo.classList.add("resize-drag");
     }
     if (mode === "toolH") {
@@ -367,6 +367,7 @@ function onMessage(chatEvent) {
           "flex",
           "important"
         );
+        colorControls.style.setProperty("display", "flex", "important");
       }, 300);
 
       console.log("spawn instruction");

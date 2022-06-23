@@ -632,7 +632,7 @@ body {
 /* Chat-wrapper*/
 .chat-wrapper {
   border-radius: 10px;
-  z-index: 99999999999;
+  z-index: 99999;
   height: 100%;
   display: flex;
   width: 100%;
@@ -905,6 +905,7 @@ main {
   z-index: 999999;
   left: 50%;
   top: 50%;
+  height: 50vh;
   transform: translate(-50%, -50%);
   background-position: center;
   background-size: cover;
@@ -1413,6 +1414,7 @@ input[type="color"] {
 }
 .public-link {
   font-family: Unica;
+  width: 15vh;
 }
 .presentation:hover {
   /* background-color: rgb(255, 216, 164) !important; */
@@ -1558,6 +1560,7 @@ input[type="color"] {
   color: white;
   font-family: "Unica";
   margin-top: 1.5vh;
+  text-align: center;
 }
 .fullImageDwn {
   color: white;
@@ -2014,6 +2017,11 @@ input[type="color"] {
   /* background-color: lightgray; */
 }
 .imageBlockWrapper {
+  display: flex;
+  height: 50vh;
+}
+
+.imageBlockWrapper-pub {
   display: flex;
   height: 10vh;
 }

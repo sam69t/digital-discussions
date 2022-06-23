@@ -64,7 +64,7 @@ function playerSetup() {
 
   player = new Player({
     parent: body,
-    csvSrc: "./assets/chats/20.6.22.csv",
+    csvSrc: "./assets/chats/final.csv",
     liveVideoSrc: "./assets/videos/HUGO_J2(CUT).mp4",
     gridVideoSrc: "./assets/videos/HUGO_J2(CUT).mp4",
   });
@@ -121,7 +121,7 @@ function playerSetup() {
       let publicImg = document.createElement("div");
       let text = document.createElement("span");
 
-      publicImg.classList.add("imageBlockwrapper");
+      publicImg.classList.add("imageBlockwrapper-pub");
       publicImg.classList.add("assets-public");
       text.classList.add("public-link");
       text.textContent = data.message.textValue;
@@ -180,7 +180,7 @@ function playerSetup() {
         let image = document.createElement("img");
         image.src = data.message.srcUrl;
         image.classList.add("public-img");
-        publicImg.classList.add("imageBlockwrapper");
+        publicImg.classList.add("imageBlockwrapper-pub");
         publicImg.classList.add("assets-public");
         publicImg.appendChild(image);
         publicImg.appendChild(publicDescAssets);
@@ -233,20 +233,20 @@ function playerSetup() {
 
         if (publicCounter >= 1 && publicCounter <= 2) {
           publicAssetsWrapperTopFirst.appendChild(publicImg);
-        } else if (publicCounter >= 3 && publicCounter <= 4) {
+        } else if (publicCounter >= 3 && publicCounter <= 3) {
           publicAssetsWrapperRight.appendChild(publicImg);
-        } else if (publicCounter >= 5 && publicCounter <= 9) {
+        } else if (publicCounter >= 4 && publicCounter <= 8) {
           publicAssetsWrapperBottom.appendChild(publicImg);
-        } else if (publicCounter >= 10 && publicCounter <= 10) {
+        } else if (publicCounter >= 9 && publicCounter <= 9) {
           publicAssetsWrapperLeft.appendChild(publicImg);
-        } else if (publicCounter >= 11 && publicCounter <= 13) {
+        } else if (publicCounter >= 10 && publicCounter <= 12) {
           publicAssetsWrapperTopLast.appendChild(publicImg);
-        } else if (publicCounter >= 14 && publicCounter <= 19) {
+        } else if (publicCounter >= 13 && publicCounter <= 18) {
           $(".addScale").css("opacity", "1");
           publicAssetsWrapperTopFirst2.appendChild(publicImg);
-        } else if (publicCounter >= 20 && publicCounter <= 22) {
+        } else if (publicCounter >= 19 && publicCounter <= 21) {
           publicAssetsWrapperRight2.appendChild(publicImg);
-        } else if (publicCounter >= 23 && publicCounter <= 29) {
+        } else if (publicCounter >= 22 && publicCounter <= 28) {
           publicAssetsWrapperBottom2.appendChild(publicImg);
         }
 
@@ -310,7 +310,7 @@ function playerSetup() {
       notifwrap.appendChild(notifImg);
       previewContainer.appendChild(notifwrap);
       //! APPEND SCROLLING PUBLIC COM
-      if (publicCounter === 4) {
+      if (publicCounter === 8) {
         let imgSlide = document.createElement("div");
         let imgofSlide = document.createElement("img");
         imgSlide.classList.add("moving-banner-h");
@@ -327,7 +327,7 @@ function playerSetup() {
           false
         );
       }
-      if (publicCounter === 2) {
+      if (publicCounter === 6) {
         let imgSlide = document.createElement("div");
         let imgofSlide = document.createElement("img");
         imgSlide.classList.add("moving-banner-v");
@@ -353,7 +353,7 @@ function playerSetup() {
       let publicVid = document.createElement("div");
       let vid = document.createElement("video");
       vid.src = data.message.srcUrl;
-      publicVid.classList.add("imageBlockWrapper");
+      publicVid.classList.add("imageBlockWrapper-pub");
       publicVid.classList.add("vid");
       publicVid.appendChild(vid);
 
@@ -370,7 +370,7 @@ function playerSetup() {
       vid.muted = true;
       vid.loop = true;
       if (publicVidCounter <= 1 && publicVidCounter < 2) {
-        publicAssetsWrapperBottom.appendChild(publicVid);
+        publicAssetsWrapperRight.appendChild(publicVid);
       } else if (publicVidCounter >= 2 && publicVidCounter < 3) {
         publicAssetsWrapperLeft.appendChild(publicVid);
       }
@@ -610,7 +610,7 @@ function playerSetup() {
             // previewContainerGrid.style.display = "none";
           }
         }, 300);
-        setTimeout(() => (imageWrap.style.display = "none"), 63000);
+        setTimeout(() => (imageWrap.style.display = "none"), 90000);
       }
       uploadLiveAssets();
     }
